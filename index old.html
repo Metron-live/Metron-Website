@@ -591,19 +591,19 @@
         /* How It Works */
         .steps-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
         }
 
         .step-card {
             text-align: center;
-            padding: 1.5rem 1rem;
+            padding: 2rem 1.5rem;
         }
 
         .step-number {
             width: 48px;
             height: 48px;
-            background: var(--accent);
+            background: var(--text-primary);
             color: var(--bg);
             border-radius: 50%;
             display: flex;
@@ -1288,7 +1288,11 @@ I noticed you haven't logged breakfast yet—snap a photo when you eat and I'll 
                 <a href="privacy.html">Privacy Policy</a>
                 <a href="terms.html">Terms of Service</a>
                 <a href="health-data-privacy.html">Health Data Privacy</a>
-                <a href="/cdn-cgi/l/email-protection#a5cdc0c9c9cae5c8c0d1d7cacb8bc9ccd3c0">Contact</a>
+                <a href="mailto:hello@metron.live">Contact</a>
             </div>
             <div class="footer-copy">© 2026 Metron. All rights reserved.</div>
-     
+        </div>
+    </footer>
+</body>
+
+</html>
