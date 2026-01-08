@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metron Logo - Negative Space Dot</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: #FAFAF8;
+            padding: 3rem;
+            color: #1a1a1a;
+        }
+        h1 { margin-bottom: 0.5rem; font-size: 2rem; }
+        h2 { margin: 3rem 0 1.5rem; font-size: 1.3rem; padding-top: 2rem; border-top: 1px solid #E8E8E6; }
+        p { color: #666; margin-bottom: 2rem; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .card {
+            background: white;
+            border: 1px solid #E8E8E6;
+            border-radius: 12px;
+            padding: 2.5rem;
+            text-align: center;
+        }
+        .card.dark {
+            background: #1a1a1a;
+            border-color: #333;
+        }
+        .card.coral {
+            background: #E8734A;
+            border-color: #d9663d;
+        }
+        .card-title {
+            font-size: 0.8rem;
+            color: #888;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .card.dark .card-title,
+        .card.coral .card-title {
+            color: rgba(255,255,255,0.6);
+        }
+        .logo-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+        .logo-stacked {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .wordmark {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.75rem;
+            letter-spacing: -0.03em;
+        }
+        .wordmark.small {
+            font-size: 1.2rem;
+        }
+        .white { color: #FAFAF8; }
+        .black { color: #1a1a1a; }
+        .coral { color: #E8734A; }
+        .comparison {
+            display: flex;
+            gap: 4rem;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+        .comparison-item {
+            text-align: center;
+        }
+        .comparison-item p {
+            font-size: 0.85rem;
+            margin-top: 1rem;
+            margin-bottom: 0;
+        }
+        .size-row {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        .size-item {
+            text-align: center;
+        }
+        .size-item p {
+            font-size: 0.7rem;
+            color: #888;
+            margin-top: 0.5rem;
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Negative Space Dot</h1>
+    <p>The data point as a cutout — clean, modern, works on any background.</p>
+
+    <!-- Side by side comparison -->
+    <h2 style="margin-top: 0; border: none; padding-top: 0;">Before & After</h2>
+    <div class="comparison">
+        <div class="comparison-item">
+            <svg width="80" height="70" viewBox="0 0 56 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 44L14 0L28 22L14 44H0Z" fill="#1a1a1a"/>
+                <path d="M28 22L42 0L56 44H42L28 22Z" fill="#1a1a1a"/>
+            </svg>
+            <p>Original</p>
+        </div>
+        <div class="comparison-item">
+            <svg width="80" height="70" viewBox="0 0 56 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <mask id="dot-mask-demo">
+                        <rect width="56" height="44" fill="white"/>
+                        <circle cx="28" cy="22" r="4" fill="black"/>
+                    </mask>
+                </defs>
+                <g mask="url(#dot-mask-demo)">
+                    <path d="M0 44L14 0L28 22L14 44H0Z" fill="#1a1a1a"/>
+                    <path d="M28 22L42 0L56 44H42L28 22Z" fill="#1a1a1a"/>
+                </g>
+            </svg>
+            <p>With Cutout</p>
+        </div>
+    </div>
+
+    <!-- Wide version - main -->
+    <h2>Wide Version (Primary)</h2>
+    <div class="grid">
+        <!-- Black on light -->
+        <div class="card">
+            <div class="card-title">Black on Light</div>
+            <div class="logo-row">
+                <svg width="56" height="44" viewBox="0 0 56 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <mask id="dot-mask-1">
+                            <rect width="56" height="44" fill="white"/>
+                            <circle cx="28" cy="22" r="4" fill="black"/>
+                        </mask>
+                    </defs>
+                    <g mask="url(#dot-mask-1)">
+                        <path d="M0 44L14 0L28 22L14 44H0Z" fill="#1a1a1a"/>
+                        <path d="M28 22L42 0L56 44H42L28 22Z" fill="#1a1a1a"/>
+                    </g>
+                </svg>
+                <span class="wordmark black">Metron</span>
+            </div>
+        </div>
+
+        <!-- White on dark -->
+        <div class="card dark">
+            <div class="card-title">White on Dark</div>
+            <div class="logo-row">
+                <svg width="56" height="44" viewBox="0 0 56 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <mask id="dot-mask-2">
+                            <rect width="56" height="44" fill="white"/>
+                            <circle cx="28" cy="22" r="4" fill="black"/>
+                        </mask>
+                    </defs>
+                    <g mask="url(#dot-mask-2)">
+                        <path d="M0 44L14 0L28 22L14 44H0Z" fill="#FAFAF8"/>
+                        <path d="M28 22L42 0L56 44H42L28 22Z" fill="#FAFAF8"/>
+                    </g>
+                </svg>
+                <span class="wordmark white">Metron</span>
+            </div>
+        </div>
+
+        <!-- Coral on light -->
+        <div class="card">
+            <div class="card-title">Coral on Light</div>
+            <div class="logo-row">
+                <svg width="56" height="44" viewBox="0 0 56 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <mask id="dot-mask-3">
+                            <rect width="56" height="44" fill="white"/>
+                            <circle cx="28" cy="22" r="4" fill="black"/>
+                        </mask>
+                    </defs>
+                    <g mask="url(#dot-mask-3)">
+                        <path d="M0 44L14 0L28 22L14 44H0Z" fill="#E8734A"/>
+                        <path d="M28 22L42 0L56 44H42L28 22Z" fill="#E8734A"/>
+                    </g>
+                </svg>
+                <span class="wordmark coral">Metron</span>
+            </div>
+        </div>
+
+        <!-- White on coral -->
+        <div class="card coral">
+            <div class="card-title">White on Coral</div>
+            <div class="logo-row">
+                <svg width="56" height="44" viewBox="0 0 56 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <mask id="dot-mask-4">
+                            <rect width="56" height="44" fill="white"/>
+                            <circle cx="28" cy="22" r="4" fill="black"/>
+                        </mask>
+                    </defs>
+                    <g mask="url(#dot-mask-4)">
+                        <path d="M0 44L14 0L28 22L14 44H0Z" fill="#FAFAF8"/>
+                        <path d="M28 22L42 0L56 44H42L28 22Z" fill="#FAFAF8"/>
+                    </g>
+                </svg>
+                <span class="wordmark white">Metron</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stacked versions -->
+    <h2>Stacked Layouts</h2>
+    <div class="grid">
+        <div class="card">
+            <div class="card-title">Stacked — Black</div>
+            <div class="logo-stacked">
+                <svg width="56" height="44" viewBox="0 0 56 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <mask id="dot-mask-5">
+                            <rect width="56" height="44" fill="white"/>
+                            <circle cx="28" cy="22" r="4" fill="black"/>
+                        </mask>
+                    </defs>
+                    <g mask="url(#dot-mask-5)">
+                        <path d="M0 44L14 0L28 22L14 44H0Z" fill="#1a1a1a"/>
+                        <path d="M28 22L42 0L56 44H42L28 22Z" fill="#1a1a1a"/>
+                    </g>
+                </svg>
+                <span class="wordmark small black">Metron</span>
+            </div>
+        </div>
+
+        <div class="card dark">
+            <div class="card-title">Stacked — White</div>
+            <div class="logo-stacked">
+                <svg width="56" height="44" viewBox="0 0 56 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <mask id="dot-mask-6">
+                            <rect width="56" height="44" fill="white"/>
+                            <circle cx="28" cy="22" r="4" fill="black"/>
+                        </mask>
+                    </defs>
+                    <g mask="url(#dot-mask-6)">
+                        <path d="M0 44L14 0L28 22L14 44H0Z" fill="#FAFAF8"/>
+                        <path d="M28 22L42 0L56 44H42L28 22Z" fill="#FAFAF8"/>
+                    </g>
+                </svg>
+                <span class="wordmark small white">Metron</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Stacked — Coral</div>
+            <div class="logo-stacked">
+                <svg width="56" height="44" viewBox="0 0 56 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <mask id="dot-mask-7">
+                            <rect width="56" height="44" fill="white"/>
+                            <circle cx="28" cy="22" r="4" fill="black"/>
+                        </mask>
+                    </defs>
+                    <g mask="url(#dot-mask-7)">
+                        <path d="M0 44L14 0L28 22L14 44H0Z" fill="#E8734A"/>
+                        <path d="M28 22L42 0L56 44H42L28 22Z" fill="#E8734A"/>
+                    </g>
+                </svg>
+                <span class="wordmark small coral">Metron</span>
+            </div>
+        </div>
+
+        <div class="card coral">
+            <div class="card-title">Stacked — White on Coral</div>
+            <div class="logo-stacked">
+                <svg width="56" height="44" viewBox="0 0 56 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <mask id="dot-mask-8">
+                            <rect width="56" height="44" fill="white"/>
+                            <circle cx="28" cy="22" r="4" fill="black"/>
+                        </mask>
+                    </defs>
+                    <g mask="url(#dot-mask-8)">
+                        <path d="M0 44L14 0L28 22L14 44H0Z" fill="#FAFAF8"/>
+                        <path d="M28 22L42 0L56 44H42L28 22Z" fill="#FAFAF8"/>
+                    </g>
+                </svg>
+                <span class="wordmark small white">Metron</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Icon only -->
+    <h2>Icon Only</h2>
+    <div class="grid">
+        <div class="card">
+            <div class="card-title">Black</div>
+            <svg width="72" height="56" viewBox="0 0 56 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <mask id="dot-mask-9">
+                        <rect width="56" height="44" fill="white"/>
+                        <circle cx="28" cy="22" r="4" fill="black"/>
+                    </mask>
+                </defs>
+                <g mask="url(#dot-mask-9)">
+                    <path d="M0 44L14 0L28 22L14 44H0Z" fill="#1a1a1a"/>
+                    <path d="M28 22L42 0L56 44H42L28 22Z" fill="#1a1a1a"/>
+                </g>
+            </svg>
+        </div>
+
+        <div class="card dark">
+            <div class="card-title">White</div>
+            <svg width="72" height="56" viewBox="0 0 56 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <mask id="dot-mask-10">
+                        <rect width="56" height="44" fill="white"/>
+                        <circle cx="28" cy="22" r="4" fill="black"/>
+                    </mask>
+                </defs>
+                <g mask="url(#dot-mask-10)">
+                    <path d="M0 44L14 0L28 22L14 44H0Z" fill="#FAFAF8"/>
+                    <path d="M28 22L42 0L56 44H42L28 22Z" fill="#FAFAF8"/>
+                </g>
+            </svg>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Coral</div>
+            <svg width="72" height="56" viewBox="0 0 56 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <mask id="dot-mask-11">
+                        <rect width="56" height="44" fill="white"/>
+                        <circle cx="28" cy="22" r="4" fill="black"/>
+                    </mask>
+                </defs>
+                <g mask="url(#dot-mask-11)">
+                    <path d="M0 44L14 0L28 22L14 44H0Z" fill="#E8734A"/>
+                    <path d="M28 22L42 0L56 44H42L28 22Z" fill="#E8734A"/>
+                </g>
+            </svg>
+        </div>
+
+        <div class="card coral">
+            <div class="card-title">White on Coral (App Icon)</div>
+            <svg width="72" height="56" viewBox="0 0 56 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <mask id="dot-mask-12">
+                        <rect width="56" height="44" fill="white"/>
+                        <circle cx="28" cy="22" r="4" fill="black"/>
+                    </mask>
+                </defs>
+                <g mask="url(#dot-mask-12)">
+                    <path d="M0 44L14 0L28 22L14 44H0Z" fill="#FAFAF8"/>
+                    <path d="M28 22L42 0L56 44H42L28 22Z" fill="#FAFAF8"/>
+                </g>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Size test -->
+    <h2>Size Test (Favicon / App Icon)</h2>
+    <div class="card" style="max-width: 700px;">
+        <div class="card-title">Coral with white cutout</div>
+        <div class="size-row">
+            <div class="size-item">
+                <svg width="64" height="50" viewBox="0 0 56 44" fill="none">
+                    <defs>
+                        <mask id="dot-mask-s1">
+                            <rect width="56" height="44" fill="white"/>
+                            <circle cx="28" cy="22" r="4" fill="black"/>
+                        </mask>
+                    </defs>
+                    <g mask="url(#dot-mask-s1)">
+                        <path d="M0 44L14 0L28 22L14 44H0Z" fill="#E8734A"/>
+                        <path d="M28 22L42 0L56 44H42L28 22Z" fill="#E8734A"/>
+                    </g>
+                </svg>
+                <p>64px</p>
+            </div>
+            <div class="size-item">
+                <svg width="48" height="38" viewBox="0 0 56 44" fill="none">
+                    <defs>
+                        <mask id="dot-mask-s2">
+                            <rect width="56" height="44" fill="white"/>
+                            <circle cx="28" cy="22" r="4" fill="black"/>
+                        </mask>
+                    </defs>
+                    <g mask="url(#dot-mask-s2)">
+                        <path d="M0 44L14 0L28 22L14 44H0Z" fill="#E8734A"/>
+                        <path d="M28 22L42 0L56 44H42L28 22Z" fill="#E8734A"/>
+                    </g>
+                </svg>
+                <p>48px</p>
+            </div>
+            <div class="size-item">
+                <svg width="32" height="25" viewBox="0 0 56 44" fill="none">
+                    <defs>
+                        <mask id="dot-mask-s3">
+                            <rect width="56" height="44" fill="white"/>
+                            <circle cx="28" cy="22" r="4" fill="black"/>
+                        </mask>
+                    </defs>
+                    <g mask="url(#dot-mask-s3)">
+                        <path d="M0 44L14 0L28 22L14 44H0Z" fill="#E8734A"/>
+                        <path d="M28 22L42 0L56 44H42L28 22Z" fill="#E8734A"/>
+                    </g>
+                </svg>
+                <p>32px</p>
+            </div>
+            <div class="size-item">
+                <svg width="24" height="19" viewBox="0 0 56 44" fill="none">
+                    <defs>
+                        <mask id="dot-mask-s4">
+                            <rect width="56" height="44" fill="white"/>
+                            <circle cx="28" cy="22" r="4" fill="black"/>
+                        </mask>
+                    </defs>
+                    <g mask="url(#dot-mask-s4)">
+                        <path d="M0 44L14 0L28 22L14 44H0Z" fill="#E8734A"/>
+                        <path d="M28 22L42 0L56 44H42L28 22Z" fill="#E8734A"/>
+                    </g>
+                </svg>
+                <p>24px</p>
+            </div>
+            <div class="size-item">
+                <svg width="16" height="13" viewBox="0 0 56 44" fill="none">
+                    <defs>
+                        <mask id="dot-mask-s5">
+                            <rect width="56" height="44" fill="white"/>
+                            <circle cx="28" cy="22" r="4" fill="black"/>
+                        </mask>
+                    </defs>
+                    <g mask="url(#dot-mask-s5)">
+                        <path d="M0 44L14 0L28 22L14 44H0Z" fill="#E8734A"/>
+                        <path d="M28 22L42 0L56 44H42L28 22Z" fill="#E8734A"/>
+                    </g>
+                </svg>
+                <p>16px</p>
+            </div>
+        </div>
+        <p style="font-size: 0.8rem; margin-top: 1.5rem; margin-bottom: 0;">The cutout holds up well even at small sizes!</p>
+    </div>
+
+    <!-- Verdict -->
+    <h2>Why Negative Space Works Better</h2>
+    <div class="card" style="max-width: 600px; text-align: left;">
+        <ul style="margin-left: 1.5rem; color: #666; line-height: 1.8;">
+            <li><strong>Works on any background</strong> — no color clash issues</li>
+            <li><strong>Cleaner</strong> — one color, not two</li>
+            <li><strong>More sophisticated</strong> — negative space is a classic design technique</li>
+            <li><strong>Scales better</strong> — the cutout is visible even at 16px</li>
+            <li><strong>App icon ready</strong> — white M with cutout on coral background looks sharp</li>
+        </ul>
+    </div>
+
+</body>
+</html>

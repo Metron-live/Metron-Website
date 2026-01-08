@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Metron | AI-Powered Fitness Intelligence</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -27,7 +30,7 @@
             --text-muted: #888888;
             --border: #E8E8E6;
             --border-dark: #D4D4D2;
-            --accent: #0D9488;
+            --accent: #E8734A;
         }
 
         body {
@@ -92,7 +95,7 @@
         }
 
         .btn-primary {
-            background: var(--text-primary);
+            background: var(--accent);
             color: var(--bg);
             padding: 0.75rem 1.5rem;
             border-radius: 6px;
@@ -105,7 +108,7 @@
         }
 
         .btn-primary:hover {
-            background: #333;
+            background: #d9663d;
             transform: translateY(-1px);
         }
 
@@ -161,8 +164,15 @@
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.4;
+            }
         }
 
         .hero h1 {
@@ -193,7 +203,7 @@
             border-radius: 8px;
             max-width: 420px;
             width: 100%;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
         }
 
         .email-form-container {
@@ -214,8 +224,15 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .success-icon {
@@ -273,7 +290,7 @@
             max-width: 520px;
             width: 100%;
             text-align: left;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
         }
 
         .chat-header {
@@ -461,7 +478,7 @@
 
         .feature-card:hover {
             border-color: var(--border-dark);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
         }
 
         .feature-icon {
@@ -521,6 +538,7 @@
             0% {
                 transform: translateX(0);
             }
+
             100% {
                 transform: translateX(-50%);
             }
@@ -550,7 +568,7 @@
         .integration-item:hover .integration-logo {
             border-color: var(--border-dark);
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
 
         .integration-logo svg {
@@ -688,7 +706,7 @@
             border: 1px solid var(--border);
             padding: 0.4rem;
             border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
         }
 
         .cta-form input {
@@ -791,6 +809,7 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Navigation -->
     <nav>
@@ -811,8 +830,9 @@
             Now in private beta
         </div>
         <h1>All your fitness data.<br>One intelligent plan.</h1>
-        <p>Metron connects your wearables, workouts, and nutrition to deliver personalized training and meal plans that adapt daily to how your body is actually performing.</p>
-        
+        <p>Metron connects your wearables, workouts, and nutrition to deliver personalized training and meal plans that
+            adapt daily to how your body is actually performing.</p>
+
         <div class="email-form-container" id="hero-form-container">
             <form class="email-form" id="hero-form" action="https://formspree.io/f/xkogdvbl" method="POST">
                 <input type="email" name="email" placeholder="Enter your email" required>
@@ -836,14 +856,16 @@
                 </div>
             </div>
             <div class="chat-message">
-                Good morning! Your HRV is up 12% from yesterday and you logged 7.5 hours of quality sleep. Based on your training load, today's an ideal day for that tempo run—I've adjusted your pace zones to match your current recovery state.
+                Good morning! Your HRV is up 12% from yesterday and you logged 7.5 hours of quality sleep. Based on your
+                training load, today's an ideal day for that tempo run—I've adjusted your pace zones to match your
+                current recovery state.
             </div>
             <div class="chat-suggestions">
                 <button class="chat-suggestion" data-response="weekly-load">Show my weekly load</button>
                 <button class="chat-suggestion" data-response="adjust-workout">Adjust today's workout</button>
                 <button class="chat-suggestion" data-response="nutrition">What should I eat?</button>
             </div>
-            
+
             <!-- Expandable response area -->
             <div class="chat-response-container" id="response-container">
                 <div class="chat-response" id="chat-response">
@@ -912,26 +934,26 @@ I noticed you haven't logged breakfast yet—snap a photo when you eat and I'll 
             const buttons = document.querySelectorAll('.chat-suggestion');
 
             buttons.forEach(button => {
-                button.addEventListener('click', function() {
+                button.addEventListener('click', function () {
                     const responseKey = this.dataset.response;
                     const data = responses[responseKey];
-                    
+
                     // Remove active state from all buttons
                     buttons.forEach(b => b.classList.remove('active'));
-                    
+
                     // If clicking the same button that's already open, close it
                     if (container.classList.contains('open') && userMessage.textContent === data.question) {
                         container.classList.remove('open');
                         return;
                     }
-                    
+
                     // Add active state to clicked button
                     this.classList.add('active');
-                    
+
                     // Update content
                     userMessage.textContent = data.question;
                     responseContent.innerHTML = data.answer;
-                    
+
                     // Open the container
                     container.classList.add('open');
                 });
@@ -940,23 +962,23 @@ I noticed you haven't logged breakfast yet—snap a photo when you eat and I'll 
 
         <script>
             // Email form handling with Formspree
-            document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('DOMContentLoaded', function () {
                 function handleFormSubmit(formId, successId) {
                     const form = document.getElementById(formId);
                     const success = document.getElementById(successId);
-                    
+
                     if (!form || !success) return; // Guard clause
-                    
-                    form.addEventListener('submit', async function(e) {
+
+                    form.addEventListener('submit', async function (e) {
                         e.preventDefault();
-                        
+
                         const formData = new FormData(form);
                         const button = form.querySelector('button');
                         const originalText = button.textContent;
-                        
+
                         button.textContent = 'Submitting...';
                         button.disabled = true;
-                        
+
                         try {
                             const response = await fetch(form.action, {
                                 method: 'POST',
@@ -965,7 +987,7 @@ I noticed you haven't logged breakfast yet—snap a photo when you eat and I'll 
                                     'Accept': 'application/json'
                                 }
                             });
-                            
+
                             if (response.ok) {
                                 form.style.display = 'none';
                                 success.style.display = 'flex';
@@ -980,7 +1002,7 @@ I noticed you haven't logged breakfast yet—snap a photo when you eat and I'll 
                         }
                     });
                 }
-                
+
                 handleFormSubmit('hero-form', 'hero-success');
                 handleFormSubmit('cta-form', 'cta-success');
             });
@@ -998,32 +1020,38 @@ I noticed you haven't logged breakfast yet—snap a photo when you eat and I'll 
             <div class="feature-card">
                 <div class="feature-icon">📊</div>
                 <h3>Unified Data Intelligence</h3>
-                <p>Your Garmin, Oura, Whoop, and Apple Watch data flows into one coherent picture. No more context-switching between apps.</p>
+                <p>Your Garmin, Oura, Whoop, and Apple Watch data flows into one coherent picture. No more
+                    context-switching between apps.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">🎯</div>
                 <h3>Dynamic Training Plans</h3>
-                <p>Plans that rebalance daily based on recovery, sleep, stress, and performance. Train smarter, not just harder.</p>
+                <p>Plans that rebalance daily based on recovery, sleep, stress, and performance. Train smarter, not just
+                    harder.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">🍎</div>
                 <h3>AI-Powered Nutrition</h3>
-                <p>Snap a photo of your meal for instant macro tracking. Get personalized nutrition recommendations aligned with your training goals.</p>
+                <p>Snap a photo of your meal for instant macro tracking. Get personalized nutrition recommendations
+                    aligned with your training goals.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">💬</div>
                 <h3>Arete AI Coach</h3>
-                <p>Ask questions, get insights, adjust your plan—all through natural conversation with an AI that knows your complete fitness history.</p>
+                <p>Ask questions, get insights, adjust your plan—all through natural conversation with an AI that knows
+                    your complete fitness history.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">📈</div>
                 <h3>Pattern Recognition</h3>
-                <p>Discover what actually works for your body. Metron learns your responses to training, sleep, and nutrition over time.</p>
+                <p>Discover what actually works for your body. Metron learns your responses to training, sleep, and
+                    nutrition over time.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">⚡</div>
                 <h3>Recovery Optimization</h3>
-                <p>Know when to push and when to rest. Real-time readiness scores based on HRV, sleep quality, and training load.</p>
+                <p>Know when to push and when to rest. Real-time readiness scores based on HRV, sleep quality, and
+                    training load.</p>
             </div>
         </div>
     </section>
@@ -1096,8 +1124,10 @@ I noticed you haven't logged breakfast yet—snap a photo when you eat and I'll 
                     <div class="integration-item">
                         <div class="integration-logo">
                             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="12" cy="12" r="9" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-dasharray="3 2"/>
-                                <path fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" d="M12 8v8M8 12h8"/>
+                                <circle cx="12" cy="12" r="9" fill="none" stroke="#1a1a1a" stroke-width="1.5"
+                                    stroke-dasharray="3 2" />
+                                <path fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"
+                                    d="M12 8v8M8 12h8" />
                             </svg>
                         </div>
                         <span class="integration-name">More coming</span>
@@ -1160,8 +1190,10 @@ I noticed you haven't logged breakfast yet—snap a photo when you eat and I'll 
                     <div class="integration-item">
                         <div class="integration-logo">
                             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="12" cy="12" r="9" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-dasharray="3 2"/>
-                                <path fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" d="M12 8v8M8 12h8"/>
+                                <circle cx="12" cy="12" r="9" fill="none" stroke="#1a1a1a" stroke-width="1.5"
+                                    stroke-dasharray="3 2" />
+                                <path fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"
+                                    d="M12 8v8M8 12h8" />
                             </svg>
                         </div>
                         <span class="integration-name">More coming</span>
@@ -1187,12 +1219,14 @@ I noticed you haven't logged breakfast yet—snap a photo when you eat and I'll 
             <div class="step-card">
                 <div class="step-number">2</div>
                 <h3>Set Your Goals</h3>
-                <p>Training for a marathon? Building strength? Optimizing health? Tell us what you're working toward.</p>
+                <p>Training for a marathon? Building strength? Optimizing health? Tell us what you're working toward.
+                </p>
             </div>
             <div class="step-card">
                 <div class="step-number">3</div>
                 <h3>Follow Your Plan</h3>
-                <p>Wake up to personalized workouts and nutrition guidance that adapts to your body's daily readiness.</p>
+                <p>Wake up to personalized workouts and nutrition guidance that adapts to your body's daily readiness.
+                </p>
             </div>
         </div>
     </section>
@@ -1223,7 +1257,8 @@ I noticed you haven't logged breakfast yet—snap a photo when you eat and I'll 
                 <div class="security-icon">🚫</div>
                 <div>
                     <h4>Never Sold</h4>
-                    <p>Your data is yours. We never sell or share your personal health information with third parties.</p>
+                    <p>Your data is yours. We never sell or share your personal health information with third parties.
+                    </p>
                 </div>
             </div>
             <div class="security-item">
@@ -1269,4 +1304,5 @@ I noticed you haven't logged breakfast yet—snap a photo when you eat and I'll 
         </div>
     </footer>
 </body>
+
 </html>
