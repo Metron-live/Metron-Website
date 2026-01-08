@@ -1,0 +1,9 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background optional - remove for transparent -->
+  <!-- <rect width="512" height="512" fill="#FAFAF8"/> -->
+  <!-- Icon centered with padding -->
+  <g transform="translate(136, 140) scale(5)">
+    <path d="M0 44L14 0L24 22L12 44H0Z" fill="#E8734A"/>
+    <path d="M24 22L34 0L48 44H36L24 22Z" fill="#E8734A"/>
+  </g>
+</svg>
