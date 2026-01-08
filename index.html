@@ -341,6 +341,7 @@
             flex-wrap: wrap;
             gap: 0.5rem;
             margin-top: 1rem;
+            justify-content: flex-end;
         }
 
         .chat-suggestion {
@@ -358,6 +359,27 @@
         .chat-suggestion:hover {
             border-color: var(--text-primary);
             color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* Chat thread for stacking responses */
+        .chat-thread {
+            margin-top: 0.5rem;
+        }
+
+        .chat-thread .chat-suggestions {
+            margin-top: 1rem;
+        }
+
+        .chat-exchange {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .chat-exchange.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .chat-suggestion.active {
@@ -776,14 +798,65 @@
             font-size: 0.85rem;
         }
 
+        /* Hamburger menu - hidden on desktop */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 0.5rem;
+            z-index: 300;
+        }
+
+        .hamburger span {
+            width: 24px;
+            height: 2px;
+            background: var(--text-primary);
+            transition: all 0.3s;
+        }
+
+        .hamburger.open span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.open span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             nav {
                 padding: 1rem 1.5rem;
             }
 
+            .hamburger {
+                display: flex;
+            }
+
             .nav-links {
                 display: none;
+                position: fixed;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background: var(--bg);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.5rem;
+                border-bottom: 1px solid var(--border);
+                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-links a {
+                font-size: 1.1rem;
             }
 
             .hero {
@@ -802,6 +875,10 @@
                 font-size: 2rem;
             }
 
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+
             .footer-content {
                 flex-direction: column;
                 text-align: center;
@@ -814,13 +891,20 @@
     <!-- Navigation -->
     <nav>
         <a href="/" class="logo">Metron</a>
-        <div class="nav-links">
+        <div class="nav-links" id="nav-links">
             <a href="#features">Features</a>
             <a href="#integrations">Integrations</a>
             <a href="#how-it-works">How It Works</a>
             <a href="#security">Security</a>
         </div>
-        <a href="#hero" class="btn-primary">Get Early Access</a>
+        <div style="display: flex; align-items: center; gap: 1rem;">
+            <a href="#hero" class="btn-primary">Get Early Access</a>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
     </nav>
 
     <!-- Hero Section -->
@@ -866,18 +950,28 @@
                 <button class="chat-suggestion" data-response="nutrition">What should I eat?</button>
             </div>
 
-            <!-- Expandable response area -->
-            <div class="chat-response-container" id="response-container">
-                <div class="chat-response" id="chat-response">
-                    <div class="response-divider"></div>
-                    <div class="user-message" id="user-message"></div>
-                    <div class="arete-response">
-                        <div class="chat-avatar small">A</div>
-                        <div class="response-content" id="response-content"></div>
-                    </div>
-                </div>
-            </div>
+            <!-- Chat thread container -->
+            <div class="chat-thread" id="chat-thread"></div>
         </div>
+
+        <script>
+            // Hamburger menu toggle
+            const hamburger = document.getElementById('hamburger');
+            const navLinks = document.getElementById('nav-links');
+            
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('open');
+                navLinks.classList.toggle('open');
+            });
+
+            // Close menu when a link is clicked
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('open');
+                    navLinks.classList.remove('open');
+                });
+            });
+        </script>
 
         <script>
             const responses = {
@@ -928,34 +1022,44 @@ I noticed you haven't logged breakfast yet—snap a photo when you eat and I'll 
                 }
             };
 
-            const container = document.getElementById('response-container');
-            const userMessage = document.getElementById('user-message');
-            const responseContent = document.getElementById('response-content');
-            const buttons = document.querySelectorAll('.chat-suggestion');
+            const chatThread = document.getElementById('chat-thread');
+            const suggestionsContainer = document.querySelector('.chat-suggestions');
 
-            buttons.forEach(button => {
+            document.querySelectorAll('.chat-suggestion').forEach(button => {
                 button.addEventListener('click', function () {
                     const responseKey = this.dataset.response;
                     const data = responses[responseKey];
 
-                    // Remove active state from all buttons
-                    buttons.forEach(b => b.classList.remove('active'));
+                    // Remove the clicked button
+                    this.remove();
 
-                    // If clicking the same button that's already open, close it
-                    if (container.classList.contains('open') && userMessage.textContent === data.question) {
-                        container.classList.remove('open');
-                        return;
+                    // Create the new exchange
+                    const exchange = document.createElement('div');
+                    exchange.className = 'chat-exchange';
+                    exchange.innerHTML = `
+                        <div class="response-divider"></div>
+                        <div class="user-message">${data.question}</div>
+                        <div class="arete-response">
+                            <div class="chat-avatar small">A</div>
+                            <div class="response-content">${data.answer}</div>
+                        </div>
+                    `;
+
+                    // Append exchange to thread
+                    chatThread.appendChild(exchange);
+
+                    // Move suggestions to end of thread (if there are remaining buttons)
+                    if (suggestionsContainer.children.length > 0) {
+                        chatThread.appendChild(suggestionsContainer);
                     }
 
-                    // Add active state to clicked button
-                    this.classList.add('active');
+                    // Animate in
+                    setTimeout(() => {
+                        exchange.classList.add('visible');
+                    }, 10);
 
-                    // Update content
-                    userMessage.textContent = data.question;
-                    responseContent.innerHTML = data.answer;
-
-                    // Open the container
-                    container.classList.add('open');
+                    // Scroll the chat preview to show new content
+                    exchange.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                 });
             });
         </script>
@@ -1288,7 +1392,7 @@ I noticed you haven't logged breakfast yet—snap a photo when you eat and I'll 
                 <a href="privacy.html">Privacy Policy</a>
                 <a href="terms.html">Terms of Service</a>
                 <a href="health-data-privacy.html">Health Data Privacy</a>
-                <a href="/cdn-cgi/l/email-protection#a5cdc0c9c9cae5c8c0d1d7cacb8bc9ccd3c0">Contact</a>
+                <a href="/cdn-cgi/l/email-protection#89e1ece5e5e6c9e4ecfdfbe6e7a7e5e0ffec">Contact</a>
             </div>
             <div class="footer-copy">© 2026 Metron. All rights reserved.</div>
      
