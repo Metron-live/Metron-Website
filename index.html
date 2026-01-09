@@ -344,6 +344,435 @@
             color: var(--text-secondary);
         }
 
+        .chat-message strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* Recovery Alert Banner */
+        .recovery-alert {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: #FEF3E7;
+            border: 1px solid #F5D0A9;
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .recovery-alert-icon {
+            width: 32px;
+            height: 32px;
+            background: #E8734A;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .recovery-alert-text {
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
+        }
+
+        .recovery-alert-label {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #B54D25;
+        }
+
+        .recovery-alert-detail {
+            font-size: 0.8rem;
+            color: #96622F;
+        }
+
+        /* Demo Action Buttons */
+        .demo-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .demo-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.7rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            border: none;
+        }
+
+        .demo-btn-primary {
+            background: var(--text-primary);
+            color: var(--bg);
+        }
+
+        .demo-btn-primary:hover {
+            background: #333;
+            transform: translateY(-1px);
+        }
+
+        .demo-btn-secondary {
+            background: var(--bg);
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+
+        .demo-btn-secondary:hover {
+            border-color: var(--text-primary);
+            color: var(--text-primary);
+        }
+
+        .demo-btn-confirm {
+            background: var(--text-primary);
+            color: var(--bg);
+        }
+
+        .demo-btn-confirm:hover {
+            background: #333;
+            transform: translateY(-1px);
+        }
+
+        .demo-btn-text {
+            background: transparent;
+            color: var(--text-muted);
+            padding: 0.7rem 0.5rem;
+        }
+
+        .demo-btn-text:hover {
+            color: var(--text-primary);
+        }
+
+        /* Workout Card */
+        .workout-card {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 0.75rem;
+        }
+
+        .workout-card.original {
+            margin-top: 0.75rem;
+        }
+
+        .workout-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid var(--border);
+            background: var(--bg-alt);
+        }
+
+        .workout-card-title {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+
+        .workout-day {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .workout-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+        }
+
+        .workout-badge {
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+        }
+
+        .workout-badge.adjusted {
+            background: #E8734A;
+            color: white;
+        }
+
+        .workout-badge.original-badge {
+            background: var(--border);
+            color: var(--text-secondary);
+        }
+
+        .workout-exercises {
+            padding: 0.25rem 0;
+        }
+
+        .exercise-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.6rem 1.25rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .exercise-item:last-child {
+            border-bottom: none;
+        }
+
+        .exercise-change {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .exercise-item.modified .exercise-change {
+            background: #FEF3E7;
+            color: #E8734A;
+        }
+
+        .exercise-change.unchanged {
+            background: #E8F5E9;
+            color: #4CAF50;
+        }
+
+        .exercise-details {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
+        }
+
+        .exercise-name {
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+        }
+
+        .exercise-original {
+            font-size: 0.75rem;
+            color: #E8734A;
+        }
+
+        .exercise-subtitle {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .exercise-sets {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .workout-footer {
+            display: flex;
+            gap: 2rem;
+            padding: 0.75rem 1.25rem;
+            background: var(--bg-alt);
+            border-top: 1px solid var(--border);
+        }
+
+        .workout-stat {
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
+        }
+
+        .workout-stat-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .workout-stat-value {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+        }
+
+        /* Confirmed Banner */
+        .confirmed-banner {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: #E8F5E9;
+            border: 1px solid #A5D6A7;
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .confirmed-icon {
+            width: 32px;
+            height: 32px;
+            background: #4CAF50;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .confirmed-text {
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
+        }
+
+        .confirmed-title {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #2E7D32;
+        }
+
+        .confirmed-detail {
+            font-size: 0.8rem;
+            color: #558B2F;
+        }
+
+        /* Demo state transitions */
+        #demo-initial,
+        #demo-adjusted,
+        #demo-original,
+        #demo-confirmed {
+            transition: opacity 0.3s ease;
+        }
+
+        /* Chat thread styles */
+        .chat-thread {
+            margin-top: 0;
+        }
+
+        .chat-exchange {
+            overflow: hidden;
+            max-height: 0;
+            opacity: 0;
+            margin-top: 0;
+            transition: max-height 1.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                        opacity 1.2s ease-out, 
+                        margin-top 0.8s ease;
+        }
+
+        .chat-exchange.visible {
+            max-height: 3000px;
+            opacity: 1;
+            margin-top: 1rem;
+        }
+
+        .chat-exchange.collapsing {
+            max-height: 0 !important;
+            opacity: 0 !important;
+            margin-top: 0 !important;
+            transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
+                        opacity 0.5s ease-out, 
+                        margin-top 0.5s ease;
+        }
+
+        /* Loading animation */
+        .loading-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 0;
+            margin-top: 1rem;
+        }
+
+        .loading-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .loading-dots span {
+            width: 8px;
+            height: 8px;
+            background: var(--text-muted);
+            border-radius: 50%;
+            animation: loadingPulse 1.4s ease-in-out infinite;
+        }
+
+        .loading-dots span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .loading-dots span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes loadingPulse {
+            0%, 80%, 100% {
+                opacity: 0.3;
+                transform: scale(0.8);
+            }
+            40% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Button states */
+        .demo-btn.selected {
+            pointer-events: none;
+        }
+
+        .demo-btn.fade-out {
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .response-divider {
+            height: 1px;
+            background: var(--border);
+            margin: 1rem 0;
+        }
+
+        .user-message {
+            background: var(--text-primary);
+            color: var(--bg);
+            padding: 0.65rem 1rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 1rem;
+            margin-left: auto;
+            float: right;
+            clear: both;
+        }
+
+        .arete-response {
+            display: flex;
+            gap: 0.75rem;
+            clear: both;
+            padding-top: 0.5rem;
+        }
+
+        .chat-avatar.small {
+            width: 28px;
+            height: 28px;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+            border-radius: 6px;
+        }
+
+        .response-content {
+            flex: 1;
+        }
+
         .chat-suggestions {
             display: flex;
             flex-wrap: wrap;
@@ -580,6 +1009,12 @@
             align-items: center;
             gap: 0.75rem;
             flex-shrink: 0;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        a.integration-item {
+            cursor: pointer;
         }
 
         .integration-logo {
@@ -939,7 +1374,7 @@
             </div>
         </div>
 
-        <div class="chat-preview">
+        <div class="chat-preview" id="demo-container">
             <div class="chat-header">
                 <div class="chat-avatar">A</div>
                 <div>
@@ -947,19 +1382,255 @@
                     <div class="chat-status">Your AI Coach</div>
                 </div>
             </div>
-            <div class="chat-message">
-                Good morning! Your HRV is up 12% from yesterday and you logged 7.5 hours of quality sleep. Based on your
-                training load, today's an ideal day for that tempo run—I've adjusted your pace zones to match your
-                current recovery state.
-            </div>
-            <div class="chat-suggestions">
-                <button class="chat-suggestion" data-response="weekly-load">Show my weekly load</button>
-                <button class="chat-suggestion" data-response="adjust-workout">Adjust today's workout</button>
-                <button class="chat-suggestion" data-response="nutrition">What should I eat?</button>
+            
+            <!-- Initial Message (always visible) -->
+            <div id="demo-initial">
+                <!-- Recovery Alert Banner -->
+                <div class="recovery-alert">
+                    <div class="recovery-alert-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                            <line x1="12" y1="9" x2="12" y2="13"/>
+                            <line x1="12" y1="17" x2="12.01" y2="17"/>
+                        </svg>
+                    </div>
+                    <div class="recovery-alert-text">
+                        <span class="recovery-alert-label">Recovery Alert</span>
+                        <span class="recovery-alert-detail">HRV down 18% · 5.8 hrs sleep</span>
+                    </div>
+                </div>
+                
+                <div class="chat-message">
+                    Good morning! You logged <strong>5.8 hours of sleep</strong> and your HRV is <strong>down 18%</strong> from baseline. Based on your recovery state, I've adjusted today's leg workout—reducing compound lift volume by 20% and swapping heavy back squats for goblet squats.
+                </div>
+                
+                <div class="demo-actions" id="initial-actions">
+                    <button class="demo-btn demo-btn-secondary" id="btn-keep-original">Keep original plan</button>
+                    <button class="demo-btn demo-btn-primary" id="btn-see-workout">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                        See adjusted workout
+                    </button>
+                </div>
             </div>
 
-            <!-- Chat thread container -->
-            <div class="chat-thread" id="chat-thread"></div>
+            <!-- Chat Thread for responses -->
+            <div class="chat-thread" id="chat-thread">
+                
+                <!-- Loading Indicator -->
+                <div class="loading-indicator" id="loading-indicator" style="display: none;">
+                    <div class="chat-avatar small">A</div>
+                    <div class="loading-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+                
+                <!-- Adjusted Workout Exchange -->
+                <div class="chat-exchange" id="exchange-adjusted">
+                    <div class="response-divider"></div>
+                    <div class="user-message">See adjusted workout</div>
+                    <div class="arete-response">
+                        <div class="chat-avatar small">A</div>
+                        <div class="response-content">
+                            <div class="workout-card">
+                                <div class="workout-card-header">
+                                    <div class="workout-card-title">
+                                        <span class="workout-day">Today's Workout</span>
+                                        <span class="workout-name">Legs (Recovery Adjusted)</span>
+                                    </div>
+                                    <div class="workout-badge adjusted">-20% volume</div>
+                                </div>
+                                
+                                <div class="workout-exercises">
+                                    <div class="exercise-item modified">
+                                        <div class="exercise-change">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M7 16l5-5 5 5M7 8l5 5 5-5"/>
+                                            </svg>
+                                        </div>
+                                        <div class="exercise-details">
+                                            <span class="exercise-name">Goblet Squats</span>
+                                            <span class="exercise-original">was: Back Squats</span>
+                                        </div>
+                                        <span class="exercise-sets">3 × 10</span>
+                                    </div>
+                                    
+                                    <div class="exercise-item modified">
+                                        <div class="exercise-change">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M12 5v14M5 12l7 7 7-7"/>
+                                            </svg>
+                                        </div>
+                                        <div class="exercise-details">
+                                            <span class="exercise-name">Romanian Deadlift</span>
+                                            <span class="exercise-original">3×8 → 3×6</span>
+                                        </div>
+                                        <span class="exercise-sets">3 × 6</span>
+                                    </div>
+                                    
+                                    <div class="exercise-item">
+                                        <div class="exercise-change unchanged">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <polyline points="20 6 9 17 4 12"/>
+                                            </svg>
+                                        </div>
+                                        <div class="exercise-details">
+                                            <span class="exercise-name">Leg Press</span>
+                                            <span class="exercise-subtitle">unchanged</span>
+                                        </div>
+                                        <span class="exercise-sets">3 × 12</span>
+                                    </div>
+                                    
+                                    <div class="exercise-item">
+                                        <div class="exercise-change unchanged">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <polyline points="20 6 9 17 4 12"/>
+                                            </svg>
+                                        </div>
+                                        <div class="exercise-details">
+                                            <span class="exercise-name">Walking Lunges</span>
+                                            <span class="exercise-subtitle">unchanged</span>
+                                        </div>
+                                        <span class="exercise-sets">2 × 20</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="workout-footer">
+                                    <div class="workout-stat">
+                                        <span class="workout-stat-label">Est. Duration</span>
+                                        <span class="workout-stat-value">38 min</span>
+                                    </div>
+                                    <div class="workout-stat">
+                                        <span class="workout-stat-label">Intensity</span>
+                                        <span class="workout-stat-value">Moderate</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="demo-actions" id="adjusted-actions">
+                                <button class="demo-btn demo-btn-secondary" id="btn-keep-original-2">Keep original workout</button>
+                                <button class="demo-btn demo-btn-confirm" id="btn-confirm">Confirm adjusted workout</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Keep Original Exchange -->
+                <div class="chat-exchange" id="exchange-original">
+                    <div class="response-divider"></div>
+                    <div class="user-message">Keep original plan</div>
+                    <div class="arete-response">
+                        <div class="chat-avatar small">A</div>
+                        <div class="response-content">
+                            <div class="chat-message" style="margin-bottom: 1rem;">
+                                Got it—keeping your original leg day as planned. Just a heads up: with your current recovery state, you might want to extend your warm-up and consider dropping weight by 10-15% if the heavy sets feel off.
+                                <br>
+                                I'll check in after your workout to see how it went.
+                            </div>
+                            
+                            <div class="workout-card original">
+                                <div class="workout-card-header">
+                                    <div class="workout-card-title">
+                                        <span class="workout-day">Today's Workout</span>
+                                        <span class="workout-name">Legs (Original)</span>
+                                    </div>
+                                    <div class="workout-badge original-badge">Full intensity</div>
+                                </div>
+                                
+                                <div class="workout-exercises">
+                                    <div class="exercise-item">
+                                        <div class="exercise-change unchanged">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                            </svg>
+                                        </div>
+                                        <div class="exercise-details">
+                                            <span class="exercise-name">Back Squats</span>
+                                        </div>
+                                        <span class="exercise-sets">4 × 6</span>
+                                    </div>
+                                    
+                                    <div class="exercise-item">
+                                        <div class="exercise-change unchanged">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                            </svg>
+                                        </div>
+                                        <div class="exercise-details">
+                                            <span class="exercise-name">Romanian Deadlift</span>
+                                        </div>
+                                        <span class="exercise-sets">3 × 8</span>
+                                    </div>
+                                    
+                                    <div class="exercise-item">
+                                        <div class="exercise-change unchanged">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                            </svg>
+                                        </div>
+                                        <div class="exercise-details">
+                                            <span class="exercise-name">Leg Press</span>
+                                        </div>
+                                        <span class="exercise-sets">3 × 12</span>
+                                    </div>
+                                    
+                                    <div class="exercise-item">
+                                        <div class="exercise-change unchanged">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                            </svg>
+                                        </div>
+                                        <div class="exercise-details">
+                                            <span class="exercise-name">Walking Lunges</span>
+                                        </div>
+                                        <span class="exercise-sets">2 × 20</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="demo-actions">
+                                <button class="demo-btn demo-btn-secondary" id="btn-restart-original">Restart demo</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Confirmed Exchange -->
+                <div class="chat-exchange" id="exchange-confirmed">
+                    <div class="response-divider"></div>
+                    <div class="user-message">Confirm adjusted workout</div>
+                    <div class="arete-response">
+                        <div class="chat-avatar small">A</div>
+                        <div class="response-content">
+                            <div class="confirmed-banner">
+                                <div class="confirmed-icon">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                        <polyline points="20 6 9 17 4 12"/>
+                                    </svg>
+                                </div>
+                                <div class="confirmed-text">
+                                    <span class="confirmed-title">Workout updated</span>
+                                    <span class="confirmed-detail">Synced to your training log</span>
+                                </div>
+                            </div>
+                            
+                            <div class="chat-message">
+                                Your adjusted leg workout is locked in. I've also noted your recovery state—this data helps me learn your patterns and make better recommendations over time.
+                                <br>
+                                <strong>Quick tip:</strong> Try to get to bed 30 min earlier tonight. Based on your sleep trends, that should help bring your HRV back to baseline by tomorrow.
+                            </div>
+                            
+                            <div class="demo-actions">
+                                <button class="demo-btn demo-btn-secondary" id="btn-restart">Restart demo</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <script>
@@ -982,94 +1653,133 @@
         </script>
 
         <script>
-            const responses = {
-                'weekly-load': {
-                    question: 'Show my weekly load',
-                    answer: `Here's your training load for this week:
+            // Demo chat thread management
+            const initialActions = document.getElementById('initial-actions');
+            const exchangeAdjusted = document.getElementById('exchange-adjusted');
+            const exchangeOriginal = document.getElementById('exchange-original');
+            const exchangeConfirmed = document.getElementById('exchange-confirmed');
+            const adjustedActions = document.getElementById('adjusted-actions');
+            const demoContainer = document.getElementById('demo-container');
+            const loadingIndicator = document.getElementById('loading-indicator');
 
-<strong>Total Load:</strong> 847 TSS (Target: 800-900) ✓
-<strong>Intensity Distribution:</strong>
-• Zone 1-2 (Easy): 68% — 6.2 hrs
-• Zone 3 (Tempo): 22% — 2.0 hrs  
-• Zone 4-5 (Hard): 10% — 0.9 hrs
+            // Button references
+            const btnSeeWorkout = document.getElementById('btn-see-workout');
+            const btnKeepOriginal = document.getElementById('btn-keep-original');
+            const btnConfirm = document.getElementById('btn-confirm');
+            const btnKeepOriginal2 = document.getElementById('btn-keep-original-2');
 
-<strong>Weekly Trend:</strong> You're up 12% from last week, which aligns with your progressive build. Recovery metrics look solid—HRV trending +8% over 7 days. You have capacity for one more quality session before your rest day Sunday.`
-                },
-                'adjust-workout': {
-                    question: 'Adjust today\'s workout',
-                    answer: `I've modified your tempo run based on your current readiness score of 84:
+            function showLoading() {
+                loadingIndicator.style.display = 'flex';
+            }
 
-<strong>Original Plan:</strong> 8 mi with 4 mi @ 7:15/mi
-<strong>Adjusted Plan:</strong> 8 mi with 5 mi @ 7:05/mi
+            function hideLoading() {
+                loadingIndicator.style.display = 'none';
+            }
 
-Your elevated HRV and quality sleep suggest you can push a bit harder today. I've extended the tempo portion and tightened the pace by 10 sec/mi.
+            function resetDemo() {
+                // Add collapsing class for roll-up animation
+                exchangeAdjusted.classList.add('collapsing');
+                exchangeOriginal.classList.add('collapsing');
+                exchangeConfirmed.classList.add('collapsing');
+                
+                // Remove visible class
+                exchangeAdjusted.classList.remove('visible');
+                exchangeOriginal.classList.remove('visible');
+                exchangeConfirmed.classList.remove('visible');
+                
+                // Scroll to demo container
+                demoContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                
+                // After animation, clean up and show initial state
+                setTimeout(() => {
+                    exchangeAdjusted.classList.remove('collapsing');
+                    exchangeOriginal.classList.remove('collapsing');
+                    exchangeConfirmed.classList.remove('collapsing');
+                    
+                    // Reset button states
+                    btnSeeWorkout.classList.remove('selected', 'fade-out');
+                    btnKeepOriginal.classList.remove('selected', 'fade-out');
+                    btnConfirm.classList.remove('selected', 'fade-out');
+                    btnKeepOriginal2.classList.remove('selected', 'fade-out');
+                    
+                    // Show initial actions
+                    initialActions.style.display = 'flex';
+                    
+                    // Show adjusted actions (for when user returns)
+                    adjustedActions.style.display = 'flex';
+                }, 800);
+            }
 
-<strong>Target HR:</strong> 158-165 bpm (Zone 4)
-<strong>Estimated finish:</strong> 58:20
-
-Want me to sync this to your Garmin?`
-                },
-                'nutrition': {
-                    question: 'What should I eat?',
-                    answer: `Based on today's tempo run (est. 620 cal burn) and your goal of maintaining performance while staying lean:
-
-<strong>Pre-Run (2 hrs before):</strong>
-• Oatmeal with banana + honey — 45g carbs
-• Coffee if desired
-
-<strong>Post-Run Recovery Window:</strong>
-• Target: 30g protein + 60g carbs within 45 min
-• Suggestion: Greek yogurt bowl with berries and granola, or a recovery shake
-
-<strong>Daily Targets:</strong>
-• Calories: 2,450 kcal
-• Protein: 145g (1.6g/kg)
-• Carbs: 320g (fuel for tempo effort)
-
-I noticed you haven't logged breakfast yet—snap a photo when you eat and I'll track it automatically.`
-                }
-            };
-
-            const chatThread = document.getElementById('chat-thread');
-            const suggestionsContainer = document.querySelector('.chat-suggestions');
-
-            document.querySelectorAll('.chat-suggestion').forEach(button => {
-                button.addEventListener('click', function () {
-                    const responseKey = this.dataset.response;
-                    const data = responses[responseKey];
-
-                    // Remove the clicked button
-                    this.remove();
-
-                    // Create the new exchange
-                    const exchange = document.createElement('div');
-                    exchange.className = 'chat-exchange';
-                    exchange.innerHTML = `
-                        <div class="response-divider"></div>
-                        <div class="user-message">${data.question}</div>
-                        <div class="arete-response">
-                            <div class="chat-avatar small">A</div>
-                            <div class="response-content">${data.answer}</div>
-                        </div>
-                    `;
-
-                    // Append exchange to thread
-                    chatThread.appendChild(exchange);
-
-                    // Move suggestions to end of thread (if there are remaining buttons)
-                    if (suggestionsContainer.children.length > 0) {
-                        chatThread.appendChild(suggestionsContainer);
-                    }
-
-                    // Animate in
-                    setTimeout(() => {
-                        exchange.classList.add('visible');
-                    }, 10);
-
-                    // Scroll the chat preview to show new content
-                    exchange.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                });
+            // See adjusted workout
+            btnSeeWorkout.addEventListener('click', function() {
+                // Mark this button as selected, fade out the other
+                btnSeeWorkout.classList.add('selected');
+                btnKeepOriginal.classList.add('fade-out');
+                
+                // Show loading indicator
+                showLoading();
+                
+                // After delay, hide loading and show response
+                setTimeout(() => {
+                    hideLoading();
+                    initialActions.style.display = 'none';
+                    exchangeOriginal.classList.remove('visible');
+                    exchangeAdjusted.classList.add('visible');
+                }, 1000);
             });
+
+            // Keep original plan
+            btnKeepOriginal.addEventListener('click', function() {
+                // Mark this button as selected, fade out the other
+                btnKeepOriginal.classList.add('selected');
+                btnSeeWorkout.classList.add('fade-out');
+                
+                // Show loading indicator
+                showLoading();
+                
+                setTimeout(() => {
+                    hideLoading();
+                    initialActions.style.display = 'none';
+                    exchangeAdjusted.classList.remove('visible');
+                    exchangeOriginal.classList.add('visible');
+                }, 1000);
+            });
+
+            // Confirm adjusted workout
+            btnConfirm.addEventListener('click', function() {
+                // Mark this button as selected, fade out the other
+                btnConfirm.classList.add('selected');
+                btnKeepOriginal2.classList.add('fade-out');
+                
+                // Show loading indicator
+                showLoading();
+                
+                setTimeout(() => {
+                    hideLoading();
+                    adjustedActions.style.display = 'none';
+                    exchangeConfirmed.classList.add('visible');
+                }, 1000);
+            });
+
+            // Keep original from adjusted view (btn-keep-original-2)
+            btnKeepOriginal2.addEventListener('click', function() {
+                // Mark this button as selected, fade out the other
+                btnKeepOriginal2.classList.add('selected');
+                btnConfirm.classList.add('fade-out');
+                
+                // Show loading indicator
+                showLoading();
+                
+                setTimeout(() => {
+                    hideLoading();
+                    adjustedActions.style.display = 'none';
+                    exchangeOriginal.classList.add('visible');
+                }, 1000);
+            });
+
+            // Restart buttons
+            document.getElementById('btn-restart').addEventListener('click', resetDemo);
+            document.getElementById('btn-restart-original').addEventListener('click', resetDemo);
         </script>
 
         <script>
@@ -1173,60 +1883,60 @@ I noticed you haven't logged breakfast yet—snap a photo when you eat and I'll 
             <div class="integrations-scroll-container">
                 <div class="integrations-scroll">
                     <!-- First set -->
-                    <div class="integration-item">
+                    <a href="https://www.garmin.com" target="_blank" rel="noopener" class="integration-item">
                         <div class="integration-logo">
                             <img src="images/garmin.png" alt="Garmin">
                         </div>
                         <span class="integration-name">Garmin</span>
-                    </div>
-                    <div class="integration-item">
+                    </a>
+                    <a href="https://www.apple.com/health/" target="_blank" rel="noopener" class="integration-item">
                         <div class="integration-logo">
                             <img src="images/health.png" alt="Apple Health">
                         </div>
                         <span class="integration-name">Apple Health</span>
-                    </div>
-                    <div class="integration-item">
+                    </a>
+                    <a href="https://ouraring.com" target="_blank" rel="noopener" class="integration-item">
                         <div class="integration-logo">
                             <img src="images/oura.png" alt="Oura">
                         </div>
                         <span class="integration-name">Oura</span>
-                    </div>
-                    <div class="integration-item">
+                    </a>
+                    <a href="https://www.whoop.com" target="_blank" rel="noopener" class="integration-item">
                         <div class="integration-logo">
                             <img src="images/whoop.png" alt="Whoop">
                         </div>
                         <span class="integration-name">Whoop</span>
-                    </div>
-                    <div class="integration-item">
+                    </a>
+                    <a href="https://www.strava.com" target="_blank" rel="noopener" class="integration-item">
                         <div class="integration-logo">
                             <img src="images/strava.png" alt="Strava">
                         </div>
                         <span class="integration-name">Strava</span>
-                    </div>
-                    <div class="integration-item">
+                    </a>
+                    <a href="https://www.eightsleep.com" target="_blank" rel="noopener" class="integration-item">
                         <div class="integration-logo">
                             <img src="images/eightsleep.png" alt="Eight Sleep">
                         </div>
                         <span class="integration-name">Eight Sleep</span>
-                    </div>
-                    <div class="integration-item">
+                    </a>
+                    <a href="https://www.myfitnesspal.com" target="_blank" rel="noopener" class="integration-item">
                         <div class="integration-logo">
                             <img src="images/myfitnesspal.png" alt="MyFitnessPal">
                         </div>
                         <span class="integration-name">MyFitnessPal</span>
-                    </div>
-                    <div class="integration-item">
+                    </a>
+                    <a href="https://www.withings.com" target="_blank" rel="noopener" class="integration-item">
                         <div class="integration-logo">
                             <img src="images/withings.png" alt="Withings">
                         </div>
                         <span class="integration-name">Withings</span>
-                    </div>
-                    <div class="integration-item">
+                    </a>
+                    <a href="https://www.anthropic.com/claude" target="_blank" rel="noopener" class="integration-item">
                         <div class="integration-logo">
                             <img src="images/claude.png" alt="Claude AI">
                         </div>
                         <span class="integration-name">Claude AI</span>
-                    </div>
+                    </a>
                     <div class="integration-item">
                         <div class="integration-logo">
                             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -1239,60 +1949,60 @@ I noticed you haven't logged breakfast yet—snap a photo when you eat and I'll 
                         <span class="integration-name">More coming</span>
                     </div>
                     <!-- Duplicate set for seamless loop -->
-                    <div class="integration-item">
+                    <a href="https://www.garmin.com" target="_blank" rel="noopener" class="integration-item">
                         <div class="integration-logo">
                             <img src="images/garmin.png" alt="Garmin">
                         </div>
                         <span class="integration-name">Garmin</span>
-                    </div>
-                    <div class="integration-item">
+                    </a>
+                    <a href="https://www.apple.com/health/" target="_blank" rel="noopener" class="integration-item">
                         <div class="integration-logo">
                             <img src="images/health.png" alt="Apple Health">
                         </div>
                         <span class="integration-name">Apple Health</span>
-                    </div>
-                    <div class="integration-item">
+                    </a>
+                    <a href="https://ouraring.com" target="_blank" rel="noopener" class="integration-item">
                         <div class="integration-logo">
                             <img src="images/oura.png" alt="Oura">
                         </div>
                         <span class="integration-name">Oura</span>
-                    </div>
-                    <div class="integration-item">
+                    </a>
+                    <a href="https://www.whoop.com" target="_blank" rel="noopener" class="integration-item">
                         <div class="integration-logo">
                             <img src="images/whoop.png" alt="Whoop">
                         </div>
                         <span class="integration-name">Whoop</span>
-                    </div>
-                    <div class="integration-item">
+                    </a>
+                    <a href="https://www.strava.com" target="_blank" rel="noopener" class="integration-item">
                         <div class="integration-logo">
                             <img src="images/strava.png" alt="Strava">
                         </div>
                         <span class="integration-name">Strava</span>
-                    </div>
-                    <div class="integration-item">
+                    </a>
+                    <a href="https://www.eightsleep.com" target="_blank" rel="noopener" class="integration-item">
                         <div class="integration-logo">
                             <img src="images/eightsleep.png" alt="Eight Sleep">
                         </div>
                         <span class="integration-name">Eight Sleep</span>
-                    </div>
-                    <div class="integration-item">
+                    </a>
+                    <a href="https://www.myfitnesspal.com" target="_blank" rel="noopener" class="integration-item">
                         <div class="integration-logo">
                             <img src="images/myfitnesspal.png" alt="MyFitnessPal">
                         </div>
                         <span class="integration-name">MyFitnessPal</span>
-                    </div>
-                    <div class="integration-item">
+                    </a>
+                    <a href="https://www.withings.com" target="_blank" rel="noopener" class="integration-item">
                         <div class="integration-logo">
                             <img src="images/withings.png" alt="Withings">
                         </div>
                         <span class="integration-name">Withings</span>
-                    </div>
-                    <div class="integration-item">
+                    </a>
+                    <a href="https://www.anthropic.com/claude" target="_blank" rel="noopener" class="integration-item">
                         <div class="integration-logo">
                             <img src="images/claude.png" alt="Claude AI">
                         </div>
                         <span class="integration-name">Claude AI</span>
-                    </div>
+                    </a>
                     <div class="integration-item">
                         <div class="integration-logo">
                             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
