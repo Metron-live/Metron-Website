@@ -509,6 +509,23 @@
 
         .exercise-icon {
             flex-shrink: 0;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .exercise-icon.swap {
+            color: #F59E0B;
+            font-weight: 600;
+        }
+
+        .exercise-icon.decrease {
+            color: #F59E0B;
+            font-weight: 600;
         }
 
         .exercise-details {
@@ -646,8 +663,15 @@
         }
 
         .feature-icon {
-            font-size: 1.75rem;
+            width: 48px;
+            height: 48px;
+            background: var(--bg-alt);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             margin-bottom: 1rem;
+            color: var(--accent);
         }
 
         .feature-card h3 {
@@ -1009,7 +1033,7 @@
                                     
                                     <div class="workout-exercises">
                                         <div class="exercise-item modified">
-                                            <div class="exercise-icon">🔄</div>
+                                            <div class="exercise-icon swap">↻</div>
                                             <div class="exercise-details">
                                                 <span class="exercise-name">Goblet Squats</span>
                                                 <span class="exercise-change">was Back Squats 4×6</span>
@@ -1017,7 +1041,7 @@
                                             <span class="exercise-sets">3 × 10</span>
                                         </div>
                                         <div class="exercise-item modified">
-                                            <div class="exercise-icon">📉</div>
+                                            <div class="exercise-icon decrease">↓</div>
                                             <div class="exercise-details">
                                                 <span class="exercise-name">Romanian Deadlift</span>
                                                 <span class="exercise-change">reduced from 3×8</span>
@@ -1041,8 +1065,8 @@
                                     </div>
                                     
                                     <div class="workout-meta">
-                                        <span>⏱ ~45 min</span>
-                                        <span>💪 Moderate intensity</span>
+                                        <span>~45 min</span>
+                                        <span>Moderate intensity</span>
                                     </div>
                                 </div>
                                 
@@ -1076,28 +1100,28 @@
                                     
                                     <div class="workout-exercises">
                                         <div class="exercise-item unchanged">
-                                            <div class="exercise-icon">🏋️</div>
+                                            <div class="exercise-icon">•</div>
                                             <div class="exercise-details">
                                                 <span class="exercise-name">Back Squats</span>
                                             </div>
                                             <span class="exercise-sets">4 × 6</span>
                                         </div>
                                         <div class="exercise-item unchanged">
-                                            <div class="exercise-icon">🏋️</div>
+                                            <div class="exercise-icon">•</div>
                                             <div class="exercise-details">
                                                 <span class="exercise-name">Romanian Deadlift</span>
                                             </div>
                                             <span class="exercise-sets">3 × 8</span>
                                         </div>
                                         <div class="exercise-item unchanged">
-                                            <div class="exercise-icon">🏋️</div>
+                                            <div class="exercise-icon">•</div>
                                             <div class="exercise-details">
                                                 <span class="exercise-name">Leg Press</span>
                                             </div>
                                             <span class="exercise-sets">3 × 12</span>
                                         </div>
                                         <div class="exercise-item unchanged">
-                                            <div class="exercise-icon">🏋️</div>
+                                            <div class="exercise-icon">•</div>
                                             <div class="exercise-details">
                                                 <span class="exercise-name">Walking Lunges</span>
                                             </div>
@@ -1158,32 +1182,56 @@
         
         <div class="features-grid">
             <div class="feature-card">
-                <div class="feature-icon">📊</div>
+                <div class="feature-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
+                    </svg>
+                </div>
                 <h3>Unified Data Intelligence</h3>
                 <p>Your Garmin, Oura, Whoop, and Apple Watch data flows into one coherent picture. No more context-switching between apps.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">🎯</div>
+                <div class="feature-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
+                    </svg>
+                </div>
                 <h3>Dynamic Training Plans</h3>
                 <p>Plans that rebalance daily based on recovery, sleep, stress, and performance. Train smarter, not just harder.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">🍎</div>
+                <div class="feature-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/>
+                    </svg>
+                </div>
                 <h3>AI-Powered Nutrition</h3>
                 <p>Snap a photo of your meal for instant macro tracking. Get personalized nutrition recommendations aligned with your training goals.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">💬</div>
+                <div class="feature-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                    </svg>
+                </div>
                 <h3>Arete AI Coach</h3>
                 <p>Ask questions, get insights, adjust your plan—all through natural conversation with an AI that knows your complete fitness history.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">📈</div>
+                <div class="feature-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                    </svg>
+                </div>
                 <h3>Pattern Recognition</h3>
                 <p>Discover what actually works for your body. Metron learns your responses to training, sleep, and nutrition over time.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">⚡</div>
+                <div class="feature-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                    </svg>
+                </div>
                 <h3>Recovery Optimization</h3>
                 <p>Know when to push and when to rest. Real-time readiness scores based on HRV, sleep quality, and training load.</p>
             </div>
