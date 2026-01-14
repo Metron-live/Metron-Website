@@ -6,8 +6,23 @@
     <title>Metron | AI-Powered Fitness Intelligence</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <meta name="theme-color" content="#E8734A">
     <style>
+        :root {
+            --text-primary: #1a1a1a;
+            --text-secondary: #4a4a4a;
+            --bg-primary: #FAFAF8;
+            --bg-alt: #F5F5F3;
+            --border: #E5E5E3;
+            --accent: #E8734A;
+            --accent-hover: #d4663f;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -18,29 +33,11 @@
             scroll-behavior: smooth;
         }
 
-        :root {
-            --bg: #FAFAF8;
-            --bg-alt: #F5F5F3;
-            --bg-card: #FFFFFF;
-            --text-primary: #1a1a1a;
-            --text-secondary: #4a4a4a;
-            --text-muted: #888888;
-            --border: #E8E8E6;
-            --border-dark: #D4D4D2;
-            --accent: #E8734A;
-        }
-
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg);
+            font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
             color: var(--text-primary);
             line-height: 1.6;
-            font-size: 16px;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        .display {
-            font-family: 'Space Grotesk', -apple-system, sans-serif;
         }
 
         /* Navigation */
@@ -66,11 +63,16 @@
             color: var(--text-primary);
             letter-spacing: -0.03em;
             text-decoration: none;
-            cursor: pointer;
         }
 
         .logo:hover {
             opacity: 0.8;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
         }
 
         .nav-links {
@@ -82,77 +84,76 @@
         .nav-links a {
             color: var(--text-secondary);
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: 500;
             transition: color 0.2s;
         }
 
         .nav-links a:hover {
-            color: var(--text-primary);
+            color: var(--accent);
         }
 
         .btn-primary {
-            background: var(--text-primary);
-            color: var(--bg);
+            background: var(--accent);
+            color: white;
             padding: 0.75rem 1.5rem;
-            border-radius: 6px;
+            border-radius: 8px;
             text-decoration: none;
-            font-weight: 500;
-            font-size: 0.9rem;
+            font-weight: 600;
+            font-size: 0.95rem;
             transition: all 0.2s;
-            border: none;
-            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(232, 115, 74, 0.25);
         }
 
         .btn-primary:hover {
-            background: #333;
+            background: var(--accent-hover);
             transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(232, 115, 74, 0.35);
         }
 
-        .btn-secondary {
-            background: transparent;
-            color: var(--text-primary);
-            padding: 0.75rem 1.5rem;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.9rem;
-            border: 1px solid var(--border-dark);
-            transition: all 0.2s;
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
             cursor: pointer;
         }
 
-        .btn-secondary:hover {
-            background: var(--bg-alt);
+        .hamburger span {
+            width: 24px;
+            height: 2px;
+            background: var(--text-primary);
+            transition: 0.3s;
         }
 
         /* Hero Section */
         .hero {
             min-height: 100vh;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
-            text-align: center;
-            padding: 8rem 2rem 4rem;
-            max-width: 1000px;
-            margin: 0 auto;
+            padding: 8rem 3rem 4rem;
+            gap: 4rem;
         }
 
-        .badge {
+        .hero-content {
+            flex: 1;
+            max-width: 560px;
+        }
+
+        .beta-badge {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            background: var(--bg-card);
+            background: var(--bg-alt);
             border: 1px solid var(--border);
             padding: 0.5rem 1rem;
             border-radius: 100px;
             font-size: 0.85rem;
             color: var(--text-secondary);
-            margin-bottom: 2.5rem;
+            margin-bottom: 1.5rem;
         }
 
-        .badge-dot {
+        .beta-badge::before {
+            content: '';
             width: 8px;
             height: 8px;
             background: #22c55e;
@@ -162,152 +163,178 @@
 
         @keyframes pulse {
             0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
+            50% { opacity: 0.5; }
         }
 
-        .hero h1 {
-            font-family: 'Space Grotesk', -apple-system, sans-serif;
-            font-size: clamp(2.75rem, 6vw, 4.5rem);
+        h1 {
+            font-size: 3.5rem;
             font-weight: 700;
             line-height: 1.1;
-            margin-bottom: 1.5rem;
             letter-spacing: -0.03em;
-            color: var(--text-primary);
+            margin-bottom: 1.5rem;
         }
 
-        .hero p {
-            font-size: 1.2rem;
+        .hero-description {
+            font-size: 1.15rem;
             color: var(--text-secondary);
-            max-width: 580px;
-            margin-bottom: 2.5rem;
             line-height: 1.7;
-            font-weight: 400;
+            margin-bottom: 2rem;
+        }
+
+        /* Email Form */
+        .email-form-container {
+            max-width: 400px;
         }
 
         .email-form {
             display: flex;
-            gap: 0.5rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            padding: 0.4rem;
-            border-radius: 8px;
-            max-width: 420px;
-            width: 100%;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-        }
-
-        .email-form-container {
-            max-width: 420px;
-            width: 100%;
-            margin: 0 auto;
-        }
-
-        .success-message {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            background: rgba(232, 115, 74, 0.1);
-            border: 1px solid var(--accent);
-            padding: 1rem 1.5rem;
-            border-radius: 8px;
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .success-icon {
-            width: 32px;
-            height: 32px;
-            background: var(--accent);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            flex-shrink: 0;
-        }
-
-        .success-text {
-            display: flex;
-            flex-direction: column;
-            gap: 0.25rem;
-            text-align: left;
-        }
-
-        .success-text strong {
-            color: var(--text-primary);
-            font-size: 1rem;
-        }
-
-        .success-text span {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
+            gap: 0.75rem;
         }
 
         .email-form input {
             flex: 1;
-            background: transparent;
-            border: none;
-            padding: 0.75rem 1rem;
-            color: var(--text-primary);
-            font-size: 0.95rem;
-            outline: none;
-            font-family: inherit;
-        }
-
-        .email-form input::placeholder {
-            color: var(--text-muted);
-        }
-
-        /* AI Chat Preview */
-        .chat-preview {
-            margin-top: 4rem;
-            background: var(--bg-card);
+            padding: 0.875rem 1rem;
             border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.5rem;
-            max-width: 520px;
-            width: 100%;
-            text-align: left;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            background: white;
+            transition: border-color 0.2s;
+        }
+
+        .email-form input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .email-form button {
+            background: var(--accent);
+            color: white;
+            padding: 0.875rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+            font-family: inherit;
+            box-shadow: 0 4px 14px rgba(232, 115, 74, 0.25);
+        }
+
+        .email-form button:hover {
+            background: var(--accent-hover);
+            box-shadow: 0 6px 20px rgba(232, 115, 74, 0.35);
+        }
+
+        .success-message {
+            display: none;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 1.25rem;
+            background: rgba(232, 115, 74, 0.1);
+            border: 1px solid rgba(232, 115, 74, 0.2);
+            border-radius: 8px;
+            color: var(--text-primary);
+        }
+
+        .success-message.visible {
+            display: flex;
+        }
+
+        .success-message svg {
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        /* Chat Preview / Demo */
+        .hero-preview {
+            flex: 1;
+            max-width: 480px;
+        }
+
+        .chat-preview {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+            overflow: hidden;
         }
 
         .chat-header {
             display: flex;
             align-items: center;
             gap: 0.75rem;
-            margin-bottom: 1rem;
-            padding-bottom: 1rem;
+            padding: 1rem 1.25rem;
             border-bottom: 1px solid var(--border);
         }
 
         .chat-avatar {
-            width: 36px;
-            height: 36px;
-            background: var(--text-primary);
-            color: var(--bg);
-            border-radius: 8px;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent) 0%, #f59e0b 100%);
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Space Grotesk', -apple-system, sans-serif;
-            font-weight: 600;
+            color: white;
+            font-weight: 700;
             font-size: 1rem;
+        }
+
+        .chat-avatar.small {
+            width: 28px;
+            height: 28px;
+            font-size: 0.75rem;
+            border-radius: 6px;
+            flex-shrink: 0;
         }
 
         .chat-name {
             font-weight: 600;
             font-size: 0.95rem;
-            color: var(--text-primary);
         }
 
         .chat-status {
             font-size: 0.8rem;
-            color: var(--text-muted);
+            color: var(--text-secondary);
+        }
+
+        .chat-body {
+            padding: 1.25rem;
+        }
+
+        /* Recovery Alert */
+        .recovery-alert {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            background: #FEF3C7;
+            border: 1px solid #FCD34D;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .recovery-alert-icon {
+            color: #D97706;
+            flex-shrink: 0;
+        }
+
+        .recovery-alert-text {
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
+        }
+
+        .recovery-alert-label {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #92400E;
+        }
+
+        .recovery-alert-detail {
+            font-size: 0.8rem;
+            color: #B45309;
         }
 
         .chat-message {
@@ -317,193 +344,355 @@
             font-size: 0.95rem;
             line-height: 1.65;
             color: var(--text-secondary);
+            margin-bottom: 1rem;
         }
 
-        .chat-suggestions {
+        /* Demo Actions */
+        .demo-actions {
             display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
+            gap: 0.75rem;
+            justify-content: flex-end;
             margin-top: 1rem;
         }
 
-        .chat-suggestion {
-            background: var(--bg);
-            border: 1px solid var(--border);
-            padding: 0.5rem 0.85rem;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            color: var(--text-secondary);
+        .demo-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.65rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
+            border: none;
             font-family: inherit;
         }
 
-        .chat-suggestion:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-
-        .chat-suggestion.active {
+        .demo-btn-primary {
             background: var(--accent);
             color: white;
-            border-color: var(--accent);
         }
 
-        /* Expandable response area */
-        .chat-response-container {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease, opacity 0.3s ease;
+        .demo-btn-primary:hover {
+            background: var(--accent-hover);
+        }
+
+        .demo-btn-secondary {
+            background: var(--bg-alt);
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+
+        .demo-btn-secondary:hover {
+            background: var(--border);
+        }
+
+        /* Chat Thread */
+        .chat-thread {
+            border-top: 1px solid var(--border);
+            padding: 1.25rem;
+        }
+
+        .chat-exchange {
+            display: none;
             opacity: 0;
+            transition: opacity 0.5s ease;
         }
 
-        .chat-response-container.open {
-            max-height: 500px;
+        .chat-exchange.visible {
+            display: block;
             opacity: 1;
-        }
-
-        .chat-response {
-            padding-top: 1rem;
         }
 
         .response-divider {
             height: 1px;
             background: var(--border);
-            margin-bottom: 1rem;
+            margin: 1rem 0;
         }
 
         .user-message {
             background: var(--text-primary);
-            color: var(--bg);
-            padding: 0.65rem 1rem;
+            color: white;
+            padding: 0.75rem 1rem;
             border-radius: 10px;
             font-size: 0.9rem;
-            display: inline-block;
-            margin-bottom: 1rem;
             margin-left: auto;
-            float: right;
-            clear: both;
+            max-width: 70%;
+            width: fit-content;
+            margin-bottom: 1rem;
         }
 
         .arete-response {
             display: flex;
             gap: 0.75rem;
-            clear: both;
-            padding-top: 0.5rem;
-        }
-
-        .chat-avatar.small {
-            width: 28px;
-            height: 28px;
-            font-size: 0.8rem;
-            flex-shrink: 0;
-            border-radius: 6px;
+            align-items: flex-start;
         }
 
         .response-content {
-            background: var(--bg-alt);
-            border-radius: 10px;
-            padding: 1rem 1.25rem;
-            font-size: 0.9rem;
-            line-height: 1.65;
-            color: var(--text-secondary);
-            white-space: pre-line;
             flex: 1;
         }
 
-        .response-content strong {
-            color: var(--text-primary);
+        /* Workout Card */
+        .workout-card {
+            background: var(--bg-alt);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .workout-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+        }
+
+        .workout-card-title {
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
+        }
+
+        .workout-day {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .workout-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .workout-badge {
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
             font-weight: 600;
         }
 
-        /* Sections */
-        .section {
-            padding: 6rem 2rem;
-            max-width: 1100px;
-            margin: 0 auto;
+        .workout-badge.adjusted {
+            background: #FEF3C7;
+            color: #D97706;
         }
 
-        .section-header {
+        .workout-badge.original {
+            background: #DBEAFE;
+            color: #1D4ED8;
+        }
+
+        .workout-exercises {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .exercise-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            background: white;
+            border-radius: 6px;
+            font-size: 0.85rem;
+        }
+
+        .exercise-item.modified {
+            border-left: 3px solid #F59E0B;
+        }
+
+        .exercise-item.unchanged {
+            border-left: 3px solid #22C55E;
+        }
+
+        .exercise-icon {
+            flex-shrink: 0;
+        }
+
+        .exercise-details {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .exercise-name {
+            font-weight: 500;
+        }
+
+        .exercise-change {
+            font-size: 0.75rem;
+            color: #D97706;
+        }
+
+        .exercise-sets {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            white-space: nowrap;
+        }
+
+        .workout-meta {
+            display: flex;
+            gap: 1rem;
+            margin-top: 0.75rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid var(--border);
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Confirmed Banner */
+        .confirmed-banner {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            background: #D1FAE5;
+            border: 1px solid #6EE7B7;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .confirmed-icon {
+            color: #059669;
+            flex-shrink: 0;
+        }
+
+        .confirmed-text {
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
+        }
+
+        .confirmed-title {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #047857;
+        }
+
+        .confirmed-detail {
+            font-size: 0.8rem;
+            color: #059669;
+        }
+
+        /* Loading Indicator */
+        .loading-indicator {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+            padding: 0.5rem 0;
+        }
+
+        .loading-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .loading-dots span {
+            width: 8px;
+            height: 8px;
+            background: var(--border);
+            border-radius: 50%;
+            animation: loadingBounce 1.4s ease-in-out infinite both;
+        }
+
+        .loading-dots span:nth-child(1) { animation-delay: -0.32s; }
+        .loading-dots span:nth-child(2) { animation-delay: -0.16s; }
+        .loading-dots span:nth-child(3) { animation-delay: 0s; }
+
+        @keyframes loadingBounce {
+            0%, 80%, 100% { transform: scale(0.8); opacity: 0.5; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 3rem;
+            background: white;
+        }
+
+        .features-header {
             text-align: center;
-            margin-bottom: 4rem;
+            max-width: 600px;
+            margin: 0 auto 4rem;
         }
 
-        .section-header h2 {
-            font-family: 'Space Grotesk', -apple-system, sans-serif;
+        .features-header h2 {
             font-size: 2.5rem;
             font-weight: 700;
+            letter-spacing: -0.02em;
             margin-bottom: 1rem;
-            letter-spacing: -0.03em;
-            color: var(--text-primary);
         }
 
-        .section-header p {
-            color: var(--text-secondary);
+        .features-header p {
             font-size: 1.1rem;
-            max-width: 550px;
-            margin: 0 auto;
+            color: var(--text-secondary);
         }
 
-        /* Features Grid */
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 1.25rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .feature-card {
-            background: var(--bg-card);
+            background: var(--bg-primary);
             border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 2rem;
-            transition: all 0.3s;
-        }
-
-        .feature-card:hover {
-            border-color: var(--border-dark);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            padding: 1.75rem;
         }
 
         .feature-icon {
-            width: 44px;
-            height: 44px;
-            background: var(--bg-alt);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.25rem;
-            font-size: 1.25rem;
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
         }
 
         .feature-card h3 {
-            font-family: 'Space Grotesk', -apple-system, sans-serif;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 600;
-            margin-bottom: 0.65rem;
-            color: var(--text-primary);
-            letter-spacing: -0.02em;
+            margin-bottom: 0.75rem;
         }
 
         .feature-card p {
-            color: var(--text-secondary);
             font-size: 0.95rem;
+            color: var(--text-secondary);
             line-height: 1.6;
         }
 
         /* Integrations Section */
         .integrations {
+            padding: 5rem 0;
             background: var(--bg-alt);
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
+            overflow: hidden;
         }
 
-        /* Integrations - Horizontal Scroll */
+        .integrations-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            padding: 0 3rem;
+        }
+
+        .integrations-header h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.75rem;
+        }
+
+        .integrations-header p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
         .integrations-scroll-container {
-            overflow: hidden;
             width: 100%;
-            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            overflow: hidden;
+            mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
         }
 
         .integrations-scroll {
@@ -518,12 +707,8 @@
         }
 
         @keyframes scroll {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-50%);
-            }
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
 
         .integration-item {
@@ -532,30 +717,27 @@
             align-items: center;
             gap: 0.75rem;
             flex-shrink: 0;
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
         }
 
         .integration-logo {
-            width: 56px;
-            height: 56px;
+            width: 64px;
+            height: 64px;
+            background: white;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: var(--bg-card);
-            border-radius: 12px;
-            border: 1px solid var(--border);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            transition: transform 0.2s, box-shadow 0.2s;
             overflow: hidden;
-            transition: all 0.2s ease;
         }
 
         .integration-item:hover .integration-logo {
-            border-color: var(--border-dark);
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-        }
-
-        .integration-logo svg {
-            width: 32px;
-            height: 32px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
         .integration-logo img {
@@ -570,158 +752,47 @@
             font-weight: 500;
         }
 
-        /* How It Works */
-        .steps-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
+        .integration-logo.coming-soon {
+            border: 2px dashed var(--accent);
+            background: transparent;
         }
 
-        .step-card {
-            text-align: center;
-            padding: 2rem 1.5rem;
-        }
-
-        .step-number {
-            width: 48px;
-            height: 48px;
-            background: var(--text-primary);
-            color: var(--bg);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Space Grotesk', -apple-system, sans-serif;
-            font-weight: 700;
-            font-size: 1.25rem;
-            margin: 0 auto 1.25rem;
-        }
-
-        .step-card h3 {
-            font-family: 'Space Grotesk', -apple-system, sans-serif;
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 0.65rem;
-            color: var(--text-primary);
-            letter-spacing: -0.02em;
-        }
-
-        .step-card p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-        }
-
-        /* Security Section */
-        .security-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1.25rem;
-        }
-
-        .security-item {
-            display: flex;
-            gap: 1rem;
-            align-items: flex-start;
-            padding: 1.5rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-        }
-
-        .security-icon {
-            width: 38px;
-            height: 38px;
-            background: var(--bg-alt);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            font-size: 1.1rem;
-        }
-
-        .security-item h4 {
-            font-family: 'Space Grotesk', -apple-system, sans-serif;
-            font-size: 1.05rem;
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-            color: var(--text-primary);
-            letter-spacing: -0.02em;
-        }
-
-        .security-item p {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
+        .integration-logo.coming-soon span {
+            font-size: 1.5rem;
         }
 
         /* CTA Section */
         .cta-section {
-            text-align: center;
-            padding: 6rem 2rem;
+            padding: 6rem 3rem;
             background: var(--bg-alt);
-            border-top: 1px solid var(--border);
+            text-align: center;
         }
 
         .cta-section h2 {
-            font-family: 'Space Grotesk', -apple-system, sans-serif;
             font-size: 2.5rem;
             font-weight: 700;
+            letter-spacing: -0.02em;
             margin-bottom: 1rem;
-            letter-spacing: -0.03em;
-            color: var(--text-primary);
         }
 
         .cta-section p {
-            color: var(--text-secondary);
             font-size: 1.1rem;
+            color: var(--text-secondary);
             margin-bottom: 2rem;
         }
 
         .cta-form {
-            display: flex;
-            gap: 0.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            max-width: 420px;
+            max-width: 400px;
             margin: 0 auto;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            padding: 0.4rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-        }
-
-        .cta-form input {
-            flex: 1;
-            min-width: 200px;
-            background: transparent;
-            border: none;
-            padding: 0.75rem 1rem;
-            color: var(--text-primary);
-            font-size: 0.95rem;
-            outline: none;
-            font-family: inherit;
-        }
-
-        .cta-form input::placeholder {
-            color: var(--text-muted);
         }
 
         /* Footer */
         footer {
+            padding: 3rem;
             border-top: 1px solid var(--border);
-            padding: 3rem 2rem;
-            background: var(--bg);
-        }
-
-        .footer-content {
-            max-width: 1100px;
-            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 1.5rem;
         }
 
         .footer-logo {
@@ -729,12 +800,7 @@
             font-size: 1.25rem;
             font-weight: 700;
             color: var(--text-primary);
-            letter-spacing: -0.03em;
             text-decoration: none;
-        }
-
-        .footer-logo:hover {
-            opacity: 0.8;
         }
 
         .footer-links {
@@ -753,12 +819,41 @@
             color: var(--text-primary);
         }
 
-        .footer-copy {
-            color: var(--text-muted);
-            font-size: 0.85rem;
+        .footer-copyright {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
         }
 
-        /* Responsive */
+        /* Mobile Responsive */
+        @media (max-width: 1024px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 7rem 2rem 4rem;
+            }
+
+            .hero-content {
+                max-width: 100%;
+            }
+
+            .email-form-container {
+                margin: 0 auto;
+            }
+
+            .hero-preview {
+                max-width: 100%;
+                width: 100%;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
         @media (max-width: 768px) {
             nav {
                 padding: 1rem 1.5rem;
@@ -768,25 +863,35 @@
                 display: none;
             }
 
+            .hamburger {
+                display: flex;
+            }
+
             .hero {
-                padding: 7rem 1.5rem 3rem;
+                padding: 6rem 1.5rem 3rem;
             }
 
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .section {
-                padding: 4rem 1.5rem;
-            }
-
-            .section-header h2 {
+            h1 {
                 font-size: 2rem;
             }
 
-            .footer-content {
+            .features, .integrations, .cta-section {
+                padding: 4rem 1.5rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            footer {
                 flex-direction: column;
+                gap: 1.5rem;
                 text-align: center;
+            }
+
+            .footer-links {
+                flex-wrap: wrap;
+                justify-content: center;
             }
         }
     </style>
@@ -795,205 +900,262 @@
     <!-- Navigation -->
     <nav>
         <a href="/" class="logo">Metron</a>
-        <div class="nav-links">
-            <a href="#features">Features</a>
-            <a href="#integrations">Integrations</a>
-            <a href="#how-it-works">How It Works</a>
-            <a href="#security">Security</a>
+        <div class="nav-right">
+            <div class="nav-links" id="nav-links">
+                <a href="#features">Features</a>
+                <a href="#integrations">Integrations</a>
+            </div>
+            <a href="#hero" class="btn-primary">Get Early Access</a>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
-        <a href="#hero-form-container" class="btn-primary">Get Early Access</a>
     </nav>
 
     <!-- Hero Section -->
     <section class="hero" id="hero">
-        <div class="badge">
-            <span class="badge-dot"></span>
-            Now in private beta
-        </div>
-        <h1>All your fitness data.<br>One intelligent plan.</h1>
-        <p>Metron connects your wearables, workouts, and nutrition to deliver personalized training and meal plans that adapt daily to how your body is actually performing.</p>
-        
-        <div class="email-form-container" id="hero-form-container">
-            <form class="email-form" id="hero-form" action="https://formspree.io/f/xkogdvbl" method="POST">
-                <input type="email" name="email" placeholder="Enter your email" required>
-                <button type="submit" class="btn-primary">Get Early Access</button>
-            </form>
-            <div class="success-message" id="hero-success" style="display: none;">
-                <div class="success-icon">✓</div>
-                <div class="success-text">
-                    <strong>You're on the list!</strong>
-                    <span>We'll be in touch soon with early access.</span>
+        <div class="hero-content">
+            <div class="beta-badge">Now in private beta</div>
+            <h1>All your fitness data. One intelligent plan.</h1>
+            <p class="hero-description">
+                Metron connects your wearables, workouts, and nutrition to deliver personalized training and meal plans that adapt daily to how your body is actually performing.
+            </p>
+            <div class="email-form-container" id="hero-form-container">
+                <form class="email-form" id="hero-form">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit">Get Early Access</button>
+                </form>
+                <div class="success-message" id="hero-success">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    <span><strong>You're on the list!</strong> We'll be in touch soon with early access.</span>
                 </div>
             </div>
         </div>
 
-        <div class="chat-preview">
-            <div class="chat-header">
-                <div class="chat-avatar">A</div>
-                <div>
-                    <div class="chat-name">Arete</div>
-                    <div class="chat-status">Your AI Coach</div>
+        <div class="hero-preview">
+            <div class="chat-preview" id="demo-container">
+                <div class="chat-header">
+                    <div class="chat-avatar">A</div>
+                    <div>
+                        <div class="chat-name">Arete</div>
+                        <div class="chat-status">Your AI Coach</div>
+                    </div>
                 </div>
-            </div>
-            <div class="chat-message">
-                Good morning! Your HRV is up 12% from yesterday and you logged 7.5 hours of quality sleep. Based on your training load, today's an ideal day for that tempo run—I've adjusted your pace zones to match your current recovery state.
-            </div>
-            <div class="chat-suggestions">
-                <button class="chat-suggestion" data-response="weekly-load">Show my weekly load</button>
-                <button class="chat-suggestion" data-response="adjust-workout">Adjust today's workout</button>
-                <button class="chat-suggestion" data-response="nutrition">What should I eat?</button>
-            </div>
-            
-            <!-- Expandable response area -->
-            <div class="chat-response-container" id="response-container">
-                <div class="chat-response" id="chat-response">
-                    <div class="response-divider"></div>
-                    <div class="user-message" id="user-message"></div>
-                    <div class="arete-response">
+                
+                <div class="chat-body" id="demo-initial">
+                    <!-- Recovery Alert Banner -->
+                    <div class="recovery-alert">
+                        <div class="recovery-alert-icon">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                                <line x1="12" y1="9" x2="12" y2="13"/>
+                                <line x1="12" y1="17" x2="12.01" y2="17"/>
+                            </svg>
+                        </div>
+                        <div class="recovery-alert-text">
+                            <span class="recovery-alert-label">Recovery Alert</span>
+                            <span class="recovery-alert-detail">HRV down 18% · 5.8 hrs sleep</span>
+                        </div>
+                    </div>
+                    
+                    <div class="chat-message">
+                        Morning. You logged <strong>5.8 hours of sleep</strong> and your HRV is <strong>down 18%</strong> from baseline. Based on your recovery state, I've adjusted today's leg workout—reducing compound lift volume by 20% and swapping heavy back squats for goblet squats.
+                    </div>
+                    
+                    <div class="demo-actions" id="initial-actions">
+                        <button class="demo-btn demo-btn-secondary" id="btn-keep-original">Keep original plan</button>
+                        <button class="demo-btn demo-btn-primary" id="btn-see-workout">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                <circle cx="12" cy="12" r="3"/>
+                            </svg>
+                            See adjusted workout
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Chat Thread -->
+                <div class="chat-thread" id="chat-thread" style="display: none;">
+                    
+                    <!-- Loading Indicator -->
+                    <div class="loading-indicator" id="loading-indicator" style="display: none;">
                         <div class="chat-avatar small">A</div>
-                        <div class="response-content" id="response-content"></div>
+                        <div class="loading-dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    
+                    <!-- Adjusted Workout Exchange -->
+                    <div class="chat-exchange" id="exchange-adjusted">
+                        <div class="response-divider"></div>
+                        <div class="user-message">See adjusted workout</div>
+                        <div class="arete-response">
+                            <div class="chat-avatar small">A</div>
+                            <div class="response-content">
+                                <div class="workout-card">
+                                    <div class="workout-card-header">
+                                        <div class="workout-card-title">
+                                            <span class="workout-day">Today's Workout</span>
+                                            <span class="workout-name">Legs (Recovery Adjusted)</span>
+                                        </div>
+                                        <div class="workout-badge adjusted">-20% volume</div>
+                                    </div>
+                                    
+                                    <div class="workout-exercises">
+                                        <div class="exercise-item modified">
+                                            <div class="exercise-icon">🔄</div>
+                                            <div class="exercise-details">
+                                                <span class="exercise-name">Goblet Squats</span>
+                                                <span class="exercise-change">was Back Squats 4×6</span>
+                                            </div>
+                                            <span class="exercise-sets">3 × 10</span>
+                                        </div>
+                                        <div class="exercise-item modified">
+                                            <div class="exercise-icon">📉</div>
+                                            <div class="exercise-details">
+                                                <span class="exercise-name">Romanian Deadlift</span>
+                                                <span class="exercise-change">reduced from 3×8</span>
+                                            </div>
+                                            <span class="exercise-sets">3 × 6</span>
+                                        </div>
+                                        <div class="exercise-item unchanged">
+                                            <div class="exercise-icon">✓</div>
+                                            <div class="exercise-details">
+                                                <span class="exercise-name">Leg Press</span>
+                                            </div>
+                                            <span class="exercise-sets">3 × 12</span>
+                                        </div>
+                                        <div class="exercise-item unchanged">
+                                            <div class="exercise-icon">✓</div>
+                                            <div class="exercise-details">
+                                                <span class="exercise-name">Walking Lunges</span>
+                                            </div>
+                                            <span class="exercise-sets">2 × 20</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="workout-meta">
+                                        <span>⏱ ~45 min</span>
+                                        <span>💪 Moderate intensity</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="demo-actions" id="adjusted-actions">
+                                    <button class="demo-btn demo-btn-secondary" id="btn-keep-original-2">Keep original plan</button>
+                                    <button class="demo-btn demo-btn-primary" id="btn-confirm">Confirm adjusted workout</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Keep Original Exchange -->
+                    <div class="chat-exchange" id="exchange-original">
+                        <div class="response-divider"></div>
+                        <div class="user-message">Keep original plan</div>
+                        <div class="arete-response">
+                            <div class="chat-avatar small">A</div>
+                            <div class="response-content">
+                                <div class="chat-message">
+                                    Got it—keeping your original leg day. Just a heads up: with your current recovery state, you might feel more fatigued than usual. Listen to your body, and I'll check in tomorrow to see how you're feeling.
+                                </div>
+                                
+                                <div class="workout-card">
+                                    <div class="workout-card-header">
+                                        <div class="workout-card-title">
+                                            <span class="workout-day">Today's Workout</span>
+                                            <span class="workout-name">Legs (Original)</span>
+                                        </div>
+                                        <div class="workout-badge original">Full intensity</div>
+                                    </div>
+                                    
+                                    <div class="workout-exercises">
+                                        <div class="exercise-item unchanged">
+                                            <div class="exercise-icon">🏋️</div>
+                                            <div class="exercise-details">
+                                                <span class="exercise-name">Back Squats</span>
+                                            </div>
+                                            <span class="exercise-sets">4 × 6</span>
+                                        </div>
+                                        <div class="exercise-item unchanged">
+                                            <div class="exercise-icon">🏋️</div>
+                                            <div class="exercise-details">
+                                                <span class="exercise-name">Romanian Deadlift</span>
+                                            </div>
+                                            <span class="exercise-sets">3 × 8</span>
+                                        </div>
+                                        <div class="exercise-item unchanged">
+                                            <div class="exercise-icon">🏋️</div>
+                                            <div class="exercise-details">
+                                                <span class="exercise-name">Leg Press</span>
+                                            </div>
+                                            <span class="exercise-sets">3 × 12</span>
+                                        </div>
+                                        <div class="exercise-item unchanged">
+                                            <div class="exercise-icon">🏋️</div>
+                                            <div class="exercise-details">
+                                                <span class="exercise-name">Walking Lunges</span>
+                                            </div>
+                                            <span class="exercise-sets">2 × 20</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="demo-actions">
+                                    <button class="demo-btn demo-btn-secondary" id="btn-restart-original">Restart demo</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Confirmed Exchange -->
+                    <div class="chat-exchange" id="exchange-confirmed">
+                        <div class="response-divider"></div>
+                        <div class="user-message">Confirm adjusted workout</div>
+                        <div class="arete-response">
+                            <div class="chat-avatar small">A</div>
+                            <div class="response-content">
+                                <div class="confirmed-banner">
+                                    <div class="confirmed-icon">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                            <polyline points="20 6 9 17 4 12"/>
+                                        </svg>
+                                    </div>
+                                    <div class="confirmed-text">
+                                        <span class="confirmed-title">Workout updated</span>
+                                        <span class="confirmed-detail">Synced to your training log</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="chat-message">
+                                    Your adjusted leg workout is locked in. I've also noted your recovery state—this data helps me learn your patterns and make better recommendations over time.
+                                    <br><br>
+                                    <strong>Quick tip:</strong> Try to get to bed 30 min earlier tonight. Based on your sleep trends, that should help bring your HRV back to baseline by tomorrow.
+                                </div>
+                                
+                                <div class="demo-actions">
+                                    <button class="demo-btn demo-btn-secondary" id="btn-restart">Restart demo</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <script>
-            const responses = {
-                'weekly-load': {
-                    question: 'Show my weekly load',
-                    answer: `Here's your training load for this week:
-
-<strong>Total Load:</strong> 847 TSS (Target: 800-900) ✓
-<strong>Intensity Distribution:</strong>
-• Zone 1-2 (Easy): 68% — 6.2 hrs
-• Zone 3 (Tempo): 22% — 2.0 hrs  
-• Zone 4-5 (Hard): 10% — 0.9 hrs
-
-<strong>Weekly Trend:</strong> You're up 12% from last week, which aligns with your progressive build. Recovery metrics look solid—HRV trending +8% over 7 days. You have capacity for one more quality session before your rest day Sunday.`
-                },
-                'adjust-workout': {
-                    question: 'Adjust today\'s workout',
-                    answer: `I've modified your tempo run based on your current readiness score of 84:
-
-<strong>Original Plan:</strong> 8 mi with 4 mi @ 7:15/mi
-<strong>Adjusted Plan:</strong> 8 mi with 5 mi @ 7:05/mi
-
-Your elevated HRV and quality sleep suggest you can push a bit harder today. I've extended the tempo portion and tightened the pace by 10 sec/mi.
-
-<strong>Target HR:</strong> 158-165 bpm (Zone 4)
-<strong>Estimated finish:</strong> 58:20
-
-Want me to sync this to your Garmin?`
-                },
-                'nutrition': {
-                    question: 'What should I eat?',
-                    answer: `Based on today's tempo run (est. 620 cal burn) and your goal of maintaining performance while staying lean:
-
-<strong>Pre-Run (2 hrs before):</strong>
-• Oatmeal with banana + honey — 45g carbs
-• Coffee if desired
-
-<strong>Post-Run Recovery Window:</strong>
-• Target: 30g protein + 60g carbs within 45 min
-• Suggestion: Greek yogurt bowl with berries and granola, or a recovery shake
-
-<strong>Daily Targets:</strong>
-• Calories: 2,450 kcal
-• Protein: 145g (1.6g/kg)
-• Carbs: 320g (fuel for tempo effort)
-
-I noticed you haven't logged breakfast yet—snap a photo when you eat and I'll track it automatically.`
-                }
-            };
-
-            const container = document.getElementById('response-container');
-            const userMessage = document.getElementById('user-message');
-            const responseContent = document.getElementById('response-content');
-            const buttons = document.querySelectorAll('.chat-suggestion');
-
-            buttons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const responseKey = this.dataset.response;
-                    const data = responses[responseKey];
-                    
-                    // Remove active state from all buttons
-                    buttons.forEach(b => b.classList.remove('active'));
-                    
-                    // If clicking the same button that's already open, close it
-                    if (container.classList.contains('open') && userMessage.textContent === data.question) {
-                        container.classList.remove('open');
-                        return;
-                    }
-                    
-                    // Add active state to clicked button
-                    this.classList.add('active');
-                    
-                    // Update content
-                    userMessage.textContent = data.question;
-                    responseContent.innerHTML = data.answer;
-                    
-                    // Open the container
-                    container.classList.add('open');
-                });
-            });
-        </script>
-
-        <script>
-            // Email form handling with Formspree
-            document.addEventListener('DOMContentLoaded', function() {
-                function handleFormSubmit(formId, successId) {
-                    const form = document.getElementById(formId);
-                    const success = document.getElementById(successId);
-                    
-                    if (!form || !success) return; // Guard clause
-                    
-                    form.addEventListener('submit', async function(e) {
-                        e.preventDefault();
-                        
-                        const formData = new FormData(form);
-                        const button = form.querySelector('button');
-                        const originalText = button.textContent;
-                        
-                        button.textContent = 'Submitting...';
-                        button.disabled = true;
-                        
-                        try {
-                            const response = await fetch(form.action, {
-                                method: 'POST',
-                                body: formData,
-                                headers: {
-                                    'Accept': 'application/json'
-                                }
-                            });
-                            
-                            if (response.ok) {
-                                form.style.display = 'none';
-                                success.style.display = 'flex';
-                            } else {
-                                throw new Error('Form submission failed');
-                            }
-                        } catch (error) {
-                            // For demo purposes, show success anyway
-                            // In production, you'd want to handle errors properly
-                            form.style.display = 'none';
-                            success.style.display = 'flex';
-                        }
-                    });
-                }
-                
-                handleFormSubmit('hero-form', 'hero-success');
-                handleFormSubmit('cta-form', 'cta-success');
-            });
-        </script>
     </section>
 
     <!-- Features Section -->
-    <section class="section" id="features">
-        <div class="section-header">
+    <section class="features" id="features">
+        <div class="features-header">
             <h2>Training that evolves with you</h2>
             <p>Stop juggling apps. Metron synthesizes everything into actionable daily guidance.</p>
         </div>
-
+        
         <div class="features-grid">
             <div class="feature-card">
                 <div class="feature-icon">📊</div>
@@ -1030,243 +1192,273 @@ I noticed you haven't logged breakfast yet—snap a photo when you eat and I'll 
 
     <!-- Integrations Section -->
     <section class="integrations" id="integrations">
-        <div class="section" style="padding-top: 5rem; padding-bottom: 5rem;">
-            <div class="section-header">
-                <h2>Connects to what you already use</h2>
-                <p>Seamlessly sync your favorite fitness devices and apps.</p>
-            </div>
-
-            <div class="integrations-scroll-container">
-                <div class="integrations-scroll">
-                    <!-- First set -->
-                    <div class="integration-item">
-                        <div class="integration-logo">
-                            <img src="images/garmin.png" alt="Garmin">
-                        </div>
-                        <span class="integration-name">Garmin</span>
+        <div class="integrations-header">
+            <h2>Connects to what you already use</h2>
+            <p>Seamlessly sync your favorite fitness devices and apps.</p>
+        </div>
+        
+        <div class="integrations-scroll-container">
+            <div class="integrations-scroll">
+                <!-- First set -->
+                <a href="https://www.garmin.com" target="_blank" rel="noopener" class="integration-item">
+                    <div class="integration-logo">
+                        <img src="images/garmin.png" alt="Garmin">
                     </div>
-                    <div class="integration-item">
-                        <div class="integration-logo">
-                            <img src="images/health.png" alt="Apple Health">
-                        </div>
-                        <span class="integration-name">Apple Health</span>
+                    <span class="integration-name">Garmin</span>
+                </a>
+                <a href="https://www.apple.com/health/" target="_blank" rel="noopener" class="integration-item">
+                    <div class="integration-logo">
+                        <img src="images/health.png" alt="Apple Health">
                     </div>
-                    <div class="integration-item">
-                        <div class="integration-logo">
-                            <img src="images/oura.png" alt="Oura">
-                        </div>
-                        <span class="integration-name">Oura</span>
+                    <span class="integration-name">Apple Health</span>
+                </a>
+                <a href="https://ouraring.com" target="_blank" rel="noopener" class="integration-item">
+                    <div class="integration-logo">
+                        <img src="images/oura.png" alt="Oura">
                     </div>
-                    <div class="integration-item">
-                        <div class="integration-logo">
-                            <img src="images/whoop.png" alt="Whoop">
-                        </div>
-                        <span class="integration-name">Whoop</span>
+                    <span class="integration-name">Oura</span>
+                </a>
+                <a href="https://www.whoop.com" target="_blank" rel="noopener" class="integration-item">
+                    <div class="integration-logo">
+                        <img src="images/whoop.png" alt="Whoop">
                     </div>
-                    <div class="integration-item">
-                        <div class="integration-logo">
-                            <img src="images/strava.png" alt="Strava">
-                        </div>
-                        <span class="integration-name">Strava</span>
+                    <span class="integration-name">Whoop</span>
+                </a>
+                <a href="https://www.strava.com" target="_blank" rel="noopener" class="integration-item">
+                    <div class="integration-logo">
+                        <img src="images/strava.png" alt="Strava">
                     </div>
-                    <div class="integration-item">
-                        <div class="integration-logo">
-                            <img src="images/eightsleep.png" alt="Eight Sleep">
-                        </div>
-                        <span class="integration-name">Eight Sleep</span>
+                    <span class="integration-name">Strava</span>
+                </a>
+                <a href="https://www.eightsleep.com" target="_blank" rel="noopener" class="integration-item">
+                    <div class="integration-logo">
+                        <img src="images/eightsleep.png" alt="Eight Sleep">
                     </div>
-                    <div class="integration-item">
-                        <div class="integration-logo">
-                            <img src="images/myfitnesspal.png" alt="MyFitnessPal">
-                        </div>
-                        <span class="integration-name">MyFitnessPal</span>
+                    <span class="integration-name">Eight Sleep</span>
+                </a>
+                <a href="https://www.myfitnesspal.com" target="_blank" rel="noopener" class="integration-item">
+                    <div class="integration-logo">
+                        <img src="images/myfitnesspal.png" alt="MyFitnessPal">
                     </div>
-                    <div class="integration-item">
-                        <div class="integration-logo">
-                            <img src="images/withings.png" alt="Withings">
-                        </div>
-                        <span class="integration-name">Withings</span>
+                    <span class="integration-name">MyFitnessPal</span>
+                </a>
+                <a href="https://www.withings.com" target="_blank" rel="noopener" class="integration-item">
+                    <div class="integration-logo">
+                        <img src="images/withings.png" alt="Withings">
                     </div>
-                    <div class="integration-item">
-                        <div class="integration-logo">
-                            <img src="images/claude.png" alt="Claude AI">
-                        </div>
-                        <span class="integration-name">Claude AI</span>
+                    <span class="integration-name">Withings</span>
+                </a>
+                <a href="https://www.anthropic.com/claude" target="_blank" rel="noopener" class="integration-item">
+                    <div class="integration-logo">
+                        <img src="images/claude.png" alt="Claude AI">
                     </div>
-                    <div class="integration-item">
-                        <div class="integration-logo">
-                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="12" cy="12" r="9" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-dasharray="3 2"/>
-                                <path fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" d="M12 8v8M8 12h8"/>
-                            </svg>
-                        </div>
-                        <span class="integration-name">More coming</span>
+                    <span class="integration-name">Claude AI</span>
+                </a>
+                <div class="integration-item">
+                    <div class="integration-logo coming-soon">
+                        <span>+</span>
                     </div>
-                    <!-- Duplicate set for seamless loop -->
-                    <div class="integration-item">
-                        <div class="integration-logo">
-                            <img src="images/garmin.png" alt="Garmin">
-                        </div>
-                        <span class="integration-name">Garmin</span>
+                    <span class="integration-name">More coming</span>
+                </div>
+                
+                <!-- Duplicate set for seamless loop -->
+                <a href="https://www.garmin.com" target="_blank" rel="noopener" class="integration-item">
+                    <div class="integration-logo">
+                        <img src="images/garmin.png" alt="Garmin">
                     </div>
-                    <div class="integration-item">
-                        <div class="integration-logo">
-                            <img src="images/health.png" alt="Apple Health">
-                        </div>
-                        <span class="integration-name">Apple Health</span>
+                    <span class="integration-name">Garmin</span>
+                </a>
+                <a href="https://www.apple.com/health/" target="_blank" rel="noopener" class="integration-item">
+                    <div class="integration-logo">
+                        <img src="images/health.png" alt="Apple Health">
                     </div>
-                    <div class="integration-item">
-                        <div class="integration-logo">
-                            <img src="images/oura.png" alt="Oura">
-                        </div>
-                        <span class="integration-name">Oura</span>
+                    <span class="integration-name">Apple Health</span>
+                </a>
+                <a href="https://ouraring.com" target="_blank" rel="noopener" class="integration-item">
+                    <div class="integration-logo">
+                        <img src="images/oura.png" alt="Oura">
                     </div>
-                    <div class="integration-item">
-                        <div class="integration-logo">
-                            <img src="images/whoop.png" alt="Whoop">
-                        </div>
-                        <span class="integration-name">Whoop</span>
+                    <span class="integration-name">Oura</span>
+                </a>
+                <a href="https://www.whoop.com" target="_blank" rel="noopener" class="integration-item">
+                    <div class="integration-logo">
+                        <img src="images/whoop.png" alt="Whoop">
                     </div>
-                    <div class="integration-item">
-                        <div class="integration-logo">
-                            <img src="images/strava.png" alt="Strava">
-                        </div>
-                        <span class="integration-name">Strava</span>
+                    <span class="integration-name">Whoop</span>
+                </a>
+                <a href="https://www.strava.com" target="_blank" rel="noopener" class="integration-item">
+                    <div class="integration-logo">
+                        <img src="images/strava.png" alt="Strava">
                     </div>
-                    <div class="integration-item">
-                        <div class="integration-logo">
-                            <img src="images/eightsleep.png" alt="Eight Sleep">
-                        </div>
-                        <span class="integration-name">Eight Sleep</span>
+                    <span class="integration-name">Strava</span>
+                </a>
+                <a href="https://www.eightsleep.com" target="_blank" rel="noopener" class="integration-item">
+                    <div class="integration-logo">
+                        <img src="images/eightsleep.png" alt="Eight Sleep">
                     </div>
-                    <div class="integration-item">
-                        <div class="integration-logo">
-                            <img src="images/myfitnesspal.png" alt="MyFitnessPal">
-                        </div>
-                        <span class="integration-name">MyFitnessPal</span>
+                    <span class="integration-name">Eight Sleep</span>
+                </a>
+                <a href="https://www.myfitnesspal.com" target="_blank" rel="noopener" class="integration-item">
+                    <div class="integration-logo">
+                        <img src="images/myfitnesspal.png" alt="MyFitnessPal">
                     </div>
-                    <div class="integration-item">
-                        <div class="integration-logo">
-                            <img src="images/withings.png" alt="Withings">
-                        </div>
-                        <span class="integration-name">Withings</span>
+                    <span class="integration-name">MyFitnessPal</span>
+                </a>
+                <a href="https://www.withings.com" target="_blank" rel="noopener" class="integration-item">
+                    <div class="integration-logo">
+                        <img src="images/withings.png" alt="Withings">
                     </div>
-                    <div class="integration-item">
-                        <div class="integration-logo">
-                            <img src="images/claude.png" alt="Claude AI">
-                        </div>
-                        <span class="integration-name">Claude AI</span>
+                    <span class="integration-name">Withings</span>
+                </a>
+                <a href="https://www.anthropic.com/claude" target="_blank" rel="noopener" class="integration-item">
+                    <div class="integration-logo">
+                        <img src="images/claude.png" alt="Claude AI">
                     </div>
-                    <div class="integration-item">
-                        <div class="integration-logo">
-                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="12" cy="12" r="9" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-dasharray="3 2"/>
-                                <path fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" d="M12 8v8M8 12h8"/>
-                            </svg>
-                        </div>
-                        <span class="integration-name">More coming</span>
+                    <span class="integration-name">Claude AI</span>
+                </a>
+                <div class="integration-item">
+                    <div class="integration-logo coming-soon">
+                        <span>+</span>
                     </div>
+                    <span class="integration-name">More coming</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- How It Works Section -->
-    <section class="section" id="how-it-works">
-        <div class="section-header">
-            <h2>How Metron works</h2>
-            <p>From data chaos to clarity in three simple steps.</p>
-        </div>
-
-        <div class="steps-grid">
-            <div class="step-card">
-                <div class="step-number">1</div>
-                <h3>Connect Your Devices</h3>
-                <p>Link your wearables and fitness apps in seconds. We handle all the data syncing automatically.</p>
-            </div>
-            <div class="step-card">
-                <div class="step-number">2</div>
-                <h3>Set Your Goals</h3>
-                <p>Training for a marathon? Building strength? Optimizing health? Tell us what you're working toward.</p>
-            </div>
-            <div class="step-card">
-                <div class="step-number">3</div>
-                <h3>Follow Your Plan</h3>
-                <p>Wake up to personalized workouts and nutrition guidance that adapts to your body's daily readiness.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Security Section -->
-    <section class="section" id="security">
-        <div class="section-header">
-            <h2>Your data, protected</h2>
-            <p>Security and privacy are foundational, not afterthoughts.</p>
-        </div>
-
-        <div class="security-grid">
-            <div class="security-item">
-                <div class="security-icon">🔐</div>
-                <div>
-                    <h4>End-to-End Encryption</h4>
-                    <p>Your health data is encrypted in transit and at rest using industry-standard protocols.</p>
-                </div>
-            </div>
-            <div class="security-item">
-                <div class="security-icon">🎛️</div>
-                <div>
-                    <h4>Granular Permissions</h4>
-                    <p>Control exactly what data each integration can access. Revoke anytime with one tap.</p>
-                </div>
-            </div>
-            <div class="security-item">
-                <div class="security-icon">🚫</div>
-                <div>
-                    <h4>Never Sold</h4>
-                    <p>Your data is yours. We never sell or share your personal health information with third parties.</p>
-                </div>
-            </div>
-            <div class="security-item">
-                <div class="security-icon">🗑️</div>
-                <div>
-                    <h4>Delete Anytime</h4>
-                    <p>Request complete data deletion at any time. Your data, your choice.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Final CTA -->
+    <!-- CTA Section -->
     <section class="cta-section">
         <h2>Ready to train smarter?</h2>
         <p>Join the beta and experience truly personalized fitness intelligence.</p>
-        <div class="email-form-container" id="cta-form-container">
-            <form class="cta-form" id="cta-form" action="https://formspree.io/f/xkogdvbl" method="POST">
-                <input type="email" name="email" placeholder="Enter your email" required>
-                <button type="submit" class="btn-primary">Get Early Access</button>
+        <div class="cta-form">
+            <form class="email-form" id="cta-form">
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit">Get Early Access</button>
             </form>
-            <div class="success-message" id="cta-success" style="display: none;">
-                <div class="success-icon">✓</div>
-                <div class="success-text">
-                    <strong>You're on the list!</strong>
-                    <span>We'll be in touch soon with early access.</span>
-                </div>
+            <div class="success-message" id="cta-success">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="20 6 9 17 4 12"/>
+                </svg>
+                <span><strong>You're on the list!</strong> We'll be in touch soon with early access.</span>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <div class="footer-content">
-            <a href="/" class="footer-logo">Metron</a>
-            <div class="footer-links">
-                <a href="privacy.html">Privacy Policy</a>
-                <a href="terms.html">Terms of Service</a>
-                <a href="health-data-privacy.html">Health Data Privacy</a>
-                <a href="mailto:hello@metron.live">Contact</a>
-            </div>
-            <div class="footer-copy">© 2026 Metron. All rights reserved.</div>
+        <a href="/" class="footer-logo">Metron</a>
+        <div class="footer-links">
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Service</a>
+            <a href="health-data-privacy.html">Health Data Privacy</a>
+            <a href="mailto:hello@metron.live">Contact</a>
         </div>
+        <div class="footer-copyright">© 2026 Metron. All rights reserved.</div>
     </footer>
+
+    <script>
+        // Email form handling
+        const heroForm = document.getElementById('hero-form');
+        const heroSuccess = document.getElementById('hero-success');
+        const ctaForm = document.getElementById('cta-form');
+        const ctaSuccess = document.getElementById('cta-success');
+
+        heroForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            heroForm.style.display = 'none';
+            heroSuccess.classList.add('visible');
+        });
+
+        ctaForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            ctaForm.style.display = 'none';
+            ctaSuccess.classList.add('visible');
+        });
+
+        // Mobile menu
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+
+        hamburger.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+        });
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Demo interaction
+        const chatThread = document.getElementById('chat-thread');
+        const initialActions = document.getElementById('initial-actions');
+        const loadingIndicator = document.getElementById('loading-indicator');
+        const exchangeAdjusted = document.getElementById('exchange-adjusted');
+        const exchangeOriginal = document.getElementById('exchange-original');
+        const exchangeConfirmed = document.getElementById('exchange-confirmed');
+        const adjustedActions = document.getElementById('adjusted-actions');
+
+        function showLoading(callback, delay = 800) {
+            chatThread.style.display = 'block';
+            loadingIndicator.style.display = 'flex';
+            setTimeout(() => {
+                loadingIndicator.style.display = 'none';
+                callback();
+            }, delay);
+        }
+
+        function resetDemo() {
+            initialActions.style.display = 'flex';
+            chatThread.style.display = 'none';
+            exchangeAdjusted.classList.remove('visible');
+            exchangeOriginal.classList.remove('visible');
+            exchangeConfirmed.classList.remove('visible');
+            if (adjustedActions) adjustedActions.style.display = 'flex';
+        }
+
+        // See adjusted workout
+        document.getElementById('btn-see-workout').addEventListener('click', function() {
+            initialActions.style.display = 'none';
+            showLoading(() => {
+                exchangeAdjusted.classList.add('visible');
+            });
+        });
+
+        // Keep original plan (from initial)
+        document.getElementById('btn-keep-original').addEventListener('click', function() {
+            initialActions.style.display = 'none';
+            showLoading(() => {
+                exchangeOriginal.classList.add('visible');
+            });
+        });
+
+        // Keep original plan (from adjusted view)
+        document.getElementById('btn-keep-original-2').addEventListener('click', function() {
+            adjustedActions.style.display = 'none';
+            setTimeout(() => {
+                exchangeAdjusted.classList.remove('visible');
+                showLoading(() => {
+                    exchangeOriginal.classList.add('visible');
+                }, 400);
+            }, 200);
+        });
+
+        // Confirm adjusted workout
+        document.getElementById('btn-confirm').addEventListener('click', function() {
+            adjustedActions.style.display = 'none';
+            setTimeout(() => {
+                exchangeConfirmed.classList.add('visible');
+            }, 50);
+        });
+
+        // Restart buttons
+        document.getElementById('btn-restart').addEventListener('click', resetDemo);
+        document.getElementById('btn-restart-original').addEventListener('click', resetDemo);
+    </script>
 </body>
 </html>
