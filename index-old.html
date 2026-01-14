@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Metron | AI-Powered Fitness Intelligence</title>
-    
+
     <!-- Favicon -->
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -50,10 +50,6 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        .display {
-            font-family: 'Space Grotesk', -apple-system, sans-serif;
-        }
-
         /* Navigation */
         nav {
             position: fixed;
@@ -77,7 +73,6 @@
             color: var(--text-primary);
             letter-spacing: -0.03em;
             text-decoration: none;
-            cursor: pointer;
         }
 
         .logo:hover {
@@ -102,17 +97,24 @@
             color: var(--text-primary);
         }
 
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+        }
+
         .btn-primary {
             background: var(--accent);
-            color: var(--bg);
+            color: white;
+            border: none;
             padding: 0.75rem 1.5rem;
             border-radius: 6px;
-            text-decoration: none;
             font-weight: 500;
             font-size: 0.9rem;
-            transition: all 0.2s;
-            border: none;
             cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            text-decoration: none;
         }
 
         .btn-primary:hover {
@@ -120,34 +122,44 @@
             transform: translateY(-1px);
         }
 
-        .btn-secondary {
-            background: transparent;
-            color: var(--text-primary);
-            padding: 0.75rem 1.5rem;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.9rem;
-            border: 1px solid var(--border-dark);
-            transition: all 0.2s;
+        /* Hamburger menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
             cursor: pointer;
+            padding: 0.5rem;
+            z-index: 300;
         }
 
-        .btn-secondary:hover {
-            background: var(--bg-alt);
+        .hamburger span {
+            width: 24px;
+            height: 2px;
+            background: var(--text-primary);
+            transition: all 0.3s;
         }
 
-        /* Hero Section */
+        .hamburger.open span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.open span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* Hero */
         .hero {
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             text-align: center;
             padding: 8rem 2rem 4rem;
-            max-width: 1000px;
-            margin: 0 auto;
         }
 
         .badge {
@@ -160,7 +172,7 @@
             border-radius: 100px;
             font-size: 0.85rem;
             color: var(--text-secondary);
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
         }
 
         .badge-dot {
@@ -185,7 +197,7 @@
 
         .hero h1 {
             font-family: 'Space Grotesk', -apple-system, sans-serif;
-            font-size: clamp(2.75rem, 6vw, 4.5rem);
+            font-size: clamp(2.5rem, 6vw, 4rem);
             font-weight: 700;
             line-height: 1.1;
             margin-bottom: 1.5rem;
@@ -196,10 +208,9 @@
         .hero p {
             font-size: 1.2rem;
             color: var(--text-secondary);
-            max-width: 580px;
+            max-width: 540px;
             margin-bottom: 2.5rem;
             line-height: 1.7;
-            font-weight: 400;
         }
 
         .email-form {
@@ -288,7 +299,7 @@
             color: var(--text-muted);
         }
 
-        /* AI Chat Preview */
+        /* Chat Preview */
         .chat-preview {
             margin-top: 4rem;
             background: var(--bg-card);
@@ -444,14 +455,127 @@
             transform: translateY(-1px);
         }
 
-        .demo-btn-text {
-            background: transparent;
-            color: var(--text-muted);
-            padding: 0.7rem 0.5rem;
+        .demo-btn.selected {
+            pointer-events: none;
         }
 
-        .demo-btn-text:hover {
-            color: var(--text-primary);
+        .demo-btn.fade-out {
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        /* Chat thread styles */
+        .chat-thread {
+            margin-top: 0;
+        }
+
+        .chat-exchange {
+            overflow: hidden;
+            max-height: 0;
+            opacity: 0;
+            margin-top: 0;
+            transition: max-height 1.5s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 1.2s ease-out,
+                margin-top 0.8s ease;
+        }
+
+        .chat-exchange.visible {
+            max-height: 3000px;
+            opacity: 1;
+            margin-top: 1rem;
+        }
+
+        .chat-exchange.collapsing {
+            max-height: 0 !important;
+            opacity: 0 !important;
+            margin-top: 0 !important;
+            transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.5s ease-out,
+                margin-top 0.5s ease;
+        }
+
+        /* Loading animation */
+        .loading-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 0;
+            margin-top: 1rem;
+        }
+
+        .loading-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .loading-dots span {
+            width: 8px;
+            height: 8px;
+            background: var(--text-muted);
+            border-radius: 50%;
+            animation: loadingPulse 1.4s ease-in-out infinite;
+        }
+
+        .loading-dots span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .loading-dots span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes loadingPulse {
+
+            0%,
+            80%,
+            100% {
+                opacity: 0.3;
+                transform: scale(0.8);
+            }
+
+            40% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .response-divider {
+            height: 1px;
+            background: var(--border);
+            margin: 1rem 0;
+        }
+
+        .user-message {
+            background: var(--text-primary);
+            color: var(--bg);
+            padding: 0.65rem 1rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 1rem;
+            margin-left: auto;
+            float: right;
+            clear: both;
+        }
+
+        .arete-response {
+            display: flex;
+            gap: 0.75rem;
+            clear: both;
+            padding-top: 0.5rem;
+        }
+
+        .chat-avatar.small {
+            width: 28px;
+            height: 28px;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+            border-radius: 6px;
+        }
+
+        .response-content {
+            flex: 1;
         }
 
         /* Workout Card */
@@ -460,10 +584,6 @@
             border: 1px solid var(--border);
             border-radius: 10px;
             overflow: hidden;
-            margin-top: 0.75rem;
-        }
-
-        .workout-card.original {
             margin-top: 0.75rem;
         }
 
@@ -645,266 +765,23 @@
             color: #558B2F;
         }
 
-        /* Demo state transitions */
-        #demo-initial,
-        #demo-adjusted,
-        #demo-original,
-        #demo-confirmed {
-            transition: opacity 0.3s ease;
-        }
-
-        /* Chat thread styles */
-        .chat-thread {
-            margin-top: 0;
-        }
-
-        .chat-exchange {
-            overflow: hidden;
-            max-height: 0;
-            opacity: 0;
-            margin-top: 0;
-            transition: max-height 1.5s cubic-bezier(0.4, 0, 0.2, 1), 
-                        opacity 1.2s ease-out, 
-                        margin-top 0.8s ease;
-        }
-
-        .chat-exchange.visible {
-            max-height: 3000px;
-            opacity: 1;
-            margin-top: 1rem;
-        }
-
-        .chat-exchange.collapsing {
-            max-height: 0 !important;
-            opacity: 0 !important;
-            margin-top: 0 !important;
-            transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
-                        opacity 0.5s ease-out, 
-                        margin-top 0.5s ease;
-        }
-
-        /* Loading animation */
-        .loading-indicator {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 1rem 0;
-            margin-top: 1rem;
-        }
-
-        .loading-dots {
-            display: flex;
-            gap: 4px;
-        }
-
-        .loading-dots span {
-            width: 8px;
-            height: 8px;
-            background: var(--text-muted);
-            border-radius: 50%;
-            animation: loadingPulse 1.4s ease-in-out infinite;
-        }
-
-        .loading-dots span:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .loading-dots span:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-
-        @keyframes loadingPulse {
-            0%, 80%, 100% {
-                opacity: 0.3;
-                transform: scale(0.8);
-            }
-            40% {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        /* Button states */
-        .demo-btn.selected {
-            pointer-events: none;
-        }
-
-        .demo-btn.fade-out {
-            opacity: 0;
-            transform: scale(0.95);
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-
-        .response-divider {
-            height: 1px;
-            background: var(--border);
-            margin: 1rem 0;
-        }
-
-        .user-message {
-            background: var(--text-primary);
-            color: var(--bg);
-            padding: 0.65rem 1rem;
-            border-radius: 10px;
-            font-size: 0.9rem;
-            display: inline-block;
-            margin-bottom: 1rem;
-            margin-left: auto;
-            float: right;
-            clear: both;
-        }
-
-        .arete-response {
-            display: flex;
-            gap: 0.75rem;
-            clear: both;
-            padding-top: 0.5rem;
-        }
-
-        .chat-avatar.small {
-            width: 28px;
-            height: 28px;
-            font-size: 0.8rem;
-            flex-shrink: 0;
-            border-radius: 6px;
-        }
-
-        .response-content {
-            flex: 1;
-        }
-
-        .chat-suggestions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 1rem;
-            justify-content: flex-end;
-        }
-
-        .chat-suggestion {
-            background: var(--bg);
-            border: 1px solid var(--border);
-            padding: 0.5rem 0.85rem;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            cursor: pointer;
-            transition: all 0.2s;
-            font-family: inherit;
-        }
-
-        .chat-suggestion:hover {
-            border-color: var(--text-primary);
-            color: var(--text-primary);
-            font-weight: 600;
-        }
-
-        /* Chat thread for stacking responses */
-        .chat-thread {
-            margin-top: 0.5rem;
-        }
-
-        .chat-thread .chat-suggestions {
-            margin-top: 1rem;
-        }
-
-        .chat-exchange {
-            opacity: 0;
-            transform: translateY(10px);
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-
-        .chat-exchange.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .chat-suggestion.active {
-            background: var(--text-primary);
-            color: var(--bg);
-            border-color: var(--text-primary);
-        }
-
-        /* Expandable response area */
-        .chat-response-container {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease, opacity 0.3s ease;
-            opacity: 0;
-        }
-
-        .chat-response-container.open {
-            max-height: 500px;
-            opacity: 1;
-        }
-
-        .chat-response {
-            padding-top: 1rem;
-        }
-
-        .response-divider {
-            height: 1px;
-            background: var(--border);
-            margin-bottom: 1rem;
-        }
-
-        .user-message {
-            background: var(--text-primary);
-            color: var(--bg);
-            padding: 0.65rem 1rem;
-            border-radius: 10px;
-            font-size: 0.9rem;
-            display: inline-block;
-            margin-bottom: 1rem;
-            margin-left: auto;
-            float: right;
-            clear: both;
-        }
-
-        .arete-response {
-            display: flex;
-            gap: 0.75rem;
-            clear: both;
-            padding-top: 0.5rem;
-        }
-
-        .chat-avatar.small {
-            width: 28px;
-            height: 28px;
-            font-size: 0.8rem;
-            flex-shrink: 0;
-            border-radius: 6px;
-        }
-
-        .response-content {
+        /* Integrations */
+        .integrations {
+            padding: 5rem 2rem;
             background: var(--bg-alt);
-            border-radius: 10px;
-            padding: 1rem 1.25rem;
-            font-size: 0.9rem;
-            line-height: 1.65;
-            color: var(--text-secondary);
-            white-space: pre-line;
-            flex: 1;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
         }
 
-        .response-content strong {
-            color: var(--text-primary);
-            font-weight: 600;
-        }
-
-        /* Sections */
-        .section {
-            padding: 6rem 2rem;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .section-header {
+        .integrations-header {
             text-align: center;
-            margin-bottom: 4rem;
+            margin-bottom: 3rem;
+            max-width: 1100px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .section-header h2 {
+        .integrations-header h2 {
             font-family: 'Space Grotesk', -apple-system, sans-serif;
             font-size: 2.5rem;
             font-weight: 700;
@@ -913,68 +790,11 @@
             color: var(--text-primary);
         }
 
-        .section-header p {
+        .integrations-header p {
             color: var(--text-secondary);
             font-size: 1.1rem;
-            max-width: 550px;
-            margin: 0 auto;
         }
 
-        /* Features Grid */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 1.25rem;
-        }
-
-        .feature-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 2rem;
-            transition: all 0.3s;
-        }
-
-        .feature-card:hover {
-            border-color: var(--border-dark);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-        }
-
-        .feature-icon {
-            width: 44px;
-            height: 44px;
-            background: var(--bg-alt);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.25rem;
-            font-size: 1.25rem;
-        }
-
-        .feature-card h3 {
-            font-family: 'Space Grotesk', -apple-system, sans-serif;
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 0.65rem;
-            color: var(--text-primary);
-            letter-spacing: -0.02em;
-        }
-
-        .feature-card p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        /* Integrations Section */
-        .integrations {
-            background: var(--bg-alt);
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-        }
-
-        /* Integrations - Horizontal Scroll */
         .integrations-scroll-container {
             overflow: hidden;
             width: 100%;
@@ -1013,10 +833,6 @@
             color: inherit;
         }
 
-        a.integration-item {
-            cursor: pointer;
-        }
-
         .integration-logo {
             width: 56px;
             height: 56px;
@@ -1036,15 +852,15 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
 
-        .integration-logo svg {
-            width: 32px;
-            height: 32px;
-        }
-
         .integration-logo img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+        }
+
+        .integration-logo svg {
+            width: 32px;
+            height: 32px;
         }
 
         .integration-name {
@@ -1053,99 +869,19 @@
             font-weight: 500;
         }
 
-        /* How It Works */
-        .steps-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
+        /* Features */
+        .features {
+            padding: 5rem 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
         }
 
-        .step-card {
+        .features-header {
             text-align: center;
-            padding: 1.5rem 1rem;
+            margin-bottom: 3rem;
         }
 
-        .step-number {
-            width: 48px;
-            height: 48px;
-            background: var(--accent);
-            color: var(--bg);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Space Grotesk', -apple-system, sans-serif;
-            font-weight: 700;
-            font-size: 1.25rem;
-            margin: 0 auto 1.25rem;
-        }
-
-        .step-card h3 {
-            font-family: 'Space Grotesk', -apple-system, sans-serif;
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 0.65rem;
-            color: var(--text-primary);
-            letter-spacing: -0.02em;
-        }
-
-        .step-card p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-        }
-
-        /* Security Section */
-        .security-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1.25rem;
-        }
-
-        .security-item {
-            display: flex;
-            gap: 1rem;
-            align-items: flex-start;
-            padding: 1.5rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-        }
-
-        .security-icon {
-            width: 38px;
-            height: 38px;
-            background: var(--bg-alt);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            font-size: 1.1rem;
-        }
-
-        .security-item h4 {
-            font-family: 'Space Grotesk', -apple-system, sans-serif;
-            font-size: 1.05rem;
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-            color: var(--text-primary);
-            letter-spacing: -0.02em;
-        }
-
-        .security-item p {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        /* CTA Section */
-        .cta-section {
-            text-align: center;
-            padding: 6rem 2rem;
-            background: var(--bg-alt);
-            border-top: 1px solid var(--border);
-        }
-
-        .cta-section h2 {
+        .features-header h2 {
             font-family: 'Space Grotesk', -apple-system, sans-serif;
             font-size: 2.5rem;
             font-weight: 700;
@@ -1154,40 +890,72 @@
             color: var(--text-primary);
         }
 
-        .cta-section p {
+        .features-header p {
             color: var(--text-secondary);
             font-size: 1.1rem;
+            max-width: 550px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            border-color: var(--border-dark);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .feature-card h3 {
+            font-family: 'Space Grotesk', -apple-system, sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.65rem;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* CTA */
+        .cta {
+            text-align: center;
+            padding: 5rem 2rem;
+            background: var(--bg-alt);
+            border-top: 1px solid var(--border);
+        }
+
+        .cta h2 {
+            font-family: 'Space Grotesk', -apple-system, sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.03em;
+            color: var(--text-primary);
+        }
+
+        .cta p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
             margin-bottom: 2rem;
         }
 
-        .cta-form {
-            display: flex;
-            gap: 0.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            max-width: 420px;
+        .cta .email-form {
             margin: 0 auto;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            padding: 0.4rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-        }
-
-        .cta-form input {
-            flex: 1;
-            min-width: 200px;
-            background: transparent;
-            border: none;
-            padding: 0.75rem 1rem;
-            color: var(--text-primary);
-            font-size: 0.95rem;
-            outline: none;
-            font-family: inherit;
-        }
-
-        .cta-form input::placeholder {
-            color: var(--text-muted);
         }
 
         /* Footer */
@@ -1216,17 +984,13 @@
             text-decoration: none;
         }
 
-        .footer-logo:hover {
-            opacity: 0.8;
-        }
-
         .footer-links {
             display: flex;
             gap: 2rem;
         }
 
         .footer-links a {
-            color: var(--text-secondary);
+            color: var(--text-muted);
             text-decoration: none;
             font-size: 0.9rem;
             transition: color 0.2s;
@@ -1239,35 +1003,6 @@
         .footer-copy {
             color: var(--text-muted);
             font-size: 0.85rem;
-        }
-
-        /* Hamburger menu - hidden on desktop */
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-            padding: 0.5rem;
-            z-index: 300;
-        }
-
-        .hamburger span {
-            width: 24px;
-            height: 2px;
-            background: var(--text-primary);
-            transition: all 0.3s;
-        }
-
-        .hamburger.open span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-
-        .hamburger.open span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .hamburger.open span:nth-child(3) {
-            transform: rotate(-45deg) translate(5px, -5px);
         }
 
         /* Responsive */
@@ -1291,7 +1026,7 @@
                 padding: 2rem;
                 gap: 1.5rem;
                 border-bottom: 1px solid var(--border);
-                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             }
 
             .nav-links.open {
@@ -1310,16 +1045,17 @@
                 font-size: 2.5rem;
             }
 
-            .section {
-                padding: 4rem 1.5rem;
-            }
-
-            .section-header h2 {
+            .integrations-header h2,
+            .features-header h2 {
                 font-size: 2rem;
             }
 
-            .steps-grid {
+            .features-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .cta h2 {
+                font-size: 1.75rem;
             }
 
             .footer-content {
@@ -1334,13 +1070,11 @@
     <!-- Navigation -->
     <nav>
         <a href="/" class="logo">Metron</a>
-        <div class="nav-links" id="nav-links">
-            <a href="#features">Features</a>
-            <a href="#integrations">Integrations</a>
-            <a href="#how-it-works">How It Works</a>
-            <a href="#security">Security</a>
-        </div>
-        <div style="display: flex; align-items: center; gap: 1rem;">
+        <div class="nav-right">
+            <div class="nav-links" id="nav-links">
+                <a href="#features">Features</a>
+                <a href="#integrations">Integrations</a>
+            </div>
             <a href="#hero" class="btn-primary">Get Early Access</a>
             <div class="hamburger" id="hamburger">
                 <span></span>
@@ -1357,8 +1091,8 @@
             Now in private beta
         </div>
         <h1>All your fitness data.<br>One intelligent plan.</h1>
-        <p>Metron connects your wearables, workouts, and nutrition to deliver personalized training and meal plans that
-            adapt daily to how your body is actually performing.</p>
+        <p>Metron connects your wearables, workouts, and nutrition to deliver training that adapts to how your body is
+            actually performing.</p>
 
         <div class="email-form-container" id="hero-form-container">
             <form class="email-form" id="hero-form" action="https://formspree.io/f/xkogdvbl" method="POST">
@@ -1382,16 +1116,17 @@
                     <div class="chat-status">Your AI Coach</div>
                 </div>
             </div>
-            
-            <!-- Initial Message (always visible) -->
+
+            <!-- Initial Message -->
             <div id="demo-initial">
-                <!-- Recovery Alert Banner -->
                 <div class="recovery-alert">
                     <div class="recovery-alert-icon">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
-                            <line x1="12" y1="9" x2="12" y2="13"/>
-                            <line x1="12" y1="17" x2="12.01" y2="17"/>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5">
+                            <path
+                                d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                            <line x1="12" y1="9" x2="12" y2="13" />
+                            <line x1="12" y1="17" x2="12.01" y2="17" />
                         </svg>
                     </div>
                     <div class="recovery-alert-text">
@@ -1399,26 +1134,29 @@
                         <span class="recovery-alert-detail">HRV down 18% · 5.8 hrs sleep</span>
                     </div>
                 </div>
-                
+
                 <div class="chat-message">
-                    Good morning! You logged <strong>5.8 hours of sleep</strong> and your HRV is <strong>down 18%</strong> from baseline. Based on your recovery state, I've adjusted today's leg workout—reducing compound lift volume by 20% and swapping heavy back squats for goblet squats.
+                    Good morning! You logged <strong>5.8 hours of sleep</strong> and your HRV is <strong>down
+                        18%</strong> from baseline. Based on your recovery state, I've adjusted today's leg
+                    workout—reducing compound lift volume by 20% and swapping heavy back squats for goblet squats.
                 </div>
-                
+
                 <div class="demo-actions" id="initial-actions">
                     <button class="demo-btn demo-btn-secondary" id="btn-keep-original">Keep original plan</button>
                     <button class="demo-btn demo-btn-primary" id="btn-see-workout">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                            <circle cx="12" cy="12" r="3"/>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                            <circle cx="12" cy="12" r="3" />
                         </svg>
                         See adjusted workout
                     </button>
                 </div>
             </div>
 
-            <!-- Chat Thread for responses -->
+            <!-- Chat Thread -->
             <div class="chat-thread" id="chat-thread">
-                
+
                 <!-- Loading Indicator -->
                 <div class="loading-indicator" id="loading-indicator" style="display: none;">
                     <div class="chat-avatar small">A</div>
@@ -1428,7 +1166,7 @@
                         <span></span>
                     </div>
                 </div>
-                
+
                 <!-- Adjusted Workout Exchange -->
                 <div class="chat-exchange" id="exchange-adjusted">
                     <div class="response-divider"></div>
@@ -1444,12 +1182,13 @@
                                     </div>
                                     <div class="workout-badge adjusted">-20% volume</div>
                                 </div>
-                                
+
                                 <div class="workout-exercises">
                                     <div class="exercise-item modified">
                                         <div class="exercise-change">
-                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                                <path d="M7 16l5-5 5 5M7 8l5 5 5-5"/>
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2">
+                                                <path d="M7 16l5-5 5 5M7 8l5 5 5-5" />
                                             </svg>
                                         </div>
                                         <div class="exercise-details">
@@ -1458,11 +1197,12 @@
                                         </div>
                                         <span class="exercise-sets">3 × 10 @ 50lb</span>
                                     </div>
-                                    
+
                                     <div class="exercise-item modified">
                                         <div class="exercise-change">
-                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                                <path d="M12 5v14M5 12l7 7 7-7"/>
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2">
+                                                <path d="M12 5v14M5 12l7 7 7-7" />
                                             </svg>
                                         </div>
                                         <div class="exercise-details">
@@ -1471,11 +1211,12 @@
                                         </div>
                                         <span class="exercise-sets">3 × 6 @ 115lb</span>
                                     </div>
-                                    
+
                                     <div class="exercise-item">
                                         <div class="exercise-change unchanged">
-                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                                <polyline points="20 6 9 17 4 12"/>
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2">
+                                                <polyline points="20 6 9 17 4 12" />
                                             </svg>
                                         </div>
                                         <div class="exercise-details">
@@ -1484,11 +1225,12 @@
                                         </div>
                                         <span class="exercise-sets">3 × 12 @ 270lb</span>
                                     </div>
-                                    
+
                                     <div class="exercise-item">
                                         <div class="exercise-change unchanged">
-                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                                <polyline points="20 6 9 17 4 12"/>
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2">
+                                                <polyline points="20 6 9 17 4 12" />
                                             </svg>
                                         </div>
                                         <div class="exercise-details">
@@ -1498,7 +1240,7 @@
                                         <span class="exercise-sets">2 × 20 BW</span>
                                     </div>
                                 </div>
-                                
+
                                 <div class="workout-footer">
                                     <div class="workout-stat">
                                         <span class="workout-stat-label">Est. Duration</span>
@@ -1510,10 +1252,12 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="demo-actions" id="adjusted-actions">
-                                <button class="demo-btn demo-btn-secondary" id="btn-keep-original-2">Keep original workout</button>
-                                <button class="demo-btn demo-btn-confirm" id="btn-confirm">Confirm adjusted workout</button>
+                                <button class="demo-btn demo-btn-secondary" id="btn-keep-original-2">Keep original
+                                    plan</button>
+                                <button class="demo-btn demo-btn-confirm" id="btn-confirm">Confirm adjusted
+                                    workout</button>
                             </div>
                         </div>
                     </div>
@@ -1527,12 +1271,14 @@
                         <div class="chat-avatar small">A</div>
                         <div class="response-content">
                             <div class="chat-message" style="margin-bottom: 1rem;">
-                                Got it—keeping your original leg day as planned. Just a heads up: with your current recovery state, you might want to extend your warm-up and consider dropping weight by 10-15% if the heavy sets feel off.
+                                Got it—keeping your original leg day as planned. Just a heads up: with your current
+                                recovery state, you might want to extend your warm-up and consider dropping weight by
+                                10-15% if the heavy sets feel off.
                                 <br>
                                 I'll check in after your workout to see how it went.
                             </div>
-                            
-                            <div class="workout-card original">
+
+                            <div class="workout-card">
                                 <div class="workout-card-header">
                                     <div class="workout-card-title">
                                         <span class="workout-day">Today's Workout</span>
@@ -1540,12 +1286,13 @@
                                     </div>
                                     <div class="workout-badge original-badge">Full intensity</div>
                                 </div>
-                                
+
                                 <div class="workout-exercises">
                                     <div class="exercise-item">
                                         <div class="exercise-change unchanged">
-                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2">
+                                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
                                             </svg>
                                         </div>
                                         <div class="exercise-details">
@@ -1553,11 +1300,12 @@
                                         </div>
                                         <span class="exercise-sets">4 × 6 @ 185lb</span>
                                     </div>
-                                    
+
                                     <div class="exercise-item">
                                         <div class="exercise-change unchanged">
-                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2">
+                                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
                                             </svg>
                                         </div>
                                         <div class="exercise-details">
@@ -1565,11 +1313,12 @@
                                         </div>
                                         <span class="exercise-sets">3 × 8 @ 135lb</span>
                                     </div>
-                                    
+
                                     <div class="exercise-item">
                                         <div class="exercise-change unchanged">
-                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2">
+                                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
                                             </svg>
                                         </div>
                                         <div class="exercise-details">
@@ -1577,11 +1326,12 @@
                                         </div>
                                         <span class="exercise-sets">3 × 12 @ 270lb</span>
                                     </div>
-                                    
+
                                     <div class="exercise-item">
                                         <div class="exercise-change unchanged">
-                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2">
+                                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
                                             </svg>
                                         </div>
                                         <div class="exercise-details">
@@ -1591,9 +1341,10 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="demo-actions">
-                                <button class="demo-btn demo-btn-secondary" id="btn-restart-original">Restart demo</button>
+                                <button class="demo-btn demo-btn-secondary" id="btn-restart-original">Restart
+                                    demo</button>
                             </div>
                         </div>
                     </div>
@@ -1608,8 +1359,9 @@
                         <div class="response-content">
                             <div class="confirmed-banner">
                                 <div class="confirmed-icon">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                        <polyline points="20 6 9 17 4 12"/>
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2.5">
+                                        <polyline points="20 6 9 17 4 12" />
                                     </svg>
                                 </div>
                                 <div class="confirmed-text">
@@ -1617,13 +1369,15 @@
                                     <span class="confirmed-detail">Synced to your training log</span>
                                 </div>
                             </div>
-                            
+
                             <div class="chat-message">
-                                Your adjusted leg workout is locked in. I've also noted your recovery state—this data helps me learn your patterns and make better recommendations over time.
+                                Your adjusted leg workout is locked in. I've also noted your recovery state—this data
+                                helps me learn your patterns and make better recommendations over time.
                                 <br>
-                                <strong>Quick tip:</strong> Try to get to bed 30 min earlier tonight. Based on your sleep trends, that should help bring your HRV back to baseline by tomorrow.
+                                <strong>Quick tip:</strong> Try to get to bed 30 min earlier tonight. Based on your
+                                sleep trends, that should help bring your HRV back to baseline by tomorrow.
                             </div>
-                            
+
                             <div class="demo-actions">
                                 <button class="demo-btn demo-btn-secondary" id="btn-restart">Restart demo</button>
                             </div>
@@ -1632,212 +1386,158 @@
                 </div>
             </div>
         </div>
-
-        <script>
-            // Hamburger menu toggle
-            const hamburger = document.getElementById('hamburger');
-            const navLinks = document.getElementById('nav-links');
-            
-            hamburger.addEventListener('click', () => {
-                hamburger.classList.toggle('open');
-                navLinks.classList.toggle('open');
-            });
-
-            // Close menu when a link is clicked
-            navLinks.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    hamburger.classList.remove('open');
-                    navLinks.classList.remove('open');
-                });
-            });
-        </script>
-
-        <script>
-            // Demo chat thread management
-            const initialActions = document.getElementById('initial-actions');
-            const exchangeAdjusted = document.getElementById('exchange-adjusted');
-            const exchangeOriginal = document.getElementById('exchange-original');
-            const exchangeConfirmed = document.getElementById('exchange-confirmed');
-            const adjustedActions = document.getElementById('adjusted-actions');
-            const demoContainer = document.getElementById('demo-container');
-            const loadingIndicator = document.getElementById('loading-indicator');
-
-            // Button references
-            const btnSeeWorkout = document.getElementById('btn-see-workout');
-            const btnKeepOriginal = document.getElementById('btn-keep-original');
-            const btnConfirm = document.getElementById('btn-confirm');
-            const btnKeepOriginal2 = document.getElementById('btn-keep-original-2');
-
-            function showLoading() {
-                loadingIndicator.style.display = 'flex';
-            }
-
-            function hideLoading() {
-                loadingIndicator.style.display = 'none';
-            }
-
-            function resetDemo() {
-                // Add collapsing class for roll-up animation
-                exchangeAdjusted.classList.add('collapsing');
-                exchangeOriginal.classList.add('collapsing');
-                exchangeConfirmed.classList.add('collapsing');
-                
-                // Remove visible class
-                exchangeAdjusted.classList.remove('visible');
-                exchangeOriginal.classList.remove('visible');
-                exchangeConfirmed.classList.remove('visible');
-                
-                // Scroll to demo container
-                demoContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                
-                // After animation, clean up and show initial state
-                setTimeout(() => {
-                    exchangeAdjusted.classList.remove('collapsing');
-                    exchangeOriginal.classList.remove('collapsing');
-                    exchangeConfirmed.classList.remove('collapsing');
-                    
-                    // Reset button states
-                    btnSeeWorkout.classList.remove('selected', 'fade-out');
-                    btnKeepOriginal.classList.remove('selected', 'fade-out');
-                    btnConfirm.classList.remove('selected', 'fade-out');
-                    btnKeepOriginal2.classList.remove('selected', 'fade-out');
-                    
-                    // Show initial actions
-                    initialActions.style.display = 'flex';
-                    
-                    // Show adjusted actions (for when user returns)
-                    adjustedActions.style.display = 'flex';
-                }, 800);
-            }
-
-            // See adjusted workout
-            btnSeeWorkout.addEventListener('click', function() {
-                // Mark this button as selected, fade out the other
-                btnSeeWorkout.classList.add('selected');
-                btnKeepOriginal.classList.add('fade-out');
-                
-                // Show loading indicator
-                showLoading();
-                
-                // After delay, hide loading and show response
-                setTimeout(() => {
-                    hideLoading();
-                    initialActions.style.display = 'none';
-                    exchangeOriginal.classList.remove('visible');
-                    exchangeAdjusted.classList.add('visible');
-                }, 1000);
-            });
-
-            // Keep original plan
-            btnKeepOriginal.addEventListener('click', function() {
-                // Mark this button as selected, fade out the other
-                btnKeepOriginal.classList.add('selected');
-                btnSeeWorkout.classList.add('fade-out');
-                
-                // Show loading indicator
-                showLoading();
-                
-                setTimeout(() => {
-                    hideLoading();
-                    initialActions.style.display = 'none';
-                    exchangeAdjusted.classList.remove('visible');
-                    exchangeOriginal.classList.add('visible');
-                }, 1000);
-            });
-
-            // Confirm adjusted workout
-            btnConfirm.addEventListener('click', function() {
-                // Mark this button as selected, fade out the other
-                btnConfirm.classList.add('selected');
-                btnKeepOriginal2.classList.add('fade-out');
-                
-                // Show loading indicator
-                showLoading();
-                
-                setTimeout(() => {
-                    hideLoading();
-                    adjustedActions.style.display = 'none';
-                    exchangeConfirmed.classList.add('visible');
-                }, 1000);
-            });
-
-            // Keep original from adjusted view (btn-keep-original-2)
-            btnKeepOriginal2.addEventListener('click', function() {
-                // Mark this button as selected, fade out the other
-                btnKeepOriginal2.classList.add('selected');
-                btnConfirm.classList.add('fade-out');
-                
-                // Show loading indicator
-                showLoading();
-                
-                setTimeout(() => {
-                    hideLoading();
-                    adjustedActions.style.display = 'none';
-                    exchangeOriginal.classList.add('visible');
-                }, 1000);
-            });
-
-            // Restart buttons
-            document.getElementById('btn-restart').addEventListener('click', resetDemo);
-            document.getElementById('btn-restart-original').addEventListener('click', resetDemo);
-        </script>
-
-        <script>
-            // Email form handling with Formspree
-            document.addEventListener('DOMContentLoaded', function () {
-                function handleFormSubmit(formId, successId) {
-                    const form = document.getElementById(formId);
-                    const success = document.getElementById(successId);
-
-                    if (!form || !success) return; // Guard clause
-
-                    form.addEventListener('submit', async function (e) {
-                        e.preventDefault();
-
-                        const formData = new FormData(form);
-                        const button = form.querySelector('button');
-                        const originalText = button.textContent;
-
-                        button.textContent = 'Submitting...';
-                        button.disabled = true;
-
-                        try {
-                            const response = await fetch(form.action, {
-                                method: 'POST',
-                                body: formData,
-                                headers: {
-                                    'Accept': 'application/json'
-                                }
-                            });
-
-                            if (response.ok) {
-                                form.style.display = 'none';
-                                success.style.display = 'flex';
-                            } else {
-                                throw new Error('Form submission failed');
-                            }
-                        } catch (error) {
-                            // For demo purposes, show success anyway
-                            // In production, you'd want to handle errors properly
-                            form.style.display = 'none';
-                            success.style.display = 'flex';
-                        }
-                    });
-                }
-
-                handleFormSubmit('hero-form', 'hero-success');
-                handleFormSubmit('cta-form', 'cta-success');
-            });
-        </script>
     </section>
 
-    <!-- Features Section -->
-    <section class="section" id="features">
-        <div class="section-header">
+    <!-- Integrations -->
+    <section class="integrations">
+        <div class="integrations-header">
+            <h2>Connects to what you already use</h2>
+            <p>Seamlessly sync your favorite fitness devices and apps.</p>
+        </div>
+        <div class="integrations-scroll-container">
+            <div class="integrations-scroll">
+                <!-- First set -->
+                <a href="https://www.garmin.com" target="_blank" rel="noopener" class="integration-item">
+                    <div class="integration-logo">
+                        <img src="images/garmin.png" alt="Garmin">
+                    </div>
+                    <span class="integration-name">Garmin</span>
+                </a>
+                <a href="https://www.apple.com/health/" target="_blank" rel="noopener" class="integration-item">
+                    <div class="integration-logo">
+                        <img src="images/health.png" alt="Apple Health">
+                    </div>
+                    <span class="integration-name">Apple Health</span>
+                </a>
+                <a href="https://ouraring.com" target="_blank" rel="noopener" class="integration-item">
+                    <div class="integration-logo">
+                        <img src="images/oura.png" alt="Oura">
+                    </div>
+                    <span class="integration-name">Oura</span>
+                </a>
+                <a href="https://www.whoop.com" target="_blank" rel="noopener" class="integration-item">
+                    <div class="integration-logo">
+                        <img src="images/whoop.png" alt="Whoop">
+                    </div>
+                    <span class="integration-name">Whoop</span>
+                </a>
+                <a href="https://www.strava.com" target="_blank" rel="noopener" class="integration-item">
+                    <div class="integration-logo">
+                        <img src="images/strava.png" alt="Strava">
+                    </div>
+                    <span class="integration-name">Strava</span>
+                </a>
+                <a href="https://www.eightsleep.com" target="_blank" rel="noopener" class="integration-item">
+                    <div class="integration-logo">
+                        <img src="images/eightsleep.png" alt="Eight Sleep">
+                    </div>
+                    <span class="integration-name">Eight Sleep</span>
+                </a>
+                <a href="https://www.myfitnesspal.com" target="_blank" rel="noopener" class="integration-item">
+                    <div class="integration-logo">
+                        <img src="images/myfitnesspal.png" alt="MyFitnessPal">
+                    </div>
+                    <span class="integration-name">MyFitnessPal</span>
+                </a>
+                <a href="https://www.withings.com" target="_blank" rel="noopener" class="integration-item">
+                    <div class="integration-logo">
+                        <img src="images/withings.png" alt="Withings">
+                    </div>
+                    <span class="integration-name">Withings</span>
+                </a>
+                <a href="https://www.anthropic.com/claude" target="_blank" rel="noopener" class="integration-item">
+                    <div class="integration-logo">
+                        <img src="images/claude.png" alt="Claude AI">
+                    </div>
+                    <span class="integration-name">Claude AI</span>
+                </a>
+                <div class="integration-item">
+                    <div class="integration-logo">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="12" cy="12" r="9" fill="none" stroke="#1a1a1a" stroke-width="1.5"
+                                stroke-dasharray="3 2" />
+                            <path fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"
+                                d="M12 8v8M8 12h8" />
+                        </svg>
+                    </div>
+                    <span class="integration-name">More coming</span>
+                </div>
+                <!-- Duplicate set for seamless loop -->
+                <a href="https://www.garmin.com" target="_blank" rel="noopener" class="integration-item">
+                    <div class="integration-logo">
+                        <img src="images/garmin.png" alt="Garmin">
+                    </div>
+                    <span class="integration-name">Garmin</span>
+                </a>
+                <a href="https://www.apple.com/health/" target="_blank" rel="noopener" class="integration-item">
+                    <div class="integration-logo">
+                        <img src="images/health.png" alt="Apple Health">
+                    </div>
+                    <span class="integration-name">Apple Health</span>
+                </a>
+                <a href="https://ouraring.com" target="_blank" rel="noopener" class="integration-item">
+                    <div class="integration-logo">
+                        <img src="images/oura.png" alt="Oura">
+                    </div>
+                    <span class="integration-name">Oura</span>
+                </a>
+                <a href="https://www.whoop.com" target="_blank" rel="noopener" class="integration-item">
+                    <div class="integration-logo">
+                        <img src="images/whoop.png" alt="Whoop">
+                    </div>
+                    <span class="integration-name">Whoop</span>
+                </a>
+                <a href="https://www.strava.com" target="_blank" rel="noopener" class="integration-item">
+                    <div class="integration-logo">
+                        <img src="images/strava.png" alt="Strava">
+                    </div>
+                    <span class="integration-name">Strava</span>
+                </a>
+                <a href="https://www.eightsleep.com" target="_blank" rel="noopener" class="integration-item">
+                    <div class="integration-logo">
+                        <img src="images/eightsleep.png" alt="Eight Sleep">
+                    </div>
+                    <span class="integration-name">Eight Sleep</span>
+                </a>
+                <a href="https://www.myfitnesspal.com" target="_blank" rel="noopener" class="integration-item">
+                    <div class="integration-logo">
+                        <img src="images/myfitnesspal.png" alt="MyFitnessPal">
+                    </div>
+                    <span class="integration-name">MyFitnessPal</span>
+                </a>
+                <a href="https://www.withings.com" target="_blank" rel="noopener" class="integration-item">
+                    <div class="integration-logo">
+                        <img src="images/withings.png" alt="Withings">
+                    </div>
+                    <span class="integration-name">Withings</span>
+                </a>
+                <a href="https://www.anthropic.com/claude" target="_blank" rel="noopener" class="integration-item">
+                    <div class="integration-logo">
+                        <img src="images/claude.png" alt="Claude AI">
+                    </div>
+                    <span class="integration-name">Claude AI</span>
+                </a>
+                <div class="integration-item">
+                    <div class="integration-logo">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="12" cy="12" r="9" fill="none" stroke="#1a1a1a" stroke-width="1.5"
+                                stroke-dasharray="3 2" />
+                            <path fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"
+                                d="M12 8v8M8 12h8" />
+                        </svg>
+                    </div>
+                    <span class="integration-name">More coming</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+        <div class="features-header">
             <h2>Training that evolves with you</h2>
             <p>Stop juggling apps. Metron synthesizes everything into actionable daily guidance.</p>
         </div>
-
         <div class="features-grid">
             <div class="feature-card">
                 <h3>Unified Data Intelligence</h3>
@@ -1872,223 +1572,12 @@
         </div>
     </section>
 
-    <!-- Integrations Section -->
-    <section class="integrations" id="integrations">
-        <div class="section" style="padding-top: 5rem; padding-bottom: 5rem;">
-            <div class="section-header">
-                <h2>Connects to what you already use</h2>
-                <p>Seamlessly sync your favorite fitness devices and apps.</p>
-            </div>
-
-            <div class="integrations-scroll-container">
-                <div class="integrations-scroll">
-                    <!-- First set -->
-                    <a href="https://www.garmin.com" target="_blank" rel="noopener" class="integration-item">
-                        <div class="integration-logo">
-                            <img src="images/garmin.png" alt="Garmin">
-                        </div>
-                        <span class="integration-name">Garmin</span>
-                    </a>
-                    <a href="https://www.apple.com/health/" target="_blank" rel="noopener" class="integration-item">
-                        <div class="integration-logo">
-                            <img src="images/health.png" alt="Apple Health">
-                        </div>
-                        <span class="integration-name">Apple Health</span>
-                    </a>
-                    <a href="https://ouraring.com" target="_blank" rel="noopener" class="integration-item">
-                        <div class="integration-logo">
-                            <img src="images/oura.png" alt="Oura">
-                        </div>
-                        <span class="integration-name">Oura</span>
-                    </a>
-                    <a href="https://www.whoop.com" target="_blank" rel="noopener" class="integration-item">
-                        <div class="integration-logo">
-                            <img src="images/whoop.png" alt="Whoop">
-                        </div>
-                        <span class="integration-name">Whoop</span>
-                    </a>
-                    <a href="https://www.strava.com" target="_blank" rel="noopener" class="integration-item">
-                        <div class="integration-logo">
-                            <img src="images/strava.png" alt="Strava">
-                        </div>
-                        <span class="integration-name">Strava</span>
-                    </a>
-                    <a href="https://www.eightsleep.com" target="_blank" rel="noopener" class="integration-item">
-                        <div class="integration-logo">
-                            <img src="images/eightsleep.png" alt="Eight Sleep">
-                        </div>
-                        <span class="integration-name">Eight Sleep</span>
-                    </a>
-                    <a href="https://www.myfitnesspal.com" target="_blank" rel="noopener" class="integration-item">
-                        <div class="integration-logo">
-                            <img src="images/myfitnesspal.png" alt="MyFitnessPal">
-                        </div>
-                        <span class="integration-name">MyFitnessPal</span>
-                    </a>
-                    <a href="https://www.withings.com" target="_blank" rel="noopener" class="integration-item">
-                        <div class="integration-logo">
-                            <img src="images/withings.png" alt="Withings">
-                        </div>
-                        <span class="integration-name">Withings</span>
-                    </a>
-                    <a href="https://www.anthropic.com/claude" target="_blank" rel="noopener" class="integration-item">
-                        <div class="integration-logo">
-                            <img src="images/claude.png" alt="Claude AI">
-                        </div>
-                        <span class="integration-name">Claude AI</span>
-                    </a>
-                    <div class="integration-item">
-                        <div class="integration-logo">
-                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="12" cy="12" r="9" fill="none" stroke="#1a1a1a" stroke-width="1.5"
-                                    stroke-dasharray="3 2" />
-                                <path fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"
-                                    d="M12 8v8M8 12h8" />
-                            </svg>
-                        </div>
-                        <span class="integration-name">More coming</span>
-                    </div>
-                    <!-- Duplicate set for seamless loop -->
-                    <a href="https://www.garmin.com" target="_blank" rel="noopener" class="integration-item">
-                        <div class="integration-logo">
-                            <img src="images/garmin.png" alt="Garmin">
-                        </div>
-                        <span class="integration-name">Garmin</span>
-                    </a>
-                    <a href="https://www.apple.com/health/" target="_blank" rel="noopener" class="integration-item">
-                        <div class="integration-logo">
-                            <img src="images/health.png" alt="Apple Health">
-                        </div>
-                        <span class="integration-name">Apple Health</span>
-                    </a>
-                    <a href="https://ouraring.com" target="_blank" rel="noopener" class="integration-item">
-                        <div class="integration-logo">
-                            <img src="images/oura.png" alt="Oura">
-                        </div>
-                        <span class="integration-name">Oura</span>
-                    </a>
-                    <a href="https://www.whoop.com" target="_blank" rel="noopener" class="integration-item">
-                        <div class="integration-logo">
-                            <img src="images/whoop.png" alt="Whoop">
-                        </div>
-                        <span class="integration-name">Whoop</span>
-                    </a>
-                    <a href="https://www.strava.com" target="_blank" rel="noopener" class="integration-item">
-                        <div class="integration-logo">
-                            <img src="images/strava.png" alt="Strava">
-                        </div>
-                        <span class="integration-name">Strava</span>
-                    </a>
-                    <a href="https://www.eightsleep.com" target="_blank" rel="noopener" class="integration-item">
-                        <div class="integration-logo">
-                            <img src="images/eightsleep.png" alt="Eight Sleep">
-                        </div>
-                        <span class="integration-name">Eight Sleep</span>
-                    </a>
-                    <a href="https://www.myfitnesspal.com" target="_blank" rel="noopener" class="integration-item">
-                        <div class="integration-logo">
-                            <img src="images/myfitnesspal.png" alt="MyFitnessPal">
-                        </div>
-                        <span class="integration-name">MyFitnessPal</span>
-                    </a>
-                    <a href="https://www.withings.com" target="_blank" rel="noopener" class="integration-item">
-                        <div class="integration-logo">
-                            <img src="images/withings.png" alt="Withings">
-                        </div>
-                        <span class="integration-name">Withings</span>
-                    </a>
-                    <a href="https://www.anthropic.com/claude" target="_blank" rel="noopener" class="integration-item">
-                        <div class="integration-logo">
-                            <img src="images/claude.png" alt="Claude AI">
-                        </div>
-                        <span class="integration-name">Claude AI</span>
-                    </a>
-                    <div class="integration-item">
-                        <div class="integration-logo">
-                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="12" cy="12" r="9" fill="none" stroke="#1a1a1a" stroke-width="1.5"
-                                    stroke-dasharray="3 2" />
-                                <path fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"
-                                    d="M12 8v8M8 12h8" />
-                            </svg>
-                        </div>
-                        <span class="integration-name">More coming</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- How It Works Section -->
-    <section class="section" id="how-it-works">
-        <div class="section-header">
-            <h2>How Metron works</h2>
-            <p>From data chaos to clarity in three simple steps.</p>
-        </div>
-
-        <div class="steps-grid">
-            <div class="step-card">
-                <div class="step-number">1</div>
-                <h3>Connect Your Devices</h3>
-                <p>Link your wearables and fitness apps in seconds. We handle all the data syncing automatically.</p>
-            </div>
-            <div class="step-card">
-                <div class="step-number">2</div>
-                <h3>Set Your Goals</h3>
-                <p>Training for a marathon? Building strength? Optimizing health? Tell us what you're working toward.
-                </p>
-            </div>
-            <div class="step-card">
-                <div class="step-number">3</div>
-                <h3>Follow Your Plan</h3>
-                <p>Wake up to personalized workouts and nutrition guidance that adapts to your body's daily readiness.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Security Section -->
-    <section class="section" id="security">
-        <div class="section-header">
-            <h2>Your data, protected</h2>
-            <p>Security and privacy are foundational, not afterthoughts.</p>
-        </div>
-
-        <div class="security-grid">
-            <div class="security-item">
-                <div>
-                    <h4>End-to-End Encryption</h4>
-                    <p>Your health data is encrypted in transit and at rest using industry-standard protocols.</p>
-                </div>
-            </div>
-            <div class="security-item">
-                <div>
-                    <h4>Granular Permissions</h4>
-                    <p>Control exactly what data each integration can access. Revoke anytime with one tap.</p>
-                </div>
-            </div>
-            <div class="security-item">
-                <div>
-                    <h4>Never Sold</h4>
-                    <p>Your data is yours. We never sell or share your personal health information with third parties.
-                    </p>
-                </div>
-            </div>
-            <div class="security-item">
-                <div>
-                    <h4>Delete Anytime</h4>
-                    <p>Request complete data deletion at any time. Your data, your choice.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Final CTA -->
-    <section class="cta-section">
+    <!-- CTA -->
+    <section class="cta">
         <h2>Ready to train smarter?</h2>
         <p>Join the beta and experience truly personalized fitness intelligence.</p>
-        <div class="email-form-container" id="cta-form-container">
-            <form class="cta-form" id="cta-form" action="https://formspree.io/f/xkogdvbl" method="POST">
+        <div class="email-form-container">
+            <form class="email-form" id="cta-form" action="https://formspree.io/f/xkogdvbl" method="POST">
                 <input type="email" name="email" placeholder="Enter your email" required>
                 <button type="submit" class="btn-primary">Get Early Access</button>
             </form>
@@ -2110,7 +1599,153 @@
                 <a href="privacy.html">Privacy Policy</a>
                 <a href="terms.html">Terms of Service</a>
                 <a href="health-data-privacy.html">Health Data Privacy</a>
-                <a href="/cdn-cgi/l/email-protection#89e1ece5e5e6c9e4ecfdfbe6e7a7e5e0ffec">Contact</a>
             </div>
-            <div class="footer-copy">© 2026 Metron. All rights reserved.</div>
-     
+            <div class="footer-copy">© 2025 Metron. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <script>
+        // Hamburger menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('open');
+            navLinks.classList.toggle('open');
+        });
+
+        // Close menu when a link is clicked
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('open');
+                navLinks.classList.remove('open');
+            });
+        });
+    </script>
+
+    <script>
+        // Email form handling
+        document.addEventListener('DOMContentLoaded', function () {
+            function setupForm(formId, successId) {
+                const form = document.getElementById(formId);
+                const success = document.getElementById(successId);
+                if (!form || !success) return;
+
+                form.addEventListener('submit', async function (e) {
+                    e.preventDefault();
+                    const formData = new FormData(form);
+                    const button = form.querySelector('button');
+                    button.textContent = 'Submitting...';
+                    button.disabled = true;
+
+                    try {
+                        const response = await fetch(form.action, {
+                            method: 'POST',
+                            body: formData,
+                            headers: { 'Accept': 'application/json' }
+                        });
+                        form.style.display = 'none';
+                        success.style.display = 'flex';
+                    } catch (error) {
+                        form.style.display = 'none';
+                        success.style.display = 'flex';
+                    }
+                });
+            }
+
+            setupForm('hero-form', 'hero-success');
+            setupForm('cta-form', 'cta-success');
+        });
+
+        // Demo logic
+        const initialActions = document.getElementById('initial-actions');
+        const exchangeAdjusted = document.getElementById('exchange-adjusted');
+        const exchangeOriginal = document.getElementById('exchange-original');
+        const exchangeConfirmed = document.getElementById('exchange-confirmed');
+        const adjustedActions = document.getElementById('adjusted-actions');
+        const demoContainer = document.getElementById('demo-container');
+        const loadingIndicator = document.getElementById('loading-indicator');
+
+        const btnSeeWorkout = document.getElementById('btn-see-workout');
+        const btnKeepOriginal = document.getElementById('btn-keep-original');
+        const btnConfirm = document.getElementById('btn-confirm');
+        const btnKeepOriginal2 = document.getElementById('btn-keep-original-2');
+
+        function showLoading() { loadingIndicator.style.display = 'flex'; }
+        function hideLoading() { loadingIndicator.style.display = 'none'; }
+
+        function resetDemo() {
+            exchangeAdjusted.classList.add('collapsing');
+            exchangeOriginal.classList.add('collapsing');
+            exchangeConfirmed.classList.add('collapsing');
+            exchangeAdjusted.classList.remove('visible');
+            exchangeOriginal.classList.remove('visible');
+            exchangeConfirmed.classList.remove('visible');
+
+            demoContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            setTimeout(() => {
+                exchangeAdjusted.classList.remove('collapsing');
+                exchangeOriginal.classList.remove('collapsing');
+                exchangeConfirmed.classList.remove('collapsing');
+                btnSeeWorkout.classList.remove('selected', 'fade-out');
+                btnKeepOriginal.classList.remove('selected', 'fade-out');
+                btnConfirm.classList.remove('selected', 'fade-out');
+                btnKeepOriginal2.classList.remove('selected', 'fade-out');
+                initialActions.style.display = 'flex';
+                adjustedActions.style.display = 'flex';
+            }, 800);
+        }
+
+        btnSeeWorkout.addEventListener('click', function () {
+            btnSeeWorkout.classList.add('selected');
+            btnKeepOriginal.classList.add('fade-out');
+            showLoading();
+            setTimeout(() => {
+                hideLoading();
+                initialActions.style.display = 'none';
+                exchangeOriginal.classList.remove('visible');
+                exchangeAdjusted.classList.add('visible');
+            }, 1000);
+        });
+
+        btnKeepOriginal.addEventListener('click', function () {
+            btnKeepOriginal.classList.add('selected');
+            btnSeeWorkout.classList.add('fade-out');
+            showLoading();
+            setTimeout(() => {
+                hideLoading();
+                initialActions.style.display = 'none';
+                exchangeAdjusted.classList.remove('visible');
+                exchangeOriginal.classList.add('visible');
+            }, 1000);
+        });
+
+        btnConfirm.addEventListener('click', function () {
+            btnConfirm.classList.add('selected');
+            btnKeepOriginal2.classList.add('fade-out');
+            showLoading();
+            setTimeout(() => {
+                hideLoading();
+                adjustedActions.style.display = 'none';
+                exchangeConfirmed.classList.add('visible');
+            }, 1000);
+        });
+
+        btnKeepOriginal2.addEventListener('click', function () {
+            btnKeepOriginal2.classList.add('selected');
+            btnConfirm.classList.add('fade-out');
+            showLoading();
+            setTimeout(() => {
+                hideLoading();
+                adjustedActions.style.display = 'none';
+                exchangeOriginal.classList.add('visible');
+            }, 1000);
+        });
+
+        document.getElementById('btn-restart').addEventListener('click', resetDemo);
+        document.getElementById('btn-restart-original').addEventListener('click', resetDemo);
+    </script>
+</body>
+
+</html>
