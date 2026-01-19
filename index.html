@@ -4,15 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Metron | Your Training Plan. Built For You. Adapts Every Day.</title>
+    <title>Metron AI™ | World's First Fully Integrated AI Trainer</title>
     
-    <meta property="og:title" content="Metron | Your Training Plan. Built For You. Adapts Every Day.">
+    <meta property="og:title" content="Metron AI™ | World's First Fully Integrated AI Trainer">
     <meta property="og:description" content="90 minutes of AI research builds your complete training system. Then it rewrites itself every night based on how you're actually recovering.">
     <meta property="og:image" content="https://metron.live/images/metron-og.png">
     <meta property="og:url" content="https://metron.live">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="description" content="Metron builds your complete training, nutrition, and recovery plan from scratch. Then adapts it daily based on your sleep, HRV, and soreness. An AI coach explains every decision.">
+    <meta name="description" content="Metron AI™ builds your complete training, nutrition, and recovery plan from scratch. Then adapts it daily based on your sleep, HRV, and soreness. An AI coach explains every decision.">
 
     <script defer data-domain="metron.live" src="https://plausible.io/js/script.js"></script>
 
@@ -584,7 +584,7 @@
             color: var(--accent);
         }
 
-        /* Timeline Section */
+        /* Adaptation Section */
         .timeline-section {
             padding: 5rem 2rem;
             background: var(--bg-dark);
@@ -593,96 +593,63 @@
         }
 
         .timeline-container {
-            max-width: 700px;
+            max-width: 900px;
             margin: 0 auto;
         }
 
         .timeline-section h2 {
-            font-size: 1.75rem;
+            font-size: 2rem;
             font-weight: 700;
-            margin-bottom: 3rem;
+            margin-bottom: 1rem;
             text-align: center;
         }
 
-        .timeline {
-            position: relative;
-            padding-left: 120px;
+        .adaptation-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0;
         }
 
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 100px;
-            top: 8px;
-            bottom: 8px;
-            width: 2px;
-            background: rgba(255,255,255,0.2);
+        .adaptation-item {
+            padding: 1.5rem 1rem;
+            text-align: center;
+            border-right: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.2s;
         }
 
-        .timeline-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 1.5rem;
-            position: relative;
+        .adaptation-item:last-child {
+            border-right: none;
         }
 
-        .timeline-item:last-child {
-            margin-bottom: 0;
+        .adaptation-item:hover {
+            background: rgba(255,255,255,0.05);
         }
 
-        .timeline-time {
-            position: absolute;
-            left: -120px;
-            width: 80px;
-            text-align: right;
-            font-size: 0.85rem;
-            font-weight: 600;
+        .adaptation-item.highlight {
+            background: rgba(232, 115, 74, 0.15);
+            border-color: rgba(232, 115, 74, 0.3);
+        }
+
+        .adaptation-timeframe {
+            font-size: 0.95rem;
+            font-weight: 700;
             color: var(--accent);
-            padding-top: 2px;
+            margin-bottom: 0.5rem;
+            font-family: 'Space Grotesk', sans-serif;
         }
 
-        .timeline-event {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
+        .adaptation-desc {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.4;
         }
 
-        .timeline-dot {
-            width: 12px;
-            height: 12px;
-            background: var(--accent);
-            border-radius: 50%;
-            margin-top: 4px;
-            flex-shrink: 0;
-            position: relative;
-            left: -5px;
+        .adaptation-item.highlight .adaptation-timeframe {
+            color: white;
         }
 
-        .timeline-item.highlight .timeline-dot {
-            width: 16px;
-            height: 16px;
-            left: -7px;
-            box-shadow: 0 0 20px rgba(232, 115, 74, 0.5);
-        }
-
-        .timeline-content {
-            padding-left: 0.5rem;
-        }
-
-        .timeline-content strong {
-            display: block;
-            font-size: 1rem;
-            margin-bottom: 0.25rem;
-        }
-
-        .timeline-content span {
-            font-size: 0.9rem;
-            opacity: 0.7;
-        }
-
-        .timeline-item.highlight .timeline-content strong {
-            color: var(--accent);
-            font-size: 1.1rem;
+        .adaptation-item.highlight .adaptation-desc {
+            color: rgba(255,255,255,0.8);
         }
 
         /* Problem Layout with Mockup */
@@ -847,6 +814,64 @@
             padding: 10px;
             border-radius: 8px;
             text-align: center;
+        }
+
+        /* Seven Pillars */
+        .pillars-seven {
+            padding: 5rem 2rem;
+            background: var(--bg-alt);
+        }
+
+        .pillars-seven-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .seven-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .seven-item {
+            text-align: center;
+            padding: 1.25rem 0.75rem;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            transition: all 0.2s;
+        }
+
+        .seven-item:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        }
+
+        .seven-icon {
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .seven-item h4 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .seven-item p {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        .pillars-seven-note {
+            text-align: center;
+            font-size: 1rem;
+            color: var(--text-secondary);
+            font-weight: 500;
         }
 
         /* Three Pillars */
@@ -2505,12 +2530,20 @@
         }
 
         .footer-logo {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            font-size: 1.25rem;
-            color: white;
+            display: flex;
+            align-items: center;
             text-decoration: none;
             opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+
+        .footer-logo:hover {
+            opacity: 1;
+        }
+
+        .footer-logo img {
+            height: 24px;
+            width: auto;
         }
 
         .footer-links {
@@ -2799,19 +2832,30 @@
                 min-height: 140px;
             }
 
-            /* Timeline responsive */
-            .timeline {
-                padding-left: 80px;
+            /* Adaptation grid responsive */
+            .adaptation-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1px;
+                background: rgba(255,255,255,0.1);
             }
 
-            .timeline::before {
-                left: 60px;
+            .adaptation-item {
+                background: var(--bg-dark);
+                border-right: none;
             }
 
-            .timeline-time {
-                left: -80px;
-                width: 50px;
-                font-size: 0.75rem;
+            .adaptation-item:nth-child(7) {
+                grid-column: span 2;
+            }
+
+            /* Seven pillars responsive */
+            .seven-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.75rem;
+            }
+
+            .seven-item:nth-child(7) {
+                grid-column: 2;
             }
 
             .timeline-section h2 {
@@ -2828,13 +2872,13 @@
 <body>
     <nav>
         <a href="/" class="logo">
-            <img src="brand/brand%20preview/metron_logo.png" alt="Metron">
+            <img src="brand/brand%20preview/metron_logo.png" alt="Metron AI™">
         </a>
         <div class="nav-right">
             <div class="nav-links">
-                <a href="/arete" class="nav-link">Arete™ AI</a>
-                <a href="/rebalance" class="nav-link">Rebalancing</a>
-                <a href="/onboarding" class="nav-link">Smart Plans</a>
+                <a href="/arete" class="nav-link">Arete AI™</a>
+                <a href="/rebalance" class="nav-link">Smart Adaptation</a>
+                <a href="/onboarding" class="nav-link">Personalized Plans</a>
                 <a href="#pricing" class="nav-link">Pricing</a>
             </div>
             <a href="#pricing" class="btn btn-primary">Start Free Trial</a>
@@ -2847,9 +2891,9 @@
     </nav>
 
     <div class="mobile-nav" id="mobile-nav">
-        <a href="/arete">Arete™ AI</a>
-        <a href="/rebalance">Rebalancing</a>
-        <a href="/onboarding">Smart Plans</a>
+        <a href="/arete">Arete AI™</a>
+        <a href="/rebalance">Smart Adaptation</a>
+        <a href="/onboarding">Personalized Plans</a>
         <a href="#pricing">Pricing</a>
     </div>
 
@@ -2893,10 +2937,10 @@
                 </div>
             </div>
             <div class="hero-content">
-                <div class="hero-badge">Olympian-level precision at your fingertips</div>
+                <div class="hero-badge">World's first fully integrated AI trainer</div>
                 <h1>Become who you're<br>supposed to be.</h1>
                 <p class="hero-subtitle">
-                    Metron connects your sleep, recovery, training, and nutrition into one intelligent system. It sees patterns you can't, adapts faster than you could, and never stops improving your plan.
+                    Metron AI™ connects your sleep, recovery, training, and nutrition into one intelligent system. It sees patterns you can't, adapts faster than you could, and never stops improving your plan.
                 </p>
                 <div class="hero-cta">
                     <a href="#pricing" class="btn btn-primary">Start Free Trial</a>
@@ -2928,7 +2972,7 @@
                     </div>
                     <div class="data-flow">→</div>
                     <div class="data-hub-center">
-                        <span class="data-hub-logo">Metron</span>
+                        <span class="data-hub-logo">Metron AI™</span>
                         <span class="data-hub-label">3 AI Engines</span>
                     </div>
                     <div class="data-flow">→</div>
@@ -3063,67 +3107,97 @@
         <div class="problem-container">
             <h2>You're doing the work. Your tools should too.</h2>
             <p class="problem-subtitle">
-                Your data is scattered across five apps. Metron brings it together so you can stop guessing and start knowing.
+                You could ask ChatGPT for a workout plan. But it doesn't know your HRV from last night, your squat PR from last month, or that your hamstring has been tight for a week. It can't see your Whoop data. It doesn't adjust when you travel, get sick, or crush a workout.
+            </p>
+            <p class="problem-punchline">
+                <strong>Metron AI™ is connected to your life—and it never stops adapting.</strong>
             </p>
         </div>
     </section>
 
-    <!-- TIMELINE -->
+    <!-- ADAPTATION -->
     <section class="timeline-section">
         <div class="timeline-container">
-            <h2>What happens while you sleep</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-time">2:00 AM</div>
-                    <div class="timeline-event">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content">
-                            <strong>Sleep data syncs</strong>
-                            <span>5.2 hours detected. HRV 44 (baseline: 54)</span>
-                        </div>
-                    </div>
+            <h2>Adapts at every level. Constantly.</h2>
+            <p style="text-align: center; color: rgba(255,255,255,0.7); margin-bottom: 2.5rem; max-width: 600px; margin-left: auto; margin-right: auto;">Not once a day. Not just overnight. Metron AI™ rebalances your plan across 7 timeframes—from your yearly periodization down to your next hour.</p>
+            <div class="adaptation-grid">
+                <div class="adaptation-item">
+                    <div class="adaptation-timeframe">Yearly</div>
+                    <div class="adaptation-desc">Season structure, competition peaks, long-term progression</div>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-time">2:01 AM</div>
-                    <div class="timeline-event">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content">
-                            <strong>Flags raised</strong>
-                            <span>SLEEP_DEBT_MODERATE, HRV_SUPPRESSED (-18%)</span>
-                        </div>
-                    </div>
+                <div class="adaptation-item">
+                    <div class="adaptation-timeframe">Quarterly</div>
+                    <div class="adaptation-desc">Training blocks, macro cycles, phase transitions</div>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-time">2:02 AM</div>
-                    <div class="timeline-event">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content">
-                            <strong>Workout adjusted</strong>
-                            <span>Squat intensity 85% → 70%. Volume reduced 15%.</span>
-                        </div>
-                    </div>
+                <div class="adaptation-item">
+                    <div class="adaptation-timeframe">Monthly</div>
+                    <div class="adaptation-desc">Volume waves, intensity progressions, deload timing</div>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-time">2:03 AM</div>
-                    <div class="timeline-event">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content">
-                            <strong>Nutrition shifted</strong>
-                            <span>+200 calories. +25g carbs for recovery.</span>
-                        </div>
-                    </div>
+                <div class="adaptation-item">
+                    <div class="adaptation-timeframe">Bi-Weekly</div>
+                    <div class="adaptation-desc">Micro-cycle adjustments, recovery patterns</div>
                 </div>
-                <div class="timeline-item highlight">
-                    <div class="timeline-time">6:00 AM</div>
-                    <div class="timeline-event">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content">
-                            <strong>You wake up</strong>
-                            <span>Open the app. It's already done.</span>
-                        </div>
-                    </div>
+                <div class="adaptation-item">
+                    <div class="adaptation-timeframe">Weekly</div>
+                    <div class="adaptation-desc">Session distribution, training splits, rest day placement</div>
+                </div>
+                <div class="adaptation-item">
+                    <div class="adaptation-timeframe">Daily</div>
+                    <div class="adaptation-desc">Today's workout, nutrition targets, recovery protocols</div>
+                </div>
+                <div class="adaptation-item highlight">
+                    <div class="adaptation-timeframe">Hourly</div>
+                    <div class="adaptation-desc">Real-time adjustments based on how you're performing right now</div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- 7 PILLARS -->
+    <section class="pillars-seven">
+        <div class="pillars-seven-container">
+            <div class="section-header">
+                <h2>One plan. Seven pillars. All connected.</h2>
+                <p>ChatGPT gives you a workout. Metron AI™ builds an integrated system across every dimension of your performance—all powered by YOUR actual data.</p>
+            </div>
+            <div class="seven-grid">
+                <div class="seven-item">
+                    <div class="seven-icon">🏋️</div>
+                    <h4>Training</h4>
+                    <p>Periodized programming that adapts to your recovery and progress</p>
+                </div>
+                <div class="seven-item">
+                    <div class="seven-icon">🥗</div>
+                    <h4>Nutrition</h4>
+                    <p>Calorie and macro targets that shift with your training days</p>
+                </div>
+                <div class="seven-item">
+                    <div class="seven-icon">💊</div>
+                    <h4>Supplements</h4>
+                    <p>Evidence-based recommendations for your specific goals</p>
+                </div>
+                <div class="seven-item">
+                    <div class="seven-icon">🔄</div>
+                    <h4>Recovery</h4>
+                    <p>Active recovery protocols based on your training load</p>
+                </div>
+                <div class="seven-item">
+                    <div class="seven-icon">😴</div>
+                    <h4>Sleep</h4>
+                    <p>Optimization strategies synced with your wearable data</p>
+                </div>
+                <div class="seven-item">
+                    <div class="seven-icon">🏃</div>
+                    <h4>Cardio</h4>
+                    <p>Conditioning work that complements—not competes with—your training</p>
+                </div>
+                <div class="seven-item">
+                    <div class="seven-icon">📊</div>
+                    <h4>Body Composition</h4>
+                    <p>Cut, bulk, or recomp—all integrated into one coherent plan</p>
+                </div>
+            </div>
+            <p class="pillars-seven-note">All seven pillars talk to each other. Change one, and the others adjust automatically.</p>
         </div>
     </section>
 
@@ -3131,14 +3205,14 @@
     <section class="pillars">
         <div class="pillars-container">
             <div class="section-header">
-                <h2>The technology behind the magic.</h2>
-                <p>Three AI engines working in concert. This is how pro teams operate—now available to everyone.</p>
+                <h2>The technology that makes it possible.</h2>
+                <p>Three AI engines working together—the first system where training, nutrition, and coaching are truly integrated.</p>
             </div>
             <div class="pillars-grid">
                 <div class="pillar-card">
                     <div class="pillar-number">01 / Generate</div>
-                    <h3>Plan Generation Engine</h3>
-                    <p>We don't match you to a template. The AI spends 90 minutes researching YOUR specific situation—your sport, injuries, schedule, stress level—before writing a single workout.</p>
+                    <h3>Personalized Plan Engine</h3>
+                    <p>90 minutes of AI research builds your complete system—training, nutrition, supplements, recovery, sleep, cardio, body composition. All 7 pillars, tailored to YOUR data, goals, and constraints.</p>
                     <div class="pillar-mockup">
                         <div class="mini-phone">
                             <div class="mini-phone-content">
@@ -3148,7 +3222,7 @@
                                 <div class="mini-phase-name">Adversarial Review</div>
                                 <div class="mini-phases">
                                     <div class="mini-phase done">✓ Deep Research</div>
-                                    <div class="mini-phase done">✓ Framework</div>
+                                    <div class="mini-phase done">✓ 7 Pillars Framework</div>
                                     <div class="mini-phase done">✓ 72 Workouts</div>
                                     <div class="mini-phase active">● Self-Critique</div>
                                     <div class="mini-phase pending">○ Failure Rules</div>
@@ -3157,41 +3231,41 @@
                         </div>
                     </div>
                     <ul class="pillar-features">
+                        <li><span class="check">&#10003;</span> Syncs with your wearables to use YOUR actual data</li>
                         <li><span class="check">&#10003;</span> 8-phase generation with adversarial self-critique</li>
-                        <li><span class="check">&#10003;</span> 15-25 custom IF-THEN rules for YOUR vulnerabilities</li>
-                        <li><span class="check">&#10003;</span> Pre-computed exercise alternatives for every movement</li>
+                        <li><span class="check">&#10003;</span> 15-25 custom rules for YOUR specific vulnerabilities</li>
                     </ul>
                 </div>
                 <div class="pillar-card">
                     <div class="pillar-number">02 / Adapt</div>
-                    <h3>Rebalancing Engine</h3>
-                    <p>At 2am, the engine pulls your sleep data, checks your HRV trend, calculates your training load, and rewrites tomorrow—workout AND nutrition. You wake up. It's already done.</p>
+                    <h3>Smart Adaptation Engine</h3>
+                    <p>Your plan rebalances across 7 timeframes—from yearly periodization down to hourly adjustments. Sleep badly? It knows in minutes. Crush a workout? Tomorrow's already different.</p>
                     <div class="pillar-mockup">
                         <div class="mini-phone">
                             <div class="mini-phone-content">
                                 <div class="mini-workout-header">
-                                    <span>OVERNIGHT LOG</span>
-                                    <span class="mini-adjusted">2:14 AM</span>
+                                    <span>ADAPTATION LOG</span>
+                                    <span class="mini-adjusted">Live</span>
                                 </div>
-                                <div class="mini-workout-name" style="font-size:11px; margin-bottom:8px;">Flags Detected</div>
+                                <div class="mini-workout-name" style="font-size:11px; margin-bottom:8px;">Active Adjustments</div>
                                 <div class="mini-exercises" style="font-size:10px;">
-                                    <div class="mini-ex">⚠️ HRV -18% vs baseline</div>
-                                    <div class="mini-ex">⚠️ Sleep debt 5.2h</div>
-                                    <div class="mini-ex">✓ Squats → 70% intensity</div>
-                                    <div class="mini-ex">✓ Carbs +40g tomorrow</div>
+                                    <div class="mini-ex">📅 Monthly: Deload week scheduled</div>
+                                    <div class="mini-ex">📆 Weekly: Volume reduced 10%</div>
+                                    <div class="mini-ex">🌙 Daily: Intensity → 70%</div>
+                                    <div class="mini-ex">⚡ Hourly: Monitoring workout RPE</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <ul class="pillar-features">
+                        <li><span class="check">&#10003;</span> 7 timeframes: yearly → quarterly → monthly → bi-weekly → weekly → daily → hourly</li>
                         <li><span class="check">&#10003;</span> Catches overtraining 2 weeks before you feel it</li>
-                        <li><span class="check">&#10003;</span> Discovers YOUR body's hidden patterns over time</li>
                         <li><span class="check">&#10003;</span> Training AND nutrition adjust together</li>
                     </ul>
                 </div>
                 <div class="pillar-card">
                     <div class="pillar-number">03 / Coach</div>
-                    <h3>Arete™ AI Coach</h3>
+                    <h3>Arete AI™ Coach</h3>
                     <p>Not a chatbot with fitness knowledge. A coach with perfect memory. It sees 50+ data points on every message—and searches months of YOUR history to answer complex questions.</p>
                     <div class="pillar-mockup">
                         <div class="mini-phone">
@@ -3295,7 +3369,7 @@
                 <ul class="pricing-features">
                     <li><span class="check">&#10003;</span> Complete 12-week plan built from scratch</li>
                     <li><span class="check">&#10003;</span> Daily workout adjustments</li>
-                    <li><span class="check">&#10003;</span> Unlimited Arete™ AI conversations</li>
+                    <li><span class="check">&#10003;</span> Unlimited Arete AI™ conversations</li>
                     <li><span class="check">&#10003;</span> Nutrition targets and meal templates</li>
                     <li><span class="check">&#10003;</span> All wearable integrations</li>
                     <li><span class="check">&#10003;</span> Data export anytime</li>
@@ -3318,7 +3392,7 @@
             <div class="faq-grid">
                 <div class="faq-item">
                     <h3 class="faq-question">How is this different from just using ChatGPT?</h3>
-                    <p class="faq-answer">ChatGPT can't see your data. Arete connects directly to your wearables and training logs, then analyzes your actual sleep, HRV, and workout history. When you ask "should I train today?", you get an answer based on YOUR recovery state, not generic advice.</p>
+                    <p class="faq-answer">ChatGPT can't see your data. Arete AI™ connects directly to your wearables and training logs, then analyzes your actual sleep, HRV, and workout history. When you ask "should I train today?", you get an answer based on YOUR recovery state, not generic advice.</p>
                 </div>
                 <div class="faq-item">
                     <h3 class="faq-question">What if the system keeps reducing my workouts?</h3>
@@ -3337,8 +3411,8 @@
                     <p class="faq-answer">Yes. Your data is encrypted, never sold, and never used to train AI models. You can export or delete everything at any time. We make money from subscriptions, not your data.</p>
                 </div>
                 <div class="faq-item">
-                    <h3 class="faq-question">What if Arete gives me bad advice?</h3>
-                    <p class="faq-answer">Arete provides insights based on your data, not medical advice. It's designed to help you understand patterns and make informed decisions. For injuries or medical concerns, always consult a healthcare professional.</p>
+                    <h3 class="faq-question">What if Arete AI™ gives me bad advice?</h3>
+                    <p class="faq-answer">Arete AI™ provides insights based on your data, not medical advice. It's designed to help you understand patterns and make informed decisions. For injuries or medical concerns, always consult a healthcare professional.</p>
                 </div>
             </div>
         </div>
@@ -3347,14 +3421,16 @@
     <!-- FOOTER -->
     <footer>
         <div class="footer-content">
-            <a href="/" class="footer-logo">Metron</a>
+            <a href="/" class="footer-logo">
+                <img src="/brand/brand%20preview/metron_logo_(white_on_white).png" alt="Metron AI™" height="24">
+            </a>
             <div class="footer-links">
                 <a href="/privacy.html">Privacy</a>
                 <a href="/terms.html">Terms</a>
                 <a href="/health-data-privacy.html">Health Data</a>
                 <a href="https://instagram.com/metron.ai" target="_blank">Instagram</a>
             </div>
-            <span class="footer-copy">&copy; 2026 Metron</span>
+            <span class="footer-copy">&copy; 2026 Metron Health AI, Inc.</span>
         </div>
     </footer>
 
