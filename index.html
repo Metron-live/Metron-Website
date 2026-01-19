@@ -399,9 +399,28 @@
         .hero-subtitle {
             font-size: 1.15rem;
             color: var(--text-secondary);
-            margin-bottom: 2rem;
+            margin-bottom: 1.25rem;
             line-height: 1.7;
             max-width: 600px;
+        }
+
+        .hero-payoff {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .hp-original {
+            font-size: 10px;
+            color: #9CA3AF;
+            margin-bottom: 10px;
+            padding: 6px 8px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 6px;
+            text-decoration: line-through;
+            text-decoration-color: rgba(239, 68, 68, 0.5);
         }
 
         .hero-cta {
@@ -466,7 +485,7 @@
 
         /* Problem Section */
         .problem {
-            padding: 5rem 2rem;
+            padding: 5rem 2rem 3rem;
             background: var(--bg-dark);
             color: white;
         }
@@ -474,6 +493,7 @@
         .problem-container {
             max-width: 900px;
             margin: 0 auto;
+            text-align: center;
         }
 
         .problem h2 {
@@ -484,13 +504,23 @@
         }
 
         .problem-subtitle {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             opacity: 0.8;
             text-align: center;
-            margin-bottom: 3rem;
-            max-width: 700px;
+            margin-bottom: 2rem;
+            max-width: 600px;
             margin-left: auto;
             margin-right: auto;
+            line-height: 1.7;
+        }
+
+        .problem-punchline {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .problem-punchline strong {
+            color: var(--accent);
         }
 
         .problem-grid {
@@ -550,15 +580,109 @@
             line-height: 1.6;
         }
 
-        .problem-punchline {
-            text-align: center;
-            margin-top: 3rem;
-            font-size: 1.1rem;
-            font-weight: 500;
-        }
-
         .problem-punchline strong {
             color: var(--accent);
+        }
+
+        /* Timeline Section */
+        .timeline-section {
+            padding: 5rem 2rem;
+            background: var(--bg-dark);
+            color: white;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .timeline-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .timeline-section h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 120px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 100px;
+            top: 8px;
+            bottom: 8px;
+            width: 2px;
+            background: rgba(255,255,255,0.2);
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-time {
+            position: absolute;
+            left: -120px;
+            width: 80px;
+            text-align: right;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent);
+            padding-top: 2px;
+        }
+
+        .timeline-event {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .timeline-dot {
+            width: 12px;
+            height: 12px;
+            background: var(--accent);
+            border-radius: 50%;
+            margin-top: 4px;
+            flex-shrink: 0;
+            position: relative;
+            left: -5px;
+        }
+
+        .timeline-item.highlight .timeline-dot {
+            width: 16px;
+            height: 16px;
+            left: -7px;
+            box-shadow: 0 0 20px rgba(232, 115, 74, 0.5);
+        }
+
+        .timeline-content {
+            padding-left: 0.5rem;
+        }
+
+        .timeline-content strong {
+            display: block;
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-content span {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .timeline-item.highlight .timeline-content strong {
+            color: var(--accent);
+            font-size: 1.1rem;
         }
 
         /* Problem Layout with Mockup */
@@ -1916,7 +2040,7 @@
 
         /* Integrations */
         .integrations {
-            padding: 3rem 0;
+            padding: 4rem 0;
             background: var(--bg);
             border-bottom: 1px solid var(--border);
             overflow: hidden;
@@ -1928,13 +2052,108 @@
             text-align: center;
         }
 
-        .integrations-label {
-            font-size: 0.8rem;
+        .integrations-headline {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            padding: 0 2rem;
+        }
+
+        .integrations-subhead {
+            font-size: 0.85rem;
             color: var(--text-muted);
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
             text-transform: uppercase;
             letter-spacing: 0.1em;
             padding: 0 2rem;
+        }
+
+        /* Data Hub Visual */
+        .data-hub {
+            max-width: 900px;
+            margin: 0 auto 3rem;
+            padding: 0 2rem;
+        }
+
+        .data-hub-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .data-sources {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .data-source {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .data-source-icon {
+            font-size: 1rem;
+        }
+
+        .data-flow {
+            display: flex;
+            align-items: center;
+            color: var(--accent);
+            font-size: 1.5rem;
+            padding: 0 0.5rem;
+        }
+
+        .data-hub-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1.5rem 2rem;
+            background: linear-gradient(135deg, rgba(232, 115, 74, 0.1), rgba(232, 115, 74, 0.05));
+            border: 2px solid var(--accent);
+            border-radius: 16px;
+        }
+
+        .data-hub-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .data-hub-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .data-outputs {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .data-output {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: var(--green);
         }
 
         .integrations-track {
@@ -2579,6 +2798,29 @@
             .mini-phone-content {
                 min-height: 140px;
             }
+
+            /* Timeline responsive */
+            .timeline {
+                padding-left: 80px;
+            }
+
+            .timeline::before {
+                left: 60px;
+            }
+
+            .timeline-time {
+                left: -80px;
+                width: 50px;
+                font-size: 0.75rem;
+            }
+
+            .timeline-section h2 {
+                font-size: 1.5rem;
+            }
+
+            .hero-payoff {
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
@@ -2586,7 +2828,7 @@
 <body>
     <nav>
         <a href="/" class="logo">
-            <img src="brand/brand%20preview/metron_logo.jpg" alt="Metron">
+            <img src="brand/brand%20preview/metron_logo.png" alt="Metron">
         </a>
         <div class="nav-right">
             <div class="nav-links">
@@ -2617,31 +2859,31 @@
                     <div class="hero-phone-notch"></div>
                     <div class="hero-phone-screen">
                         <div class="hp-header">
-                            <div class="hp-greeting">Good morning, Alex</div>
+                            <div class="hp-greeting">Good morning, Ben</div>
                             <div class="hp-date">Saturday, January 18</div>
                         </div>
                         <div class="hp-recovery">
                             <div class="hp-recovery-row">
                                 <span class="hp-recovery-label">Recovery Score</span>
-                                <span class="hp-recovery-score">72</span>
+                                <span class="hp-recovery-score">64</span>
                             </div>
                             <div class="hp-metrics">
-                                <span>🛏 7.2h</span>
-                                <span>❤️ 52 HRV</span>
-                                <span>💤 58 RHR</span>
+                                <span>🛏 5.2h</span>
+                                <span>❤️ 44 HRV</span>
+                                <span>💤 62 RHR</span>
                             </div>
                         </div>
                         <div class="hp-workout">
                             <div class="hp-workout-top">
                                 <span class="hp-workout-label">Today's Workout</span>
-                                <span class="hp-adjusted">⚡ Adjusted</span>
+                                <span class="hp-adjusted">⚡ Adjusted 2:03am</span>
                             </div>
-                            <div class="hp-workout-name">Upper Body Push</div>
-                            <div class="hp-workout-info">6 exercises · ~45 min · Volume -15%</div>
+                            <div class="hp-workout-name">Lower Body</div>
+                            <div class="hp-original">Was: 5×5 @ 85% → Now: 4×6 @ 70%</div>
                             <div class="hp-exercises">
-                                <div class="hp-ex">🏋️ Bench Press <span>4×6</span></div>
-                                <div class="hp-ex">🏋️ Incline DB Press <span>3×10</span></div>
-                                <div class="hp-ex">🏋️ Shoulder Press <span>3×8</span></div>
+                                <div class="hp-ex">🏋️ Squat <span>4×6 @ 220</span></div>
+                                <div class="hp-ex">🏋️ RDL <span>3×10 @ 185</span></div>
+                                <div class="hp-ex">🏋️ Leg Press <span>3×12</span></div>
                             </div>
                             <div class="hp-start">Start Workout</div>
                         </div>
@@ -2649,34 +2891,12 @@
                 </div>
             </div>
             <div class="hero-content">
-                <div class="hero-badge">Beta pricing ends soon</div>
-                <h1>The pros have support teams.<br>You have Metron.</h1>
+                <div class="hero-badge">Your plan never stops thinking</div>
+                <h1>Become the athlete<br>you're supposed to be.</h1>
                 <p class="hero-subtitle">
-                    Elite athletes have coaches, nutritionists, and sports scientists analyzing their data 24/7. Metron brings that same system to everyone: personalized training plans, integrated insights across all your data, and an AI coach that adapts daily to how you're actually recovering.
+                    Last night you slept 5.2 hours. By 6am, your squat intensity dropped from 85% to 70%, your calories shifted by 200, and your AI coach already knows why. Your Whoop talks to your Strava. Your training adapts with your nutrition. Everything connected. Everything adapting. Constantly.
                 </p>
-                <div class="hero-pillars">
-                    <div class="hero-pillar">
-                        <span class="hero-pillar-icon">◆</span>
-                        <div>
-                            <strong>Personalized Plans</strong>
-                            <span>Built from scratch for your body, goals, and life</span>
-                        </div>
-                    </div>
-                    <div class="hero-pillar">
-                        <span class="hero-pillar-icon">◆</span>
-                        <div>
-                            <strong>Integrated Insights</strong>
-                            <span>Connects your sleep, training, and recovery data</span>
-                        </div>
-                    </div>
-                    <div class="hero-pillar">
-                        <span class="hero-pillar-icon">◆</span>
-                        <div>
-                            <strong>Adaptive Coaching</strong>
-                            <span>Adjusts daily based on how you're actually recovering</span>
-                        </div>
-                    </div>
-                </div>
+                <p class="hero-payoff">This is how elite athletes operate. Now you can too.</p>
                 <div class="hero-cta">
                     <a href="#pricing" class="btn btn-primary">Start Free Trial</a>
                     <a href="#how-it-works" class="btn btn-secondary">See How It Works</a>
@@ -2693,7 +2913,32 @@
     <!-- INTEGRATIONS -->
     <section class="integrations">
         <div class="integrations-container">
-            <div class="integrations-label">For runners, lifters, cyclists, and athletes of all kinds</div>
+            <h2 class="integrations-headline">All your data. One place. Finally.</h2>
+            <div class="integrations-subhead">Your Oura talks to your Strava talks to your MyFitnessPal. For the first time ever.</div>
+            
+            <!-- Data Hub Visual -->
+            <div class="data-hub">
+                <div class="data-hub-diagram">
+                    <div class="data-sources">
+                        <div class="data-source"><span class="data-source-icon">🛏</span> Sleep & HRV</div>
+                        <div class="data-source"><span class="data-source-icon">🏋️</span> Training Load</div>
+                        <div class="data-source"><span class="data-source-icon">🍎</span> Nutrition</div>
+                        <div class="data-source"><span class="data-source-icon">❤️</span> Recovery</div>
+                    </div>
+                    <div class="data-flow">→</div>
+                    <div class="data-hub-center">
+                        <span class="data-hub-logo">Metron</span>
+                        <span class="data-hub-label">3 AI Engines</span>
+                    </div>
+                    <div class="data-flow">→</div>
+                    <div class="data-outputs">
+                        <div class="data-output"><span>✓</span> Overnight Adjustments</div>
+                        <div class="data-output"><span>✓</span> Pattern Discovery</div>
+                        <div class="data-output"><span>✓</span> Unified Intelligence</div>
+                    </div>
+                </div>
+            </div>
+
             <div class="integrations-track">
                 <div class="integration-item">
                     <img src="images/health.png" alt="Apple Health">
@@ -2742,6 +2987,14 @@
                 <div class="integration-item">
                     <img src="images/withings.png" alt="Withings">
                     <span>Withings</span>
+                </div>
+                <div class="integration-item">
+                    <img src="images/instacart.png" alt="Instacart">
+                    <span>Instacart</span>
+                </div>
+                <div class="integration-item">
+                    <img src="images/grubhub.png" alt="Grubhub">
+                    <span>Grubhub</span>
                 </div>
                 <!-- Duplicate for seamless loop -->
                 <div class="integration-item">
@@ -2792,6 +3045,14 @@
                     <img src="images/withings.png" alt="Withings">
                     <span>Withings</span>
                 </div>
+                <div class="integration-item">
+                    <img src="images/instacart.png" alt="Instacart">
+                    <span>Instacart</span>
+                </div>
+                <div class="integration-item">
+                    <img src="images/grubhub.png" alt="Grubhub">
+                    <span>Grubhub</span>
+                </div>
             </div>
         </div>
     </section>
@@ -2799,43 +3060,72 @@
     <!-- PROBLEM -->
     <section class="problem">
         <div class="problem-container">
-            <h2>"Should I push through or rest?"</h2>
+            <h2>You've been doing this math in your head for years.</h2>
             <p class="problem-subtitle">
-                You face this question 3-4 times per week. You slept poorly. Your legs are sore. Work stress is high. Your program says heavy squats.
+                Should I train hard or go easy? Did I eat enough protein? Is my soreness normal or a warning sign? Your apps don't talk to each other. So you guess.
             </p>
-            <div class="problem-grid">
-                <div class="problem-card bad">
-                    <div class="problem-card-header">
-                        <div class="icon">&#10005;</div>
-                        Push through anyway
+            <p class="problem-punchline">
+                <strong>We automated it.</strong>
+            </p>
+        </div>
+    </section>
+
+    <!-- TIMELINE -->
+    <section class="timeline-section">
+        <div class="timeline-container">
+            <h2>What happens while you sleep</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-time">2:00 AM</div>
+                    <div class="timeline-event">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <strong>Sleep data syncs</strong>
+                            <span>5.2 hours detected. HRV 44 (baseline: 54)</span>
+                        </div>
                     </div>
-                    <p>Form breaks down on set 4. Something tweaks. Miss the next three sessions.</p>
                 </div>
-                <div class="problem-card bad">
-                    <div class="problem-card-header">
-                        <div class="icon">&#10005;</div>
-                        Skip it entirely
+                <div class="timeline-item">
+                    <div class="timeline-time">2:01 AM</div>
+                    <div class="timeline-event">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <strong>Flags raised</strong>
+                            <span>SLEEP_DEBT_MODERATE, HRV_SUPPRESSED (-18%)</span>
+                        </div>
                     </div>
-                    <p>Feel guilty all day. Lose momentum. Never "make it up" on Saturday.</p>
                 </div>
-                <div class="problem-card bad">
-                    <div class="problem-card-header">
-                        <div class="icon">&#10005;</div>
-                        Spend 20 min googling
+                <div class="timeline-item">
+                    <div class="timeline-time">2:02 AM</div>
+                    <div class="timeline-event">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <strong>Workout adjusted</strong>
+                            <span>Squat intensity 85% → 70%. Volume reduced 15%.</span>
+                        </div>
                     </div>
-                    <p>Get 14 different answers. Still don't know what to do.</p>
                 </div>
-                <div class="problem-card good">
-                    <div class="problem-card-header">
-                        <div class="icon">&#10003;</div>
-                        Open Metron
+                <div class="timeline-item">
+                    <div class="timeline-time">2:03 AM</div>
+                    <div class="timeline-event">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <strong>Nutrition shifted</strong>
+                            <span>+200 calories. +25g carbs for recovery.</span>
+                        </div>
                     </div>
-                    <p>Workout already adjusted at 2am. Heavy squats moved to Thursday. Done.</p>
+                </div>
+                <div class="timeline-item highlight">
+                    <div class="timeline-time">6:00 AM</div>
+                    <div class="timeline-event">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <strong>You wake up</strong>
+                            <span>Open the app. It's already done.</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <p class="problem-punchline">
-                <strong>Metron answers this question in 3 seconds.</strong> With your actual data. Not guesswork.
-            </p>
         </div>
     </section>
 
@@ -2843,70 +3133,68 @@
     <section class="pillars">
         <div class="pillars-container">
             <div class="section-header">
-                <h2>One system. Three engines.</h2>
-                <p>Build your plan. Adapt it daily. Coach you through it.</p>
+                <h2>The technology behind the magic.</h2>
+                <p>Three AI engines working in concert. This is how pro teams operate—now available to everyone.</p>
             </div>
             <div class="pillars-grid">
                 <div class="pillar-card">
-                    <div class="pillar-number">01 / Build</div>
-                    <h3>Training Plans</h3>
-                    <p>90 minutes of AI research creates your complete 12-week system from scratch. Not a template. Generated for your body, injuries, schedule, and goals.</p>
+                    <div class="pillar-number">01 / Generate</div>
+                    <h3>Plan Generation Engine</h3>
+                    <p>We don't match you to a template. The AI spends 90 minutes researching YOUR specific situation—your sport, injuries, schedule, stress level—before writing a single workout.</p>
                     <div class="pillar-mockup">
                         <div class="mini-phone">
                             <div class="mini-phone-content">
                                 <div class="mini-gen-title">Building Your Plan</div>
-                                <div class="mini-gen-time">~2 min remaining</div>
-                                <div class="mini-phase-circle">🍴</div>
-                                <div class="mini-phase-name">Nutrition Plan</div>
+                                <div class="mini-gen-time">Phase 5 of 8</div>
+                                <div class="mini-phase-circle">🔬</div>
+                                <div class="mini-phase-name">Adversarial Review</div>
                                 <div class="mini-phases">
-                                    <div class="mini-phase done">✓ Context</div>
+                                    <div class="mini-phase done">✓ Deep Research</div>
                                     <div class="mini-phase done">✓ Framework</div>
-                                    <div class="mini-phase done">✓ Exercises</div>
-                                    <div class="mini-phase active">● Nutrition</div>
-                                    <div class="mini-phase pending">○ Recovery</div>
+                                    <div class="mini-phase done">✓ 72 Workouts</div>
+                                    <div class="mini-phase active">● Self-Critique</div>
+                                    <div class="mini-phase pending">○ Failure Rules</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <ul class="pillar-features">
-                        <li><span class="check">&#10003;</span> 72 workouts with every set, rep, weight</li>
-                        <li><span class="check">&#10003;</span> Nutrition targets and meal templates</li>
-                        <li><span class="check">&#10003;</span> Supplement stack (tiered by priority)</li>
+                        <li><span class="check">&#10003;</span> 8-phase generation with adversarial self-critique</li>
+                        <li><span class="check">&#10003;</span> 15-25 custom IF-THEN rules for YOUR vulnerabilities</li>
+                        <li><span class="check">&#10003;</span> Pre-computed exercise alternatives for every movement</li>
                     </ul>
-                    <a href="/training" class="pillar-link">Learn more →</a>
                 </div>
                 <div class="pillar-card">
                     <div class="pillar-number">02 / Adapt</div>
                     <h3>Rebalancing Engine</h3>
-                    <p>Every night at 2am, the engine checks your sleep, HRV, soreness, and training load. If something's off, your workout is modified before you wake up.</p>
+                    <p>At 2am, the engine pulls your sleep data, checks your HRV trend, calculates your training load, and rewrites tomorrow—workout AND nutrition. You wake up. It's already done.</p>
                     <div class="pillar-mockup">
                         <div class="mini-phone">
                             <div class="mini-phone-content">
                                 <div class="mini-workout-header">
-                                    <span>TODAY'S WORKOUT</span>
-                                    <span class="mini-adjusted">⚡ Adjusted</span>
+                                    <span>OVERNIGHT LOG</span>
+                                    <span class="mini-adjusted">2:14 AM</span>
                                 </div>
-                                <div class="mini-workout-name">Upper Body Push</div>
-                                <div class="mini-workout-meta">Volume reduced 15%</div>
-                                <div class="mini-exercises">
-                                    <div class="mini-ex">🏋️ Bench Press <span>4×6</span></div>
-                                    <div class="mini-ex">🏋️ Incline DB <span>3×10</span></div>
-                                    <div class="mini-ex">🏋️ Shoulder Press <span>3×8</span></div>
+                                <div class="mini-workout-name" style="font-size:11px; margin-bottom:8px;">Flags Detected</div>
+                                <div class="mini-exercises" style="font-size:10px;">
+                                    <div class="mini-ex">⚠️ HRV -18% vs baseline</div>
+                                    <div class="mini-ex">⚠️ Sleep debt 5.2h</div>
+                                    <div class="mini-ex">✓ Squats → 70% intensity</div>
+                                    <div class="mini-ex">✓ Carbs +40g tomorrow</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <ul class="pillar-features">
-                        <li><span class="check">&#10003;</span> Auto-adjusts volume and intensity</li>
-                        <li><span class="check">&#10003;</span> Swaps exercises for soreness</li>
-                        <li><span class="check">&#10003;</span> Learns your recovery capacity</li>
+                        <li><span class="check">&#10003;</span> Catches overtraining 2 weeks before you feel it</li>
+                        <li><span class="check">&#10003;</span> Discovers YOUR body's hidden patterns over time</li>
+                        <li><span class="check">&#10003;</span> Training AND nutrition adjust together</li>
                     </ul>
-                    <a href="/rebalance" class="pillar-link">Learn more →</a>
                 </div>
                 <div class="pillar-card">
                     <div class="pillar-number">03 / Coach</div>
-                    <h3>Arete AI</h3>
-                    <p>An AI coach that knows your plan, your data, and your history. Ask anything. Get real answers with real reasoning. Available 24/7.</p>
+                    <h3>Arete AI Coach</h3>
+                    <p>Not a chatbot with fitness knowledge. A coach with perfect memory. It sees 50+ data points on every message—and searches months of YOUR history to answer complex questions.</p>
                     <div class="pillar-mockup">
                         <div class="mini-phone">
                             <div class="mini-phone-content chat">
@@ -2914,20 +3202,18 @@
                                     <span class="mini-avatar">A</span>
                                     <span>Arete</span>
                                 </div>
-                                <div class="mini-chat-msg user">Should I train today?</div>
-                                <div class="mini-chat-msg assistant">
-                                    <strong>I'd go lighter.</strong> Your HRV is 27% below baseline.
-                                    <span class="mini-adjusted">⚡ Adjusted</span>
+                                <div class="mini-chat-msg user" style="font-size:10px;">Why does my bench stall at 225?</div>
+                                <div class="mini-chat-msg assistant" style="font-size:9px;">
+                                    <strong>Found it.</strong> Your 6 attempts at 225: you only hit it when readiness was 81+. Average on failed days: 67. You're strong enough. You're just always tired when you try it.
                                 </div>
                             </div>
                         </div>
                     </div>
                     <ul class="pillar-features">
-                        <li><span class="check">&#10003;</span> Explains every adjustment</li>
-                        <li><span class="check">&#10003;</span> Answers "should I train today?"</li>
-                        <li><span class="check">&#10003;</span> Remembers your injury history</li>
+                        <li><span class="check">&#10003;</span> RAG search over months of YOUR training data</li>
+                        <li><span class="check">&#10003;</span> 20 personality combinations (tough love → supportive)</li>
+                        <li><span class="check">&#10003;</span> Learns your tendencies and calls out your bullshit</li>
                     </ul>
-                    <a href="/arete" class="pillar-link">Learn more →</a>
                 </div>
             </div>
         </div>
