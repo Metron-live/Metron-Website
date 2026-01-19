@@ -4,20 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Metron | AI-Powered Fitness Intelligence</title>
+    <title>Metron | Your Training Plan. Built For You. Adapts Every Day.</title>
+    
+    <meta property="og:title" content="Metron | Your Training Plan. Built For You. Adapts Every Day.">
+    <meta property="og:description" content="90 minutes of AI research builds your complete training system. Then it rewrites itself every night based on how you're actually recovering.">
+    <meta property="og:image" content="https://metron.live/images/metron-og.png">
+    <meta property="og:url" content="https://metron.live">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="description" content="Metron builds your complete training, nutrition, and recovery plan from scratch. Then adapts it daily based on your sleep, HRV, and soreness. An AI coach explains every decision.">
 
-    <!-- Favicon -->
+    <script defer data-domain="metron.live" src="https://plausible.io/js/script.js"></script>
+
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png">
-    <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512x512.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
     <style>
         * {
             margin: 0;
@@ -33,12 +39,16 @@
             --bg: #FAFAF8;
             --bg-alt: #F5F5F3;
             --bg-card: #FFFFFF;
+            --bg-dark: #0f0f0f;
             --text-primary: #1a1a1a;
             --text-secondary: #4a4a4a;
             --text-muted: #888888;
             --border: #E8E8E6;
             --border-dark: #D4D4D2;
             --accent: #E8734A;
+            --green: #22c55e;
+            --yellow: #fbbf24;
+            --red: #ef4444;
         }
 
         body {
@@ -50,42 +60,51 @@
             -webkit-font-smoothing: antialiased;
         }
 
+        h1, h2, h3 {
+            font-family: 'Space Grotesk', -apple-system, sans-serif;
+            letter-spacing: -0.03em;
+            line-height: 1.15;
+        }
+
         /* Navigation */
         nav {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            padding: 1.25rem 3rem;
+            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(250, 250, 248, 0.9);
+            background: rgba(250, 250, 248, 0.95);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border);
             z-index: 100;
         }
 
         .logo {
-            font-family: 'Space Grotesk', -apple-system, sans-serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            letter-spacing: -0.03em;
+            display: flex;
+            align-items: center;
             text-decoration: none;
         }
 
-        .logo:hover {
-            opacity: 0.8;
+        .logo img {
+            height: 26px;
+            width: auto;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
         }
 
         .nav-links {
             display: flex;
-            gap: 2.5rem;
-            align-items: center;
+            gap: 2rem;
         }
 
-        .nav-links a {
+        .nav-link {
             color: var(--text-secondary);
             text-decoration: none;
             font-size: 0.9rem;
@@ -93,876 +112,1105 @@
             transition: color 0.2s;
         }
 
-        .nav-links a:hover {
+        .nav-link:hover {
             color: var(--text-primary);
         }
 
-        .nav-right {
-            display: flex;
+        .btn {
+            display: inline-flex;
             align-items: center;
-            gap: 2.5rem;
+            justify-content: center;
+            padding: 0.7rem 1.25rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
         }
 
         .btn-primary {
-            background: var(--accent);
+            background: var(--text-primary);
             color: white;
-            border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 6px;
-            font-weight: 500;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-family: inherit;
-            text-decoration: none;
         }
 
         .btn-primary:hover {
-            background: #d9663d;
+            opacity: 0.85;
             transform: translateY(-1px);
         }
 
-        /* Hamburger menu */
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1.5px solid var(--border-dark);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--text-primary);
+        }
+
+        /* Hamburger */
         .hamburger {
             display: none;
             flex-direction: column;
-            gap: 5px;
             cursor: pointer;
-            padding: 0.5rem;
-            z-index: 300;
+            gap: 5px;
+            padding: 5px;
+            background: none;
+            border: none;
         }
 
         .hamburger span {
-            width: 24px;
+            width: 22px;
             height: 2px;
             background: var(--text-primary);
             transition: all 0.3s;
         }
 
-        .hamburger.open span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
+        /* Mobile Nav */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 60px;
+            left: 0;
+            right: 0;
+            background: var(--bg);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem;
+            flex-direction: column;
+            gap: 0.5rem;
+            z-index: 99;
         }
 
-        .hamburger.open span:nth-child(2) {
-            opacity: 0;
+        .mobile-nav.active {
+            display: flex;
         }
 
-        .hamburger.open span:nth-child(3) {
-            transform: rotate(-45deg) translate(5px, -5px);
+        .mobile-nav a {
+            padding: 0.75rem 1rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 8px;
+        }
+
+        .mobile-nav a:hover {
+            background: var(--bg-alt);
+            color: var(--text-primary);
         }
 
         /* Hero */
         .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 8rem 2rem 4rem;
-        }
-
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            padding: 0.5rem 1rem;
-            border-radius: 100px;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-        }
-
-        .badge-dot {
-            width: 8px;
-            height: 8px;
-            background: #22c55e;
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-
-            0%,
-            100% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0.4;
-            }
-        }
-
-        .hero h1 {
-            font-family: 'Space Grotesk', -apple-system, sans-serif;
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 700;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            letter-spacing: -0.03em;
-            color: var(--text-primary);
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            max-width: 540px;
-            margin-bottom: 2.5rem;
-            line-height: 1.7;
-        }
-
-        .email-form {
-            display: flex;
-            gap: 0.5rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            padding: 0.4rem;
-            border-radius: 8px;
-            max-width: 420px;
-            width: 100%;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-        }
-
-        .email-form-container {
-            max-width: 420px;
-            width: 100%;
+            padding: 8rem 2rem 5rem;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
-        .success-message {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            background: rgba(13, 148, 136, 0.1);
-            border: 1px solid var(--accent);
-            padding: 1rem 1.5rem;
-            border-radius: 8px;
-            animation: fadeIn 0.3s ease;
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .success-icon {
-            width: 32px;
-            height: 32px;
-            background: var(--accent);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            flex-shrink: 0;
-        }
-
-        .success-text {
-            display: flex;
-            flex-direction: column;
-            gap: 0.25rem;
-            text-align: left;
-        }
-
-        .success-text strong {
-            color: var(--text-primary);
-            font-size: 1rem;
-        }
-
-        .success-text span {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        .email-form input {
-            flex: 1;
-            background: transparent;
-            border: none;
-            padding: 0.75rem 1rem;
-            color: var(--text-primary);
-            font-size: 0.95rem;
-            outline: none;
-            font-family: inherit;
-        }
-
-        .email-form input::placeholder {
-            color: var(--text-muted);
-        }
-
-        /* Chat Preview */
-        .chat-preview {
-            margin-top: 4rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.5rem;
-            max-width: 520px;
-            width: 100%;
-            text-align: left;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-        }
-
-        .chat-header {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 1rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .chat-avatar {
-            width: 36px;
-            height: 36px;
-            background: var(--text-primary);
-            color: var(--bg);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Space Grotesk', -apple-system, sans-serif;
-            font-weight: 600;
-            font-size: 1rem;
-        }
-
-        .chat-name {
-            font-weight: 600;
-            font-size: 0.95rem;
-            color: var(--text-primary);
-        }
-
-        .chat-status {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        .chat-message {
-            background: var(--bg-alt);
-            border-radius: 10px;
-            padding: 1rem 1.25rem;
-            font-size: 0.95rem;
-            line-height: 1.65;
-            color: var(--text-secondary);
-        }
-
-        .chat-message strong {
-            color: var(--text-primary);
-            font-weight: 600;
-        }
-
-        /* Recovery Alert Banner */
-        .recovery-alert {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            background: #FEF3E7;
-            border: 1px solid #F5D0A9;
-            border-radius: 8px;
-            padding: 0.75rem 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .recovery-alert-icon {
-            width: 32px;
-            height: 32px;
-            background: #E8734A;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            flex-shrink: 0;
-        }
-
-        .recovery-alert-text {
-            display: flex;
-            flex-direction: column;
-            gap: 0.1rem;
-        }
-
-        .recovery-alert-label {
-            font-weight: 600;
-            font-size: 0.85rem;
-            color: #B54D25;
-        }
-
-        .recovery-alert-detail {
-            font-size: 0.8rem;
-            color: #96622F;
-        }
-
-        /* Demo Action Buttons */
-        .demo-actions {
-            display: flex;
-            gap: 0.5rem;
-            margin-top: 0.75rem;
-            flex-wrap: wrap;
-            justify-content: flex-end;
-        }
-
-        .demo-btn {
+        .hero-badge {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.7rem 1rem;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-family: inherit;
-            border: none;
-        }
-
-        .demo-btn-primary {
-            background: var(--accent);
-            color: white;
-        }
-
-        .demo-btn-primary:hover {
-            background: #d4663f;
-            transform: translateY(-1px);
-        }
-
-        .demo-btn-secondary {
-            background: var(--bg);
-            color: var(--text-secondary);
-            border: 1px solid var(--border);
-        }
-
-        .demo-btn-secondary:hover {
-            border-color: var(--text-primary);
-            color: var(--text-primary);
-        }
-
-        .demo-btn-confirm {
-            background: var(--accent);
-            color: white;
-        }
-
-        .demo-btn-confirm:hover {
-            background: #d4663f;
-            transform: translateY(-1px);
-        }
-
-        .demo-btn.selected {
-            pointer-events: none;
-        }
-
-        .demo-btn.fade-out {
-            opacity: 0;
-            transform: scale(0.95);
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-
-        /* Chat thread styles */
-        .chat-thread {
-            margin-top: 0;
-        }
-
-        .chat-exchange {
-            overflow: hidden;
-            max-height: 0;
-            opacity: 0;
-            margin-top: 0;
-            transition: max-height 1.5s cubic-bezier(0.4, 0, 0.2, 1),
-                opacity 1.2s ease-out,
-                margin-top 0.8s ease;
-        }
-
-        .chat-exchange.visible {
-            max-height: 3000px;
-            opacity: 1;
-            margin-top: 1rem;
-        }
-
-        .chat-exchange.collapsing {
-            max-height: 0 !important;
-            opacity: 0 !important;
-            margin-top: 0 !important;
-            transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1),
-                opacity 0.5s ease-out,
-                margin-top 0.5s ease;
-        }
-
-        /* Loading animation */
-        .loading-indicator {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 1rem 0;
-            margin-top: 1rem;
-        }
-
-        .loading-dots {
-            display: flex;
-            gap: 4px;
-        }
-
-        .loading-dots span {
-            width: 8px;
-            height: 8px;
-            background: var(--text-muted);
-            border-radius: 50%;
-            animation: loadingPulse 1.4s ease-in-out infinite;
-        }
-
-        .loading-dots span:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .loading-dots span:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-
-        @keyframes loadingPulse {
-
-            0%,
-            80%,
-            100% {
-                opacity: 0.3;
-                transform: scale(0.8);
-            }
-
-            40% {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .response-divider {
-            height: 1px;
-            background: var(--border);
-            margin: 1rem 0;
-        }
-
-        .user-message {
-            background: var(--text-primary);
-            color: var(--bg);
-            padding: 0.65rem 1rem;
-            border-radius: 10px;
-            font-size: 0.9rem;
-            display: inline-block;
-            margin-bottom: 1rem;
-            margin-left: auto;
-            float: right;
-            clear: both;
-        }
-
-        .arete-response {
-            display: flex;
-            gap: 0.75rem;
-            clear: both;
-            padding-top: 0.5rem;
-        }
-
-        .chat-avatar.small {
-            width: 28px;
-            height: 28px;
+            padding: 0.4rem 0.85rem;
+            background: rgba(232, 115, 74, 0.1);
+            border: 1px solid rgba(232, 115, 74, 0.2);
+            border-radius: 50px;
             font-size: 0.8rem;
-            flex-shrink: 0;
-            border-radius: 6px;
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 1.5rem;
         }
 
-        .response-content {
-            flex: 1;
-        }
-
-        /* Workout Card */
-        .workout-card {
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            overflow: hidden;
-            margin-top: 0.75rem;
-        }
-
-        .workout-card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            padding: 1rem 1.25rem;
-            border-bottom: 1px solid var(--border);
-            background: var(--bg-alt);
-        }
-
-        .workout-card-title {
-            display: flex;
-            flex-direction: column;
-            gap: 0.2rem;
-        }
-
-        .workout-day {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.03em;
-        }
-
-        .workout-name {
-            font-weight: 600;
-            font-size: 0.95rem;
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
             color: var(--text-primary);
         }
 
-        .workout-badge {
-            font-size: 0.7rem;
-            font-weight: 600;
-            padding: 0.3rem 0.6rem;
-            border-radius: 4px;
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .workout-badge.adjusted {
-            background: #E8734A;
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .hero-meta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .hero-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .check {
+            color: var(--green);
+            font-weight: 700;
+        }
+
+        .hero-pillars {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-pillar {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            text-align: left;
+        }
+
+        .hero-pillar-icon {
+            color: var(--accent);
+            font-size: 0.7rem;
+            margin-top: 0.35rem;
+        }
+
+        .hero-pillar strong {
+            display: block;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.15rem;
+        }
+
+        .hero-pillar span:last-child {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Problem Section */
+        .problem {
+            padding: 5rem 2rem;
+            background: var(--bg-dark);
             color: white;
         }
 
-        .workout-badge.original-badge {
-            background: var(--border);
-            color: var(--text-secondary);
+        .problem-container {
+            max-width: 900px;
+            margin: 0 auto;
         }
 
-        .workout-exercises {
-            padding: 0.25rem 0;
+        .problem h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-align: center;
         }
 
-        .exercise-item {
+        .problem-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            text-align: center;
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .problem-card {
+            padding: 1.5rem;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .problem-card.bad {
+            border-color: rgba(239, 68, 68, 0.3);
+        }
+
+        .problem-card.good {
+            border-color: rgba(34, 197, 94, 0.3);
+        }
+
+        .problem-card-header {
             display: flex;
             align-items: center;
             gap: 0.75rem;
-            padding: 0.6rem 1.25rem;
-            border-bottom: 1px solid var(--border);
+            margin-bottom: 1rem;
+            font-weight: 600;
         }
 
-        .exercise-item:last-child {
-            border-bottom: none;
-        }
-
-        .exercise-change {
+        .problem-card-header .icon {
             width: 24px;
             height: 24px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-shrink: 0;
+            font-size: 0.8rem;
         }
 
-        .exercise-item.modified .exercise-change {
-            background: #FEF3E7;
-            color: #E8734A;
+        .problem-card.bad .icon {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--red);
         }
 
-        .exercise-change.unchanged {
-            background: #E8F5E9;
-            color: #4CAF50;
+        .problem-card.good .icon {
+            background: rgba(34, 197, 94, 0.2);
+            color: var(--green);
         }
 
-        .exercise-details {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 0.1rem;
+        .problem-card p {
+            font-size: 0.95rem;
+            opacity: 0.8;
+            line-height: 1.6;
         }
 
-        .exercise-name {
+        .problem-punchline {
+            text-align: center;
+            margin-top: 3rem;
+            font-size: 1.1rem;
             font-weight: 500;
-            font-size: 0.9rem;
-            color: var(--text-primary);
         }
 
-        .exercise-original {
-            font-size: 0.75rem;
-            color: #E8734A;
+        .problem-punchline strong {
+            color: var(--accent);
         }
 
-        .exercise-subtitle {
-            font-size: 0.75rem;
-            color: var(--text-muted);
+        /* Three Pillars */
+        .pillars {
+            padding: 5rem 2rem;
+            background: var(--bg);
         }
 
-        .exercise-sets {
-            font-size: 0.85rem;
+        .pillars-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-header p {
+            font-size: 1.05rem;
             color: var(--text-secondary);
-            font-weight: 500;
         }
 
-        .workout-footer {
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .pillar-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.2s;
+        }
+
+        .pillar-card:hover {
+            border-color: var(--border-dark);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+        }
+
+        .pillar-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+
+        .pillar-card h3 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .pillar-card p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .pillar-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .pillar-features li {
             display: flex;
-            gap: 2rem;
-            padding: 0.75rem 1.25rem;
+            align-items: flex-start;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            padding: 0.35rem 0;
+        }
+
+        .pillar-features .check {
+            margin-top: 2px;
+        }
+
+        .pillar-link {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--accent);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .pillar-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Aha Moment / Demo */
+        .demo {
+            padding: 5rem 2rem;
             background: var(--bg-alt);
             border-top: 1px solid var(--border);
         }
 
-        .workout-stat {
-            display: flex;
-            flex-direction: column;
-            gap: 0.1rem;
+        .demo-container {
+            max-width: 1000px;
+            margin: 0 auto;
         }
 
-        .workout-stat-label {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.03em;
-        }
-
-        .workout-stat-value {
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: var(--text-primary);
-        }
-
-        /* Confirmed Banner */
-        .confirmed-banner {
-            display: flex;
+        .demo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
             align-items: center;
-            gap: 0.75rem;
-            background: #E8F5E9;
-            border: 1px solid #A5D6A7;
-            border-radius: 8px;
-            padding: 0.75rem 1rem;
+        }
+
+        .demo-content h2 {
+            font-size: 2rem;
+            font-weight: 700;
             margin-bottom: 1rem;
         }
 
-        .confirmed-icon {
-            width: 32px;
-            height: 32px;
-            background: #4CAF50;
-            border-radius: 50%;
+        .demo-content p {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .demo-highlight {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .demo-highlight p {
+            margin: 0;
+            font-size: 0.95rem;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .demo-highlight strong {
+            color: var(--text-primary);
+            font-style: normal;
+        }
+
+        /* App Mockup */
+        .app-mockup {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.08), 0 10px 30px rgba(0, 0, 0, 0.04);
+            overflow: hidden;
+        }
+
+        .app-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid var(--border);
+            background: var(--bg-alt);
+        }
+
+        .app-header-left {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .app-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #E8734A 0%, #D4532A 100%);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            flex-shrink: 0;
+            font-weight: 700;
+            font-size: 0.9rem;
         }
 
-        .confirmed-text {
+        .app-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .app-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .app-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            padding: 0.35rem 0.75rem;
+            background: rgba(34, 197, 94, 0.1);
+            color: var(--green);
+            border-radius: 50px;
+            font-weight: 500;
+        }
+
+        .app-status-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--green);
+            border-radius: 50%;
+        }
+
+        .app-content {
+            padding: 1.25rem;
+            min-height: 280px;
+        }
+
+        .chat-container {
             display: flex;
             flex-direction: column;
-            gap: 0.1rem;
+            gap: 1rem;
         }
 
-        .confirmed-title {
-            font-weight: 600;
-            font-size: 0.85rem;
-            color: #2E7D32;
+        .chat-bubble {
+            max-width: 88%;
+            padding: 0.85rem 1rem;
+            border-radius: 14px;
+            font-size: 0.9rem;
+            line-height: 1.5;
         }
 
-        .confirmed-detail {
-            font-size: 0.8rem;
-            color: #558B2F;
+        .chat-bubble.user {
+            background: var(--text-primary);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
         }
 
-        /* Integrations */
-        .integrations {
-            padding: 5rem 2rem;
+        .chat-bubble.assistant {
             background: var(--bg-alt);
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
         }
 
-        .integrations-header {
+        .chat-bubble.assistant strong {
+            color: var(--text-primary);
+        }
+
+        .chat-adjustment {
+            background: rgba(251, 191, 36, 0.1);
+            border: 1px solid rgba(251, 191, 36, 0.2);
+            border-radius: 10px;
+            padding: 0.75rem 1rem;
+            margin-top: 0.75rem;
+            font-size: 0.85rem;
+        }
+
+        .chat-adjustment-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.35rem;
+        }
+
+        .chat-adjustment-header span {
+            color: var(--yellow);
+        }
+
+        .chat-adjustment p {
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        .typing-indicator {
+            display: flex;
+            gap: 4px;
+            padding: 0.85rem 1rem;
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            border-bottom-left-radius: 4px;
+            align-self: flex-start;
+            max-width: 60px;
+        }
+
+        .typing-indicator span {
+            width: 6px;
+            height: 6px;
+            background: var(--text-muted);
+            border-radius: 50%;
+            animation: typing 1.2s infinite;
+        }
+
+        .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typing {
+            0%, 100% { opacity: 0.3; transform: translateY(0); }
+            50% { opacity: 1; transform: translateY(-2px); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .chat-fade-in {
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        /* Who It's For */
+        .audience {
+            padding: 5rem 2rem;
+            background: var(--bg);
+            border-top: 1px solid var(--border);
+        }
+
+        .audience-container {
+            max-width: 900px;
+            margin: 0 auto;
             text-align: center;
+        }
+
+        .audience h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .audience-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
             margin-bottom: 3rem;
-            max-width: 1100px;
+            max-width: 600px;
             margin-left: auto;
             margin-right: auto;
         }
 
-        .integrations-header h2 {
-            font-family: 'Space Grotesk', -apple-system, sans-serif;
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            letter-spacing: -0.03em;
-            color: var(--text-primary);
-        }
-
-        .integrations-header p {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-        }
-
-        .integrations-scroll-container {
-            overflow: hidden;
-            width: 100%;
-            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-        }
-
-        .integrations-scroll {
-            display: flex;
-            gap: 3rem;
-            animation: scroll 30s linear infinite;
-            width: max-content;
-        }
-
-        .integrations-scroll:hover {
-            animation-play-state: paused;
-        }
-
-        @keyframes scroll {
-            0% {
-                transform: translateX(0);
-            }
-
-            100% {
-                transform: translateX(-50%);
-            }
-        }
-
-        .integration-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.75rem;
-            flex-shrink: 0;
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .integration-logo {
-            width: 56px;
-            height: 56px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--bg-card);
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            overflow: hidden;
-            transition: all 0.2s ease;
-        }
-
-        .integration-item:hover .integration-logo {
-            border-color: var(--border-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        }
-
-        .integration-logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .integration-logo svg {
-            width: 32px;
-            height: 32px;
-        }
-
-        .integration-name {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            font-weight: 500;
-        }
-
-        /* Features */
-        .features {
-            padding: 5rem 2rem;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .features-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .features-header h2 {
-            font-family: 'Space Grotesk', -apple-system, sans-serif;
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            letter-spacing: -0.03em;
-            color: var(--text-primary);
-        }
-
-        .features-header p {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            max-width: 550px;
-            margin: 0 auto;
-        }
-
-        .features-grid {
+        .audience-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 1.25rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            text-align: left;
         }
 
-        .feature-card {
+        .audience-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 2rem;
-            transition: all 0.3s;
+            padding: 1.5rem;
         }
 
-        .feature-card:hover {
-            border-color: var(--border-dark);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-        }
-
-        .feature-card h3 {
-            font-family: 'Space Grotesk', -apple-system, sans-serif;
-            font-size: 1.2rem;
+        .audience-card h3 {
+            font-size: 1.1rem;
             font-weight: 600;
-            margin-bottom: 0.65rem;
-            color: var(--text-primary);
-            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
         }
 
-        .feature-card p {
+        .audience-card p {
+            font-size: 0.9rem;
             color: var(--text-secondary);
-            font-size: 0.95rem;
             line-height: 1.6;
         }
 
-        /* CTA */
-        .cta {
-            text-align: center;
+        .audience-statement {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: var(--bg-dark);
+            border-radius: 16px;
+            color: white;
+        }
+
+        .audience-statement p {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        .audience-statement strong {
+            color: var(--accent);
+        }
+
+        /* Journey / How It Works */
+        .journey {
             padding: 5rem 2rem;
             background: var(--bg-alt);
             border-top: 1px solid var(--border);
         }
 
-        .cta h2 {
-            font-family: 'Space Grotesk', -apple-system, sans-serif;
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-            letter-spacing: -0.03em;
+        .journey-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .journey-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .journey-item {
+            display: grid;
+            grid-template-columns: 120px 40px 1fr;
+            gap: 1.5rem;
+            align-items: start;
+        }
+
+        .journey-time {
+            text-align: right;
+            padding-top: 0.25rem;
+        }
+
+        .journey-time-label {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
             color: var(--text-primary);
         }
 
-        .cta p {
+        .journey-time-sub {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .journey-line {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .journey-dot {
+            width: 14px;
+            height: 14px;
+            background: var(--accent);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .journey-connector {
+            width: 2px;
+            flex: 1;
+            background: var(--border-dark);
+            min-height: 80px;
+        }
+
+        .journey-item:last-child .journey-connector {
+            display: none;
+        }
+
+        .journey-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .journey-content h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .journey-content p {
+            font-size: 0.9rem;
             color: var(--text-secondary);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Integrations */
+        .integrations {
+            padding: 3rem 2rem;
+            background: var(--bg);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .integrations-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .integrations-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .integrations-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem 3rem;
+            align-items: center;
+        }
+
+        .integrations-grid img {
+            height: 28px;
+            opacity: 0.6;
+            transition: opacity 0.2s;
+        }
+
+        .integrations-grid img:hover {
+            opacity: 0.9;
+        }
+
+        /* Comparison */
+        .comparison {
+            padding: 5rem 2rem;
+            background: var(--bg-alt);
+            border-top: 1px solid var(--border);
+        }
+
+        .comparison-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-card);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem 1.25rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .comparison-table th {
+            background: var(--bg-alt);
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+        }
+
+        .comparison-table th:last-child {
+            color: var(--accent);
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comparison-table td {
+            font-size: 0.95rem;
+        }
+
+        .comparison-table td:first-child {
+            color: var(--text-secondary);
+        }
+
+        .comparison-table td:last-child {
+            font-weight: 500;
+        }
+
+        .comparison-check {
+            color: var(--green);
+        }
+
+        .comparison-x {
+            color: var(--text-muted);
+        }
+
+        /* Pricing */
+        .pricing {
+            padding: 5rem 2rem;
+            background: var(--bg);
+            border-top: 1px solid var(--border);
+        }
+
+        .pricing-container {
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .urgency-banner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            background: linear-gradient(90deg, rgba(232, 115, 74, 0.1), rgba(232, 115, 74, 0.05));
+            border: 1px solid rgba(232, 115, 74, 0.3);
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 0.85rem 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .urgency-icon {
+            font-size: 1rem;
+        }
+
+        .pricing-card {
+            background: var(--bg-card);
+            border: 2px solid var(--text-primary);
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+            text-align: left;
+        }
+
+        .pricing-badge {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+
+        .pricing-row {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-price {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .pricing-period {
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+
+        .pricing-note {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .pricing-note strong {
+            color: var(--text-primary);
+        }
+
+        .pricing-comparison {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .pricing-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.4rem 0;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .pricing-features .check {
+            color: var(--green);
+            font-weight: 700;
+        }
+
+        .pricing-form {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .pricing-form input {
+            flex: 1;
+            padding: 0.85rem 1rem;
+            border: 1.5px solid var(--border-dark);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            min-width: 0;
+        }
+
+        .pricing-form input:focus {
+            outline: none;
+            border-color: var(--text-primary);
+        }
+
+        .pricing-disclaimer {
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        /* FAQ */
+        .faq {
+            padding: 5rem 2rem;
+            background: var(--bg-alt);
+            border-top: 1px solid var(--border);
+        }
+
+        .faq-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .faq-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .faq-item {
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .faq-question {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .faq-answer {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 5rem 2rem;
+            background: var(--bg-dark);
+            text-align: center;
+        }
+
+        .cta-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cta h2 {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta p {
+            color: rgba(255,255,255,0.7);
             font-size: 1.05rem;
             margin-bottom: 2rem;
         }
 
-        .cta .email-form {
+        .cta-form {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+            max-width: 450px;
             margin: 0 auto;
+        }
+
+        .cta-form input {
+            flex: 1;
+            padding: 0.9rem 1.25rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            min-width: 0;
+        }
+
+        .cta-form .btn-primary {
+            background: var(--accent);
         }
 
         /* Footer */
         footer {
-            border-top: 1px solid var(--border);
             padding: 3rem 2rem;
-            background: var(--bg);
+            background: var(--bg-dark);
+            border-top: 1px solid rgba(255,255,255,0.1);
         }
 
         .footer-content {
@@ -971,17 +1219,15 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 1.5rem;
         }
 
         .footer-logo {
-            font-family: 'Space Grotesk', -apple-system, sans-serif;
-            font-size: 1.25rem;
+            font-family: 'Space Grotesk', sans-serif;
             font-weight: 700;
-            color: var(--text-primary);
-            letter-spacing: -0.03em;
+            font-size: 1.25rem;
+            color: white;
             text-decoration: none;
+            opacity: 0.8;
         }
 
         .footer-links {
@@ -990,762 +1236,543 @@
         }
 
         .footer-links a {
-            color: var(--text-muted);
+            color: rgba(255,255,255,0.5);
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             transition: color 0.2s;
         }
 
         .footer-links a:hover {
-            color: var(--text-primary);
+            color: rgba(255,255,255,0.8);
         }
 
         .footer-copy {
-            color: var(--text-muted);
-            font-size: 0.85rem;
+            color: rgba(255,255,255,0.3);
+            font-size: 0.8rem;
+        }
+
+        /* Success Message */
+        .success-message {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            padding: 1rem 1.25rem;
+            border-radius: 8px;
+        }
+
+        .success-icon {
+            width: 24px;
+            height: 24px;
+            background: var(--green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .success-text {
+            font-size: 0.9rem;
+            color: #166534;
+        }
+
+        .success-text strong {
+            display: block;
+            margin-bottom: 0.1rem;
         }
 
         /* Responsive */
+        @media (max-width: 900px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hero-meta {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .hero-pillars {
+                flex-direction: column;
+                align-items: center;
+                gap: 1.25rem;
+            }
+
+            .hero-pillar {
+                max-width: 300px;
+            }
+
+            .problem-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pillars-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .demo-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .demo-content {
+                order: 2;
+            }
+
+            .app-mockup {
+                order: 1;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .audience-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .journey-item {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+
+            .journey-time {
+                text-align: left;
+            }
+
+            .journey-line {
+                display: none;
+            }
+
+            .comparison-table {
+                font-size: 0.9rem;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 0.75rem 1rem;
+            }
+        }
+
         @media (max-width: 768px) {
             nav {
                 padding: 1rem 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
             }
 
             .hamburger {
                 display: flex;
             }
 
-            .nav-links {
-                display: none;
-                position: fixed;
-                top: 60px;
-                left: 0;
-                right: 0;
-                background: var(--bg);
-                flex-direction: column;
-                padding: 2rem;
-                gap: 1.5rem;
-                border-bottom: 1px solid var(--border);
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            }
-
-            .nav-links.open {
-                display: flex;
-            }
-
-            .nav-links a {
-                font-size: 1.1rem;
-            }
-
             .hero {
                 padding: 7rem 1.5rem 3rem;
             }
 
-            .hero h1 {
-                font-size: 2.5rem;
+            .pricing-form {
+                flex-direction: column;
             }
 
-            .integrations-header h2,
-            .features-header h2 {
-                font-size: 2rem;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .cta h2 {
-                font-size: 1.75rem;
+            .cta-form {
+                flex-direction: column;
             }
 
             .footer-content {
                 flex-direction: column;
+                gap: 1.5rem;
                 text-align: center;
+            }
+
+            .footer-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            .integrations-grid {
+                gap: 1.5rem 2rem;
+            }
+
+            .integrations-grid img {
+                height: 22px;
             }
         }
     </style>
 </head>
 
 <body>
-    <!-- Navigation -->
     <nav>
-        <a href="/" class="logo">Metron</a>
+        <a href="/" class="logo">
+            <img src="brand/wordmark/png/metron-wordmark-black.png" alt="Metron">
+        </a>
         <div class="nav-right">
-            <div class="nav-links" id="nav-links">
-                <a href="#features">Features</a>
-                <a href="#integrations">Integrations</a>
+            <div class="nav-links">
+                <a href="#how-it-works" class="nav-link">How It Works</a>
+                <a href="#pricing" class="nav-link">Pricing</a>
+                <a href="#faq" class="nav-link">FAQ</a>
             </div>
-            <a href="#hero" class="btn-primary">Get Early Access</a>
-            <div class="hamburger" id="hamburger">
+            <a href="#pricing" class="btn btn-primary">Start Free Trial</a>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
+            </button>
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <div class="mobile-nav" id="mobile-nav">
+        <a href="#how-it-works">How It Works</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+    </div>
+
+    <!-- HERO -->
     <section class="hero" id="hero">
-        <div class="badge">
-            <span class="badge-dot"></span>
-            Now in private beta
-        </div>
-        <h1>All your fitness data.<br>One intelligent plan.</h1>
-        <p>Metron connects your wearables, workouts, and nutrition to deliver training that adapts to how your body is
-            actually performing.</p>
-
-        <div class="email-form-container" id="hero-form-container">
-            <form class="email-form" id="hero-form" action="https://formspree.io/f/xkogdvbl" method="POST">
-                <input type="email" name="email" placeholder="Enter your email" required>
-                <button type="submit" class="btn-primary">Get Early Access</button>
-            </form>
-            <div class="success-message" id="hero-success" style="display: none;">
-                <div class="success-icon">✓</div>
-                <div class="success-text">
-                    <strong>You're on the list!</strong>
-                    <span>We'll be in touch soon with early access.</span>
+        <div class="hero-content">
+            <div class="hero-badge">Beta pricing ends soon</div>
+            <h1>The pros have support teams.<br>You have Metron.</h1>
+            <p class="hero-subtitle">
+                Elite athletes have coaches, nutritionists, and sports scientists analyzing their data 24/7. Metron brings that same system to everyone: personalized training plans, integrated insights across all your data, and an AI coach that adapts daily to how you're actually recovering.
+            </p>
+            <div class="hero-pillars">
+                <div class="hero-pillar">
+                    <span class="hero-pillar-icon">◆</span>
+                    <div>
+                        <strong>Personalized Plans</strong>
+                        <span>Built from scratch for your body, goals, and life</span>
+                    </div>
+                </div>
+                <div class="hero-pillar">
+                    <span class="hero-pillar-icon">◆</span>
+                    <div>
+                        <strong>Integrated Insights</strong>
+                        <span>Connects your sleep, training, and recovery data</span>
+                    </div>
+                </div>
+                <div class="hero-pillar">
+                    <span class="hero-pillar-icon">◆</span>
+                    <div>
+                        <strong>Adaptive Coaching</strong>
+                        <span>Adjusts daily based on how you're actually recovering</span>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <div class="chat-preview" id="demo-container">
-            <div class="chat-header">
-                <div class="chat-avatar">A</div>
-                <div>
-                    <div class="chat-name">Arete</div>
-                    <div class="chat-status">Your AI Coach</div>
-                </div>
+            <div class="hero-cta">
+                <a href="#pricing" class="btn btn-primary">Start Free Trial</a>
+                <a href="#how-it-works" class="btn btn-secondary">See How It Works</a>
             </div>
-
-            <!-- Initial Message -->
-            <div id="demo-initial">
-                <div class="recovery-alert">
-                    <div class="recovery-alert-icon">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2.5">
-                            <path
-                                d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
-                            <line x1="12" y1="9" x2="12" y2="13" />
-                            <line x1="12" y1="17" x2="12.01" y2="17" />
-                        </svg>
-                    </div>
-                    <div class="recovery-alert-text">
-                        <span class="recovery-alert-label">Recovery Alert</span>
-                        <span class="recovery-alert-detail">HRV down 18% · 5.8 hrs sleep</span>
-                    </div>
-                </div>
-
-                <div class="chat-message">
-                    Good morning! You logged <strong>5.8 hours of sleep</strong> and your HRV is <strong>down
-                        18%</strong> from baseline. Based on your recovery state, I've adjusted today's leg
-                    workout—reducing compound lift volume by 20% and swapping heavy back squats for goblet squats.
-                </div>
-
-                <div class="demo-actions" id="initial-actions">
-                    <button class="demo-btn demo-btn-secondary" id="btn-keep-original">Keep original plan</button>
-                    <button class="demo-btn demo-btn-primary" id="btn-see-workout">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                            <circle cx="12" cy="12" r="3" />
-                        </svg>
-                        See adjusted workout
-                    </button>
-                </div>
-            </div>
-
-            <!-- Chat Thread -->
-            <div class="chat-thread" id="chat-thread">
-
-                <!-- Loading Indicator -->
-                <div class="loading-indicator" id="loading-indicator" style="display: none;">
-                    <div class="chat-avatar small">A</div>
-                    <div class="loading-dots">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                </div>
-
-                <!-- Adjusted Workout Exchange -->
-                <div class="chat-exchange" id="exchange-adjusted">
-                    <div class="response-divider"></div>
-                    <div class="user-message">See adjusted workout</div>
-                    <div class="arete-response">
-                        <div class="chat-avatar small">A</div>
-                        <div class="response-content">
-                            <div class="workout-card">
-                                <div class="workout-card-header">
-                                    <div class="workout-card-title">
-                                        <span class="workout-day">Today's Workout</span>
-                                        <span class="workout-name">Legs (Recovery Adjusted)</span>
-                                    </div>
-                                    <div class="workout-badge adjusted">-20% volume</div>
-                                </div>
-
-                                <div class="workout-exercises">
-                                    <div class="exercise-item modified">
-                                        <div class="exercise-change">
-                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-                                                stroke="currentColor" stroke-width="2">
-                                                <path d="M7 16l5-5 5 5M7 8l5 5 5-5" />
-                                            </svg>
-                                        </div>
-                                        <div class="exercise-details">
-                                            <span class="exercise-name">Goblet Squats</span>
-                                            <span class="exercise-original">was: Back Squats @ 185lb</span>
-                                        </div>
-                                        <span class="exercise-sets">3 × 10 @ 50lb</span>
-                                    </div>
-
-                                    <div class="exercise-item modified">
-                                        <div class="exercise-change">
-                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-                                                stroke="currentColor" stroke-width="2">
-                                                <path d="M12 5v14M5 12l7 7 7-7" />
-                                            </svg>
-                                        </div>
-                                        <div class="exercise-details">
-                                            <span class="exercise-name">Romanian Deadlift</span>
-                                            <span class="exercise-original">135lb 3×8 → 115lb 3×6</span>
-                                        </div>
-                                        <span class="exercise-sets">3 × 6 @ 115lb</span>
-                                    </div>
-
-                                    <div class="exercise-item">
-                                        <div class="exercise-change unchanged">
-                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-                                                stroke="currentColor" stroke-width="2">
-                                                <polyline points="20 6 9 17 4 12" />
-                                            </svg>
-                                        </div>
-                                        <div class="exercise-details">
-                                            <span class="exercise-name">Leg Press</span>
-                                            <span class="exercise-subtitle">unchanged</span>
-                                        </div>
-                                        <span class="exercise-sets">3 × 12 @ 270lb</span>
-                                    </div>
-
-                                    <div class="exercise-item">
-                                        <div class="exercise-change unchanged">
-                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-                                                stroke="currentColor" stroke-width="2">
-                                                <polyline points="20 6 9 17 4 12" />
-                                            </svg>
-                                        </div>
-                                        <div class="exercise-details">
-                                            <span class="exercise-name">Walking Lunges</span>
-                                            <span class="exercise-subtitle">unchanged</span>
-                                        </div>
-                                        <span class="exercise-sets">2 × 20 BW</span>
-                                    </div>
-                                </div>
-
-                                <div class="workout-footer">
-                                    <div class="workout-stat">
-                                        <span class="workout-stat-label">Est. Duration</span>
-                                        <span class="workout-stat-value">38 min</span>
-                                    </div>
-                                    <div class="workout-stat">
-                                        <span class="workout-stat-label">Intensity</span>
-                                        <span class="workout-stat-value">Moderate</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="demo-actions" id="adjusted-actions">
-                                <button class="demo-btn demo-btn-secondary" id="btn-keep-original-2">Keep original
-                                    plan</button>
-                                <button class="demo-btn demo-btn-confirm" id="btn-confirm">Confirm adjusted
-                                    workout</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Keep Original Exchange -->
-                <div class="chat-exchange" id="exchange-original">
-                    <div class="response-divider"></div>
-                    <div class="user-message">Keep original plan</div>
-                    <div class="arete-response">
-                        <div class="chat-avatar small">A</div>
-                        <div class="response-content">
-                            <div class="chat-message" style="margin-bottom: 1rem;">
-                                Got it—keeping your original leg day as planned. Just a heads up: with your current
-                                recovery state, you might want to extend your warm-up and consider dropping weight by
-                                10-15% if the heavy sets feel off.
-                                <br>
-                                I'll check in after your workout to see how it went.
-                            </div>
-
-                            <div class="workout-card">
-                                <div class="workout-card-header">
-                                    <div class="workout-card-title">
-                                        <span class="workout-day">Today's Workout</span>
-                                        <span class="workout-name">Legs (Original)</span>
-                                    </div>
-                                    <div class="workout-badge original-badge">Full intensity</div>
-                                </div>
-
-                                <div class="workout-exercises">
-                                    <div class="exercise-item">
-                                        <div class="exercise-change unchanged">
-                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-                                                stroke="currentColor" stroke-width="2">
-                                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                                            </svg>
-                                        </div>
-                                        <div class="exercise-details">
-                                            <span class="exercise-name">Back Squats</span>
-                                        </div>
-                                        <span class="exercise-sets">4 × 6 @ 185lb</span>
-                                    </div>
-
-                                    <div class="exercise-item">
-                                        <div class="exercise-change unchanged">
-                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-                                                stroke="currentColor" stroke-width="2">
-                                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                                            </svg>
-                                        </div>
-                                        <div class="exercise-details">
-                                            <span class="exercise-name">Romanian Deadlift</span>
-                                        </div>
-                                        <span class="exercise-sets">3 × 8 @ 135lb</span>
-                                    </div>
-
-                                    <div class="exercise-item">
-                                        <div class="exercise-change unchanged">
-                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-                                                stroke="currentColor" stroke-width="2">
-                                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                                            </svg>
-                                        </div>
-                                        <div class="exercise-details">
-                                            <span class="exercise-name">Leg Press</span>
-                                        </div>
-                                        <span class="exercise-sets">3 × 12 @ 270lb</span>
-                                    </div>
-
-                                    <div class="exercise-item">
-                                        <div class="exercise-change unchanged">
-                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-                                                stroke="currentColor" stroke-width="2">
-                                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                                            </svg>
-                                        </div>
-                                        <div class="exercise-details">
-                                            <span class="exercise-name">Walking Lunges</span>
-                                        </div>
-                                        <span class="exercise-sets">2 × 20 BW</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="demo-actions">
-                                <button class="demo-btn demo-btn-secondary" id="btn-restart-original">Restart
-                                    demo</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Confirmed Exchange -->
-                <div class="chat-exchange" id="exchange-confirmed">
-                    <div class="response-divider"></div>
-                    <div class="user-message">Confirm adjusted workout</div>
-                    <div class="arete-response">
-                        <div class="chat-avatar small">A</div>
-                        <div class="response-content">
-                            <div class="confirmed-banner">
-                                <div class="confirmed-icon">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2.5">
-                                        <polyline points="20 6 9 17 4 12" />
-                                    </svg>
-                                </div>
-                                <div class="confirmed-text">
-                                    <span class="confirmed-title">Workout updated</span>
-                                    <span class="confirmed-detail">Synced to your training log</span>
-                                </div>
-                            </div>
-
-                            <div class="chat-message">
-                                Your adjusted leg workout is locked in. I've also noted your recovery state—this data
-                                helps me learn your patterns and make better recommendations over time.
-                                <br>
-                                <strong>Quick tip:</strong> Try to get to bed 30 min earlier tonight. Based on your
-                                sleep trends, that should help bring your HRV back to baseline by tomorrow.
-                            </div>
-
-                            <div class="demo-actions">
-                                <button class="demo-btn demo-btn-secondary" id="btn-restart">Restart demo</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="hero-meta">
+                <span><span class="check">&#10003;</span> 14-day free trial</span>
+                <span><span class="check">&#10003;</span> No credit card required</span>
+                <span><span class="check">&#10003;</span> iOS app</span>
             </div>
         </div>
     </section>
 
-    <!-- Integrations -->
+    <!-- INTEGRATIONS -->
     <section class="integrations">
-        <div class="integrations-header">
-            <h2>Connects to what you already use</h2>
-            <p>Seamlessly sync your favorite fitness devices and apps.</p>
+        <div class="integrations-container">
+            <div class="integrations-label">For runners, lifters, cyclists, and athletes of all kinds</div>
+            <div class="integrations-grid">
+                <img src="images/health.png" alt="Apple Health">
+                <img src="images/whoop.png" alt="Whoop">
+                <img src="images/oura.png" alt="Oura">
+                <img src="images/garmin.png" alt="Garmin">
+                <img src="images/fitbit.png" alt="Fitbit">
+                <img src="images/strava.png" alt="Strava">
+                <img src="images/trainingpeaks.png" alt="TrainingPeaks">
+                <img src="images/myfitnesspal.png" alt="MyFitnessPal">
+                <img src="images/eightsleep.png" alt="Eight Sleep">
+                <img src="images/peloton.png" alt="Peloton">
+                <img src="images/fitbod.png" alt="Fitbod">
+                <img src="images/withings.png" alt="Withings">
+            </div>
         </div>
-        <div class="integrations-scroll-container">
-            <div class="integrations-scroll">
-                <!-- First set -->
-                <a href="https://www.garmin.com" target="_blank" rel="noopener" class="integration-item">
-                    <div class="integration-logo">
-                        <img src="images/garmin.png" alt="Garmin">
+    </section>
+
+    <!-- PROBLEM -->
+    <section class="problem">
+        <div class="problem-container">
+            <h2>"Should I push through or rest?"</h2>
+            <p class="problem-subtitle">
+                You face this question 3-4 times per week. You slept poorly. Your legs are sore. Work stress is high. Your program says heavy squats.
+            </p>
+            <div class="problem-grid">
+                <div class="problem-card bad">
+                    <div class="problem-card-header">
+                        <div class="icon">&#10005;</div>
+                        Push through anyway
                     </div>
-                    <span class="integration-name">Garmin</span>
-                </a>
-                <a href="https://www.apple.com/health/" target="_blank" rel="noopener" class="integration-item">
-                    <div class="integration-logo">
-                        <img src="images/health.png" alt="Apple Health">
-                    </div>
-                    <span class="integration-name">Apple Health</span>
-                </a>
-                <a href="https://ouraring.com" target="_blank" rel="noopener" class="integration-item">
-                    <div class="integration-logo">
-                        <img src="images/oura.png" alt="Oura">
-                    </div>
-                    <span class="integration-name">Oura</span>
-                </a>
-                <a href="https://www.whoop.com" target="_blank" rel="noopener" class="integration-item">
-                    <div class="integration-logo">
-                        <img src="images/whoop.png" alt="Whoop">
-                    </div>
-                    <span class="integration-name">Whoop</span>
-                </a>
-                <a href="https://www.strava.com" target="_blank" rel="noopener" class="integration-item">
-                    <div class="integration-logo">
-                        <img src="images/strava.png" alt="Strava">
-                    </div>
-                    <span class="integration-name">Strava</span>
-                </a>
-                <a href="https://www.eightsleep.com" target="_blank" rel="noopener" class="integration-item">
-                    <div class="integration-logo">
-                        <img src="images/eightsleep.png" alt="Eight Sleep">
-                    </div>
-                    <span class="integration-name">Eight Sleep</span>
-                </a>
-                <a href="https://www.myfitnesspal.com" target="_blank" rel="noopener" class="integration-item">
-                    <div class="integration-logo">
-                        <img src="images/myfitnesspal.png" alt="MyFitnessPal">
-                    </div>
-                    <span class="integration-name">MyFitnessPal</span>
-                </a>
-                <a href="https://www.withings.com" target="_blank" rel="noopener" class="integration-item">
-                    <div class="integration-logo">
-                        <img src="images/withings.png" alt="Withings">
-                    </div>
-                    <span class="integration-name">Withings</span>
-                </a>
-                <a href="https://www.anthropic.com/claude" target="_blank" rel="noopener" class="integration-item">
-                    <div class="integration-logo">
-                        <img src="images/claude.png" alt="Claude AI">
-                    </div>
-                    <span class="integration-name">Claude AI</span>
-                </a>
-                <div class="integration-item">
-                    <div class="integration-logo">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="12" cy="12" r="9" fill="none" stroke="#1a1a1a" stroke-width="1.5"
-                                stroke-dasharray="3 2" />
-                            <path fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"
-                                d="M12 8v8M8 12h8" />
-                        </svg>
-                    </div>
-                    <span class="integration-name">More coming</span>
+                    <p>Form breaks down on set 4. Something tweaks. Miss the next three sessions recovering from one bad decision.</p>
                 </div>
-                <!-- Duplicate set for seamless loop -->
-                <a href="https://www.garmin.com" target="_blank" rel="noopener" class="integration-item">
-                    <div class="integration-logo">
-                        <img src="images/garmin.png" alt="Garmin">
+                <div class="problem-card bad">
+                    <div class="problem-card-header">
+                        <div class="icon">&#10005;</div>
+                        Skip it entirely
                     </div>
-                    <span class="integration-name">Garmin</span>
-                </a>
-                <a href="https://www.apple.com/health/" target="_blank" rel="noopener" class="integration-item">
-                    <div class="integration-logo">
-                        <img src="images/health.png" alt="Apple Health">
+                    <p>Feel guilty all day. Lose momentum. Promise to "make it up" on Saturday. You won't.</p>
+                </div>
+                <div class="problem-card bad">
+                    <div class="problem-card-header">
+                        <div class="icon">&#10005;</div>
+                        Spend 20 minutes googling
                     </div>
-                    <span class="integration-name">Apple Health</span>
-                </a>
-                <a href="https://ouraring.com" target="_blank" rel="noopener" class="integration-item">
-                    <div class="integration-logo">
-                        <img src="images/oura.png" alt="Oura">
+                    <p>"Is 5 hours of sleep enough to train?" Get 14 different answers. Still don't know what to do.</p>
+                </div>
+                <div class="problem-card good">
+                    <div class="problem-card-header">
+                        <div class="icon">&#10003;</div>
+                        Open Metron
                     </div>
-                    <span class="integration-name">Oura</span>
-                </a>
-                <a href="https://www.whoop.com" target="_blank" rel="noopener" class="integration-item">
-                    <div class="integration-logo">
-                        <img src="images/whoop.png" alt="Whoop">
-                    </div>
-                    <span class="integration-name">Whoop</span>
-                </a>
-                <a href="https://www.strava.com" target="_blank" rel="noopener" class="integration-item">
-                    <div class="integration-logo">
-                        <img src="images/strava.png" alt="Strava">
-                    </div>
-                    <span class="integration-name">Strava</span>
-                </a>
-                <a href="https://www.eightsleep.com" target="_blank" rel="noopener" class="integration-item">
-                    <div class="integration-logo">
-                        <img src="images/eightsleep.png" alt="Eight Sleep">
-                    </div>
-                    <span class="integration-name">Eight Sleep</span>
-                </a>
-                <a href="https://www.myfitnesspal.com" target="_blank" rel="noopener" class="integration-item">
-                    <div class="integration-logo">
-                        <img src="images/myfitnesspal.png" alt="MyFitnessPal">
-                    </div>
-                    <span class="integration-name">MyFitnessPal</span>
-                </a>
-                <a href="https://www.withings.com" target="_blank" rel="noopener" class="integration-item">
-                    <div class="integration-logo">
-                        <img src="images/withings.png" alt="Withings">
-                    </div>
-                    <span class="integration-name">Withings</span>
-                </a>
-                <a href="https://www.anthropic.com/claude" target="_blank" rel="noopener" class="integration-item">
-                    <div class="integration-logo">
-                        <img src="images/claude.png" alt="Claude AI">
-                    </div>
-                    <span class="integration-name">Claude AI</span>
-                </a>
-                <div class="integration-item">
-                    <div class="integration-logo">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="12" cy="12" r="9" fill="none" stroke="#1a1a1a" stroke-width="1.5"
-                                stroke-dasharray="3 2" />
-                            <path fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"
-                                d="M12 8v8M8 12h8" />
-                        </svg>
-                    </div>
-                    <span class="integration-name">More coming</span>
+                    <p>Your workout was already adjusted at 2am. Heavy squats moved to Thursday. Today: moderate volume, protected recovery. Done.</p>
+                </div>
+            </div>
+            <p class="problem-punchline">
+                <strong>Metron answers this question in 3 seconds.</strong> With your actual data. Not guesswork.
+            </p>
+        </div>
+    </section>
+
+    <!-- THREE PILLARS -->
+    <section class="pillars">
+        <div class="pillars-container">
+            <div class="section-header">
+                <h2>One system. Three engines.</h2>
+                <p>Build your plan. Adapt it daily. Coach you through it.</p>
+            </div>
+            <div class="pillars-grid">
+                <div class="pillar-card">
+                    <div class="pillar-number">01 / Build</div>
+                    <h3>Training Plans</h3>
+                    <p>90 minutes of AI research creates your complete 12-week system from scratch. Not a template. Generated for your body, injuries, schedule, and goals.</p>
+                    <ul class="pillar-features">
+                        <li><span class="check">&#10003;</span> 72 workouts with every set, rep, weight</li>
+                        <li><span class="check">&#10003;</span> Nutrition targets and meal templates</li>
+                        <li><span class="check">&#10003;</span> Supplement stack (tiered by priority)</li>
+                        <li><span class="check">&#10003;</span> Recovery protocols</li>
+                        <li><span class="check">&#10003;</span> "Why Your Plan" rationale document</li>
+                    </ul>
+                    <a href="/training" class="pillar-link">Learn more →</a>
+                </div>
+                <div class="pillar-card">
+                    <div class="pillar-number">02 / Adapt</div>
+                    <h3>Rebalancing Engine</h3>
+                    <p>Every night at 2am, the engine checks your sleep, HRV, soreness, and training load. If something's off, your workout is modified before you wake up.</p>
+                    <ul class="pillar-features">
+                        <li><span class="check">&#10003;</span> Auto-adjusts volume and intensity</li>
+                        <li><span class="check">&#10003;</span> Swaps exercises for soreness</li>
+                        <li><span class="check">&#10003;</span> Inserts rest days when needed</li>
+                        <li><span class="check">&#10003;</span> Detects overtraining patterns</li>
+                        <li><span class="check">&#10003;</span> Learns your recovery capacity</li>
+                    </ul>
+                    <a href="/rebalance" class="pillar-link">Learn more →</a>
+                </div>
+                <div class="pillar-card">
+                    <div class="pillar-number">03 / Coach</div>
+                    <h3>Arete AI</h3>
+                    <p>An AI coach that knows your plan, your data, and your history. Ask anything. Get real answers with real reasoning. Available 24/7.</p>
+                    <ul class="pillar-features">
+                        <li><span class="check">&#10003;</span> Explains every adjustment</li>
+                        <li><span class="check">&#10003;</span> Answers "should I train today?"</li>
+                        <li><span class="check">&#10003;</span> Helps with nutrition decisions</li>
+                        <li><span class="check">&#10003;</span> Remembers your injury history</li>
+                        <li><span class="check">&#10003;</span> Builds trust over 12 weeks</li>
+                    </ul>
+                    <a href="/arete" class="pillar-link">Learn more →</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Features -->
-    <section class="features">
-        <div class="features-header">
-            <h2>Training that evolves with you</h2>
-            <p>Stop juggling apps. Metron synthesizes everything into actionable daily guidance.</p>
-        </div>
-        <div class="features-grid">
-            <div class="feature-card">
-                <h3>Unified Data Intelligence</h3>
-                <p>Your Garmin, Oura, Whoop, and Apple Watch data flows into one coherent picture. No more
-                    context-switching between apps.</p>
-            </div>
-            <div class="feature-card">
-                <h3>Dynamic Training Plans</h3>
-                <p>Plans that rebalance daily based on recovery, sleep, stress, and performance. Train smarter, not just
-                    harder.</p>
-            </div>
-            <div class="feature-card">
-                <h3>AI-Powered Nutrition</h3>
-                <p>Snap a photo of your meal for instant macro tracking. Get personalized nutrition recommendations
-                    aligned with your training goals.</p>
-            </div>
-            <div class="feature-card">
-                <h3>Arete AI Coach</h3>
-                <p>Ask questions, get insights, adjust your plan—all through natural conversation with an AI that knows
-                    your complete fitness history.</p>
-            </div>
-            <div class="feature-card">
-                <h3>Pattern Recognition</h3>
-                <p>Discover what actually works for your body. Metron learns your responses to training, sleep, and
-                    nutrition over time.</p>
-            </div>
-            <div class="feature-card">
-                <h3>Recovery Optimization</h3>
-                <p>Know when to push and when to rest. Real-time readiness scores based on HRV, sleep quality, and
-                    training load.</p>
-            </div>
-        </div>
-    </section>
 
-    <!-- CTA -->
-    <section class="cta">
-        <h2>Ready to train smarter?</h2>
-        <p>Join the beta and experience truly personalized fitness intelligence.</p>
-        <div class="email-form-container">
-            <form class="email-form" id="cta-form" action="https://formspree.io/f/xkogdvbl" method="POST">
-                <input type="email" name="email" placeholder="Enter your email" required>
-                <button type="submit" class="btn-primary">Get Early Access</button>
-            </form>
-            <div class="success-message" id="cta-success" style="display: none;">
-                <div class="success-icon">✓</div>
-                <div class="success-text">
-                    <strong>You're on the list!</strong>
-                    <span>We'll be in touch soon with early access.</span>
+    <!-- JOURNEY / HOW IT WORKS -->
+    <section class="journey" id="how-it-works">
+        <div class="journey-container">
+            <div class="section-header">
+                <h2>How it works</h2>
+                <p>From signup to personalized system in one day.</p>
+            </div>
+            <div class="journey-timeline">
+                <div class="journey-item">
+                    <div class="journey-time">
+                        <div class="journey-time-label">Step 1</div>
+                        <div class="journey-time-sub">15 minutes</div>
+                    </div>
+                    <div class="journey-line">
+                        <div class="journey-dot"></div>
+                        <div class="journey-connector"></div>
+                    </div>
+                    <div class="journey-content">
+                        <h3>Tell us about yourself</h3>
+                        <p>Complete a detailed questionnaire about your body, goals, injuries, schedule, and preferences. This is the foundation of your personalized plan.</p>
+                    </div>
+                </div>
+                <div class="journey-item">
+                    <div class="journey-time">
+                        <div class="journey-time-label">Step 2</div>
+                        <div class="journey-time-sub">90 minutes</div>
+                    </div>
+                    <div class="journey-line">
+                        <div class="journey-dot"></div>
+                        <div class="journey-connector"></div>
+                    </div>
+                    <div class="journey-content">
+                        <h3>AI builds your plan</h3>
+                        <p>Our AI researches your specific situation and generates 72 workouts, nutrition targets, supplement recommendations, and recovery protocols. All integrated. All personalized.</p>
+                    </div>
+                </div>
+                <div class="journey-item">
+                    <div class="journey-time">
+                        <div class="journey-time-label">Step 3</div>
+                        <div class="journey-time-sub">Ongoing</div>
+                    </div>
+                    <div class="journey-line">
+                        <div class="journey-dot"></div>
+                    </div>
+                    <div class="journey-content">
+                        <h3>Train and adapt</h3>
+                        <p>Start training with full context. Every night, the system checks your recovery data and adjusts tomorrow's workout. The longer you use it, the smarter it gets about you.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
+
+    <!-- PRICING -->
+    <section class="pricing" id="pricing">
+        <div class="pricing-container">
+            <div class="section-header">
+                <h2>Pro-level coaching. Accessible price.</h2>
+                <p>The same insights that cost pros $10,000+/year.</p>
+            </div>
+            <div class="urgency-banner">
+                <span class="urgency-icon">⚡</span>
+                Beta pricing ends soon. Lock in $6.99/month for life.
+            </div>
+            <div class="pricing-card">
+                <div class="pricing-badge">Beta Access</div>
+                <div class="pricing-row">
+                    <span class="pricing-price">$0</span>
+                    <span class="pricing-period">/ month</span>
+                </div>
+                <p class="pricing-note">
+                    Free during beta. Then $9.99/month. <strong>Beta users lock in $6.99/month for life.</strong>
+                </p>
+                <ul class="pricing-features">
+                    <li><span class="check">&#10003;</span> Complete 12-week plan built from scratch</li>
+                    <li><span class="check">&#10003;</span> Daily workout adjustments</li>
+                    <li><span class="check">&#10003;</span> Unlimited Arete AI conversations</li>
+                    <li><span class="check">&#10003;</span> Nutrition targets and meal templates</li>
+                    <li><span class="check">&#10003;</span> All wearable integrations</li>
+                    <li><span class="check">&#10003;</span> Data export anytime</li>
+                </ul>
+                <form class="pricing-form" id="pricing-form" action="https://formspree.io/f/xkogdvbl" method="POST">
+                    <input type="email" name="email" placeholder="Enter your email" required>
+                    <button type="submit" class="btn btn-primary">Start Free Trial</button>
+                </form>
+                <p class="pricing-disclaimer">14-day free trial. No credit card required.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq" id="faq">
+        <div class="faq-container">
+            <div class="section-header">
+                <h2>Frequently asked questions</h2>
+            </div>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3 class="faq-question">How is this different from just using ChatGPT?</h3>
+                    <p class="faq-answer">ChatGPT can't see your data. Arete connects directly to your wearables and training logs, then analyzes your actual sleep, HRV, and workout history. When you ask "should I train today?", you get an answer based on YOUR recovery state, not generic advice.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">What if the system keeps reducing my workouts?</h3>
+                    <p class="faq-answer">It doesn't default to easy. When you're ready to push, it tells you to push harder. Last month, 23% of adjustments INCREASED intensity because users were under-training relative to their recovery. You can also override any adjustment.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">What if I only have an Apple Watch?</h3>
+                    <p class="faq-answer">That's plenty. Apple Watch tracks sleep, heart rate, and workouts. The system works with one device. More devices = richer insights, but one is enough to start.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">Is this iOS only?</h3>
+                    <p class="faq-answer">Yes, currently iOS only. Android is on our roadmap. Sign up for the beta and we'll notify you when Android launches.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">Is my health data private?</h3>
+                    <p class="faq-answer">Yes. Your data is encrypted, never sold, and never used to train AI models. You can export or delete everything at any time. We make money from subscriptions, not your data.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">What if Arete gives me bad advice?</h3>
+                    <p class="faq-answer">Arete provides insights based on your data, not medical advice. It's designed to help you understand patterns and make informed decisions. For injuries or medical concerns, always consult a healthcare professional.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
     <footer>
         <div class="footer-content">
             <a href="/" class="footer-logo">Metron</a>
             <div class="footer-links">
-                <a href="privacy.html">Privacy Policy</a>
-                <a href="terms.html">Terms of Service</a>
-                <a href="health-data-privacy.html">Health Data Privacy</a>
+                <a href="/privacy.html">Privacy</a>
+                <a href="/terms.html">Terms</a>
+                <a href="/health-data-privacy.html">Health Data</a>
+                <a href="https://instagram.com/metron.ai" target="_blank">Instagram</a>
             </div>
-            <div class="footer-copy">© 2025 Metron. All rights reserved.</div>
+            <span class="footer-copy">&copy; 2026 Metron</span>
         </div>
     </footer>
 
     <script>
-        // Hamburger menu toggle
+        // Mobile nav toggle
         const hamburger = document.getElementById('hamburger');
-        const navLinks = document.getElementById('nav-links');
-
+        const mobileNav = document.getElementById('mobile-nav');
+        
         hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('open');
-            navLinks.classList.toggle('open');
+            mobileNav.classList.toggle('active');
         });
 
-        // Close menu when a link is clicked
-        navLinks.querySelectorAll('a').forEach(link => {
+        // Close mobile nav on link click
+        mobileNav.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
-                hamburger.classList.remove('open');
-                navLinks.classList.remove('open');
+                mobileNav.classList.remove('active');
+            });
+        });
+
+        // Form handling
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                try {
+                    const response = await fetch(form.action, {
+                        method: 'POST',
+                        body: new FormData(form),
+                        headers: { 'Accept': 'application/json' }
+                    });
+                    if (response.ok) {
+                        form.innerHTML = '<div class="success-message"><div class="success-icon">&#10003;</div><div class="success-text"><strong>You\'re in!</strong><span>Check your email for next steps.</span></div></div>';
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                }
             });
         });
     </script>
-
-    <script>
-        // Email form handling
-        document.addEventListener('DOMContentLoaded', function () {
-            function setupForm(formId, successId) {
-                const form = document.getElementById(formId);
-                const success = document.getElementById(successId);
-                if (!form || !success) return;
-
-                form.addEventListener('submit', async function (e) {
-                    e.preventDefault();
-                    const formData = new FormData(form);
-                    const button = form.querySelector('button');
-                    button.textContent = 'Submitting...';
-                    button.disabled = true;
-
-                    try {
-                        const response = await fetch(form.action, {
-                            method: 'POST',
-                            body: formData,
-                            headers: { 'Accept': 'application/json' }
-                        });
-                        form.style.display = 'none';
-                        success.style.display = 'flex';
-                    } catch (error) {
-                        form.style.display = 'none';
-                        success.style.display = 'flex';
-                    }
-                });
-            }
-
-            setupForm('hero-form', 'hero-success');
-            setupForm('cta-form', 'cta-success');
-        });
-
-        // Demo logic
-        const initialActions = document.getElementById('initial-actions');
-        const exchangeAdjusted = document.getElementById('exchange-adjusted');
-        const exchangeOriginal = document.getElementById('exchange-original');
-        const exchangeConfirmed = document.getElementById('exchange-confirmed');
-        const adjustedActions = document.getElementById('adjusted-actions');
-        const demoContainer = document.getElementById('demo-container');
-        const loadingIndicator = document.getElementById('loading-indicator');
-
-        const btnSeeWorkout = document.getElementById('btn-see-workout');
-        const btnKeepOriginal = document.getElementById('btn-keep-original');
-        const btnConfirm = document.getElementById('btn-confirm');
-        const btnKeepOriginal2 = document.getElementById('btn-keep-original-2');
-
-        function showLoading() { loadingIndicator.style.display = 'flex'; }
-        function hideLoading() { loadingIndicator.style.display = 'none'; }
-
-        function resetDemo() {
-            exchangeAdjusted.classList.add('collapsing');
-            exchangeOriginal.classList.add('collapsing');
-            exchangeConfirmed.classList.add('collapsing');
-            exchangeAdjusted.classList.remove('visible');
-            exchangeOriginal.classList.remove('visible');
-            exchangeConfirmed.classList.remove('visible');
-
-            demoContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-            setTimeout(() => {
-                exchangeAdjusted.classList.remove('collapsing');
-                exchangeOriginal.classList.remove('collapsing');
-                exchangeConfirmed.classList.remove('collapsing');
-                btnSeeWorkout.classList.remove('selected', 'fade-out');
-                btnKeepOriginal.classList.remove('selected', 'fade-out');
-                btnConfirm.classList.remove('selected', 'fade-out');
-                btnKeepOriginal2.classList.remove('selected', 'fade-out');
-                initialActions.style.display = 'flex';
-                adjustedActions.style.display = 'flex';
-            }, 800);
-        }
-
-        btnSeeWorkout.addEventListener('click', function () {
-            btnSeeWorkout.classList.add('selected');
-            btnKeepOriginal.classList.add('fade-out');
-            showLoading();
-            setTimeout(() => {
-                hideLoading();
-                initialActions.style.display = 'none';
-                exchangeOriginal.classList.remove('visible');
-                exchangeAdjusted.classList.add('visible');
-            }, 1000);
-        });
-
-        btnKeepOriginal.addEventListener('click', function () {
-            btnKeepOriginal.classList.add('selected');
-            btnSeeWorkout.classList.add('fade-out');
-            showLoading();
-            setTimeout(() => {
-                hideLoading();
-                initialActions.style.display = 'none';
-                exchangeAdjusted.classList.remove('visible');
-                exchangeOriginal.classList.add('visible');
-            }, 1000);
-        });
-
-        btnConfirm.addEventListener('click', function () {
-            btnConfirm.classList.add('selected');
-            btnKeepOriginal2.classList.add('fade-out');
-            showLoading();
-            setTimeout(() => {
-                hideLoading();
-                adjustedActions.style.display = 'none';
-                exchangeConfirmed.classList.add('visible');
-            }, 1000);
-        });
-
-        btnKeepOriginal2.addEventListener('click', function () {
-            btnKeepOriginal2.classList.add('selected');
-            btnConfirm.classList.add('fade-out');
-            showLoading();
-            setTimeout(() => {
-                hideLoading();
-                adjustedActions.style.display = 'none';
-                exchangeOriginal.classList.add('visible');
-            }, 1000);
-        });
-
-        document.getElementById('btn-restart').addEventListener('click', resetDemo);
-        document.getElementById('btn-restart-original').addEventListener('click', resetDemo);
-    </script>
 </body>
-
 </html>
