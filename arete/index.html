@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arete AI™ | Metron AI™</title>
+    
+    <meta property="og:title" content="Arete AI™ Coach | Metron">
+    <meta property="og:description" content="A coach with perfect memory. 50+ data points on every message. Searches months of YOUR history.">
+    <meta name="description" content="Arete AI™ isn't a chatbot with fitness knowledge. It's a coach that sees your sleep, HRV, training history, and nutrition—all at once, on every message.">
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        :root {
+            --bg: #FAFAF8;
+            --bg-alt: #F5F5F3;
+            --bg-dark: #0f0f0f;
+            --text-primary: #1a1a1a;
+            --text-secondary: #4a4a4a;
+            --text-muted: #888888;
+            --border: #E8E8E6;
+            --accent: #E8734A;
+            --green: #22c55e;
+            --yellow: #fbbf24;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+        }
+        h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.03em; line-height: 1.15; }
+
+        nav {
+            position: fixed; top: 0; left: 0; right: 0;
+            padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center;
+            background: rgba(250, 250, 248, 0.95); backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border); z-index: 100;
+        }
+        .logo { display: flex; align-items: center; text-decoration: none; }
+        .logo img { height: 26px; }
+        .nav-right { display: flex; align-items: center; gap: 2rem; }
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-link { color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+        .nav-link:hover { color: var(--text-primary); }
+        .nav-link.active { color: var(--accent); }
+        .btn {
+            display: inline-flex; align-items: center; padding: 0.7rem 1.25rem;
+            border-radius: 8px; font-weight: 600; font-size: 0.9rem; text-decoration: none;
+        }
+        .btn-primary { background: var(--text-primary); color: white; }
+        .btn-primary:hover { opacity: 0.85; }
+
+        .hero { padding: 8rem 2rem 5rem; max-width: 1200px; margin: 0 auto; }
+        .hero-layout { display: grid; grid-template-columns: 1fr 380px; gap: 4rem; align-items: center; }
+        .hero-badge {
+            display: inline-flex; padding: 0.4rem 0.85rem;
+            background: rgba(232, 115, 74, 0.1); border: 1px solid rgba(232, 115, 74, 0.2);
+            border-radius: 50px; font-size: 0.8rem; color: var(--accent); font-weight: 500; margin-bottom: 1.5rem;
+        }
+        .hero h1 { font-size: 3.25rem; font-weight: 700; margin-bottom: 1.5rem; }
+        .hero-subtitle { font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 2rem; line-height: 1.7; }
+
+        .chat-mockup {
+            background: var(--bg-dark); border-radius: 24px; padding: 20px; color: white;
+        }
+        .chat-header {
+            display: flex; align-items: center; gap: 12px;
+            padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 16px;
+        }
+        .chat-avatar {
+            width: 40px; height: 40px; background: var(--accent); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; font-weight: 700;
+        }
+        .chat-name { font-weight: 600; }
+        .chat-status { font-size: 12px; color: var(--green); }
+        .chat-messages { display: flex; flex-direction: column; gap: 12px; }
+        .chat-msg { padding: 12px 16px; border-radius: 16px; max-width: 90%; font-size: 13px; line-height: 1.5; }
+        .chat-msg.user { background: rgba(255,255,255,0.1); align-self: flex-end; border-bottom-right-radius: 4px; }
+        .chat-msg.assistant { background: rgba(232, 115, 74, 0.15); border: 1px solid rgba(232, 115, 74, 0.25); align-self: flex-start; border-bottom-left-radius: 4px; }
+        .chat-msg strong { display: block; margin-bottom: 6px; color: var(--accent); }
+        .chat-context { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1); }
+        .context-pill { font-size: 10px; padding: 4px 8px; background: rgba(255,255,255,0.08); border-radius: 20px; }
+
+        .section { padding: 6rem 2rem; max-width: 1100px; margin: 0 auto; }
+        .section.dark { background: var(--bg-dark); color: white; max-width: 100%; }
+        .section.dark .section-inner { max-width: 1100px; margin: 0 auto; }
+        .section-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .section-grid.reverse { direction: rtl; }
+        .section-grid.reverse > * { direction: ltr; }
+        .section h2 { font-size: 2.25rem; margin-bottom: 1.25rem; }
+        .section p { font-size: 1.1rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 1.25rem; }
+        .section.dark p { color: rgba(255,255,255,0.7); }
+        .section-list { list-style: none; margin-top: 1.5rem; }
+        .section-list li { display: flex; gap: 0.75rem; margin-bottom: 0.9rem; font-size: 1rem; }
+        .section-list .icon { color: var(--green); font-weight: 700; }
+        .section.dark .section-list li { color: rgba(255,255,255,0.85); }
+
+        .code-block {
+            background: #0a0a0a; border-radius: 12px; padding: 24px;
+            font-family: 'SF Mono', Monaco, monospace; font-size: 12px;
+            color: rgba(255,255,255,0.85); border: 1px solid rgba(255,255,255,0.1);
+        }
+        .code-title { color: var(--accent); font-weight: 600; margin-bottom: 16px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+        .code-line { margin-bottom: 3px; white-space: pre; }
+        .code-line .dim { color: rgba(255,255,255,0.4); }
+        .code-line .warn { color: var(--yellow); }
+        .code-line .good { color: var(--green); }
+
+        .personality-section { text-align: center; margin-bottom: 3rem; }
+        .personality-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 3rem; }
+        .personality-card {
+            background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px; padding: 1.5rem; text-align: left;
+        }
+        .personality-card h4 { font-size: 0.8rem; color: var(--accent); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .personality-card p { font-size: 0.95rem; color: rgba(255,255,255,0.7); line-height: 1.6; margin: 0; }
+
+        .cta-section { padding: 5rem 2rem; text-align: center; background: var(--bg-alt); }
+        .cta-section h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .cta-section p { font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 2rem; }
+
+        footer { padding: 2rem; text-align: center; font-size: 0.85rem; color: rgba(255,255,255,0.6); background: var(--bg-dark); }
+        footer a { color: rgba(255,255,255,0.5); text-decoration: none; margin: 0 0.5rem; }
+        footer a:hover { color: rgba(255,255,255,0.8); }
+        footer p { margin-bottom: 0.5rem; }
+
+        @media (max-width: 900px) {
+            .hero-layout, .section-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+            .section-grid.reverse { direction: ltr; }
+            .hero h1 { font-size: 2.5rem; }
+            .personality-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            nav { padding: 1rem 1.5rem; }
+            .nav-links { display: none; }
+            .hero { padding: 6rem 1.5rem 3rem; }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="/" class="logo"><img src="/brand/brand%20preview/metron_logo.png" alt="Metron AI™"></a>
+        <div class="nav-right">
+            <div class="nav-links">
+                <a href="/arete" class="nav-link active">Arete AI™</a>
+                <a href="/rebalance" class="nav-link">Smart Adaptation</a>
+                <a href="/onboarding" class="nav-link">Personalized Plans</a>
+            </div>
+            <a href="/#pricing" class="btn btn-primary">Start Free Trial</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-layout">
+            <div>
+                <div class="hero-badge">AI Coach</div>
+                <h1>A coach with<br>perfect memory.</h1>
+                <p class="hero-subtitle">
+                    Arete AI™ sees your sleep from last night, your HRV trend from the last week, your squat progress from the last three months, and today's workout—all at once, on every message.
+                </p>
+                <a href="/#pricing" class="btn btn-primary">Start Free Trial</a>
+            </div>
+            <div class="chat-mockup">
+                <div class="chat-header">
+                    <div class="chat-avatar">A</div>
+                    <div><div class="chat-name">Arete</div><div class="chat-status">● Online</div></div>
+                </div>
+                <div class="chat-messages">
+                    <div class="chat-msg user">Why does my bench always stall around 225?</div>
+                    <div class="chat-msg assistant">
+                        <strong>Found the pattern.</strong>
+                        I pulled your bench data from the last 4 months. You've attempted 225×5 six times—only hit it once (Oct 12).
+                        <br><br>
+                        That day: readiness 81, sleep 8.1h. Failed days averaged readiness 67, sleep 6.4h.
+                        <br><br>
+                        You're strong enough. You're just never fresh when you try it.
+                        <div class="chat-context">
+                            <span class="context-pill">🛏 6.2h sleep</span>
+                            <span class="context-pill">❤️ HRV 46</span>
+                            <span class="context-pill">📊 Readiness 61</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section dark">
+        <div class="section-inner">
+            <div class="section-grid">
+                <div>
+                    <h2>Every message sees your entire life.</h2>
+                    <p>Most AI fitness chatbots know your name, goals, and whatever you just typed. They're ChatGPT with a fitness prompt.</p>
+                    <p>Arete AI™ reasons over 50+ live data points. When you ask "should I train?", it evaluates HRV trend × training load × sleep debt × soreness × historical performance on similar days.</p>
+                    <ul class="section-list">
+                        <li><span class="icon">✓</span> Today's sleep, HRV, resting HR, stress, soreness</li>
+                        <li><span class="icon">✓</span> Active flags (sleep debt, HRV suppressed)</li>
+                        <li><span class="icon">✓</span> Today's workout with any modifications</li>
+                        <li><span class="icon">✓</span> All training maxes and current phase</li>
+                        <li><span class="icon">✓</span> Learned patterns about YOUR body</li>
+                    </ul>
+                </div>
+                <div class="code-block">
+                    <div class="code-title">What Arete AI™ sees on every message</div>
+<div class="code-line"><span class="dim">TODAY</span></div>
+<div class="code-line">├── Sleep: 6.2h <span class="warn">⚠️ -16%</span></div>
+<div class="code-line">├── HRV: 46 <span class="warn">⚠️ -15%</span></div>
+<div class="code-line">├── Readiness: 61/100</div>
+<div class="code-line">├── Protein: 45g / 180g</div>
+<div class="code-line">└── Soreness: lower back, quads</div>
+<div class="code-line"></div>
+<div class="code-line"><span class="dim">FLAGS</span></div>
+<div class="code-line">├── <span class="warn">SLEEP_DEBT_MODERATE</span></div>
+<div class="code-line">└── <span class="warn">HRV_SUPPRESSED</span></div>
+<div class="code-line"></div>
+<div class="code-line"><span class="dim">WORKOUT</span></div>
+<div class="code-line">├── Was: Heavy Squat 5×5 @ 85%</div>
+<div class="code-line">└── Now: <span class="good">Moderate 4×6 @ 70%</span></div>
+<div class="code-line"></div>
+<div class="code-line"><span class="dim">PATTERNS</span></div>
+<div class="code-line">├── Tends to: push through fatigue</div>
+<div class="code-line">└── Best days: Tue, Thu</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-grid reverse">
+            <div>
+                <h2>Searches your history like a coach reviewing film.</h2>
+                <p>When you ask a complex question, Arete AI™ doesn't just look at today—it searches weeks or months of data to find patterns.</p>
+                <p>This is what good human coaches do: review logs, look for patterns, correlate with external factors. Except Arete AI™ does it in 3 seconds, with perfect recall.</p>
+                <ul class="section-list">
+                    <li><span class="icon">✓</span> RAG search over your entire training history</li>
+                    <li><span class="icon">✓</span> Correlates performance with sleep, stress, nutrition</li>
+                    <li><span class="icon">✓</span> Finds patterns you'd never notice</li>
+                    <li><span class="icon">✓</span> Remembers every conversation</li>
+                </ul>
+            </div>
+            <div class="chat-mockup">
+                <div class="chat-header">
+                    <div class="chat-avatar">A</div>
+                    <div><div class="chat-name">Arete</div><div class="chat-status">● Online</div></div>
+                </div>
+                <div class="chat-messages">
+                    <div class="chat-msg user">I feel okay, I want to do the heavy workout.</div>
+                    <div class="chat-msg assistant">
+                        <strong>I know you feel okay.</strong>
+                        You also felt okay on Nov 3, Nov 18, and Dec 2—and all three times you pushed through and missed the next two days.
+                        <br><br>
+                        Your track record when "feeling okay" with HRV under 45 is 1-for-4.
+                        <br><br>
+                        Want to make it 2-for-5?
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section dark">
+        <div class="section-inner">
+            <div class="personality-section">
+                <h2>20 personalities. One that fits you.</h2>
+                <p style="color: rgba(255,255,255,0.7); max-width: 600px; margin: 0 auto;">The entire system prompt reconstructs based on your preferences. Different users get fundamentally different Arete AI™ experiences.</p>
+            </div>
+            <div class="personality-grid">
+                <div class="personality-card">
+                    <h4>Tough Love + Concise</h4>
+                    <p>"Feeling okay isn't being recovered. HRV 41—that's suppressed. Modified workout or short-term satisfaction. Your call."</p>
+                </div>
+                <div class="personality-card">
+                    <h4>Supportive + Detailed</h4>
+                    <p>"I hear you—sometimes we feel better than the numbers suggest. That said, HRV is 20% below baseline. Would you consider 70% instead of 85%?"</p>
+                </div>
+                <div class="personality-card">
+                    <h4>Data-Driven + Bullets</h4>
+                    <p>"Sleep: 5.0h (32% deficit). HRV: 41 (21% suppressed). Historical: last 3 sessions with HRV &lt;45 = RPE 9+. Recommendation: 70%."</p>
+                </div>
+                <div class="personality-card">
+                    <h4>Minimal + Casual</h4>
+                    <p>"HRV's tanked at 41. Go lighter—maybe 70%. Heavy squats can wait til Thursday."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-grid">
+            <div>
+                <h2>The chat is a control surface.</h2>
+                <p>When Arete AI™ suggests an action, it's not just text. Quick actions trigger real API calls. The conversation IS the interface.</p>
+                <ul class="section-list">
+                    <li><span class="icon">✓</span> Accept or reject workout modifications</li>
+                    <li><span class="icon">✓</span> Log meals and check-ins from chat</li>
+                    <li><span class="icon">✓</span> Swap exercises with one tap</li>
+                    <li><span class="icon">✓</span> System learns from your choices</li>
+                </ul>
+            </div>
+            <div class="chat-mockup">
+                <div class="chat-messages" style="padding-top: 20px;">
+                    <div class="chat-msg assistant">
+                        <strong>Workout modified overnight.</strong>
+                        Reduced squat volume (5×5 → 4×5) and intensity (85% → 75%) due to HRV drop.
+                        <div style="display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap;">
+                            <span style="background: var(--accent); color: white; padding: 8px 14px; border-radius: 8px; font-size: 12px; font-weight: 600;">Accept Modified</span>
+                            <span style="background: rgba(255,255,255,0.1); padding: 8px 14px; border-radius: 8px; font-size: 12px;">Keep Original</span>
+                            <span style="background: rgba(255,255,255,0.1); padding: 8px 14px; border-radius: 8px; font-size: 12px;">Discuss</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2>Meet your new coach.</h2>
+        <p>Perfect memory. Always available. Adapts to you.</p>
+        <a href="/#pricing" class="btn btn-primary">Start Free Trial</a>
+    </section>
+
+    <footer>
+        <p><a href="/"><img src="/brand/brand%20preview/metron_logo_(white_on_white).png" alt="Metron AI™" height="20" style="vertical-align: middle; opacity: 0.8;"></a></p>
+        <p>&copy; 2026 Metron Health AI, Inc. <a href="/privacy">Privacy</a> <a href="/terms">Terms</a></p>
+    </footer>
+</body>
+</html>
