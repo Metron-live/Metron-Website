@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Adaptation | Metron AI™</title>
+    
+    <meta property="og:title" content="Rebalancing Engine | Metron">
+    <meta property="og:description" content="Your workout adjusts while you sleep. Training AND nutrition adapt together, constantly.">
+    <meta name="description" content="At 2am, Metron pulls your sleep data, checks your HRV, and rewrites tomorrow's workout AND nutrition. You wake up. It's already done.">
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        :root {
+            --bg: #FAFAF8;
+            --bg-alt: #F5F5F3;
+            --bg-dark: #0f0f0f;
+            --text-primary: #1a1a1a;
+            --text-secondary: #4a4a4a;
+            --text-muted: #888888;
+            --border: #E8E8E6;
+            --accent: #E8734A;
+            --green: #22c55e;
+            --yellow: #fbbf24;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+        }
+        h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.03em; line-height: 1.15; }
+
+        nav {
+            position: fixed; top: 0; left: 0; right: 0;
+            padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center;
+            background: rgba(250, 250, 248, 0.95); backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border); z-index: 100;
+        }
+        .logo { display: flex; align-items: center; text-decoration: none; }
+        .logo img { height: 26px; }
+        .nav-right { display: flex; align-items: center; gap: 2rem; }
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-link { color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+        .nav-link:hover { color: var(--text-primary); }
+        .nav-link.active { color: var(--accent); }
+        .btn {
+            display: inline-flex; align-items: center; padding: 0.7rem 1.25rem;
+            border-radius: 8px; font-weight: 600; font-size: 0.9rem; text-decoration: none;
+        }
+        .btn-primary { background: var(--text-primary); color: white; }
+        .btn-primary:hover { opacity: 0.85; }
+
+        .hero { padding: 8rem 2rem 5rem; max-width: 1200px; margin: 0 auto; }
+        .hero-layout { display: grid; grid-template-columns: 1fr 400px; gap: 4rem; align-items: center; }
+        .hero-badge {
+            display: inline-flex; padding: 0.4rem 0.85rem;
+            background: rgba(232, 115, 74, 0.1); border: 1px solid rgba(232, 115, 74, 0.2);
+            border-radius: 50px; font-size: 0.8rem; color: var(--accent); font-weight: 500; margin-bottom: 1.5rem;
+        }
+        .hero h1 { font-size: 3.25rem; font-weight: 700; margin-bottom: 1.5rem; }
+        .hero-subtitle { font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 2rem; line-height: 1.7; }
+
+        /* Timeline */
+        .timeline-card {
+            background: var(--bg-dark); border-radius: 20px; padding: 28px; color: white;
+        }
+        .timeline-title { font-size: 12px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 20px; font-weight: 600; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 16px; }
+        .timeline-item:last-child { margin-bottom: 0; }
+        .timeline-time { font-size: 13px; color: var(--accent); font-weight: 600; width: 65px; flex-shrink: 0; }
+        .timeline-content { flex: 1; }
+        .timeline-content strong { display: block; font-size: 14px; margin-bottom: 2px; }
+        .timeline-content span { font-size: 12px; color: rgba(255,255,255,0.6); }
+        .timeline-item.highlight .timeline-content strong { color: var(--accent); }
+        .timeline-dot { width: 10px; height: 10px; background: rgba(255,255,255,0.3); border-radius: 50%; margin-top: 4px; flex-shrink: 0; }
+        .timeline-item.highlight .timeline-dot { background: var(--accent); box-shadow: 0 0 12px rgba(232, 115, 74, 0.5); }
+
+        .section { padding: 6rem 2rem; max-width: 1100px; margin: 0 auto; }
+        .section.dark { background: var(--bg-dark); color: white; max-width: 100%; }
+        .section.dark .section-inner { max-width: 1100px; margin: 0 auto; }
+        .section-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .section-grid.reverse { direction: rtl; }
+        .section-grid.reverse > * { direction: ltr; }
+        .section h2 { font-size: 2.25rem; margin-bottom: 1.25rem; }
+        .section p { font-size: 1.1rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 1.25rem; }
+        .section.dark p { color: rgba(255,255,255,0.7); }
+        .section-list { list-style: none; margin-top: 1.5rem; }
+        .section-list li { display: flex; gap: 0.75rem; margin-bottom: 0.9rem; font-size: 1rem; }
+        .section-list .icon { color: var(--green); font-weight: 700; }
+        .section.dark .section-list li { color: rgba(255,255,255,0.85); }
+
+        /* Three Engines */
+        .engines-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
+        .engine-card {
+            background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px; padding: 1.5rem; text-align: center;
+        }
+        .engine-icon { font-size: 2rem; margin-bottom: 1rem; }
+        .engine-card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .engine-card p { font-size: 0.9rem; color: rgba(255,255,255,0.6); margin: 0; line-height: 1.5; }
+
+        /* Day in Life */
+        .day-timeline {
+            background: #0a0a0a; border-radius: 12px; padding: 24px;
+            font-family: 'SF Mono', Monaco, monospace; font-size: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .day-title { color: var(--accent); font-weight: 600; margin-bottom: 16px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+        .day-event { display: flex; gap: 12px; margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .day-event:last-child { border: none; margin-bottom: 0; padding-bottom: 0; }
+        .day-time { color: var(--accent); width: 65px; flex-shrink: 0; }
+        .day-what { color: white; }
+        .day-detail { color: rgba(255,255,255,0.5); font-size: 11px; margin-top: 4px; }
+
+        /* Stats */
+        .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem; }
+        .stat-card { text-align: center; }
+        .stat-number { font-size: 3rem; font-weight: 700; color: var(--accent); font-family: 'Space Grotesk', sans-serif; }
+        .stat-label { font-size: 1rem; color: var(--text-secondary); margin-top: 0.5rem; }
+
+        .cta-section { padding: 5rem 2rem; text-align: center; background: var(--bg-alt); }
+        .cta-section h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .cta-section p { font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 2rem; }
+
+        footer { padding: 2rem; text-align: center; font-size: 0.85rem; color: rgba(255,255,255,0.6); background: var(--bg-dark); }
+        footer a { color: rgba(255,255,255,0.5); text-decoration: none; margin: 0 0.5rem; }
+        footer a:hover { color: rgba(255,255,255,0.8); }
+        footer p { margin-bottom: 0.5rem; }
+
+        @media (max-width: 900px) {
+            .hero-layout, .section-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+            .section-grid.reverse { direction: ltr; }
+            .hero h1 { font-size: 2.5rem; }
+            .engines-grid, .stat-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            nav { padding: 1rem 1.5rem; }
+            .nav-links { display: none; }
+            .hero { padding: 6rem 1.5rem 3rem; }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="/" class="logo"><img src="/brand/brand%20preview/metron_logo.png" alt="Metron AI™"></a>
+        <div class="nav-right">
+            <div class="nav-links">
+                <a href="/arete" class="nav-link">Arete AI™</a>
+                <a href="/rebalance" class="nav-link active">Smart Adaptation</a>
+                <a href="/onboarding" class="nav-link">Personalized Plans</a>
+            </div>
+            <a href="/#pricing" class="btn btn-primary">Start Free Trial</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-layout">
+            <div>
+                <div class="hero-badge">Smart Adaptation</div>
+                <h1>7 timeframes.<br>Always adapting.</h1>
+                <p class="hero-subtitle">
+                    Your plan rebalances from yearly periodization down to hourly adjustments. Not just overnight—constantly. Sleep badly? It knows in minutes. Crush a workout? Tomorrow's already different.
+                </p>
+                <a href="/#pricing" class="btn btn-primary">Start Free Trial</a>
+            </div>
+            <div class="timeline-card">
+                <div class="timeline-title">Adaptation at every level</div>
+                <div class="timeline-item">
+                    <div class="timeline-time">Yearly</div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <strong>Season structure</strong>
+                        <span>Competition peaks, long-term progression</span>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-time">Monthly</div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <strong>Volume waves</strong>
+                        <span>Intensity progressions, deload timing</span>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-time">Weekly</div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <strong>Session distribution</strong>
+                        <span>Training splits, rest day placement</span>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-time">Daily</div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <strong>Today's plan</strong>
+                        <span>Workout, nutrition, recovery protocols</span>
+                    </div>
+                </div>
+                <div class="timeline-item highlight">
+                    <div class="timeline-time">Hourly</div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <strong>Real-time</strong>
+                        <span>Adjusting based on how you're performing now</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section dark">
+        <div class="section-inner">
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <h2>Three engines. One system.</h2>
+                <p style="max-width: 600px; margin: 0 auto; color: rgba(255,255,255,0.7);">This isn't a workout modifier. It's a continuous life rebalancing system that adjusts training, nutrition, and recovery—all together.</p>
+            </div>
+            <div class="engines-grid">
+                <div class="engine-card">
+                    <div class="engine-icon">📊</div>
+                    <h3>Readiness Engine</h3>
+                    <p>Scores your recovery from sleep, HRV, stress, soreness, and training load. Updates continuously.</p>
+                </div>
+                <div class="engine-card">
+                    <div class="engine-icon">⚡</div>
+                    <h3>Rebalancing Engine</h3>
+                    <p>Adjusts workout volume, intensity, and exercise selection based on readiness and flags.</p>
+                </div>
+                <div class="engine-card">
+                    <div class="engine-icon">🍎</div>
+                    <h3>Nutrition Engine</h3>
+                    <p>Shifts calories, macros, and meal timing to match training day type and recovery needs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-grid">
+            <div>
+                <h2>Not just workouts.<br>Everything.</h2>
+                <p>Most apps give you a training program and a meal plan and hope you figure out how they connect. Metron treats them as one living system.</p>
+                <ul class="section-list">
+                    <li><span class="icon">✓</span> Sleep poorly? Workout gets easier AND nutrition shifts to recovery</li>
+                    <li><span class="icon">✓</span> Crush a hard session? Tomorrow's carbs go up automatically</li>
+                    <li><span class="icon">✓</span> Miss a meal? Dinner adjusts to keep you on track</li>
+                    <li><span class="icon">✓</span> High stress week? Volume reduces, calories adjust</li>
+                </ul>
+            </div>
+            <div class="day-timeline">
+                <div class="day-title">One day in the life</div>
+                <div class="day-event">
+                    <div class="day-time">6:00 AM</div>
+                    <div class="day-what">
+                        Log: 5.5h sleep, HRV 44, energy 2/5
+                        <div class="day-detail">→ Readiness: 54. Heavy → Moderate. High carb → Moderate.</div>
+                    </div>
+                </div>
+                <div class="day-event">
+                    <div class="day-time">12:30 PM</div>
+                    <div class="day-what">
+                        Lunch logged: 400 cal, 25g protein
+                        <div class="day-detail">→ On pace for 110g protein. Dinner shifts to high-protein.</div>
+                    </div>
+                </div>
+                <div class="day-event">
+                    <div class="day-time">5:00 PM</div>
+                    <div class="day-what">
+                        Workout complete: RPE 7, felt good
+                        <div class="day-detail">→ Tomorrow bumped from light to moderate.</div>
+                    </div>
+                </div>
+                <div class="day-event">
+                    <div class="day-time">2:00 AM</div>
+                    <div class="day-what">
+                        Overnight review: 3 of 5 days below 65 readiness
+                        <div class="day-detail">→ Heavy session moved. Refeed day scheduled.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section dark">
+        <div class="section-inner">
+            <div class="section-grid reverse">
+                <div>
+                    <h2>Catches overtraining<br>2 weeks before you feel it.</h2>
+                    <p>Pro sports teams use the acute:chronic workload ratio. When it exceeds 1.5, injury risk skyrockets—but you won't feel it for 1-2 weeks.</p>
+                    <p>We track this automatically. When your ratio hits danger zone, you feel fine. The system inserts a rest day anyway. Two weeks later, you're still healthy.</p>
+                    <ul class="section-list">
+                        <li><span class="icon">✓</span> Same monitoring NFL teams pay $50K+/year for</li>
+                        <li><span class="icon">✓</span> Automatic deload insertion when fatigue accumulates</li>
+                        <li><span class="icon">✓</span> Sees the cliff before you drive off it</li>
+                    </ul>
+                </div>
+                <div style="background: #0a0a0a; border-radius: 12px; padding: 24px; border: 1px solid rgba(255,255,255,0.1);">
+                    <div style="font-size: 11px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px; font-weight: 600;">Without Metron</div>
+                    <div style="font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 8px;">Week 1-2: Crushing it. PRs. Feeling great.</div>
+                    <div style="font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 8px;">Week 3: Ratio hits 1.6. You feel fine.</div>
+                    <div style="font-size: 13px; color: var(--yellow); margin-bottom: 16px;">Week 4: Get sick. Tweak back. Forced time off.</div>
+                    
+                    <div style="font-size: 11px; color: var(--green); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px; font-weight: 600;">With Metron</div>
+                    <div style="font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 8px;">Week 1-2: Crushing it. PRs. Feeling great.</div>
+                    <div style="font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 8px;">Week 3: Ratio hits 1.6. Rest day inserted.</div>
+                    <div style="font-size: 13px; color: var(--green);">Week 4: You feel fine. Because we intervened.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-grid">
+            <div>
+                <h2>Discovers patterns in YOUR body.</h2>
+                <p>After 4-6 weeks of data, the correlation analyzer starts finding things like:</p>
+                <ul class="section-list">
+                    <li><span class="icon">✓</span> "Your bench is 18% stronger after 7+ hours sleep"</li>
+                    <li><span class="icon">✓</span> "Your HRV drops 12ms after high-carb dinners"</li>
+                    <li><span class="icon">✓</span> "You perform worse on Wednesdays (Tuesday stress?)"</li>
+                    <li><span class="icon">✓</span> "Your squat RPE correlates with deep sleep %, not total hours"</li>
+                </ul>
+                <p style="margin-top: 1.5rem;">These aren't generic insights. They're YOUR body's patterns, discovered through statistical analysis—then acted on automatically.</p>
+            </div>
+            <div style="background: var(--bg-dark); color: white; border-radius: 12px; padding: 24px;">
+                <div style="font-size: 11px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px; font-weight: 600;">Personalized Baselines</div>
+                <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    <div style="font-size: 13px; font-weight: 600; margin-bottom: 4px;">Sarah's baseline: 6.3h sleep</div>
+                    <div style="font-size: 12px; color: rgba(255,255,255,0.6);">Performs well on 6 hours. System doesn't flag.</div>
+                </div>
+                <div>
+                    <div style="font-size: 13px; font-weight: 600; margin-bottom: 4px;">Mike's baseline: 8.0h sleep</div>
+                    <div style="font-size: 12px; color: rgba(255,255,255,0.6);">Crashes on anything under 7.5. System adjusts.</div>
+                </div>
+                <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 12px; color: rgba(255,255,255,0.5);">
+                    Same "6 hours of sleep" input. Completely different outputs.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2>Your plan never stops thinking.</h2>
+        <p>Training. Nutrition. Recovery. All connected. All adapting. Constantly.</p>
+        <a href="/#pricing" class="btn btn-primary">Start Free Trial</a>
+    </section>
+
+    <footer>
+        <p><a href="/"><img src="/brand/brand%20preview/metron_logo_(white_on_white).png" alt="Metron AI™" height="20" style="vertical-align: middle; opacity: 0.8;"></a></p>
+        <p>&copy; 2026 Metron Health AI, Inc. <a href="/privacy">Privacy</a> <a href="/terms">Terms</a></p>
+    </footer>
+</body>
+</html>
