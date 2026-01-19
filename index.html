@@ -202,15 +202,177 @@
 
         /* Hero */
         .hero {
-            padding: 8rem 2rem 5rem;
+            padding: 6rem 2rem 5rem;
             max-width: 1200px;
             margin: 0 auto;
         }
 
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
+        .hero-layout {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .hero-mockup {
+            display: flex;
+            justify-content: flex-start;
+            padding-left: 1rem;
+        }
+
+        .hero-phone {
+            width: 260px;
+            background: #000;
+            border-radius: 36px;
+            padding: 10px;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+        }
+
+        .hero-phone-notch {
+            width: 90px;
+            height: 26px;
+            background: #000;
+            border-radius: 0 0 14px 14px;
+            margin: 0 auto 10px;
+        }
+
+        .hero-phone-screen {
+            background: #0a0a0a;
+            border-radius: 26px;
+            padding: 14px;
+            min-height: 480px;
+        }
+
+        .hp-header {
+            margin-bottom: 14px;
+        }
+
+        .hp-greeting {
+            font-size: 16px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .hp-date {
+            font-size: 12px;
+            color: #9CA3AF;
+        }
+
+        .hp-recovery {
+            background: linear-gradient(135deg, #1a1a1a, #111);
+            border-radius: 14px;
+            padding: 14px;
+            margin-bottom: 14px;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .hp-recovery-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .hp-recovery-label {
+            font-size: 12px;
+            color: #9CA3AF;
+        }
+
+        .hp-recovery-score {
+            font-size: 24px;
+            font-weight: 700;
+            color: #10B981;
+        }
+
+        .hp-metrics {
+            display: flex;
+            gap: 10px;
+            font-size: 11px;
+            color: #9CA3AF;
+        }
+
+        .hp-workout {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(234, 88, 12, 0.1));
+            border-radius: 14px;
+            padding: 14px;
+            border: 1px solid rgba(245, 158, 11, 0.2);
+        }
+
+        .hp-workout-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .hp-workout-label {
+            font-size: 10px;
+            color: #F59E0B;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .hp-adjusted {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            background: rgba(251, 191, 36, 0.2);
+            color: #FBBF24;
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        .hp-workout-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 4px;
+        }
+
+        .hp-workout-info {
+            font-size: 11px;
+            color: #9CA3AF;
+            margin-bottom: 12px;
+        }
+
+        .hp-exercises {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .hp-ex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0,0,0,0.3);
+            padding: 10px 12px;
+            border-radius: 10px;
+            font-size: 12px;
+            color: white;
+        }
+
+        .hp-ex span {
+            color: #9CA3AF;
+            font-size: 11px;
+        }
+
+        .hp-start {
+            background: #F59E0B;
+            color: white;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 12px;
+            border-radius: 10px;
             text-align: center;
+        }
+
+        .hero-content {
+            text-align: left;
         }
 
         .hero-badge {
@@ -228,35 +390,31 @@
         }
 
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: 3rem;
             font-weight: 700;
             margin-bottom: 1.5rem;
             color: var(--text-primary);
         }
 
         .hero-subtitle {
-            font-size: 1.25rem;
+            font-size: 1.15rem;
             color: var(--text-secondary);
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
             line-height: 1.7;
-            max-width: 650px;
-            margin-left: auto;
-            margin-right: auto;
+            max-width: 600px;
         }
 
         .hero-cta {
             display: flex;
             gap: 1rem;
-            justify-content: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .hero-meta {
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 2rem;
-            font-size: 0.9rem;
+            gap: 1.5rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
         }
 
@@ -273,10 +431,9 @@
 
         .hero-pillars {
             display: flex;
-            justify-content: center;
-            gap: 2.5rem;
-            margin-bottom: 2.5rem;
-            flex-wrap: wrap;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
         }
 
         .hero-pillar {
@@ -297,12 +454,14 @@
             font-size: 0.95rem;
             font-weight: 600;
             color: var(--text-primary);
-            margin-bottom: 0.15rem;
+            margin-bottom: 0.25rem;
         }
 
-        .hero-pillar span:last-child {
+        .hero-pillar div span {
+            display: block;
             font-size: 0.85rem;
             color: var(--text-muted);
+            line-height: 1.4;
         }
 
         /* Problem Section */
@@ -337,7 +496,9 @@
         .problem-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 2rem;
+            gap: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         .problem-card {
@@ -398,6 +559,170 @@
 
         .problem-punchline strong {
             color: var(--accent);
+        }
+
+        /* Problem Layout with Mockup */
+        .problem-layout {
+            display: grid;
+            grid-template-columns: 1fr 280px;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .problem-mockup {
+            display: flex;
+            justify-content: center;
+        }
+
+        .phone-mockup-inline {
+            width: 240px;
+            background: #000;
+            border-radius: 32px;
+            padding: 8px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+        }
+
+        .phone-notch-inline {
+            width: 80px;
+            height: 24px;
+            background: #000;
+            border-radius: 0 0 12px 12px;
+            margin: 0 auto 8px;
+        }
+
+        .phone-content-inline {
+            background: #0a0a0a;
+            border-radius: 24px;
+            padding: 12px;
+            min-height: 420px;
+        }
+
+        .mock-home-header-inline {
+            margin-bottom: 12px;
+        }
+
+        .mock-greeting-inline {
+            font-size: 14px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .mock-date-inline {
+            font-size: 11px;
+            color: #9CA3AF;
+        }
+
+        .mock-recovery-inline {
+            background: linear-gradient(135deg, #1a1a1a, #111);
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 12px;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .mock-recovery-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .mock-recovery-row span:first-child {
+            font-size: 11px;
+            color: #9CA3AF;
+        }
+
+        .recovery-score-inline {
+            font-size: 20px;
+            font-weight: 700;
+            color: #10B981;
+        }
+
+        .mock-metrics-inline {
+            display: flex;
+            gap: 8px;
+            font-size: 10px;
+            color: #9CA3AF;
+        }
+
+        .mock-workout-inline {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(234, 88, 12, 0.1));
+            border-radius: 12px;
+            padding: 12px;
+            border: 1px solid rgba(245, 158, 11, 0.2);
+        }
+
+        .mock-workout-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .workout-label-inline {
+            font-size: 9px;
+            color: #F59E0B;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .adjusted-badge-inline {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            background: rgba(251, 191, 36, 0.2);
+            color: #FBBF24;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 9px;
+            font-weight: 600;
+        }
+
+        .mock-workout-name {
+            font-size: 14px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 2px;
+        }
+
+        .mock-workout-info {
+            font-size: 10px;
+            color: #9CA3AF;
+            margin-bottom: 10px;
+        }
+
+        .mock-exercise-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 10px;
+        }
+
+        .mock-ex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0,0,0,0.3);
+            padding: 8px 10px;
+            border-radius: 8px;
+            font-size: 11px;
+            color: white;
+        }
+
+        .mock-ex span {
+            color: #9CA3AF;
+            font-size: 10px;
+        }
+
+        .mock-start-inline {
+            background: #F59E0B;
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
         }
 
         /* Three Pillars */
@@ -499,6 +824,214 @@
 
         .pillar-link:hover {
             text-decoration: underline;
+        }
+
+        /* Mini Phone Mockups in Pillar Cards */
+        .pillar-mockup {
+            margin: 1.25rem 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .mini-phone {
+            width: 180px;
+            background: #000;
+            border-radius: 20px;
+            padding: 6px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .mini-phone-content {
+            background: #0a0a0a;
+            border-radius: 14px;
+            padding: 10px;
+            min-height: 160px;
+        }
+
+        .mini-phone-content.chat {
+            min-height: 140px;
+        }
+
+        /* Plan Generation Mini */
+        .mini-gen-title {
+            font-size: 10px;
+            font-weight: 700;
+            color: white;
+            text-align: center;
+        }
+
+        .mini-gen-time {
+            font-size: 8px;
+            color: #9CA3AF;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .mini-phase-circle {
+            width: 40px;
+            height: 40px;
+            background: rgba(245, 158, 11, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            margin: 0 auto 6px;
+            border: 2px solid #F59E0B;
+        }
+
+        .mini-phase-name {
+            font-size: 9px;
+            font-weight: 600;
+            color: white;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .mini-phases {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .mini-phase {
+            font-size: 8px;
+            padding: 3px 6px;
+            border-radius: 4px;
+        }
+
+        .mini-phase.done {
+            color: #10B981;
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .mini-phase.active {
+            color: #F59E0B;
+            background: rgba(245, 158, 11, 0.15);
+            font-weight: 600;
+        }
+
+        .mini-phase.pending {
+            color: #6B7280;
+        }
+
+        /* Workout Mini */
+        .mini-workout-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+
+        .mini-workout-header span:first-child {
+            font-size: 7px;
+            color: #F59E0B;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .mini-adjusted {
+            display: inline-flex;
+            align-items: center;
+            gap: 2px;
+            background: rgba(251, 191, 36, 0.2);
+            color: #FBBF24;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-size: 7px;
+            font-weight: 600;
+        }
+
+        .mini-workout-name {
+            font-size: 11px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .mini-workout-meta {
+            font-size: 8px;
+            color: #9CA3AF;
+            margin-bottom: 8px;
+        }
+
+        .mini-exercises {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .mini-ex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(245, 158, 11, 0.1);
+            padding: 5px 8px;
+            border-radius: 6px;
+            font-size: 9px;
+            color: white;
+        }
+
+        .mini-ex span {
+            color: #9CA3AF;
+            font-size: 8px;
+        }
+
+        /* Chat Mini */
+        .mini-chat-header {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 8px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .mini-avatar {
+            width: 18px;
+            height: 18px;
+            background: rgba(245, 158, 11, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 9px;
+            font-weight: 700;
+            color: #F59E0B;
+        }
+
+        .mini-chat-header span:last-child {
+            font-size: 10px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .mini-chat-msg {
+            padding: 6px 8px;
+            border-radius: 8px;
+            font-size: 8px;
+            line-height: 1.3;
+            margin-bottom: 6px;
+        }
+
+        .mini-chat-msg.user {
+            background: #F59E0B;
+            color: white;
+            margin-left: 20px;
+            border-bottom-right-radius: 2px;
+        }
+
+        .mini-chat-msg.assistant {
+            background: #1a1a1a;
+            color: white;
+            margin-right: 10px;
+            border-bottom-left-radius: 2px;
+        }
+
+        .mini-chat-msg .mini-adjusted {
+            display: block;
+            margin-top: 4px;
+            width: fit-content;
         }
 
         /* Aha Moment / Demo */
@@ -791,6 +1324,506 @@
 
         .audience-statement strong {
             color: var(--accent);
+        }
+
+        /* App Preview / Mockups */
+        .app-preview {
+            padding: 5rem 2rem;
+            background: var(--bg-dark);
+        }
+
+        .app-preview .section-header h2,
+        .app-preview .section-header p {
+            color: white;
+        }
+
+        .app-preview .section-header p {
+            opacity: 0.7;
+        }
+
+        .app-preview-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .mockups-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .mockup-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .mockup-label {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .phone-mockup {
+            width: 260px;
+            height: 520px;
+            background: #000;
+            border-radius: 36px;
+            padding: 8px;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.4);
+            position: relative;
+        }
+
+        .phone-notch {
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 24px;
+            background: #000;
+            border-radius: 12px;
+            z-index: 10;
+        }
+
+        .phone-content {
+            width: 100%;
+            height: 100%;
+            background: #000;
+            border-radius: 30px;
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 11px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .phone-content.dark {
+            background: #000;
+        }
+
+        /* Mock Header */
+        .mock-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 40px 12px 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .mock-header-title {
+            text-align: center;
+            color: white;
+        }
+
+        .mock-header-title strong {
+            display: block;
+            font-size: 14px;
+        }
+
+        .mock-header-title small {
+            color: #9CA3AF;
+            font-size: 10px;
+        }
+
+        .mock-done {
+            color: #F59E0B;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        /* Context Bar */
+        .mock-context-bar {
+            display: flex;
+            gap: 6px;
+            padding: 8px;
+            background: #111;
+            overflow-x: auto;
+        }
+
+        .ctx-pill {
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-size: 10px;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .ctx-pill.green {
+            background: rgba(16, 185, 129, 0.15);
+            color: #10B981;
+        }
+
+        .ctx-pill.yellow {
+            background: rgba(251, 191, 36, 0.15);
+            color: #FBBF24;
+        }
+
+        .ctx-pill.orange {
+            background: rgba(234, 88, 12, 0.15);
+            color: #EA580C;
+        }
+
+        /* Mock Chat */
+        .mock-chat {
+            flex: 1;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            overflow: hidden;
+        }
+
+        .chat-msg {
+            display: flex;
+            gap: 6px;
+        }
+
+        .chat-msg.user {
+            justify-content: flex-end;
+        }
+
+        .chat-avatar {
+            width: 24px;
+            height: 24px;
+            background: rgba(245, 158, 11, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #F59E0B;
+            font-weight: 700;
+            font-size: 10px;
+            flex-shrink: 0;
+        }
+
+        .chat-bubble-mock {
+            padding: 8px 10px;
+            border-radius: 12px;
+            max-width: 85%;
+            line-height: 1.4;
+        }
+
+        .chat-bubble-mock.user {
+            background: #F59E0B;
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        .chat-bubble-mock.assistant {
+            background: #1A1A1A;
+            color: white;
+            border-bottom-left-radius: 4px;
+        }
+
+        .chat-bubble-mock strong {
+            font-weight: 600;
+        }
+
+        .adjusted-badge {
+            display: inline-block;
+            background: rgba(251, 191, 36, 0.2);
+            color: #FBBF24;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-size: 9px;
+            font-weight: 600;
+            margin-top: 6px;
+        }
+
+        .adjusted-badge.small {
+            font-size: 8px;
+            padding: 2px 5px;
+        }
+
+        /* Mock Input */
+        .mock-input {
+            display: flex;
+            gap: 8px;
+            padding: 8px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .mock-input-field {
+            flex: 1;
+            background: #1A1A1A;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 8px 12px;
+            color: #6B7280;
+            font-size: 11px;
+        }
+
+        .mock-send {
+            width: 28px;
+            height: 28px;
+            background: #F59E0B;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+        }
+
+        /* Mock Home */
+        .mock-home-header {
+            padding: 40px 12px 12px;
+        }
+
+        .mock-greeting {
+            font-size: 16px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .mock-date {
+            font-size: 11px;
+            color: #9CA3AF;
+            margin-top: 2px;
+        }
+
+        .mock-week {
+            display: flex;
+            gap: 4px;
+            padding: 0 8px 12px;
+        }
+
+        .mock-day {
+            flex: 1;
+            text-align: center;
+            padding: 6px 0;
+            background: #1A1A1A;
+            border-radius: 8px;
+            color: #9CA3AF;
+            font-size: 9px;
+        }
+
+        .mock-day span {
+            display: block;
+            color: white;
+            font-weight: 600;
+            font-size: 11px;
+            margin-top: 2px;
+        }
+
+        .mock-day.active {
+            background: #F59E0B;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .mock-day.active span {
+            color: white;
+        }
+
+        .mock-recovery {
+            margin: 0 8px 12px;
+            background: linear-gradient(135deg, #1A1A1A, #111);
+            border-radius: 12px;
+            padding: 12px;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .mock-recovery-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            color: white;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .recovery-num {
+            font-size: 20px;
+            font-weight: 700;
+            color: #10B981;
+        }
+
+        .recovery-num small {
+            font-size: 11px;
+            color: #9CA3AF;
+            font-weight: 400;
+        }
+
+        .mock-metrics {
+            display: flex;
+            gap: 8px;
+        }
+
+        .mock-metric {
+            flex: 1;
+            background: rgba(255,255,255,0.03);
+            border-radius: 8px;
+            padding: 8px;
+            text-align: center;
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .mock-metric small {
+            display: block;
+            color: #6B7280;
+            font-size: 9px;
+            font-weight: 400;
+            margin-bottom: 2px;
+        }
+
+        .mock-workout-card {
+            margin: 0 8px;
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(234, 88, 12, 0.1));
+            border-radius: 12px;
+            padding: 12px;
+            border: 1px solid rgba(245, 158, 11, 0.2);
+        }
+
+        .mock-workout-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .mock-workout-label {
+            color: #F59E0B;
+            font-size: 9px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+
+        .mock-workout-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .mock-workout-meta {
+            font-size: 10px;
+            color: #9CA3AF;
+            margin-bottom: 10px;
+        }
+
+        .mock-exercises {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 10px;
+        }
+
+        .mock-exercise {
+            display: flex;
+            justify-content: space-between;
+            background: rgba(0,0,0,0.3);
+            padding: 8px;
+            border-radius: 8px;
+            color: white;
+            font-size: 10px;
+        }
+
+        .mock-exercise span {
+            color: #9CA3AF;
+        }
+
+        .mock-start-btn {
+            background: #F59E0B;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 12px;
+        }
+
+        /* Mock Plan Generation */
+        .mock-gen-header {
+            padding: 40px 12px 16px;
+            text-align: center;
+        }
+
+        .mock-gen-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .mock-gen-time {
+            font-size: 11px;
+            color: #9CA3AF;
+            margin-top: 2px;
+        }
+
+        .mock-gen-hero {
+            text-align: center;
+            padding: 16px;
+        }
+
+        .mock-phase-circle {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: rgba(245, 158, 11, 0.1);
+            border: 3px solid #F59E0B;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            font-size: 28px;
+        }
+
+        .mock-phase-label {
+            font-size: 10px;
+            color: #9CA3AF;
+        }
+
+        .mock-phase-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: white;
+            margin: 2px 0;
+        }
+
+        .mock-phase-desc {
+            font-size: 10px;
+            color: #9CA3AF;
+        }
+
+        .mock-phase-list {
+            padding: 0 12px;
+            flex: 1;
+        }
+
+        .mock-phase-row {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 11px;
+        }
+
+        .mock-phase-row.done {
+            color: #10B981;
+        }
+
+        .mock-phase-row.active {
+            color: #F59E0B;
+            font-weight: 600;
+        }
+
+        .mock-phase-row.pending {
+            color: #4B5563;
+        }
+
+        @media (max-width: 900px) {
+            .mockups-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .phone-mockup {
+                width: 280px;
+                height: 560px;
+            }
         }
 
         /* Journey / How It Works */
@@ -1288,6 +2321,20 @@
 
         /* Responsive */
         @media (max-width: 900px) {
+            .hero-layout {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .hero-mockup {
+                order: 2;
+            }
+
+            .hero-content {
+                order: 1;
+                text-align: center;
+            }
+
             .hero h1 {
                 font-size: 2.5rem;
             }
@@ -1304,6 +2351,7 @@
             .hero-meta {
                 flex-wrap: wrap;
                 gap: 1rem;
+                justify-content: center;
             }
 
             .hero-pillars {
@@ -1314,6 +2362,14 @@
 
             .hero-pillar {
                 max-width: 300px;
+            }
+
+            .problem-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .problem-mockup {
+                display: none;
             }
 
             .problem-grid {
@@ -1410,6 +2466,82 @@
             .integrations-grid img {
                 height: 22px;
             }
+
+            /* Hero responsive */
+            .hero-layout {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .hero-mockup {
+                order: 2;
+            }
+
+            .hero-content {
+                order: 1;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .hero-pillars {
+                align-items: center;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hero-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .hero-phone {
+                width: 220px;
+            }
+
+            .hp-workout-name {
+                font-size: 14px;
+            }
+
+            .hp-greeting {
+                font-size: 14px;
+            }
+
+            /* Problem section responsive */
+            .problem-layout {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .problem-mockup {
+                order: -1;
+            }
+
+            .phone-mockup-inline {
+                width: 200px;
+            }
+
+            .phone-content-inline {
+                min-height: 360px;
+            }
+
+            /* Pillar mockups responsive */
+            .mini-phone {
+                width: 160px;
+            }
+
+            .mini-phone-content {
+                min-height: 140px;
+            }
         }
     </style>
 </head>
@@ -1442,43 +2574,81 @@
 
     <!-- HERO -->
     <section class="hero" id="hero">
-        <div class="hero-content">
-            <div class="hero-badge">Beta pricing ends soon</div>
-            <h1>The pros have support teams.<br>You have Metron.</h1>
-            <p class="hero-subtitle">
-                Elite athletes have coaches, nutritionists, and sports scientists analyzing their data 24/7. Metron brings that same system to everyone: personalized training plans, integrated insights across all your data, and an AI coach that adapts daily to how you're actually recovering.
-            </p>
-            <div class="hero-pillars">
-                <div class="hero-pillar">
-                    <span class="hero-pillar-icon">◆</span>
-                    <div>
-                        <strong>Personalized Plans</strong>
-                        <span>Built from scratch for your body, goals, and life</span>
-                    </div>
-                </div>
-                <div class="hero-pillar">
-                    <span class="hero-pillar-icon">◆</span>
-                    <div>
-                        <strong>Integrated Insights</strong>
-                        <span>Connects your sleep, training, and recovery data</span>
-                    </div>
-                </div>
-                <div class="hero-pillar">
-                    <span class="hero-pillar-icon">◆</span>
-                    <div>
-                        <strong>Adaptive Coaching</strong>
-                        <span>Adjusts daily based on how you're actually recovering</span>
+        <div class="hero-layout">
+            <div class="hero-mockup">
+                <div class="hero-phone">
+                    <div class="hero-phone-notch"></div>
+                    <div class="hero-phone-screen">
+                        <div class="hp-header">
+                            <div class="hp-greeting">Good morning, Alex</div>
+                            <div class="hp-date">Saturday, January 18</div>
+                        </div>
+                        <div class="hp-recovery">
+                            <div class="hp-recovery-row">
+                                <span class="hp-recovery-label">Recovery Score</span>
+                                <span class="hp-recovery-score">72</span>
+                            </div>
+                            <div class="hp-metrics">
+                                <span>🛏 7.2h</span>
+                                <span>❤️ 52 HRV</span>
+                                <span>💤 58 RHR</span>
+                            </div>
+                        </div>
+                        <div class="hp-workout">
+                            <div class="hp-workout-top">
+                                <span class="hp-workout-label">Today's Workout</span>
+                                <span class="hp-adjusted">⚡ Adjusted</span>
+                            </div>
+                            <div class="hp-workout-name">Upper Body Push</div>
+                            <div class="hp-workout-info">6 exercises · ~45 min · Volume -15%</div>
+                            <div class="hp-exercises">
+                                <div class="hp-ex">🏋️ Bench Press <span>4×6</span></div>
+                                <div class="hp-ex">🏋️ Incline DB Press <span>3×10</span></div>
+                                <div class="hp-ex">🏋️ Shoulder Press <span>3×8</span></div>
+                            </div>
+                            <div class="hp-start">Start Workout</div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="hero-cta">
-                <a href="#pricing" class="btn btn-primary">Start Free Trial</a>
-                <a href="#how-it-works" class="btn btn-secondary">See How It Works</a>
-            </div>
-            <div class="hero-meta">
-                <span><span class="check">&#10003;</span> 14-day free trial</span>
-                <span><span class="check">&#10003;</span> No credit card required</span>
-                <span><span class="check">&#10003;</span> iOS app</span>
+            <div class="hero-content">
+                <div class="hero-badge">Beta pricing ends soon</div>
+                <h1>The pros have support teams.<br>You have Metron.</h1>
+                <p class="hero-subtitle">
+                    Elite athletes have coaches, nutritionists, and sports scientists analyzing their data 24/7. Metron brings that same system to everyone: personalized training plans, integrated insights across all your data, and an AI coach that adapts daily to how you're actually recovering.
+                </p>
+                <div class="hero-pillars">
+                    <div class="hero-pillar">
+                        <span class="hero-pillar-icon">◆</span>
+                        <div>
+                            <strong>Personalized Plans</strong>
+                            <span>Built from scratch for your body, goals, and life</span>
+                        </div>
+                    </div>
+                    <div class="hero-pillar">
+                        <span class="hero-pillar-icon">◆</span>
+                        <div>
+                            <strong>Integrated Insights</strong>
+                            <span>Connects your sleep, training, and recovery data</span>
+                        </div>
+                    </div>
+                    <div class="hero-pillar">
+                        <span class="hero-pillar-icon">◆</span>
+                        <div>
+                            <strong>Adaptive Coaching</strong>
+                            <span>Adjusts daily based on how you're actually recovering</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-cta">
+                    <a href="#pricing" class="btn btn-primary">Start Free Trial</a>
+                    <a href="#how-it-works" class="btn btn-secondary">See How It Works</a>
+                </div>
+                <div class="hero-meta">
+                    <span><span class="check">&#10003;</span> 14-day free trial</span>
+                    <span><span class="check">&#10003;</span> No credit card required</span>
+                    <span><span class="check">&#10003;</span> iOS app</span>
+                </div>
             </div>
         </div>
     </section>
@@ -1517,28 +2687,28 @@
                         <div class="icon">&#10005;</div>
                         Push through anyway
                     </div>
-                    <p>Form breaks down on set 4. Something tweaks. Miss the next three sessions recovering from one bad decision.</p>
+                    <p>Form breaks down on set 4. Something tweaks. Miss the next three sessions.</p>
                 </div>
                 <div class="problem-card bad">
                     <div class="problem-card-header">
                         <div class="icon">&#10005;</div>
                         Skip it entirely
                     </div>
-                    <p>Feel guilty all day. Lose momentum. Promise to "make it up" on Saturday. You won't.</p>
+                    <p>Feel guilty all day. Lose momentum. Never "make it up" on Saturday.</p>
                 </div>
                 <div class="problem-card bad">
                     <div class="problem-card-header">
                         <div class="icon">&#10005;</div>
-                        Spend 20 minutes googling
+                        Spend 20 min googling
                     </div>
-                    <p>"Is 5 hours of sleep enough to train?" Get 14 different answers. Still don't know what to do.</p>
+                    <p>Get 14 different answers. Still don't know what to do.</p>
                 </div>
                 <div class="problem-card good">
                     <div class="problem-card-header">
                         <div class="icon">&#10003;</div>
                         Open Metron
                     </div>
-                    <p>Your workout was already adjusted at 2am. Heavy squats moved to Thursday. Today: moderate volume, protected recovery. Done.</p>
+                    <p>Workout already adjusted at 2am. Heavy squats moved to Thursday. Done.</p>
                 </div>
             </div>
             <p class="problem-punchline">
@@ -1559,12 +2729,27 @@
                     <div class="pillar-number">01 / Build</div>
                     <h3>Training Plans</h3>
                     <p>90 minutes of AI research creates your complete 12-week system from scratch. Not a template. Generated for your body, injuries, schedule, and goals.</p>
+                    <div class="pillar-mockup">
+                        <div class="mini-phone">
+                            <div class="mini-phone-content">
+                                <div class="mini-gen-title">Building Your Plan</div>
+                                <div class="mini-gen-time">~2 min remaining</div>
+                                <div class="mini-phase-circle">🍴</div>
+                                <div class="mini-phase-name">Nutrition Plan</div>
+                                <div class="mini-phases">
+                                    <div class="mini-phase done">✓ Context</div>
+                                    <div class="mini-phase done">✓ Framework</div>
+                                    <div class="mini-phase done">✓ Exercises</div>
+                                    <div class="mini-phase active">● Nutrition</div>
+                                    <div class="mini-phase pending">○ Recovery</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <ul class="pillar-features">
                         <li><span class="check">&#10003;</span> 72 workouts with every set, rep, weight</li>
                         <li><span class="check">&#10003;</span> Nutrition targets and meal templates</li>
                         <li><span class="check">&#10003;</span> Supplement stack (tiered by priority)</li>
-                        <li><span class="check">&#10003;</span> Recovery protocols</li>
-                        <li><span class="check">&#10003;</span> "Why Your Plan" rationale document</li>
                     </ul>
                     <a href="/training" class="pillar-link">Learn more →</a>
                 </div>
@@ -1572,11 +2757,26 @@
                     <div class="pillar-number">02 / Adapt</div>
                     <h3>Rebalancing Engine</h3>
                     <p>Every night at 2am, the engine checks your sleep, HRV, soreness, and training load. If something's off, your workout is modified before you wake up.</p>
+                    <div class="pillar-mockup">
+                        <div class="mini-phone">
+                            <div class="mini-phone-content">
+                                <div class="mini-workout-header">
+                                    <span>TODAY'S WORKOUT</span>
+                                    <span class="mini-adjusted">⚡ Adjusted</span>
+                                </div>
+                                <div class="mini-workout-name">Upper Body Push</div>
+                                <div class="mini-workout-meta">Volume reduced 15%</div>
+                                <div class="mini-exercises">
+                                    <div class="mini-ex">🏋️ Bench Press <span>4×6</span></div>
+                                    <div class="mini-ex">🏋️ Incline DB <span>3×10</span></div>
+                                    <div class="mini-ex">🏋️ Shoulder Press <span>3×8</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <ul class="pillar-features">
                         <li><span class="check">&#10003;</span> Auto-adjusts volume and intensity</li>
                         <li><span class="check">&#10003;</span> Swaps exercises for soreness</li>
-                        <li><span class="check">&#10003;</span> Inserts rest days when needed</li>
-                        <li><span class="check">&#10003;</span> Detects overtraining patterns</li>
                         <li><span class="check">&#10003;</span> Learns your recovery capacity</li>
                     </ul>
                     <a href="/rebalance" class="pillar-link">Learn more →</a>
@@ -1585,12 +2785,25 @@
                     <div class="pillar-number">03 / Coach</div>
                     <h3>Arete AI</h3>
                     <p>An AI coach that knows your plan, your data, and your history. Ask anything. Get real answers with real reasoning. Available 24/7.</p>
+                    <div class="pillar-mockup">
+                        <div class="mini-phone">
+                            <div class="mini-phone-content chat">
+                                <div class="mini-chat-header">
+                                    <span class="mini-avatar">A</span>
+                                    <span>Arete</span>
+                                </div>
+                                <div class="mini-chat-msg user">Should I train today?</div>
+                                <div class="mini-chat-msg assistant">
+                                    <strong>I'd go lighter.</strong> Your HRV is 27% below baseline.
+                                    <span class="mini-adjusted">⚡ Adjusted</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <ul class="pillar-features">
                         <li><span class="check">&#10003;</span> Explains every adjustment</li>
                         <li><span class="check">&#10003;</span> Answers "should I train today?"</li>
-                        <li><span class="check">&#10003;</span> Helps with nutrition decisions</li>
                         <li><span class="check">&#10003;</span> Remembers your injury history</li>
-                        <li><span class="check">&#10003;</span> Builds trust over 12 weeks</li>
                     </ul>
                     <a href="/arete" class="pillar-link">Learn more →</a>
                 </div>
