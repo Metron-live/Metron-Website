@@ -112,12 +112,12 @@
             font-size: 0.95rem;
         }
         footer {
-            border-top: 1px solid var(--border);
-            padding: 3rem 2rem;
-            margin-top: 4rem;
+            background: #0f0f0f;
+            border-top: 1px solid rgba(255,255,255,0.07);
+            padding: 2.5rem 2rem;
         }
         .footer-content {
-            max-width: 800px;
+            max-width: 1100px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
@@ -127,19 +127,21 @@
         }
         .footer-logo {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            font-size: 1.1rem;
+            font-size: 1.4rem;
             font-weight: 800;
             letter-spacing: 0.2em;
-            color: var(--text-primary);
-        }
-        .footer-links { display: flex; gap: 2rem; }
-        .footer-links a {
-            color: var(--text-secondary);
+            color: rgba(255,255,255,0.75);
             text-decoration: none;
-            font-size: 0.9rem;
         }
-        .footer-links a:hover { color: var(--text-primary); }
-        .footer-copy { color: var(--text-muted); font-size: 0.85rem; }
+        .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+        .footer-links a {
+            color: rgba(255,255,255,0.45);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover { color: rgba(255,255,255,0.8); }
+        .footer-copy { font-size: 0.8rem; color: rgba(255,255,255,0.3); }
         @media (max-width: 768px) {
             nav { padding: 1rem 1.5rem; }
             .content { padding: 6rem 1.5rem 3rem; }
@@ -242,14 +244,14 @@
 
     <footer>
         <div class="footer-content">
-            <div class="footer-logo">METRON</div>
+            <a href="/" class="footer-logo">METRON</a>
             <div class="footer-links">
-                <a href="privacy.html">Privacy Policy</a>
-                <a href="terms.html">Terms of Service</a>
-                <a href="health-data-privacy.html">Health Data Privacy</a>
-                <a href="mailto:hello@metron.live">Contact</a>
+                <a href="/privacy.html">Privacy</a>
+                <a href="/terms.html">Terms</a>
+                <a href="/health-data-privacy.html">Health Data</a>
+                <a href="https://instagram.com/metron.ai" target="_blank" rel="noopener">Instagram</a>
             </div>
-            <div class="footer-copy">© 2026 Metron. All rights reserved.</div>
+            <span class="footer-copy">&copy; 2026 Metron Health AI, Inc.</span>
         </div>
     </footer>
 </body>
