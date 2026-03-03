@@ -792,7 +792,7 @@
         ========================================== */
         .problem-scroll {
             position: relative;
-            height: 220vh;
+            height: 320vh;
         }
 
         .problem-sticky {
@@ -800,7 +800,8 @@
             top: var(--nav-height);
             height: calc(100vh - var(--nav-height));
             display: flex;
-            align-items: center;
+            align-items: flex-start;
+            padding-top: 4rem;
             overflow: hidden;
         }
 
@@ -810,12 +811,16 @@
             padding: 0 1.5rem;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 5rem;
+            grid-template-rows: auto auto auto;
+            column-gap: 5rem;
+            row-gap: 0;
             align-items: start;
             width: 100%;
+            position: relative;
+            z-index: 1;
         }
 
-        .problem__eyebrow { margin-bottom: 1.25rem; display: block; }
+        .problem__eyebrow { margin-bottom: 1.25rem; display: block; font-size: 0.9rem; }
 
         .problem__headline {
             font-size: clamp(3rem, 5vw, 4.6rem);
@@ -823,11 +828,15 @@
             letter-spacing: -0.05em;
             line-height: 1.0;
             color: var(--text-primary);
-            margin: 0;
+            margin: 0 0 1.75rem;
+            align-self: start;
         }
 
-        /* Left — animates in top→down when section enters viewport */
+        /* Left — animates in, spans all 3 rows via subgrid */
         .problem__left {
+            display: grid;
+            grid-row: span 3;
+            grid-template-rows: subgrid;
             opacity: 0;
             transform: translateY(-22px);
             transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
@@ -835,38 +844,78 @@
         }
         .problem__left.visible { opacity: 1; transform: translateY(0); }
 
-        /* Right — same animation, triggered further into scroll */
+        /* Right — spans all 3 rows via subgrid */
         .problem__right {
-            opacity: 0;
-            transform: translateY(-22px);
-            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.1s,
-                        transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
+            display: grid;
+            grid-row: span 3;
+            grid-template-rows: subgrid;
+            position: relative;
+            z-index: 1;
         }
-        .problem__right.visible { opacity: 1; transform: translateY(0); }
+
+        /* Orange wall: slides down from top over right half */
+        .problem__wall {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: var(--accent);
+            transform: translateY(-100%);
+            transition: transform 0.72s cubic-bezier(0.77, 0, 0.18, 1);
+            z-index: 0;
+            pointer-events: none;
+        }
+        .problem__wall.visible {
+            transform: translateY(0);
+        }
+
+        /* Text content — fades in shortly after wall lands, subgrid for row alignment */
+        .problem__right-content {
+            display: grid;
+            grid-row: span 3;
+            grid-template-rows: subgrid;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.45s ease 0.62s, transform 0.45s ease 0.62s;
+        }
+        .problem__right.visible .problem__right-content {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
         .problem__solution-label {
-            font-size: 0.75rem;
-            font-weight: 700;
+            font-size: 0.9rem;
+            font-weight: 800;
             letter-spacing: 0.09em;
             text-transform: uppercase;
-            color: var(--accent);
+            color: #000;
             display: block;
             margin-bottom: 1.25rem;
         }
 
         .problem__solution-headline {
-            font-size: clamp(1.9rem, 2.8vw, 2.6rem);
+            font-size: clamp(3rem, 5vw, 4.6rem);
             font-weight: 800;
-            letter-spacing: -0.04em;
-            line-height: 1.12;
-            color: var(--text-primary);
-            margin: 0 0 1.25rem;
+            letter-spacing: -0.05em;
+            line-height: 1.0;
+            color: #fff;
+            margin: 0 0 1.75rem;
+            align-self: start;
         }
 
         .problem__solution-body {
             font-size: 1rem;
-            color: var(--text-secondary);
+            color: rgba(255,255,255,0.88);
             line-height: 1.7;
+        }
+
+        .problem__desc {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.65;
+            margin-top: 1.5rem;
+            max-width: 36ch;
         }
 
         /* Features section gets more width than default container */
@@ -998,7 +1047,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 620px;
+            height: 620px;
         }
 
         .feature-card {
@@ -1012,14 +1061,13 @@
             inset: 0;
             opacity: 0;
             transform: translateY(20px);
-            transition: opacity 0.25s var(--ease), transform 0.25s var(--ease);
+            transition: opacity 0.22s var(--ease), transform 0.22s var(--ease);
             pointer-events: none;
         }
         .feature-card.active {
             opacity: 1;
             transform: translateY(0);
             pointer-events: auto;
-            position: relative;
         }
 
         .feature-card__mockup {
@@ -1356,6 +1404,8 @@
         /* ==========================================
            COMPARISON TABLE
         ========================================== */
+        #compare .container { max-width: 1300px; }
+
         .compare-wrapper {
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
@@ -1367,7 +1417,7 @@
 
         .compare-table {
             width: 100%;
-            min-width: 600px;
+            min-width: 700px;
             border-collapse: collapse;
         }
 
@@ -1376,10 +1426,10 @@
         }
 
         .compare-table th {
-            padding: 1.25rem 1.25rem;
+            padding: 1.75rem 1.75rem;
             text-align: center;
             font-family: 'Inter', sans-serif;
-            font-size: 0.9rem;
+            font-size: 1.05rem;
             font-weight: 700;
             color: var(--text-secondary);
             background: var(--bg-alt);
@@ -1411,9 +1461,9 @@
         }
 
         .compare-table td {
-            padding: 1rem 1.25rem;
+            padding: 1.4rem 1.75rem;
             text-align: center;
-            font-size: 0.9rem;
+            font-size: 1.05rem;
             color: var(--text-secondary);
             border-bottom: 1px solid var(--border);
         }
@@ -1466,106 +1516,97 @@
         }
 
         /* ==========================================
-           TESTIMONIALS
+           TESTIMONIALS — BOLD FEATURE STYLE
         ========================================== */
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.25rem;
+        .testimonial-feature {
+            background: #111;
+            padding: 110px 0;
         }
 
-        .testimonial-card {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: var(--radius-card);
-            padding: 1.75rem;
-            transition: transform var(--ease), box-shadow var(--ease);
+        .testimonial-feature__inner {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
         }
 
-        .testimonial-card:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-card-hover);
+        .testimonial-feature__heading {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.4rem, 5.5vw, 4.5rem);
+            font-weight: 800;
+            color: #fff;
+            line-height: 1.08;
+            letter-spacing: -0.03em;
+            margin-bottom: 3rem;
         }
 
-        .testimonial-card__quote {
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-            line-height: 1.7;
-            margin-bottom: 1.25rem;
+        .testimonial-feature__quote-wrap {
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            padding-top: 2.5rem;
         }
 
-        .testimonial-card__author {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
+        .testimonial-feature__quote {
+            font-size: clamp(1.15rem, 2.2vw, 1.6rem);
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.88);
+            line-height: 1.55;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            transition: opacity 0.3s ease;
         }
 
-        .testimonial-card__avatar {
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            background: var(--accent-light);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 0.9rem;
-            color: var(--accent);
-            flex-shrink: 0;
+        .testimonial-feature__quote.t-fade {
+            opacity: 0;
         }
 
-        .testimonial-card__name {
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: var(--text-primary);
-        }
-
-        .testimonial-card__role {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        .testimonial-stars {
-            color: #F59E0B;
+        .testimonial-feature__author {
             font-size: 0.85rem;
-            margin-bottom: 1rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.4);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: opacity 0.3s ease;
+        }
+
+        .testimonial-feature__author.t-fade {
+            opacity: 0;
         }
 
         /* ==========================================
            BETA CTA
         ========================================== */
         .beta-section {
-            background: var(--bg-dark);
+            background: linear-gradient(160deg, #fde8d4 0%, #f9c9a0 40%, #f5b07a 100%);
             padding: var(--section-v) 1.5rem;
             text-align: center;
         }
 
         .beta-section__inner {
-            max-width: 560px;
+            max-width: 520px;
             margin: 0 auto;
         }
 
         .beta-section__eyebrow {
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 0.09em;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.07em;
             text-transform: uppercase;
-            color: var(--accent);
+            color: #000;
             display: block;
             margin-bottom: 1rem;
         }
 
         .beta-section__headline {
-            font-size: clamp(1.75rem, 3.5vw, 2.4rem);
-            font-weight: 700;
-            letter-spacing: -0.03em;
-            line-height: 1.2;
-            color: white;
-            margin-bottom: 1rem;
+            font-size: clamp(2.4rem, 5vw, 3.6rem);
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            line-height: 1.05;
+            color: #000;
+            margin-bottom: 1.25rem;
         }
 
         .beta-section__sub {
-            color: rgba(255,255,255,0.55);
+            color: rgba(0,0,0,0.7);
             font-size: 1rem;
             margin-bottom: 2rem;
         }
@@ -1581,7 +1622,7 @@
 
         .beta-section__value li {
             font-size: 0.9rem;
-            color: rgba(255,255,255,0.7);
+            color: rgba(0,0,0,0.7);
             display: flex;
             align-items: center;
             gap: 0.6rem;
@@ -1606,17 +1647,17 @@
         .beta-form__input {
             flex: 1;
             padding: 0.85rem 1rem;
-            border: 1.5px solid rgba(255,255,255,0.15);
+            border: 1.5px solid var(--border-dark);
             border-radius: 10px;
             font-size: 0.95rem;
             font-family: 'Inter', sans-serif;
-            background: rgba(255,255,255,0.07);
-            color: white;
+            background: white;
+            color: var(--text-primary);
             min-width: 0;
             transition: border-color var(--ease);
         }
 
-        .beta-form__input::placeholder { color: rgba(255,255,255,0.35); }
+        .beta-form__input::placeholder { color: var(--text-muted); }
 
         .beta-form__input:focus {
             outline: none;
@@ -1629,7 +1670,7 @@
 
         .beta-disclaimer {
             font-size: 0.78rem;
-            color: rgba(255,255,255,0.3);
+            color: rgba(0,0,0,0.5);
         }
 
         .beta-success {
@@ -1651,13 +1692,13 @@
             margin: 0 auto 1rem;
         }
 
-        .beta-success__title { font-size: 1.2rem; font-weight: 600; color: white; margin-bottom: 0.4rem; }
-        .beta-success__sub   { font-size: 0.9rem; color: rgba(255,255,255,0.55); }
+        .beta-success__title { font-size: 1.2rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.4rem; }
+        .beta-success__sub   { font-size: 0.9rem; color: var(--text-secondary); }
 
         .beta-error {
             display: none;
             font-size: 0.85rem;
-            color: #fca5a5;
+            color: #dc2626;
             margin-bottom: 0.75rem;
         }
 
@@ -1686,13 +1727,13 @@
             background: none;
             border: none;
             cursor: pointer;
-            padding: 1.25rem 0;
+            padding: 1.5rem 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
             gap: 1rem;
             font-family: 'Inter', sans-serif;
-            font-size: 1rem;
+            font-size: 1.15rem;
             font-weight: 600;
             color: var(--text-primary);
             transition: color var(--ease);
@@ -1701,30 +1742,32 @@
         .faq-question:hover { color: var(--accent); }
 
         .faq-icon {
-            width: 24px;
-            height: 24px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
-            border: 1.5px solid var(--border-dark);
+            border: 2px solid var(--border-dark);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1rem;
-            font-weight: 300;
+            font-size: 1.35rem;
+            font-weight: 400;
+            line-height: 1;
             flex-shrink: 0;
             transition: all var(--ease);
-            color: var(--text-muted);
+            color: var(--text-secondary);
         }
 
         .faq-question[aria-expanded="true"] .faq-icon {
             transform: rotate(45deg);
             border-color: var(--accent);
             color: var(--accent);
+            background: var(--accent-light);
         }
 
         .faq-answer {
-            font-size: 0.95rem;
+            font-size: 1.05rem;
             color: var(--text-secondary);
-            line-height: 1.7;
+            line-height: 1.75;
             max-height: 0;
             overflow: hidden;
             opacity: 0;
@@ -1735,7 +1778,7 @@
         }
         .faq-answer.open {
             opacity: 1;
-            padding-bottom: 1.4rem;
+            padding-bottom: 1.75rem;
         }
 
         /* ==========================================
@@ -1825,15 +1868,18 @@
             .problem-scroll { height: auto; }
             .problem-sticky { position: static; height: auto; padding: var(--section-v) 0; }
             .problem__inner { grid-template-columns: 1fr; gap: 2.5rem; padding: 0 1.5rem; }
-            .problem__left, .problem__right { opacity: 1; transform: none; }
+            .problem__left { opacity: 1; transform: none; }
+            .problem__wall { display: none; }
+            .problem__right-content { opacity: 1; transform: none; transition: none; }
+            .problem__solution-label { color: var(--accent); font-size: 0.9rem; font-weight: 700; }
+            .problem__solution-headline { color: var(--text-primary); font-size: clamp(2.4rem, 5vw, 4rem); }
+            .problem__solution-body { color: var(--text-secondary); }
+            .problem__solution-body { color: var(--text-secondary); }
 
             .steps-grid {
                 grid-template-columns: 1fr;
             }
 
-            .testimonials-grid {
-                grid-template-columns: 1fr;
-            }
         }
 
         @media (max-width: 768px) {
@@ -2037,6 +2083,10 @@
     ========================================== -->
     <div class="problem-scroll">
         <div class="problem-sticky">
+
+            <!-- Orange wall slides down over right half -->
+            <div class="problem__wall" id="problem-wall"></div>
+
             <div class="problem__inner">
 
                 <!-- Left: The problem -->
@@ -2045,17 +2095,20 @@
                     <h2 class="problem__headline">
                         You're tracking<br>everything.<br>Nothing's<br>connected.
                     </h2>
+                    <p class="problem__desc">Your calorie counter doesn't know you went on a two hour run yesterday and only slept four hours last night.</p>
                 </div>
 
                 <!-- Right: The solution — revealed on scroll -->
                 <div class="problem__right" id="problem-solution">
-                    <span class="problem__solution-label">The solution</span>
-                    <h3 class="problem__solution-headline">
-                        One AI that reads<br>all of it. And acts<br>on it overnight.
-                    </h3>
-                    <p class="problem__solution-body">
-                        Metron pulls your sleep, recovery, training, and nutrition into a single model — then rewrites your plan every night based on what your data actually says. No manual input. No guesswork. Just a plan that already knows you slept badly before your alarm goes off.
-                    </p>
+                    <div class="problem__right-content">
+                        <span class="problem__solution-label">The solution</span>
+                        <h3 class="problem__solution-headline">
+                            One AI that reads all of it. And acts on it overnight.
+                        </h3>
+                        <p class="problem__solution-body">
+                            Metron pulls your sleep, recovery, training, and nutrition into a single model, then rewrites your plan every night based on what your data actually says. No manual input. No guesswork. Just a plan that adapts before your alarm goes off.
+                        </p>
+                    </div>
                 </div>
 
             </div>
@@ -2213,8 +2266,7 @@
     <section class="section" id="how-it-works">
         <div class="container">
             <div class="section-header reveal">
-                <span class="t-label">Simple to start</span>
-                <h2 class="t-h2">From zero to your plan in one day.</h2>
+                <h2 style="font-size: clamp(2.4rem, 4vw, 4rem); font-weight: 800; letter-spacing: -0.05em; line-height: 1.0;">From zero to your plan in one day.</h2>
             </div>
             <div class="steps-grid">
                 <div class="step reveal">
@@ -2226,7 +2278,7 @@
                 <div class="step reveal reveal-delay-1">
                     <div class="step__number">02</div>
                     <div class="step__time">90 minutes</div>
-                    <h3 class="step__title">AI builds your plan</h3>
+                    <h3 class="step__title">Metron builds your plan</h3>
                     <p class="step__desc">72 workouts. Nutrition targets. Supplement stack. Recovery protocols. All integrated, all personalized, while you do something else.</p>
                 </div>
                 <div class="step reveal reveal-delay-2">
@@ -2246,8 +2298,7 @@
     <section class="section section--alt" id="compare">
         <div class="container">
             <div class="section-header reveal">
-                <span class="t-label">How we stack up</span>
-                <h2 class="t-h2">Not all training tools are created equal.</h2>
+                <h2 style="font-size: clamp(2.4rem, 4vw, 4rem); font-weight: 800; letter-spacing: -0.05em; line-height: 1.0;">The Metron Advantage</h2>
             </div>
             <div class="compare-wrapper reveal reveal-delay-1">
                 <table class="compare-table">
@@ -2311,68 +2362,14 @@
 
 
     <!-- ==========================================
-         TESTIMONIALS  <!-- PLACEHOLDER — replace with real quotes before public launch -->
+         TESTIMONIALS
     ========================================== -->
-    <section class="section" id="testimonials">
-        <div class="container">
-            <div class="section-header reveal">
-                <span class="t-label">Early access users</span>
-                <h2 class="t-h2">Built for people who take training seriously.</h2>
-            </div>
-            <div class="testimonials-grid">
-
-                <!-- PLACEHOLDER -->
-                <div class="testimonial-card reveal">
-                    <div class="testimonial-stars">★★★★★</div>
-                    <p class="testimonial-card__quote">"I've tried every fitness app out there. Metron is the first one that actually feels like it knows me. It adjusted my training the morning after a bad night of sleep before I even opened it."</p>
-                    <div class="testimonial-card__author">
-                        <div class="testimonial-card__avatar">J</div>
-                        <div>
-                            <div class="testimonial-card__name">James R.</div>
-                            <div class="testimonial-card__role">Competitive powerlifter, 4 years</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- PLACEHOLDER -->
-                <div class="testimonial-card reveal reveal-delay-1">
-                    <div class="testimonial-stars">★★★★★</div>
-                    <p class="testimonial-card__quote">"The Arete AI chat blew me away. I asked why my bench keeps stalling and it pulled my last 3 months of data to explain exactly what was happening. No other app can do that."</p>
-                    <div class="testimonial-card__author">
-                        <div class="testimonial-card__avatar">S</div>
-                        <div>
-                            <div class="testimonial-card__name">Sarah K.</div>
-                            <div class="testimonial-card__role">CrossFit athlete, beta tester</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- PLACEHOLDER -->
-                <div class="testimonial-card reveal reveal-delay-1">
-                    <div class="testimonial-stars">★★★★★</div>
-                    <p class="testimonial-card__quote">"I used to have my Whoop, my nutrition app, my training app, and ChatGPT all open at once. Now it's just Metron. Everything I need is in one place, and it's actually connected."</p>
-                    <div class="testimonial-card__author">
-                        <div class="testimonial-card__avatar">M</div>
-                        <div>
-                            <div class="testimonial-card__name">Marcus T.</div>
-                            <div class="testimonial-card__role">Amateur triathlete, Whoop user</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- PLACEHOLDER -->
-                <div class="testimonial-card reveal reveal-delay-2">
-                    <div class="testimonial-stars">★★★★★</div>
-                    <p class="testimonial-card__quote">"The plan it built for me was more detailed than anything a human coach gave me. It knew my weaknesses from my data and built specific rules around them. That's next level."</p>
-                    <div class="testimonial-card__author">
-                        <div class="testimonial-card__avatar">A</div>
-                        <div>
-                            <div class="testimonial-card__name">Alex P.</div>
-                            <div class="testimonial-card__role">Strength & conditioning, Oura user</div>
-                        </div>
-                    </div>
-                </div>
-
+    <section class="testimonial-feature" id="testimonials">
+        <div class="testimonial-feature__inner">
+            <h2 class="testimonial-feature__heading reveal">Built for people who take training seriously.</h2>
+            <div class="testimonial-feature__quote-wrap reveal reveal-delay-1">
+                <p class="testimonial-feature__quote" id="testimonialQuote">"I've tried every fitness app out there. Metron is the first one that actually feels like it knows me. It adjusted my training the morning after a bad night of sleep before I even opened it."</p>
+                <span class="testimonial-feature__author" id="testimonialAuthor">James R. — Competitive powerlifter</span>
             </div>
         </div>
     </section>
@@ -2385,7 +2382,7 @@
         <div class="beta-section__inner">
             <span class="beta-section__eyebrow reveal">Limited beta access</span>
             <h2 class="beta-section__headline reveal reveal-delay-1">
-                Ready to stop guessing<br>and start adapting?
+                Stop Guessing.<br>Start Adapting.
             </h2>
             <p class="beta-section__sub reveal reveal-delay-2">
                 Free during beta. Lock in $6.99/month for life when we launch.
@@ -2423,18 +2420,17 @@
     <section class="section section--alt" id="faq">
         <div class="container">
             <div class="section-header reveal">
-                <span class="t-label">Common questions</span>
-                <h2 class="t-h2">Frequently asked.</h2>
+                <h2 style="font-size: clamp(2.4rem, 4vw, 4rem); font-weight: 800; letter-spacing: -0.05em; line-height: 1.0;">FAQs</h2>
             </div>
             <div class="faq-list" id="faq-list">
 
                 <div class="faq-item reveal">
                     <button class="faq-question" aria-expanded="false">
-                        How is this different from just using ChatGPT?
+                        How is this different from Standard AI models?
                         <span class="faq-icon">+</span>
                     </button>
                     <div class="faq-answer">
-                        ChatGPT can't see your data. Arete AI connects directly to your wearables and training logs, then analyzes your actual sleep, HRV, and workout history. When you ask "should I train today?", you get an answer based on YOUR recovery state, not generic advice.
+                        A standard AI model can't see your data. Metron connects directly to your wearables and training logs, then analyzes your actual sleep, HRV, and workout history. When you ask "should I train today?", you get an answer based on YOUR recovery state, not generic advice.
                     </div>
                 </div>
 
@@ -2474,17 +2470,17 @@
                         <span class="faq-icon">+</span>
                     </button>
                     <div class="faq-answer">
-                        Yes. Your data is encrypted, never sold, and never used to train AI models. You can export or delete everything at any time. We make money from subscriptions, not your data.
+                        Yes. Your data is encrypted, never sold, and never shared with external AI models. You can export or delete everything at any time. We make money from subscriptions, not your data.
                     </div>
                 </div>
 
                 <div class="faq-item reveal">
                     <button class="faq-question" aria-expanded="false">
-                        What if Arete AI gives me bad advice?
+                        What if Metron gives me bad advice?
                         <span class="faq-icon">+</span>
                     </button>
                     <div class="faq-answer">
-                        Arete AI provides insights based on your data, not medical advice. It's designed to help you understand patterns and make informed decisions. For injuries or medical concerns, always consult a healthcare professional.
+                        Metron provides insights based on your data, not medical advice. It's designed to help you understand patterns and make informed decisions. For injuries or medical concerns, always consult a healthcare professional.
                     </div>
                 </div>
 
@@ -2706,6 +2702,7 @@
         const problemScroll   = document.querySelector('.problem-scroll');
         const problemLeft     = document.getElementById('problem-left');
         const problemSolution = document.getElementById('problem-solution');
+        const problemWall     = document.getElementById('problem-wall');
         if (problemScroll && problemLeft && problemSolution) {
             window.addEventListener('scroll', () => {
                 const rect     = problemScroll.getBoundingClientRect();
@@ -2717,7 +2714,9 @@
                 }
                 if (total <= 0) return;
                 const progress = Math.max(0, Math.min(1, scrolled / total));
-                problemSolution.classList.toggle('visible', progress >= 0.38);
+                const show = progress >= 0.22;
+                if (problemWall)     problemWall.classList.toggle('visible', show);
+                problemSolution.classList.toggle('visible', show);
             }, { passive: true });
         }
 
@@ -2756,20 +2755,30 @@
 
             function setFeature(idx) {
                 if (idx === current) return;
+                const prev = current;
                 current = idx;
 
                 progressDots.forEach((el, i) => el.classList.toggle('active', i === idx));
 
-                // Fade out all left elements together
+                // Fade out left text AND outgoing card simultaneously at t=0
                 leftEls.forEach(el => { el.style.opacity = '0'; el.style.transform = 'translateY(-8px)'; });
+                const prevCard = cards[prev];
+                if (prevCard) {
+                    prevCard.style.opacity = '0';
+                    prevCard.style.transform = 'translateY(-8px)';
+                }
 
-                // Switch card + update + fade in — all at the same moment
+                // At t=200ms: swap cards, update text, fade both sides back in together
                 setTimeout(() => {
-                    cards.forEach((el, i) => el.classList.toggle('active', i === idx));
-                    if (faNum)     faNum.textContent     = featureData[idx].num;
-                    if (faName)    faName.textContent    = featureData[idx].name;
-                    if (faDesc)    faDesc.textContent    = featureData[idx].desc;
-                    if (faBullets) faBullets.innerHTML   = featureData[idx].bullets.map(b => `<li>${b}</li>`).join('');
+                    cards.forEach((el, i) => {
+                        el.classList.toggle('active', i === idx);
+                        el.style.opacity = '';
+                        el.style.transform = '';
+                    });
+                    if (faNum)     faNum.textContent   = featureData[idx].num;
+                    if (faName)    faName.textContent  = featureData[idx].name;
+                    if (faDesc)    faDesc.textContent  = featureData[idx].desc;
+                    if (faBullets) faBullets.innerHTML = featureData[idx].bullets.map(b => `<li>${b}</li>`).join('');
                     leftEls.forEach(el => { el.style.opacity = '1'; el.style.transform = 'translateY(0)'; });
                 }, 200);
             }
@@ -2801,7 +2810,36 @@
 
 
         // ==========================================
-        // 7. PAUSE CAROUSEL ON REDUCED MOTION
+        // 7. TESTIMONIAL ROTATOR
+        // ==========================================
+        const testimonials = [
+            { quote: '"I\'ve tried every fitness app out there. Metron is the first one that actually feels like it knows me. It adjusted my training the morning after a bad night of sleep before I even opened it."', author: 'James R. — Competitive powerlifter' },
+            { quote: '"The Arete AI chat blew me away. I asked why my bench keeps stalling and it pulled my last 3 months of data to explain exactly what was happening. No other app can do that."', author: 'Sarah K. — CrossFit athlete' },
+            { quote: '"I used to have my Whoop, my nutrition app, my training app, and ChatGPT all open at once. Now it\'s just Metron. Everything I need is in one place, and it\'s actually connected."', author: 'Marcus T. — Amateur triathlete' },
+            { quote: '"The plan it built for me was more detailed than anything a human coach gave me. It knew my weaknesses from my data and built specific rules around them. That\'s next level."', author: 'Alex P. — Strength & conditioning' },
+        ];
+        let testimonialIndex = 0;
+        const quoteEl = document.getElementById('testimonialQuote');
+        const authorEl = document.getElementById('testimonialAuthor');
+        if (quoteEl && authorEl) {
+            setInterval(() => {
+                quoteEl.classList.add('t-fade');
+                authorEl.classList.add('t-fade');
+                setTimeout(() => {
+                    let next;
+                    do { next = Math.floor(Math.random() * testimonials.length); } while (next === testimonialIndex);
+                    testimonialIndex = next;
+                    quoteEl.textContent = testimonials[testimonialIndex].quote;
+                    authorEl.textContent = testimonials[testimonialIndex].author;
+                    quoteEl.classList.remove('t-fade');
+                    authorEl.classList.remove('t-fade');
+                }, 300);
+            }, 4000);
+        }
+
+
+        // ==========================================
+        // 8. PAUSE CAROUSEL ON REDUCED MOTION
         // ==========================================
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
             const track = document.querySelector('.integrations-track');
