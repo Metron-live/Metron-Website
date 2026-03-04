@@ -1294,6 +1294,8 @@
             border-top: none;
             border-bottom: none;
             background: #000;
+            position: relative;
+            z-index: 2;
         }
 
         .integrations__headline {
@@ -1684,6 +1686,8 @@
 
         .beta-form__btn {
             flex-shrink: 0;
+            border: 2px solid rgba(255,255,255,0.55);
+            animation: none;
         }
 
         .beta-disclaimer {
@@ -1882,10 +1886,11 @@
             /* Explicit row heights so text and phone never overlap */
             .features-sticky__inner {
                 grid-template-columns: 1fr;
-                grid-template-rows: auto auto clamp(330px, 46vh, 420px);
+                grid-template-rows: auto 1fr clamp(260px, 38vh, 340px);
                 gap: 0.5rem;
                 height: calc(100vh - var(--nav-height) - 1rem);
                 align-items: start;
+                overflow: hidden;
             }
             .features-headline { font-size: clamp(1.7rem, 5.5vw, 2.2rem); margin-bottom: 0.4rem; }
             .features-active { margin-bottom: 0.15rem; }
