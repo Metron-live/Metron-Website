@@ -2603,16 +2603,10 @@
         }
 
         function closeAnswer(el) {
-            // Pin to current height so transition has a start point
             el.style.maxHeight = el.scrollHeight + 'px';
-            // Force layout, then animate to 0
             el.getBoundingClientRect();
+            el.classList.remove('open');
             el.style.maxHeight = '0';
-            el.addEventListener('transitionend', function handler(e) {
-                if (e.propertyName !== 'max-height') return;
-                el.classList.remove('open');
-                el.removeEventListener('transitionend', handler);
-            });
         }
 
         faqItems.forEach(item => {
