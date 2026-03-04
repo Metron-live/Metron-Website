@@ -1878,18 +1878,25 @@
 
             /* Features: keep sticky scroll active — single column layout */
             .features-scroll { height: 300vh; }
-            .features-sticky { position: sticky; top: var(--nav-height); height: calc(100vh - var(--nav-height)); padding: 0.75rem 0 0; overflow: hidden; }
-            .features-sticky__inner { grid-template-columns: 1fr; gap: 0.5rem; }
-            .features-headline { font-size: clamp(1.8rem, 6vw, 2.6rem); margin-bottom: 0.75rem; }
-            .features-active { margin-bottom: 0.25rem; }
-            .features-active__num { font-size: clamp(2.8rem, 10vw, 4rem); }
-            .features-active__name { font-size: clamp(1rem, 4vw, 1.25rem); margin-top: 0.3rem; }
-            .features-active__desc { font-size: 0.875rem; line-height: 1.5; margin-top: 0.5rem; }
-            .features-active__bullets { margin-top: 0.4rem; margin-bottom: 0.5rem; }
-            .features-active__bullets li { font-size: 0.8rem; margin-bottom: 0.2rem; }
-            .features-progress { position: static; bottom: auto; margin-top: 0.25rem; }
-            .features-panel { height: clamp(200px, 30vh, 300px); }
-            /* Keep cards as absolute — restore from any previous override */
+            .features-sticky { position: sticky; top: var(--nav-height); height: calc(100vh - var(--nav-height)); padding: 0.5rem 0; overflow: hidden; }
+            /* Explicit row heights: headline | text block | phone panel */
+            .features-sticky__inner {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto clamp(190px, 32vh, 280px);
+                gap: 0.4rem;
+                height: calc(100vh - var(--nav-height) - 1rem);
+                align-items: start;
+            }
+            .features-headline { font-size: clamp(1.6rem, 5.5vw, 2.4rem); margin-bottom: 0.4rem; }
+            .features-active { margin-bottom: 0.1rem; }
+            .features-active__num { font-size: clamp(2.4rem, 9vw, 3.5rem); }
+            .features-active__name { font-size: clamp(0.95rem, 3.5vw, 1.2rem); margin-top: 0.25rem; }
+            .features-active__desc { font-size: 0.82rem; line-height: 1.45; margin-top: 0.4rem; }
+            .features-active__bullets { margin-top: 0.3rem; margin-bottom: 0; }
+            .features-active__bullets li { font-size: 0.78rem; margin-bottom: 0.15rem; }
+            .features-progress { position: static; bottom: auto; margin-top: 0.3rem; }
+            /* Panel takes its row height from the grid — cards fill it absolutely */
+            .features-panel { height: 100%; min-height: 0; }
             .feature-card { position: absolute; inset: 0; margin-bottom: 0; }
 
             /* Problem: disable sticky on mobile, horizontal slide-in */
