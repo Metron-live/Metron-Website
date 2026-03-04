@@ -1879,25 +1879,46 @@
             /* Features: keep sticky scroll active — single column layout */
             .features-scroll { height: 300vh; }
             .features-sticky { position: sticky; top: var(--nav-height); height: calc(100vh - var(--nav-height)); padding: 0.5rem 0; overflow: hidden; }
-            /* Explicit row heights: headline | text block | phone panel */
+            /* Explicit row heights so text and phone never overlap */
             .features-sticky__inner {
                 grid-template-columns: 1fr;
-                grid-template-rows: auto auto clamp(190px, 32vh, 280px);
-                gap: 0.4rem;
+                grid-template-rows: auto auto clamp(330px, 46vh, 420px);
+                gap: 0.5rem;
                 height: calc(100vh - var(--nav-height) - 1rem);
                 align-items: start;
             }
-            .features-headline { font-size: clamp(1.6rem, 5.5vw, 2.4rem); margin-bottom: 0.4rem; }
-            .features-active { margin-bottom: 0.1rem; }
-            .features-active__num { font-size: clamp(2.4rem, 9vw, 3.5rem); }
-            .features-active__name { font-size: clamp(0.95rem, 3.5vw, 1.2rem); margin-top: 0.25rem; }
-            .features-active__desc { font-size: 0.82rem; line-height: 1.45; margin-top: 0.4rem; }
-            .features-active__bullets { margin-top: 0.3rem; margin-bottom: 0; }
-            .features-active__bullets li { font-size: 0.78rem; margin-bottom: 0.15rem; }
-            .features-progress { position: static; bottom: auto; margin-top: 0.3rem; }
-            /* Panel takes its row height from the grid — cards fill it absolutely */
+            .features-headline { font-size: clamp(1.7rem, 5.5vw, 2.2rem); margin-bottom: 0.4rem; }
+            .features-active { margin-bottom: 0.15rem; }
+            .features-active__num { font-size: clamp(2.6rem, 9vw, 3.8rem); }
+            .features-active__name { font-size: clamp(1rem, 3.5vw, 1.2rem); margin-top: 0.3rem; }
+            .features-active__desc { font-size: 0.88rem; line-height: 1.5; margin-top: 0.4rem; }
+            .features-active__bullets { margin-top: 0.35rem; margin-bottom: 0; }
+            .features-active__bullets li { font-size: 0.82rem; margin-bottom: 0.2rem; }
+            .features-progress { position: static; bottom: auto; margin-top: 0.35rem; }
+            /* Panel fills its grid row; cards fill panel absolutely */
             .features-panel { height: 100%; min-height: 0; }
             .feature-card { position: absolute; inset: 0; margin-bottom: 0; }
+            /* Scale phone down for mobile */
+            .features-panel .mini-phone { width: 155px; border-radius: 26px; padding: 8px; }
+            .features-panel .mini-phone-inner { border-radius: 20px; padding: 12px 12px 18px; min-height: 300px; }
+            .features-panel .mini-notch { width: 60px; height: 16px; margin-bottom: 10px; }
+            .features-panel .mini-gen-title { font-size: 13px; }
+            .features-panel .mini-gen-sub { font-size: 10px; margin-bottom: 12px; }
+            .features-panel .mini-phase-circle { width: 50px; height: 50px; font-size: 20px; margin-bottom: 8px; }
+            .features-panel .mini-phase-name { font-size: 11px; margin-bottom: 8px; }
+            .features-panel .mini-phases { gap: 4px; }
+            .features-panel .mini-phase { font-size: 10px; padding: 4px 8px; }
+            .features-panel .mini-adapt-header { margin-bottom: 10px; }
+            .features-panel .mini-adapt-title { font-size: 10px; }
+            .features-panel .mini-live { font-size: 9px; }
+            .features-panel .mini-adapt-list { gap: 6px; }
+            .features-panel .mini-adapt-row { font-size: 10px; padding: 6px 8px; }
+            .features-panel .mini-chat-header { gap: 8px; margin-bottom: 12px; }
+            .features-panel .mini-avatar { width: 26px; height: 26px; font-size: 11px; }
+            .features-panel .mini-chat-name { font-size: 12px; }
+            .features-panel .mini-chat-messages { gap: 8px; }
+            .features-panel .mini-chat-msg { font-size: 10px; padding: 7px 10px; }
+            .features-panel .feature-card[data-idx="0"] .mini-phase-circle { width: 42px; height: 42px; font-size: 18px; }
 
             /* Problem: disable sticky on mobile, horizontal slide-in */
             .problem-scroll { height: auto; }
