@@ -1589,6 +1589,13 @@
             filter: blur(2px) saturate(1.15);
             z-index: 0;
         }
+        .beta-section::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.12);
+            z-index: 0;
+        }
         .beta-section__inner {
             position: relative;
             z-index: 1;
@@ -1681,7 +1688,7 @@
 
         .beta-disclaimer {
             font-size: 0.78rem;
-            color: rgba(0,0,0,0.5);
+            color: rgba(255,255,255,0.6);
         }
 
         .beta-success {
