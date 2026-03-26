@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arete AI™ | Metron AI™</title>
     
@@ -75,7 +75,11 @@
         .hero-subtitle { font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 2rem; line-height: 1.7; }
 
         .chat-mockup {
-            background: var(--bg-dark); border-radius: 24px; padding: 20px; color: white;
+            background: var(--bg-dark); border-radius: 32px; padding: 12px; color: white;
+            overflow: hidden;
+        }
+        .chat-mockup img.chat-screen-img {
+            width: 100%; height: auto; display: block; border-radius: 24px;
         }
         .chat-header {
             display: flex; align-items: center; gap: 12px;
@@ -176,26 +180,7 @@
                 <a href="/#pricing" class="btn btn-primary">Start Free Trial</a>
             </div>
             <div class="chat-mockup">
-                <div class="chat-header">
-                    <div class="chat-avatar">A</div>
-                    <div><div class="chat-name">Arete</div><div class="chat-status">● Online</div></div>
-                </div>
-                <div class="chat-messages">
-                    <div class="chat-msg user">Why does my bench always stall around 225?</div>
-                    <div class="chat-msg assistant">
-                        <strong>Found the pattern.</strong>
-                        I pulled your bench data from the last 4 months. You've attempted 225×5 six times—only hit it once (Oct 12).
-                        <br><br>
-                        That day: readiness 81, sleep 8.1h. Failed days averaged readiness 67, sleep 6.4h.
-                        <br><br>
-                        You're strong enough. You're just never fresh when you try it.
-                        <div class="chat-context">
-                            <span class="context-pill">🛏 6.2h sleep</span>
-                            <span class="context-pill">❤️ HRV 46</span>
-                            <span class="context-pill">📊 Readiness 61</span>
-                        </div>
-                    </div>
-                </div>
+                <img src="../images/screen-ai-chat.png" alt="Arete AI voice assistant" class="chat-screen-img">
             </div>
         </div>
     </section>
