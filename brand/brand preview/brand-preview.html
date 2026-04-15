@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metron Brand Assets</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: #FAFAF8;
+            padding: 3rem;
+            color: #1a1a1a;
+        }
+        h1 { margin-bottom: 0.5rem; font-size: 2rem; }
+        h2 { margin: 3rem 0 1.5rem; font-size: 1.3rem; padding-top: 2rem; border-top: 1px solid #E8E8E6; }
+        h3 { font-size: 1rem; color: #666; margin-bottom: 1rem; font-weight: 500; }
+        p { color: #666; margin-bottom: 2rem; }
+        .color-bar {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .color-swatch {
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            color: white;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .card {
+            background: white;
+            border: 1px solid #E8E8E6;
+            border-radius: 12px;
+            padding: 2rem;
+        }
+        .card.dark {
+            background: #1a1a1a;
+            border-color: #333;
+        }
+        .card-title {
+            font-size: 0.8rem;
+            color: #888;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .card.dark .card-title {
+            color: #666;
+        }
+        .logo-row {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .logo-stacked {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        .wordmark {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.75rem;
+            letter-spacing: -0.03em;
+        }
+        .wordmark.small {
+            font-size: 1.2rem;
+        }
+        .white { color: #FAFAF8; }
+        .black { color: #1a1a1a; }
+        .coral { color: #E8734A; }
+        .size-comparison {
+            display: flex;
+            align-items: flex-end;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        .size-item {
+            text-align: center;
+        }
+        .size-item p {
+            font-size: 0.7rem;
+            color: #888;
+            margin-top: 0.5rem;
+            margin-bottom: 0;
+        }
+        .icon-grid {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .icon-box {
+            text-align: center;
+        }
+        .icon-box p {
+            font-size: 0.7rem;
+            margin-top: 0.5rem;
+            margin-bottom: 0;
+        }
+        .mock-browser {
+            background: #f1f1f1;
+            border-radius: 8px;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .mock-tab {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: white;
+            padding: 0.4rem 1rem;
+            border-radius: 6px 6px 0 0;
+            font-size: 0.75rem;
+        }
+        .mock-phone {
+            width: 120px;
+            background: #1a1a1a;
+            border-radius: 20px;
+            padding: 8px;
+            margin: 0 auto;
+        }
+        .mock-screen {
+            background: #333;
+            border-radius: 12px;
+            padding: 1.5rem 0.75rem;
+        }
+        .mock-app-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+        }
+        .mock-app {
+            width: 20px;
+            height: 20px;
+            background: #555;
+            border-radius: 5px;
+        }
+        .mock-app.metron {
+            background: #E8734A;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+        th, td {
+            text-align: left;
+            padding: 0.75rem;
+            border-bottom: 1px solid #E8E8E6;
+        }
+        th {
+            color: #888;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <h1>Metron Brand Assets</h1>
+    <p>Final logo files — Medium vs Wide comparison</p>
+
+    <!-- Brand Colors -->
+    <h2 style="margin-top: 0; border: none; padding-top: 0;">Brand Colors</h2>
+    <div class="color-bar">
+        <div class="color-swatch" style="background: #1a1a1a;">Primary<br>#1a1a1a</div>
+        <div class="color-swatch" style="background: #E8734A;">Accent<br>#E8734A</div>
+        <div class="color-swatch" style="background: #FAFAF8; color: #1a1a1a; border: 1px solid #E8E8E6;">Background<br>#FAFAF8</div>
+    </div>
+
+    <!-- HORIZONTAL LOGOS -->
+    <h2>Horizontal Logo</h2>
+    <div class="grid">
+        <!-- Medium Black -->
+        <div class="card">
+            <div class="card-title">Medium — Black</div>
+            <div class="logo-row">
+                <svg width="44" height="40" viewBox="0 0 48 44" fill="none">
+                    <path d="M0 44L14 0L24 22L12 44H0Z" fill="#1a1a1a"/>
+                    <path d="M24 22L34 0L48 44H36L24 22Z" fill="#1a1a1a"/>
+                </svg>
+                <span class="wordmark black">Metron</span>
+            </div>
+        </div>
+
+        <!-- Wide Black -->
+        <div class="card">
+            <div class="card-title">Wide — Black</div>
+            <div class="logo-row">
+                <svg width="52" height="40" viewBox="0 0 56 44" fill="none">
+                    <path d="M0 44L14 0L28 22L14 44H0Z" fill="#1a1a1a"/>
+                    <path d="M28 22L42 0L56 44H42L28 22Z" fill="#1a1a1a"/>
+                </svg>
+                <span class="wordmark black">Metron</span>
+            </div>
+        </div>
+
+        <!-- Medium White on Dark -->
+        <div class="card dark">
+            <div class="card-title">Medium — White</div>
+            <div class="logo-row">
+                <svg width="44" height="40" viewBox="0 0 48 44" fill="none">
+                    <path d="M0 44L14 0L24 22L12 44H0Z" fill="#FAFAF8"/>
+                    <path d="M24 22L34 0L48 44H36L24 22Z" fill="#FAFAF8"/>
+                </svg>
+                <span class="wordmark white">Metron</span>
+            </div>
+        </div>
+
+        <!-- Wide White on Dark -->
+        <div class="card dark">
+            <div class="card-title">Wide — White</div>
+            <div class="logo-row">
+                <svg width="52" height="40" viewBox="0 0 56 44" fill="none">
+                    <path d="M0 44L14 0L28 22L14 44H0Z" fill="#FAFAF8"/>
+                    <path d="M28 22L42 0L56 44H42L28 22Z" fill="#FAFAF8"/>
+                </svg>
+                <span class="wordmark white">Metron</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- STACKED LOGOS -->
+    <h2>Stacked Logo</h2>
+    <div class="grid">
+        <!-- Medium Stacked -->
+        <div class="card">
+            <div class="card-title">Medium — Stacked</div>
+            <div class="logo-stacked">
+                <svg width="44" height="40" viewBox="0 0 48 44" fill="none">
+                    <path d="M0 44L14 0L24 22L12 44H0Z" fill="#1a1a1a"/>
+                    <path d="M24 22L34 0L48 44H36L24 22Z" fill="#1a1a1a"/>
+                </svg>
+                <span class="wordmark small black">Metron</span>
+            </div>
+        </div>
+
+        <!-- Wide Stacked -->
+        <div class="card">
+            <div class="card-title">Wide — Stacked</div>
+            <div class="logo-stacked">
+                <svg width="52" height="40" viewBox="0 0 56 44" fill="none">
+                    <path d="M0 44L14 0L28 22L14 44H0Z" fill="#1a1a1a"/>
+                    <path d="M28 22L42 0L56 44H42L28 22Z" fill="#1a1a1a"/>
+                </svg>
+                <span class="wordmark small black">Metron</span>
+            </div>
+        </div>
+
+        <!-- Medium Stacked Dark -->
+        <div class="card dark">
+            <div class="card-title">Medium — Stacked White</div>
+            <div class="logo-stacked">
+                <svg width="44" height="40" viewBox="0 0 48 44" fill="none">
+                    <path d="M0 44L14 0L24 22L12 44H0Z" fill="#FAFAF8"/>
+                    <path d="M24 22L34 0L48 44H36L24 22Z" fill="#FAFAF8"/>
+                </svg>
+                <span class="wordmark small white">Metron</span>
+            </div>
+        </div>
+
+        <!-- Wide Stacked Dark -->
+        <div class="card dark">
+            <div class="card-title">Wide — Stacked White</div>
+            <div class="logo-stacked">
+                <svg width="52" height="40" viewBox="0 0 56 44" fill="none">
+                    <path d="M0 44L14 0L28 22L14 44H0Z" fill="#FAFAF8"/>
+                    <path d="M28 22L42 0L56 44H42L28 22Z" fill="#FAFAF8"/>
+                </svg>
+                <span class="wordmark small white">Metron</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAVICON / APP ICON -->
+    <h2>Favicon & App Icon (Coral)</h2>
+    <h3>Medium vs Wide at Icon Sizes</h3>
+    
+    <div class="grid">
+        <div class="card">
+            <div class="card-title">Medium — All Sizes</div>
+            <div class="size-comparison">
+                <div class="size-item">
+                    <svg width="64" height="58" viewBox="0 0 48 44" fill="none">
+                        <path d="M0 44L14 0L24 22L12 44H0Z" fill="#E8734A"/>
+                        <path d="M24 22L34 0L48 44H36L24 22Z" fill="#E8734A"/>
+                    </svg>
+                    <p>64px</p>
+                </div>
+                <div class="size-item">
+                    <svg width="48" height="44" viewBox="0 0 48 44" fill="none">
+                        <path d="M0 44L14 0L24 22L12 44H0Z" fill="#E8734A"/>
+                        <path d="M24 22L34 0L48 44H36L24 22Z" fill="#E8734A"/>
+                    </svg>
+                    <p>48px</p>
+                </div>
+                <div class="size-item">
+                    <svg width="32" height="29" viewBox="0 0 48 44" fill="none">
+                        <path d="M0 44L14 0L24 22L12 44H0Z" fill="#E8734A"/>
+                        <path d="M24 22L34 0L48 44H36L24 22Z" fill="#E8734A"/>
+                    </svg>
+                    <p>32px</p>
+                </div>
+                <div class="size-item">
+                    <svg width="24" height="22" viewBox="0 0 48 44" fill="none">
+                        <path d="M0 44L14 0L24 22L12 44H0Z" fill="#E8734A"/>
+                        <path d="M24 22L34 0L48 44H36L24 22Z" fill="#E8734A"/>
+                    </svg>
+                    <p>24px</p>
+                </div>
+                <div class="size-item">
+                    <svg width="16" height="15" viewBox="0 0 48 44" fill="none">
+                        <path d="M0 44L14 0L24 22L12 44H0Z" fill="#E8734A"/>
+                        <path d="M24 22L34 0L48 44H36L24 22Z" fill="#E8734A"/>
+                    </svg>
+                    <p>16px</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Wide — All Sizes</div>
+            <div class="size-comparison">
+                <div class="size-item">
+                    <svg width="74" height="58" viewBox="0 0 56 44" fill="none">
+                        <path d="M0 44L14 0L28 22L14 44H0Z" fill="#E8734A"/>
+                        <path d="M28 22L42 0L56 44H42L28 22Z" fill="#E8734A"/>
+                    </svg>
+                    <p>64px</p>
+                </div>
+                <div class="size-item">
+                    <svg width="55" height="44" viewBox="0 0 56 44" fill="none">
+                        <path d="M0 44L14 0L28 22L14 44H0Z" fill="#E8734A"/>
+                        <path d="M28 22L42 0L56 44H42L28 22Z" fill="#E8734A"/>
+                    </svg>
+                    <p>48px</p>
+                </div>
+                <div class="size-item">
+                    <svg width="37" height="29" viewBox="0 0 56 44" fill="none">
+                        <path d="M0 44L14 0L28 22L14 44H0Z" fill="#E8734A"/>
+                        <path d="M28 22L42 0L56 44H42L28 22Z" fill="#E8734A"/>
+                    </svg>
+                    <p>32px</p>
+                </div>
+                <div class="size-item">
+                    <svg width="28" height="22" viewBox="0 0 56 44" fill="none">
+                        <path d="M0 44L14 0L28 22L14 44H0Z" fill="#E8734A"/>
+                        <path d="M28 22L42 0L56 44H42L28 22Z" fill="#E8734A"/>
+                    </svg>
+                    <p>24px</p>
+                </div>
+                <div class="size-item">
+                    <svg width="18" height="15" viewBox="0 0 56 44" fill="none">
+                        <path d="M0 44L14 0L28 22L14 44H0Z" fill="#E8734A"/>
+                        <path d="M28 22L42 0L56 44H42L28 22Z" fill="#E8734A"/>
+                    </svg>
+                    <p>16px</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- REAL WORLD MOCKUPS -->
+    <h2>In Context</h2>
+    <div class="grid">
+        <!-- Browser Tab -->
+        <div class="card">
+            <div class="card-title">Browser Tab (Favicon)</div>
+            <div class="mock-browser">
+                <div class="mock-tab">
+                    <svg width="16" height="15" viewBox="0 0 48 44" fill="none">
+                        <path d="M0 44L14 0L24 22L12 44H0Z" fill="#E8734A"/>
+                        <path d="M24 22L34 0L48 44H36L24 22Z" fill="#E8734A"/>
+                    </svg>
+                    Metron - Fitness Intelligence
+                </div>
+            </div>
+            <p style="font-size: 0.75rem; margin-bottom: 0;">Medium icon — Coral</p>
+        </div>
+
+        <!-- App Grid -->
+        <div class="card">
+            <div class="card-title">iOS App Grid</div>
+            <div class="mock-phone">
+                <div class="mock-screen">
+                    <div class="mock-app-grid">
+                        <div class="mock-app"></div>
+                        <div class="mock-app"></div>
+                        <div class="mock-app metron">
+                            <svg width="12" height="11" viewBox="0 0 48 44" fill="none">
+                                <path d="M0 44L14 0L24 22L12 44H0Z" fill="#FAFAF8"/>
+                                <path d="M24 22L34 0L48 44H36L24 22Z" fill="#FAFAF8"/>
+                            </svg>
+                        </div>
+                        <div class="mock-app"></div>
+                        <div class="mock-app"></div>
+                        <div class="mock-app"></div>
+                        <div class="mock-app"></div>
+                        <div class="mock-app"></div>
+                    </div>
+                </div>
+            </div>
+            <p style="font-size: 0.75rem; margin-top: 1rem; margin-bottom: 0;">Coral background with white icon</p>
+        </div>
+    </div>
+
+    <!-- FILE LIST -->
+    <h2>Exported Files</h2>
+    <table>
+        <tr>
+            <th>File</th>
+            <th>Use Case</th>
+        </tr>
+        <tr>
+            <td><code>icon-medium-black.svg</code></td>
+            <td>Icon only, light backgrounds</td>
+        </tr>
+        <tr>
+            <td><code>icon-medium-white.svg</code></td>
+            <td>Icon only, dark backgrounds</td>
+        </tr>
+        <tr>
+            <td><code>icon-medium-coral.svg</code></td>
+            <td>Icon only, accent usage</td>
+        </tr>
+        <tr>
+            <td><code>icon-wide-black.svg</code></td>
+            <td>Icon only, light backgrounds</td>
+        </tr>
+        <tr>
+            <td><code>icon-wide-white.svg</code></td>
+            <td>Icon only, dark backgrounds</td>
+        </tr>
+        <tr>
+            <td><code>icon-wide-coral.svg</code></td>
+            <td>Icon only, accent usage</td>
+        </tr>
+        <tr>
+            <td><code>appicon-medium-coral.svg</code></td>
+            <td>512x512 app icon template</td>
+        </tr>
+        <tr>
+            <td><code>appicon-wide-coral.svg</code></td>
+            <td>512x512 app icon template</td>
+        </tr>
+    </table>
+
+    <h2>Recommendation</h2>
+    <div class="card" style="max-width: 600px;">
+        <p style="margin-bottom: 1rem;"><strong>For icon/favicon, I recommend: Medium</strong></p>
+        <p style="margin-bottom: 0;">The Medium version has slightly more visual weight and holds its shape better at small sizes. The Wide version works great for the full logo but can feel a bit thin as a standalone icon.</p>
+    </div>
+
+</body>
+</html>
