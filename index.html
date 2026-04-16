@@ -408,6 +408,8 @@
         .nav__links {
             display: flex;
             gap: 2rem;
+            justify-content: center;
+            flex: 1;
         }
 
         .nav__link {
@@ -2136,21 +2138,7 @@
                 <p class="video-banner__sub-text reveal reveal-delay-2">
                     Metron connects your sleep, recovery, training, and nutrition into one system that adapts every single day. No generic plans. No manual tweaking.
                 </p>
-                <div class="reveal reveal-delay-3">
-                    <div class="hero__error" id="hero-error">Something went wrong. Please try again.</div>
-                    <div class="hero__success" id="hero-success">
-                        <strong>Check your inbox!</strong>
-                        Your beta access link is on its way.
-                    </div>
-                    <form class="video-banner__form" id="hero-form">
-                        <input class="video-banner__form-input" type="email" placeholder="your@email.com" required>
-                        <button class="btn btn-accent video-banner__form-btn" type="submit" id="hero-submit">
-                            <span class="btn-text">Get Early Access</span>
-                            <span class="btn-loading" style="display:none">Sending...</span>
-                        </button>
-                    </form>
-                    <p class="video-banner__trust">No spam. Unsubscribe anytime.</p>
-                </div>
+                <!-- Email form removed — beta signup not wired yet -->
             </div>
 
             <div class="hero__phone-wrap reveal reveal-delay-2">
