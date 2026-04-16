@@ -649,6 +649,10 @@
             text-align: right;
         }
 
+        .video-banner__tagline-mobile {
+            display: none;
+        }
+
         .video-banner__tagline {
             font-family: 'Cormorant', serif;
             font-size: clamp(1.8rem, 3.5vw, 3rem);
@@ -2037,12 +2041,13 @@
             }
 
             .video-banner__tagline-corner {
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                padding: 1rem 1.5rem 1.5rem;
+                display: none;
+            }
+
+            .video-banner__tagline-mobile {
+                display: block;
                 text-align: center;
+                padding: 0.5rem 0 1rem;
             }
 
             .video-banner__headline {
@@ -2160,6 +2165,11 @@
                     Metron connects your sleep, recovery, training, and nutrition into one system that adapts every single day. No generic plans. No manual tweaking.
                 </p>
                 <!-- Email form removed — beta signup not wired yet -->
+            </div>
+
+            <div class="video-banner__tagline-mobile reveal reveal-delay-2">
+                <h2 class="video-banner__tagline">Performance, democratized.</h2>
+                <p class="video-banner__sub">For every athlete. At every level.</p>
             </div>
 
             <div class="hero__phone-wrap reveal reveal-delay-2">
