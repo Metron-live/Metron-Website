@@ -366,13 +366,35 @@
             border-bottom-color: rgba(200, 190, 175, 0.4);
         }
 
-        /* When scrolled, amber logo */
+        /* When scrolled: marble bg, amber accents, dark text */
         .nav.scrolled .nav__logo-icon path { fill: var(--accent); }
-        .nav.scrolled .nav__logo-text { color: var(--accent); -webkit-text-fill-color: var(--accent); }
-        .nav.scrolled .nav__link { color: var(--text-primary); }
+        .nav.scrolled .nav__logo-text {
+            background: none !important;
+            -webkit-background-clip: unset !important;
+            -webkit-text-fill-color: var(--accent) !important;
+            color: var(--accent);
+        }
+        .nav.scrolled .nav__logo-tm {
+            background: none !important;
+            -webkit-background-clip: unset !important;
+            -webkit-text-fill-color: var(--accent) !important;
+        }
+        .nav.scrolled .nav__logo-subtitle {
+            background: none !important;
+            -webkit-background-clip: unset !important;
+            -webkit-text-fill-color: var(--accent) !important;
+        }
+        .nav.scrolled .nav__link {
+            background: none !important;
+            -webkit-background-clip: unset !important;
+            -webkit-text-fill-color: var(--text-primary) !important;
+            color: var(--text-primary);
+        }
         .nav.scrolled .nav__hamburger span { background: var(--text-primary); }
         .nav.scrolled .nav__cta {
-            background: var(--accent);
+            background: var(--accent) !important;
+            -webkit-background-clip: unset !important;
+            -webkit-text-fill-color: white !important;
             border-color: var(--accent);
             color: white;
         }
@@ -531,21 +553,26 @@
 
         .mobile-menu a {
             padding: 0.85rem 1rem;
-            color: var(--text-secondary);
+            color: var(--text-primary);
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
+            font-family: 'Space Grotesk', sans-serif;
             border-radius: 8px;
             transition: all var(--ease);
         }
 
         .mobile-menu a:hover {
-            background: url('images/marble.png') center/cover;
-            color: var(--text-primary);
+            background: rgba(245, 166, 35, 0.1);
+            color: var(--accent);
         }
 
         .mobile-menu .btn-primary {
             margin-top: 0.5rem;
             text-align: center;
+            background: var(--accent) !important;
+            -webkit-background-clip: unset !important;
+            -webkit-text-fill-color: white !important;
+            color: white;
         }
 
         /* ==========================================
@@ -2596,22 +2623,7 @@
                 <li>All integrations included</li>
             </ul>
 
-            <div class="reveal reveal-delay-3">
-                <div class="beta-error" id="beta-error">Something went wrong. Please try again.</div>
-                <div class="beta-success" id="beta-success">
-                    <div class="beta-success__icon">✓</div>
-                    <div class="beta-success__title">Check your inbox!</div>
-                    <div class="beta-success__sub">Your beta access link is on its way.</div>
-                </div>
-                <form class="beta-form" id="beta-form">
-                    <input class="beta-form__input" type="email" id="beta-email" name="email" placeholder="your@email.com" required>
-                    <button class="btn btn-accent beta-form__btn" type="submit" id="beta-submit">
-                        <span class="btn-text">Get Access</span>
-                        <span class="btn-loading" style="display:none">Sending...</span>
-                    </button>
-                </form>
-                <p class="beta-disclaimer">No credit card required. Unsubscribe anytime.</p>
-            </div>
+            <!-- Beta form removed — signup not wired yet -->
         </div>
     </section>
 
