@@ -959,13 +959,16 @@
         /* Floating data badges */
         .hero__badge {
             position: absolute;
-            background: url('images/marble.png') center/cover;
+            background: white !important;
             border-radius: 12px;
             box-shadow: var(--shadow-card);
             padding: 0.5rem 0.9rem;
             font-size: 0.78rem;
             font-weight: 600;
-            color: var(--text-primary);
+            color: var(--text-primary) !important;
+            -webkit-text-fill-color: var(--text-primary) !important;
+            -webkit-background-clip: unset !important;
+            background-clip: unset !important;
             white-space: nowrap;
             z-index: 3;
         }
