@@ -537,10 +537,10 @@
             display: grid;
             grid-template-columns: 1fr 380px;
             gap: 4rem;
-            align-items: start;
+            align-items: end;
             max-width: none;
             margin: 0;
-            padding: calc(var(--nav-height) + 3rem) 2rem 3rem clamp(2rem, 5vw, 4rem);
+            padding: calc(var(--nav-height) + 3rem) 2rem 10rem clamp(2rem, 5vw, 4rem);
         }
 
         .video-banner__hero-content {
@@ -642,7 +642,7 @@
 
         .video-banner__tagline-corner {
             position: absolute;
-            bottom: 0;
+            top: calc(var(--nav-height) + 1.5rem);
             right: 0;
             z-index: 3;
             padding: 1.8rem clamp(1.5rem, 4vw, 3rem);
@@ -840,7 +840,7 @@
             justify-content: center;
             align-items: flex-start;
             padding: 1rem;
-            margin-bottom: 10rem;
+            margin-bottom: 0;
         }
 
         .hero__phone {
