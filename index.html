@@ -7,7 +7,7 @@
     <title>Metron AI | Performance, democratized.</title>
 
     <meta property="og:title" content="Metron AI">
-    <meta property="og:description" content="Training, nutrition, supplements, and recovery—all built by AI, all adapting to you daily.">
+    <meta property="og:description" content="AI-powered training, nutrition & recovery — all adapting to you daily.">
     <meta property="og:image" content="https://metron.live/brand/brand%20preview/og-preview.png">
     <meta property="og:image:width" content="720">
     <meta property="og:image:height" content="960">
@@ -19,7 +19,7 @@
     <meta property="og:url" content="https://metron.live">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="description" content="Metron connects your sleep, recovery, training, and nutrition into one intelligent system—then adapts it daily based on your data. Your partner in performance.">
+    <meta name="description" content="AI-powered training, nutrition & recovery — all adapting to you daily. Performance, democratized.">
 
     <script defer data-domain="metron.live" src="https://plausible.io/js/script.js"></script>
 
@@ -49,6 +49,7 @@
             --bg: #FAFAF8;
             --bg-alt: #F5F5F3;
             --bg-card: transparent;
+            --marble: url('images/marble.png') center/cover;
             --bg-dark: #0f0f0f;
             --text-primary: #1a1a1a;
             --text-secondary: #4a4a4a;
@@ -1907,11 +1908,11 @@
         }
 
         .faq-item {
-            border-bottom: 1px solid var(--border);
+            border-bottom: 1px solid rgba(200, 185, 170, 0.3);
         }
 
         .faq-item:first-child {
-            border-top: 1px solid var(--border);
+            border-top: 1px solid rgba(200, 185, 170, 0.3);
         }
 
         .faq-question {
@@ -1925,7 +1926,7 @@
             justify-content: space-between;
             align-items: center;
             gap: 1rem;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Space Grotesk', sans-serif;
             font-size: 1.15rem;
             font-weight: 600;
             color: var(--text-primary);
@@ -2245,7 +2246,7 @@
                 <a href="#compare" class="nav__link">Compare</a>
                 <a href="#faq" class="nav__link">FAQ</a>
             </div>
-            <a href="#beta" class="btn btn-primary nav__cta">Join Beta</a>
+            <a href="#beta" class="btn btn-primary nav__cta">Get the App</a>
             <button class="nav__hamburger" id="hamburger" aria-label="Menu">
                 <span></span>
                 <span></span>
@@ -2259,7 +2260,7 @@
         <a href="#how-it-works">How It Works</a>
         <a href="#compare">Compare</a>
         <a href="#faq">FAQ</a>
-        <a href="#beta" class="btn btn-primary">Join Beta</a>
+        <a href="#beta" class="btn btn-primary">Get the App</a>
     </div>
 
 
@@ -2616,12 +2617,12 @@
     ========================================== -->
     <section class="beta-section" id="beta">
         <div class="beta-section__inner">
-            <span class="beta-section__eyebrow reveal">Limited beta access</span>
+            <span class="beta-section__eyebrow reveal">Coming Soon</span>
             <h2 class="beta-section__headline reveal reveal-delay-1">
                 Stop Guessing.<br>Start Adapting.
             </h2>
             <p class="beta-section__sub reveal reveal-delay-2">
-                Free during beta. Lock in $6.99/month for life when we launch.
+                Launching on the App Store. Be the first to know.
             </p>
             <ul class="beta-section__value reveal reveal-delay-2">
                 <li>Complete 12-week plan built from your data</li>
@@ -2630,7 +2631,12 @@
                 <li>All integrations included</li>
             </ul>
 
-            <!-- Beta form removed — signup not wired yet -->
+            <div class="reveal reveal-delay-3" style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; align-items: center; flex-wrap: wrap;">
+                <a href="#" style="display: inline-block; opacity: 0.9; transition: opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.9'">
+                    <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store" style="height: 54px;">
+                </a>
+                <span style="font-family: 'Space Grotesk', sans-serif; font-size: 0.85rem; font-weight: 600; color: rgba(255,255,255,0.5); letter-spacing: 0.05em; text-transform: uppercase;">Coming Soon</span>
+            </div>
         </div>
     </section>
 
@@ -2715,12 +2721,17 @@
     ========================================== -->
     <footer>
         <div class="footer-content">
-            <a href="/" class="footer-logo" style="text-decoration:none;display:inline-flex;align-items:center;">
-                <svg width="28" height="22" viewBox="0 0 56 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <defs><mask id="footer-dot-mask"><rect width="56" height="44" fill="white"/><circle cx="28" cy="22" r="4" fill="black"/></mask></defs>
-                    <g mask="url(#footer-dot-mask)"><path d="M0 44L14 0L28 22L14 44H0Z" fill="rgba(255,255,255,0.75)"/><path d="M28 22L42 0L56 44H42L28 22Z" fill="rgba(255,255,255,0.75)"/></g>
+            <a href="/" class="footer-logo" style="text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;">
+                <svg width="42" height="34" viewBox="0 0 56 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <pattern id="footerMarble" patternUnits="userSpaceOnUse" width="56" height="44">
+                            <image href="images/marble.png" width="56" height="44" preserveAspectRatio="xMidYMid slice"/>
+                        </pattern>
+                        <mask id="footer-dot-mask"><rect width="56" height="44" fill="white"/><circle cx="28" cy="22" r="4" fill="black"/></mask>
+                    </defs>
+                    <g mask="url(#footer-dot-mask)"><path d="M0 44L14 0L28 22L14 44H0Z" fill="url(#footerMarble)"/><path d="M28 22L42 0L56 44H42L28 22Z" fill="url(#footerMarble)"/></g>
                 </svg>
-                <span class="nav__logo-text" style="background: url('images/marble.png') center/cover; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">Metron</span>
+                <span style="font-family:'Space Grotesk',sans-serif;font-size:1.8rem;font-weight:700;background:url('images/marble.png') center/cover;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">Metron</span>
             </a>
             <div class="footer-links">
                 <a href="/privacy.html">Privacy</a>
