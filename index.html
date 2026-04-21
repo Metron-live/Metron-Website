@@ -259,8 +259,40 @@
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
+        }
+
+        /* Typewriter: each word fades in */
+        .quote-hero__text .word {
             opacity: 0;
-            animation: quoteReveal 2.5s ease-out 0.8s forwards;
+            display: inline-block;
+            animation: wordFadeIn 0.6s ease forwards;
+        }
+
+        @keyframes wordFadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Marble dust particles */
+        .quote-hero__particles {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .quote-hero__particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(210, 195, 175, 0.3);
+            border-radius: 50%;
+            animation: particleDrift linear infinite;
+        }
+        @keyframes particleDrift {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(20px); opacity: 0; }
         }
 
         .quote-hero__attribution {
@@ -340,6 +372,134 @@
 
         .quote-hero__perf .video-banner__tagline {
             font-size: clamp(1.4rem, 2.5vw, 2rem);
+        }
+
+        /* ==========================================
+           SECTION DIVIDERS
+        ========================================== */
+        .section-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            padding: 3rem 0;
+        }
+        .section-divider__line {
+            height: 1px;
+            width: 80px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        }
+        .section-divider__heptagon {
+            width: 16px;
+            height: 16px;
+            opacity: 0.5;
+        }
+        .section-divider__heptagon polygon {
+            fill: none;
+            stroke: var(--accent);
+            stroke-width: 1.5;
+        }
+
+        /* ==========================================
+           VIDEO VIGNETTE
+        ========================================== */
+        .video-banner__vignette {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.6) 100%);
+            pointer-events: none;
+        }
+
+        /* ==========================================
+           PARALLAX VIDEO
+        ========================================== */
+        .video-banner__video {
+            will-change: transform;
+        }
+
+        /* ==========================================
+           SMOOTH SCROLL REVEAL
+        ========================================== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 { transition-delay: 0.15s; }
+        .reveal-delay-2 { transition-delay: 0.3s; }
+        .reveal-delay-3 { transition-delay: 0.45s; }
+
+        /* ==========================================
+           DROP CAPS
+        ========================================== */
+        .drop-cap::first-letter {
+            font-family: 'Cardo', serif;
+            font-size: 3.5em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.08em;
+            margin-top: 0.05em;
+            color: var(--accent);
+        }
+
+        /* ==========================================
+           PULL QUOTES
+        ========================================== */
+        .pull-quote {
+            font-family: 'Cardo', serif;
+            font-size: clamp(1.4rem, 3vw, 2.2rem);
+            font-style: italic;
+            color: var(--accent);
+            text-align: center;
+            padding: 2rem 3rem;
+            position: relative;
+            line-height: 1.4;
+        }
+        .pull-quote::before {
+            content: '"';
+            font-size: 4rem;
+            color: var(--accent);
+            opacity: 0.3;
+            position: absolute;
+            top: -0.5rem;
+            left: 1rem;
+            font-family: 'Cardo', serif;
+        }
+
+        /* ==========================================
+           CLOSING QUOTE (above footer)
+        ========================================== */
+        .closing-quote {
+            background: #000;
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+        .closing-quote__text {
+            font-family: 'Cardo', serif;
+            font-size: clamp(1.3rem, 2.5vw, 2rem);
+            font-style: italic;
+            background: url('images/marble.png') center/cover;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            max-width: 650px;
+            margin: 0 auto 1rem;
+            line-height: 1.5;
+        }
+        .closing-quote__attribution {
+            font-family: 'Cardo', serif;
+            font-size: 0.95rem;
+            background: url('images/marble.png') center/cover;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            opacity: 0.6;
         }
 
         /* ==========================================
@@ -2381,14 +2541,14 @@
          SOCRATES QUOTE HERO
     ========================================== -->
     <section class="quote-hero" id="quote-hero">
+        <div class="quote-hero__particles" id="quote-particles"></div>
+
         <div class="quote-hero__perf">
             <h2 class="video-banner__tagline">Performance, democratized.</h2>
             <p class="video-banner__sub">For every athlete. At every level.</p>
         </div>
 
-        <p class="quote-hero__text">
-            "It is a shame for a man to grow old without seeing the beauty and strength of which his body is capable."
-        </p>
+        <p class="quote-hero__text" id="quote-text"></p>
         <span class="quote-hero__attribution">— Socrates</span>
         <div class="quote-hero__scroll-line"></div>
     </section>
@@ -2402,6 +2562,7 @@
             <source src="videos/montage-web.mp4" type="video/mp4">
         </video>
         <div class="video-banner__overlay"></div>
+        <div class="video-banner__vignette"></div>
 
         <!-- Hero content on top of video -->
         <div class="video-banner__hero-grid">
@@ -2658,6 +2819,11 @@
         </div>
     </section>
 
+    <div class="section-divider reveal">
+        <div class="section-divider__line"></div>
+        <svg class="section-divider__heptagon" viewBox="0 0 20 20"><polygon points="10,1 17,4.5 19,12 14.5,18.5 5.5,18.5 1,12 3,4.5"/></svg>
+        <div class="section-divider__line"></div>
+    </div>
 
     <!-- ==========================================
          COMPARISON TABLE
@@ -2727,6 +2893,11 @@
         </div>
     </section>
 
+    <div class="section-divider reveal">
+        <div class="section-divider__line"></div>
+        <svg class="section-divider__heptagon" viewBox="0 0 20 20"><polygon points="10,1 17,4.5 19,12 14.5,18.5 5.5,18.5 1,12 3,4.5"/></svg>
+        <div class="section-divider__line"></div>
+    </div>
 
     <!-- ==========================================
          TESTIMONIALS
@@ -2846,6 +3017,15 @@
     </section>
 
 
+
+    <!-- ==========================================
+         CLOSING QUOTE
+    ========================================== -->
+    <section class="closing-quote reveal">
+        <p class="closing-quote__text">"We are what we repeatedly do. Excellence, then, is not an act, but a habit."</p>
+        <span class="closing-quote__attribution">— Aristotle</span>
+    </section>
+
     <!-- ==========================================
          FOOTER
     ========================================== -->
@@ -2879,6 +3059,41 @@
     ========================================== -->
     <script>
         // ==========================================
+        // 0. TYPEWRITER QUOTE + PARTICLES
+        // ==========================================
+        (function() {
+            const quoteText = '"It is a shame for a man to grow old without seeing the beauty and strength of which his body is capable."';
+            const quoteEl = document.getElementById('quote-text');
+            if (quoteEl) {
+                const words = quoteText.split(' ');
+                words.forEach((word, i) => {
+                    const span = document.createElement('span');
+                    span.className = 'word';
+                    span.textContent = word + ' ';
+                    span.style.animationDelay = (0.8 + i * 0.12) + 's';
+                    quoteEl.appendChild(span);
+                });
+            }
+
+            // Marble dust particles
+            const particleContainer = document.getElementById('quote-particles');
+            if (particleContainer) {
+                for (let i = 0; i < 30; i++) {
+                    const p = document.createElement('div');
+                    p.className = 'quote-hero__particle';
+                    p.style.left = Math.random() * 100 + '%';
+                    p.style.bottom = '-10px';
+                    p.style.animationDuration = (8 + Math.random() * 12) + 's';
+                    p.style.animationDelay = (Math.random() * 10) + 's';
+                    p.style.width = (1 + Math.random() * 2) + 'px';
+                    p.style.height = p.style.width;
+                    particleContainer.appendChild(p);
+                }
+            }
+        })();
+
+
+        // ==========================================
         // 1. NAV SCROLL STATE
         // ==========================================
         const nav = document.getElementById('nav');
@@ -2901,6 +3116,19 @@
 
 
         // ==========================================
+        // 1b. PARALLAX VIDEO
+        const videoEl = document.querySelector('.video-banner__video');
+        if (videoEl) {
+            window.addEventListener('scroll', () => {
+                const bannerTop = document.querySelector('.video-banner')?.offsetTop || 0;
+                const scrolled = window.scrollY - bannerTop;
+                if (scrolled > -window.innerHeight && scrolled < window.innerHeight * 2) {
+                    videoEl.style.transform = `translate(-50%, -50%) translateY(${scrolled * 0.15}px)`;
+                }
+            }, { passive: true });
+        }
+
+
         // 2. MOBILE MENU
         // ==========================================
         const hamburger = document.getElementById('hamburger');
