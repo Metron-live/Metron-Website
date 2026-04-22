@@ -232,16 +232,16 @@
         /* ==========================================
            SOCRATES QUOTE HERO
         ========================================== */
-        .quote-hero {
-            position: relative;
-            width: 100%;
-            height: 100vh;
-            background: #000;
+        /* Quote overlay on video */
+        .quote-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 3;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
-            z-index: 101;
+            pointer-events: none;
         }
 
         .quote-hero__text {
@@ -296,21 +296,17 @@
         }
 
         .quote-hero__attribution {
-            position: absolute;
-            bottom: 30%;
-            left: 50%;
-            transform: translateX(-50%);
             font-family: 'Cardo', serif;
             font-size: 0.95rem;
             font-weight: 400;
             letter-spacing: 0.1em;
-            text-transform: none;
+            margin-top: 1.5rem;
             background: url('images/marble.png') center/cover;
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
             opacity: 0;
-            animation: quoteReveal 1.5s ease-out 2.5s forwards;
+            animation: quoteReveal 1.5s ease-out 3s forwards;
         }
 
         .quote-hero__scroll-line {
@@ -321,8 +317,9 @@
             width: 60px;
             height: 2px;
             background: var(--accent);
+            z-index: 4;
             opacity: 0;
-            animation: scrollLineReveal 1s ease-out 3.5s forwards, scrollLineBreathe 3s ease-in-out 4.5s infinite;
+            animation: scrollLineReveal 1s ease-out 4s forwards, scrollLineBreathe 3s ease-in-out 5s infinite;
         }
 
         @keyframes quoteReveal {
@@ -360,19 +357,7 @@
             pointer-events: auto;
         }
 
-        /* Performance democratized stays visible in quote mode */
-        .quote-hero__perf {
-            position: absolute;
-            top: calc(var(--nav-height) + 0.5rem);
-            right: 0;
-            padding: 0 clamp(1.5rem, 4vw, 3rem);
-            text-align: right;
-            z-index: 102;
-        }
-
-        .quote-hero__perf .video-banner__tagline {
-            font-size: clamp(1.4rem, 2.5vw, 2rem);
-        }
+        /* Tagline corner on video */
 
         /* ==========================================
            SECTION DIVIDERS
@@ -2540,22 +2525,8 @@
     <!-- ==========================================
          SOCRATES QUOTE HERO
     ========================================== -->
-    <section class="quote-hero" id="quote-hero">
-        <div class="quote-hero__particles" id="quote-particles"></div>
-
-        <div class="quote-hero__perf">
-            <h2 class="video-banner__tagline">Performance, democratized.</h2>
-            <p class="video-banner__sub">For every athlete. At every level.</p>
-        </div>
-
-        <p class="quote-hero__text" id="quote-text"></p>
-        <span class="quote-hero__attribution">— Socrates</span>
-        <div class="quote-hero__scroll-line"></div>
-    </section>
-
-
     <!-- ==========================================
-         VIDEO BANNER
+         VIDEO BANNER (with quote overlay)
     ========================================== -->
     <section class="video-banner" id="hero">
         <video class="video-banner__video" autoplay muted loop playsinline>
@@ -2563,41 +2534,16 @@
         </video>
         <div class="video-banner__overlay"></div>
         <div class="video-banner__vignette"></div>
+        <div class="quote-hero__particles" id="quote-particles"></div>
 
-        <!-- Hero content on top of video -->
-        <div class="video-banner__hero-grid">
-            <div class="video-banner__hero-content">
-                <div class="video-banner__eyebrow reveal">
-                    <span class="video-banner__dot"></span>
-                    Now in Beta
-                </div>
-                <h1 class="video-banner__headline reveal reveal-delay-1">
-                    Your data is<br>
-                    <span class="text-gradient">finally talking to itself.</span>
-                </h1>
-                <p class="video-banner__sub-text reveal reveal-delay-2">
-                    Metron connects your sleep, recovery, training, and nutrition into one system that adapts every single day. No generic plans. No manual tweaking.
-                </p>
-                <!-- Email form removed — beta signup not wired yet -->
-            </div>
-
-            <div class="video-banner__tagline-mobile reveal reveal-delay-2">
-                <h2 class="video-banner__tagline">Performance, democratized.</h2>
-                <p class="video-banner__sub">For every athlete. At every level.</p>
-            </div>
-
-            <div class="hero__phone-wrap reveal reveal-delay-2">
-                <div class="hero__badge hero__badge--hrv">HRV 44 up 12%</div>
-                <div class="hero__badge hero__badge--adjusted">Plan adjusted 2:03am</div>
-                <div class="hero__badge hero__badge--recovery">Recovery 64%</div>
-                <div class="hero__phone">
-                    <div class="hero__phone-screen">
-                        <div class="hero__phone-notch"></div>
-                        <img src="images/screen-training-volume.png" alt="Metron training volume dashboard" class="phone-screen-img">
-                    </div>
-                </div>
-            </div>
+        <!-- Socrates quote centered on video -->
+        <div class="quote-overlay">
+            <p class="quote-hero__text" id="quote-text"></p>
+            <span class="quote-hero__attribution">— Socrates</span>
         </div>
+
+        <!-- Scroll cue -->
+        <div class="quote-hero__scroll-line"></div>
 
         <!-- Corner tagline -->
         <div class="video-banner__tagline-corner">
@@ -3098,14 +3044,13 @@
         // ==========================================
         const nav = document.getElementById('nav');
         const videoBanner = document.querySelector('.video-banner');
-        const quoteHero = document.querySelector('.quote-hero');
         function updateNav() {
             const scrollY = window.scrollY;
-            const quoteBottom = quoteHero ? quoteHero.offsetHeight * 0.5 : 0;
-            const bannerBottom = videoBanner ? (quoteHero ? quoteHero.offsetHeight : 0) + videoBanner.offsetHeight - 80 : 0;
+            const bannerHalf = videoBanner ? videoBanner.offsetHeight * 0.4 : 0;
+            const bannerBottom = videoBanner ? videoBanner.offsetHeight - 80 : 0;
 
-            // Reveal nav links once user scrolls past quote
-            nav.classList.toggle('nav--reveal-nav', scrollY > quoteBottom);
+            // Reveal nav links once user scrolls past halfway through video
+            nav.classList.toggle('nav--reveal-nav', scrollY > bannerHalf);
 
             // Switch nav style when past video banner
             nav.classList.toggle('scrolled', scrollY > bannerBottom);
