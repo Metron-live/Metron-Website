@@ -2591,54 +2591,42 @@
 
 
     <!-- ==========================================
-         STATS BAR
+         PROBLEM
     ========================================== -->
-    <div class="stats-bar">
-        <div class="stats-bar__inner">
-            <div class="stats-bar__item reveal">
-                <span class="stats-bar__number" data-target="14" data-suffix="+">0</span>
-                <span class="stats-bar__label">Integrations</span>
-            </div>
-            <div class="stats-bar__divider"></div>
-            <div class="stats-bar__item reveal reveal-delay-1">
-                <span class="stats-bar__number" data-target="72" data-suffix="">0</span>
-                <span class="stats-bar__label">Workouts per plan</span>
-            </div>
-            <div class="stats-bar__divider"></div>
-            <div class="stats-bar__item reveal reveal-delay-2">
-                <span class="stats-bar__number" data-target="7" data-suffix="">0</span>
-                <span class="stats-bar__label">Adaptation timeframes</span>
-            </div>
-            <div class="stats-bar__divider"></div>
-            <div class="stats-bar__item reveal reveal-delay-3">
-                <span class="stats-bar__number" data-target="90" data-suffix=" min">0</span>
-                <span class="stats-bar__label">To build your plan</span>
+    <section class="section section--dark" id="problem" style="padding: var(--section-v) 0;">
+        <div class="container" style="max-width: 800px;">
+            <span class="t-label reveal" style="font-family: 'Cardo', serif; font-size: 0.85rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 1.5rem;">The problem</span>
+            <h2 class="reveal reveal-delay-1" style="font-family: 'Cardo', serif; font-size: clamp(2.4rem, 4vw, 4rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 2rem;">You're tracking everything. Nothing's talking.</h2>
+            <div class="reveal reveal-delay-2" style="font-family: 'Cardo', serif; font-size: 1.15rem; line-height: 1.75; color: rgba(255,255,255,0.8);">
+                <p style="margin-bottom: 1.5rem;">You slept four hours. You ran ten miles yesterday. This morning your training app wants intervals. Your nutrition app has no idea you trained fasted. Your recovery score is red. Your coach app tells you to push.</p>
+                <p style="margin-bottom: 1.5rem; font-weight: 700; color: rgba(255,255,255,0.95);">Five apps. Five answers. Zero coordination.</p>
+                <p>The data exists. Nothing reads all of it.</p>
             </div>
         </div>
-    </div>
+    </section>
+
+
+
+    <!-- ==========================================
+         TRANSITION LINE
+    ========================================== -->
+    <section style="background: #000; padding: 4rem 2rem; text-align: center;">
+        <p class="reveal" style="font-family: 'Cardo', serif; font-size: clamp(1.6rem, 3vw, 2.4rem); font-style: italic; font-weight: 400; background: url('images/marble.png') center/cover fixed; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; max-width: 600px; margin: 0 auto; line-height: 1.4;">There had to be a better way.</p>
+    </section>
 
 
     <!-- ==========================================
          INTEGRATIONS
     ========================================== -->
     <section class="integrations">
-        <p class="integrations__headline">Connects with everything you already use</p>
+        <!-- Introducing Metron -->
+        <div style="text-align: center; padding: 0 2rem 3rem; max-width: 800px; margin: 0 auto;">
+            <span class="reveal" style="font-family: 'Cardo', serif; font-size: 0.85rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 1.5rem;">The solution</span>
+            <h2 class="reveal reveal-delay-1" style="font-family: 'Cardo', serif; font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 700; color: #fff; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1.5rem;">One coach. All your data. Every night.</h2>
+            <p class="reveal reveal-delay-2" style="font-family: 'Cardo', serif; font-size: 1.1rem; color: rgba(255,255,255,0.75); line-height: 1.65; max-width: 650px; margin: 0 auto 2.5rem;">Metron pulls your sleep, recovery, training, and nutrition into a single model — then rewrites tomorrow's plan while you sleep. No manual input. No conflicting advice. One plan, adapting to you, every morning.</p>
+        </div>
+        <p class="integrations__headline" style="margin-bottom: 2rem;">Connects with everything you already use</p>
         <div class="integrations-track">
-            <div class="integration-item"><img src="images/health.png" alt="Apple Health"><span>Apple Health</span></div>
-            <div class="integration-item"><img src="images/whoop.png" alt="Whoop"><span>Whoop</span></div>
-            <div class="integration-item"><img src="images/oura.png" alt="Oura"><span>Oura</span></div>
-            <div class="integration-item"><img src="images/garmin.png" alt="Garmin"><span>Garmin</span></div>
-            <div class="integration-item"><img src="images/fitbit.png" alt="Fitbit"><span>Fitbit</span></div>
-            <div class="integration-item"><img src="images/strava.png" alt="Strava"><span>Strava</span></div>
-            <div class="integration-item"><img src="images/trainingpeaks.png" alt="TrainingPeaks"><span>TrainingPeaks</span></div>
-            <div class="integration-item"><img src="images/myfitnesspal.png" alt="MyFitnessPal"><span>MyFitnessPal</span></div>
-            <div class="integration-item"><img src="images/eightsleep.png" alt="Eight Sleep"><span>Eight Sleep</span></div>
-            <div class="integration-item"><img src="images/peloton.png" alt="Peloton"><span>Peloton</span></div>
-            <div class="integration-item"><img src="images/fitbod.png" alt="Fitbod"><span>Fitbod</span></div>
-            <div class="integration-item"><img src="images/withings.png" alt="Withings"><span>Withings</span></div>
-            <div class="integration-item"><img src="images/instacart.png" alt="Instacart"><span>Instacart</span></div>
-            <div class="integration-item"><img src="images/grubhub.png" alt="Grubhub"><span>Grubhub</span></div>
-            <!-- Duplicate for seamless loop -->
             <div class="integration-item"><img src="images/health.png" alt="Apple Health"><span>Apple Health</span></div>
             <div class="integration-item"><img src="images/whoop.png" alt="Whoop"><span>Whoop</span></div>
             <div class="integration-item"><img src="images/oura.png" alt="Oura"><span>Oura</span></div>
@@ -2657,43 +2645,35 @@
     </section>
 
 
+
+
     <!-- ==========================================
-         PROBLEM — scroll-driven call & response
+         MAGIC MOMENT
     ========================================== -->
-    <div class="problem-scroll">
-        <div class="problem-sticky">
-
-            <!-- Orange wall slides down over right half -->
-            <div class="problem__wall" id="problem-wall"></div>
-
-            <div class="problem__inner">
-
-                <!-- Left: The problem -->
-                <div class="problem__left" id="problem-left">
-                    <span class="t-label problem__eyebrow">The problem</span>
-                    <h2 class="problem__headline">
-                        You're tracking<br>everything.<br>Nothing's<br>connected.
-                    </h2>
-                    <p class="problem__desc">Your calorie counter doesn't know you went on a two hour run yesterday and only slept four hours last night.</p>
+    <section class="section section--dark" id="magic-moment" style="padding: var(--section-v) 0;">
+        <div class="container" style="max-width: 800px;">
+            <span class="reveal" style="font-family: 'Cardo', serif; font-size: 0.85rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 1.5rem; text-align: center;">While you sleep</span>
+            <h2 class="reveal reveal-delay-1" style="font-family: 'Cardo', serif; font-size: clamp(2.4rem, 4vw, 4rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 3rem; text-align: center;">Metron is working.</h2>
+            <div class="reveal reveal-delay-2" style="font-family: 'Inter', sans-serif; font-size: 1rem; line-height: 2.2; color: rgba(255,255,255,0.7);">
+                <div style="display: flex; gap: 1.2rem; align-items: baseline; margin-bottom: 1rem;">
+                    <span style="font-family: 'Inter', sans-serif; font-weight: 700; color: var(--accent); white-space: nowrap; min-width: 90px;">11:47 PM</span>
+                    <span style="font-family: 'Cardo', serif;">Whoop logs recovery at 42%.</span>
                 </div>
-
-                <!-- Right: The solution — revealed on scroll -->
-                <div class="problem__right" id="problem-solution">
-                    <div class="problem__right-content">
-                        <span class="problem__solution-label">The solution</span>
-                        <h3 class="problem__solution-headline">
-                            One AI that reads all of it. And acts on it overnight.
-                        </h3>
-                        <p class="problem__solution-body">
-                            Metron pulls your sleep, recovery, training, and nutrition into a single model, then rewrites your plan every night based on what your data actually says. No manual input. No guesswork. Just a plan that adapts before your alarm goes off.
-                        </p>
-                    </div>
+                <div style="display: flex; gap: 1.2rem; align-items: baseline; margin-bottom: 1rem;">
+                    <span style="font-family: 'Inter', sans-serif; font-weight: 700; color: var(--accent); white-space: nowrap; min-width: 90px;">2:13 AM</span>
+                    <span style="font-family: 'Cardo', serif;">Apple Health confirms four hours of sleep.</span>
                 </div>
-
+                <div style="display: flex; gap: 1.2rem; align-items: baseline; margin-bottom: 1rem;">
+                    <span style="font-family: 'Inter', sans-serif; font-weight: 700; color: var(--accent); white-space: nowrap; min-width: 90px;">4:30 AM</span>
+                    <span style="font-family: 'Cardo', serif;">Metron rewrites tomorrow: strength session becomes mobility, protein target drops 20g, cardio moves to Thursday.</span>
+                </div>
+                <div style="display: flex; gap: 1.2rem; align-items: baseline;">
+                    <span style="font-family: 'Inter', sans-serif; font-weight: 700; color: var(--accent); white-space: nowrap; min-width: 90px;">7:00 AM</span>
+                    <span style="font-family: 'Cardo', serif;">Your plan is ready. You didn't do anything.</span>
+                </div>
             </div>
         </div>
-    </div>
-
+    </section>
 
     <!-- ==========================================
          FEATURES
@@ -2888,9 +2868,20 @@
     <section class="testimonial-feature" id="testimonials">
         <div class="testimonial-feature__inner">
             <h2 class="testimonial-feature__heading reveal">Built for people who take training seriously.</h2>
-            <div class="testimonial-feature__quote-wrap reveal reveal-delay-1">
-                <p class="testimonial-feature__quote" id="testimonialQuote">"I've tried every fitness app out there. Metron is the first one that actually feels like it knows me. It adjusted my training the morning after a bad night of sleep before I even opened it."</p>
-                <span class="testimonial-feature__author" id="testimonialAuthor">James R. — Competitive powerlifter</span>
+
+            <div class="testimonial-feature__quote-wrap reveal reveal-delay-1" style="margin-bottom: 3rem;">
+                <p class="testimonial-feature__quote">"I've tried every fitness app out there. Metron is the first one that actually feels like it knows me. It adjusted my training the morning after a bad night of sleep before I even opened it."</p>
+                <span class="testimonial-feature__author">James R. — Competitive powerlifter</span>
+            </div>
+
+            <div class="testimonial-feature__quote-wrap reveal reveal-delay-2" style="margin-bottom: 3rem;">
+                <p class="testimonial-feature__quote">"I've been marathon training for six years. No coach I've ever worked with adjusted my taper week the way Metron did — it caught a recovery dip I hadn't even noticed yet and cut my Tuesday session before I hurt myself."</p>
+                <span class="testimonial-feature__author">Sarah K. — 2:58 marathoner</span>
+            </div>
+
+            <div class="testimonial-feature__quote-wrap reveal reveal-delay-3">
+                <p class="testimonial-feature__quote">"I'm not a competitive athlete. I just want to train smart around a busy job and two kids. Metron is the first thing that actually accounts for the fact that I slept like garbage because the baby was up."</p>
+                <span class="testimonial-feature__author">Marcus T. — Recreational lifter</span>
             </div>
         </div>
     </section>
@@ -3324,14 +3315,14 @@
                     bullets: ['Syncs your wearables before generating', 'Eight-phase build with adversarial self-critique', '15 to 25 custom rules for your vulnerabilities']
                 },
                 {
-                    num: '02', name: 'Smart Adaptation Engine',
-                    desc: 'Slept badly? Your workout changes by 2am. Crushed last week? This week loads more. Your plan rebalances across 7 timeframes, every single day.',
-                    bullets: ['Yearly → quarterly → monthly → daily → hourly', 'Catches overtraining 2 weeks before you feel it', 'Training AND nutrition adjust together']
+                    num: '02', name: 'Adaptation Engine',
+                    desc: 'Every night, eight data streams. One adjusted plan by morning. Metron reads your overnight recovery, yesterday\'s training load, nutrition adherence, and sleep quality — then rewrites tomorrow before your alarm.',
+                    bullets: ['Nightly rewrite based on recovery state', 'Adjusts intensity, volume, and nutrition together', 'Explains every change in plain language']
                 },
                 {
                     num: '03', name: 'Arete AI Coach',
-                    desc: 'Not a chatbot. A coach with perfect memory of every workout, meal, and night of sleep you\'ve ever logged, searching months of history to answer questions no generic AI can.',
-                    bullets: ['RAG search over months of YOUR training data', '20 personality combinations (tough → supportive)', 'Learns your patterns and keeps you honest']
+                    desc: 'Name comes from the Greek aretē — excellence, virtue, living up to your potential. Ask Arete anything. It has your full history, your current plan, and your real-time data. Not generic advice — your answer, for your body, right now.',
+                    bullets: ['Remembers every conversation', 'Sees your wearable data in real time', 'Powered by Claude, trained on your plan']
                 }
             ];
 
