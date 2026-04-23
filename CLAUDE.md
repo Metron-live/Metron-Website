@@ -89,3 +89,43 @@ Target order after restructure:
 - CSS-in-JS or preprocessors
 - Analytics, cookies, consent banners (handled separately)
 - Dark mode toggle (planned but not this pass)
+
+## Mega menu navigation
+
+Metron nav is moving to a Harvey-style mega-menu pattern for two items: Platform and Athletes. Compare and FAQ remain simple anchor links. "Get the App" stays as the CTA button.
+
+Nav structure:
+Logo · · · Platform ▾ · Athletes ▾ · Compare · FAQ · [Get the App]
+
+Platform dropdown — left column (text items, Cardo, stacked vertically, ~48px gap):
+- Overview — Seven pillars. One score. Every day.
+- Plan Engine — 90-minute build. 72 workouts. Built from your data.
+- Adaptation Engine — Nightly rewrite based on your recovery.
+- Arete AI Coach — Your history, your plan, your real-time data.
+- Integrations — Apple Health, Whoop, Oura, Garmin, and more.
+
+Platform dropdown — right column (featured):
+Title: The Heptagon
+Body: Seven pillars. One score. Every day.
+Visual: animated rotating heptagon (reuse hero scroll-cue component scaled up) on black marble background
+
+Athletes dropdown — left column:
+- Endurance — Runners, cyclists, triathletes.
+- Strength — Lifters, powerlifters, bodybuilders.
+- General fitness — Busy lives, real training.
+- Competitive — Teams, coaches, sports programs.
+
+Athletes dropdown — right column (featured):
+Testimonial card: Sarah K., 2:58 marathoner. Quote: "No coach I've ever worked with adjusted my taper week the way Metron did."
+
+Visual spec for the mega menu:
+- Panel: full viewport width, slides down from nav, black marble background (images/black-marble.jpg)
+- Panel height: ~540px desktop
+- Panel entrance: 200ms ease-out, fade + 8px translateY
+- Active nav item: amber hairline underneath, caret flips to ▲
+- Caret glyph: small rotating heptagon (match hero scroll cue, smaller)
+- Left column items: Cardo medium 18px title, Cardo regular 14px description at 70% white opacity
+- Featured right column: Cardo medium 24px title, Cardo regular 16px body
+- Hover state on items: subtle amber tint on title, smooth 150ms
+- On scroll: nav background becomes marble (existing behavior), panel still opens on black marble
+- Mobile: reverts to existing hamburger pattern — do not build mega menu on mobile this pass
