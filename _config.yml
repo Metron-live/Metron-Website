@@ -1,0 +1,3 @@
+# Jekyll skips dot-folders by default; Apple fetches /.well-known/apple-app-site-association
+include:
+  - .well-known
