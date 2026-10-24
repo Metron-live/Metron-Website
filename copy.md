@@ -33,8 +33,10 @@ integrations unless they have been independently verified and approved.
 
 ## Reservation
 
-The reservation form is phone-first. It offers a founding free year and uses
-this confirmation:
+The reservation form is phone-first. A founding reservation provides the full
+coach free for the first year. This is distinct from the standard launch offer:
+a 30-day full-coach trial with no card, followed by the free tracker if the user
+does not continue. Use this confirmation:
 
 > Welcome to the Metron family. Your free year is reserved. It's time to begin
 > your journey to greatness.

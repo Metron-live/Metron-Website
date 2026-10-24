@@ -37,6 +37,8 @@ assert.match(main[1], /<section[^>]+class="closing-quote reveal"/i);
 assert.ok(count(visibleText, '30 days') >= 2);
 assert.ok(count(visibleText, 'no card') >= 3);
 assert.ok(count(visibleText, 'tracker, logging, and history remain free') >= 2);
+assert.ok(count(visibleText, 'full coach free for the first year') >= 2);
+assert.match(visibleText, /full Metron coach free for the first year/i);
 assert.match(visibleText, /Welcome to the Metron family\./);
 assert.match(visibleText, /journey to greatness\./);
 
@@ -48,6 +50,10 @@ for (const forbidden of [
   assert.equal(visibleText.includes(forbidden), false, `forbidden claim found: ${forbidden}`);
 }
 assert.doesNotMatch(html, /<section[^>]+(?:founder|testimonial)/i);
+assert.doesNotMatch(visibleText, /\b\d+(?:\.\d+)?%\b/, 'unsupported percentage claim found');
+for (const unverifiedIntegration of ['Garmin', 'WHOOP', 'Oura', 'Strava', 'Fitbit']) {
+  assert.doesNotMatch(visibleText, new RegExp(`\\b${unverifiedIntegration}\\b`, 'i'));
+}
 
 // Launch proof and future boundaries.
 for (const proof of [
@@ -86,11 +92,14 @@ for (const formId of ['hero-form', 'beta-form']) {
   assert.ok(form, `missing #${formId}`);
   assert.match(form[1], /type="tel"/i);
   assert.match(form[1], /autocomplete="tel"/i);
+  assert.match(form[1], /aria-describedby="[^"]+"/i);
+  assert.match(form[0], /data-source="(?:hero|reservation-section)"/i);
   assert.match(form[1], /<label[^>]+for=/i);
   assert.match(form[1], /<button[^>]+type="submit"/i);
 }
 assert.ok(count(html, 'role="status"') >= 2);
 assert.ok(count(html, 'role="alert"') >= 2);
+assert.equal(count(visibleText, 'Reserve my free year'), 4, 'all reservation CTAs should use the approved label');
 
 // Expandable controls expose matching state and relationships to assistive tech.
 for (const match of html.matchAll(/<button[^>]+aria-controls="([^"]+)"[^>]*>/g)) {
@@ -152,7 +161,7 @@ async function testReservationFunction() {
   };
   const valid = await handler({
     httpMethod: 'POST',
-    body: JSON.stringify({ type: 'phone', value: '+1 (415) 555-0123' })
+    body: JSON.stringify({ type: 'phone', value: '+1 (415) 555-0123', source: 'hero' })
   });
   assert.equal(valid.statusCode, 200);
   assert.deepEqual(JSON.parse(valid.body), { success: true });
@@ -160,6 +169,8 @@ async function testReservationFunction() {
   const message = JSON.parse(request.options.body);
   assert.equal(message.to, 'reservations@example.com');
   assert.match(message.text, /\+14155550123/);
+  assert.match(message.text, /founding free-year full-coach reservation/);
+  assert.match(message.text, /metron\.live\/hero/);
 
   global.fetch = async () => ({ ok: false, status: 429 });
   const originalConsoleError = console.error;

@@ -12,6 +12,7 @@ const jsonResponse = (statusCode, body) => ({
 });
 
 const normalizePhone = (value) => String(value || '').trim().replace(/[\s().-]/g, '');
+const RESERVATION_SOURCES = new Set(['hero', 'reservation-section']);
 
 exports.handler = async (event) => {
   if (event.httpMethod === 'OPTIONS') {
@@ -37,6 +38,7 @@ exports.handler = async (event) => {
   if (!/^\+?[0-9]{10,15}$/.test(phone)) {
     return jsonResponse(422, { error: 'Enter a valid mobile phone number' });
   }
+  const source = RESERVATION_SOURCES.has(payload.source) ? payload.source : 'unspecified';
 
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
@@ -55,7 +57,7 @@ exports.handler = async (event) => {
         from: 'Metron Reservations <beta@metron.live>',
         to: RESERVATION_RECIPIENT,
         subject: 'New Metron free-year reservation',
-        text: `Mobile: ${phone}\nOffer: founding free-year reservation\nSource: metron.live`
+        text: `Mobile: ${phone}\nOffer: founding free-year full-coach reservation\nSource: metron.live/${source}`
       })
     });
 

@@ -7,7 +7,7 @@
     <title>Metron | The World's Smartest Personal Trainer</title>
 
     <meta property="og:title" content="Metron | The World's Smartest Personal Trainer">
-    <meta property="og:description" content="A personal trainer that builds, coaches, tracks, and adapts your training. Keep the best-in-class workout tracker free.">
+    <meta property="og:description" content="The world's smartest personal trainer, built on a best-in-class workout tracker that stays free. Try the full coach for 30 days, no card required.">
     <meta property="og:image" content="https://metron.live/brand/brand%20preview/og-preview.png">
     <meta property="og:image:width" content="720">
     <meta property="og:image:height" content="960">
@@ -3151,7 +3151,7 @@
                 <a href="#compare" class="nav__link">Compare</a>
                 <a href="#faq" class="nav__link">FAQ</a>
             </div>
-            <a href="#reserve" class="btn btn-primary nav__cta">Reserve a free year</a>
+            <a href="#reserve" class="btn btn-primary nav__cta">Reserve my free year</a>
             <button class="nav__hamburger" type="button" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
                 <span></span>
                 <span></span>
@@ -3247,7 +3247,7 @@
         </div>
         <a href="#compare">Compare</a>
         <a href="#faq">FAQ</a>
-        <a href="#reserve" class="btn btn-primary">Reserve a free year</a>
+        <a href="#reserve" class="btn btn-primary">Reserve my free year</a>
     </div>
 
 
@@ -3270,15 +3270,15 @@
             <p class="hero-kicker">Metron</p>
             <h1 class="quote-hero__text" id="hero-title">The world's smartest personal trainer.</h1>
             <p class="quote-hero__attribution">And a best-in-class workout tracker that stays free.</p>
-            <form class="video-banner__form hero-reservation-form" id="hero-form" aria-label="Hero free-year reservation">
+            <form class="video-banner__form hero-reservation-form" id="hero-form" data-source="hero" aria-label="Hero free-year reservation">
                 <label class="sr-only" for="hero-phone">Mobile phone number</label>
-                <input class="video-banner__form-input" id="hero-phone" type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="Mobile phone number" required>
+                <input class="video-banner__form-input" id="hero-phone" type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="Mobile phone number" aria-describedby="hero-offer-note hero-error" required>
                 <button class="btn btn-primary video-banner__form-btn" type="submit" id="hero-submit">
                     <span class="btn-text">Reserve my free year</span>
                     <span class="btn-loading" hidden>Reserving…</span>
                 </button>
             </form>
-            <p class="hero-reservation-note">30 days of the full coach. No card required. Your tracker, logging, and history remain free.</p>
+            <p class="hero-reservation-note" id="hero-offer-note">Founding reservations get the full coach free for the first year. The standard offer is 30 days of the full coach with no card required; your tracker, logging, and history remain free.</p>
             <div class="hero__success" id="hero-success" role="status" tabindex="-1">
                 <strong>Welcome to the Metron family.</strong>
                 Your free year is reserved. It's time to begin your journey to greatness.
@@ -3435,16 +3435,16 @@
             <div class="beta-section__inner">
                 <span class="beta-section__eyebrow reveal">Founding reservation</span>
                 <h2 class="beta-section__headline reveal reveal-delay-1">Reserve your first year free.</h2>
-                <p class="beta-section__sub reveal reveal-delay-2">Meet the world's smartest personal trainer. Start with 30 days of the full coach—no card required—and keep the best-in-class workout tracker free.</p>
-                <form class="beta-form reveal reveal-delay-2" id="beta-form" aria-label="Founding free-year reservation">
+                <p class="beta-section__sub reveal reveal-delay-2" id="reservation-offer-note">Meet the world's smartest personal trainer. Founding reservations get the full coach free for the first year. The standard offer starts with 30 days—no card required—and the best-in-class workout tracker stays free.</p>
+                <form class="beta-form reveal reveal-delay-2" id="beta-form" data-source="reservation-section" aria-label="Founding free-year reservation">
                     <label class="sr-only" for="beta-phone">Mobile phone number</label>
-                    <input class="beta-form__input" id="beta-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Mobile phone number" required>
+                    <input class="beta-form__input" id="beta-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Mobile phone number" aria-describedby="reservation-offer-note reservation-privacy-note beta-error" required>
                     <button class="btn btn-primary beta-form__btn" type="submit" id="beta-submit">
                         <span class="btn-text">Reserve my free year</span>
                         <span class="btn-loading" hidden>Reserving…</span>
                     </button>
                 </form>
-                <p class="beta-disclaimer reveal reveal-delay-2">Mobile number required for reservation updates. No card. No spam.</p>
+                <p class="beta-disclaimer reveal reveal-delay-2" id="reservation-privacy-note">Mobile number required for reservation updates. No card. No spam.</p>
                 <div class="beta-success" id="beta-success" role="status" tabindex="-1">
                     <div class="beta-success__icon" aria-hidden="true">✓</div>
                     <p class="beta-success__title">Welcome to the Metron family.</p>
@@ -3481,37 +3481,46 @@
                     </div>
                     <div class="faq-item reveal">
                         <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-answer-3" id="faq-question-3">
-                            Are Arete chat and the Training screens different products?
+                            What does the free-year reservation include?
                             <span class="faq-icon" aria-hidden="true">+</span>
                         </button>
                         <div class="faq-answer" id="faq-answer-3" role="region" aria-labelledby="faq-question-3" aria-hidden="true">
-                            No. They are two interfaces to the same plan, history, and shared actions. Chat is useful when you want to ask or understand; dedicated screens are useful when you want to see or change something directly.
+                            Founding reservations get the full Metron coach free for the first year. The standard launch offer is a 30-day full-coach trial with no card required. In either case, workout tracking, logging, and history remain free afterward.
                         </div>
                     </div>
                     <div class="faq-item reveal">
                         <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-answer-4" id="faq-question-4">
-                            What platforms is Metron available on?
+                            Are Arete chat and the Training screens different products?
                             <span class="faq-icon" aria-hidden="true">+</span>
                         </button>
                         <div class="faq-answer" id="faq-answer-4" role="region" aria-labelledby="faq-question-4" aria-hidden="true">
-                            Metron launches first on iPhone. Android and a dedicated Watch experience are coming later.
+                            No. They are two interfaces to the same plan, history, and shared actions. Chat is useful when you want to ask or understand; dedicated screens are useful when you want to see or change something directly.
                         </div>
                     </div>
                     <div class="faq-item reveal">
                         <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-answer-5" id="faq-question-5">
-                            Which wearable data does Metron use at launch?
+                            What platforms is Metron available on?
                             <span class="faq-icon" aria-hidden="true">+</span>
                         </button>
                         <div class="faq-answer" id="faq-answer-5" role="region" aria-labelledby="faq-question-5" aria-hidden="true">
-                            With your permission, Metron uses verified recovery and workout signals available through Apple Health. We do not claim an integration until it is ready.
+                            Metron launches first on iPhone. Android and a dedicated Watch experience are coming later.
                         </div>
                     </div>
                     <div class="faq-item reveal">
                         <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-answer-6" id="faq-question-6">
-                            Is Metron medical advice?
+                            Which wearable data does Metron use at launch?
                             <span class="faq-icon" aria-hidden="true">+</span>
                         </button>
                         <div class="faq-answer" id="faq-answer-6" role="region" aria-labelledby="faq-question-6" aria-hidden="true">
+                            With your permission, Metron uses verified recovery and workout signals available through Apple Health. We do not claim an integration until it is ready.
+                        </div>
+                    </div>
+                    <div class="faq-item reveal">
+                        <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-answer-7" id="faq-question-7">
+                            Is Metron medical advice?
+                            <span class="faq-icon" aria-hidden="true">+</span>
+                        </button>
+                        <div class="faq-answer" id="faq-answer-7" role="region" aria-labelledby="faq-question-7" aria-hidden="true">
                             No. Metron is a training and wellness product, not a medical service. For an injury, symptoms, or any medical concern, consult a qualified healthcare professional.
                         </div>
                     </div>
@@ -3895,7 +3904,7 @@
                 const response = await fetch('/.netlify/functions/beta-signup', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ type: 'phone', value: phone })
+                    body: JSON.stringify({ type: 'phone', value: phone, source: formEl.dataset.source })
                 });
 
                 const data = await response.json();

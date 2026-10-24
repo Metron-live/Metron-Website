@@ -4,7 +4,7 @@ Landing page for [metron.live](https://metron.live) — the world's smartest per
 
 ## Overview
 
-Metron builds, coaches, tracks, and adapts training. The website also accepts phone-first founding reservations for a free year.
+Metron builds, coaches, tracks, and adapts training. The website also accepts phone-first founding reservations for a free first year of the full coach.
 
 ## Tech Stack
 
@@ -26,7 +26,7 @@ cd metron-landing
 
 Set `RESEND_API_KEY` in Netlify. Reservations are sent to `beta@metron.live` by
 default; set `SIGNUP_NOTIFICATION_EMAIL` to route them to another approved
-inbox. The browser posts only the submitted phone number and offer source to
+inbox. The browser posts only the submitted phone number and page source to
 `/.netlify/functions/beta-signup`.
 
 ### 3. Deploy
