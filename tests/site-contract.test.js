@@ -28,6 +28,10 @@ assert.match(hero, /<h1[^>]*>The world's smartest personal trainer\.<\/h1>/i);
 assert.match(hero, /best-in-class workout tracker that stays free/i);
 assert.ok(count(visibleText, "world's smartest personal trainer") >= 3);
 assert.ok(count(visibleText, 'best-in-class workout tracker') >= 3);
+const main = html.match(/<main>([\s\S]*?)<\/main>/i);
+assert.ok(main, 'missing main landmark');
+assert.match(main[1], /<section[^>]+id="hero"/i);
+assert.match(main[1], /<section[^>]+class="closing-quote reveal"/i);
 
 // Offer mechanics are unambiguous wherever a visitor decides.
 assert.ok(count(visibleText, '30 days') >= 2);
@@ -67,6 +71,15 @@ for (const later of ['Injury mode', 'vacation mode', 'technical-skill coaching',
 assert.match(visibleText, /What platforms is Metron available on\?/);
 assert.match(html, /\.faq-question,\s*\.faq-answer\s*{\s*font-family:\s*'Cardo'/);
 
+// Brand typography remains disciplined: no extra font family, Cardo headings,
+// Inter actions, and Space Grotesk only on Metron wordmark treatments.
+assert.equal(html.includes('Cormorant'), false);
+assert.match(html, /h1, h2, h3, h4\s*{\s*font-family:\s*'Cardo'/);
+assert.match(html, /\.btn\s*{[\s\S]*?font-family:\s*'Inter'/);
+for (const match of html.matchAll(/([^{}]+)\{[^{}]*font-family:\s*'Space Grotesk'/g)) {
+  assert.match(match[1], /logo|hero-kicker/i, `Space Grotesk used outside a wordmark: ${match[1].trim()}`);
+}
+
 // Forms are phone-first, labelled, and report success/errors accessibly.
 for (const formId of ['hero-form', 'beta-form']) {
   const form = html.match(new RegExp(`<form[^>]+id=["']${formId}["'][^>]*>([\\s\\S]*?)<\\/form>`, 'i'));
@@ -78,6 +91,20 @@ for (const formId of ['hero-form', 'beta-form']) {
 }
 assert.ok(count(html, 'role="status"') >= 2);
 assert.ok(count(html, 'role="alert"') >= 2);
+
+// Expandable controls expose matching state and relationships to assistive tech.
+for (const match of html.matchAll(/<button[^>]+aria-controls="([^"]+)"[^>]*>/g)) {
+  const controlledId = match[1];
+  const controlled = html.match(new RegExp(`<[^>]+id=["']${controlledId}["'][^>]*>`, 'i'));
+  assert.ok(controlled, `missing controlled element: #${controlledId}`);
+  assert.match(controlled[0], /(?:aria-hidden="true"|\sinert(?:\s|>))/i, `#${controlledId} needs an initial hidden state`);
+}
+for (const match of html.matchAll(/<div class="faq-answer"[^>]+>/g)) {
+  assert.match(match[0], /role="region"/i);
+  assert.match(match[0], /aria-labelledby="faq-question-\d+"/i);
+}
+assert.match(html, /if \(e\.key !== 'ArrowDown'\) return;[\s\S]*?querySelector\('a'\)\?\.focus\(\)/);
+assert.match(html, /e\.key === 'Escape'[\s\S]*?activeTrigger\.focus\(\)/);
 
 // IDs are unique and every in-page link resolves; dead href="#" links are forbidden.
 const ids = [...html.matchAll(/\sid="([^"]+)"/g)].map((match) => match[1]);
@@ -102,6 +129,16 @@ async function testReservationFunction() {
   process.env.SIGNUP_NOTIFICATION_EMAIL = 'reservations@example.com';
   const { handler } = require('../netlify/functions/beta-signup');
 
+  const preflight = await handler({ httpMethod: 'OPTIONS' });
+  assert.equal(preflight.statusCode, 200);
+  assert.equal(preflight.headers['Access-Control-Allow-Methods'], 'POST, OPTIONS');
+
+  const wrongMethod = await handler({ httpMethod: 'GET' });
+  assert.equal(wrongMethod.statusCode, 405);
+
+  const malformed = await handler({ httpMethod: 'POST', body: '{' });
+  assert.equal(malformed.statusCode, 400);
+
   const invalid = await handler({
     httpMethod: 'POST',
     body: JSON.stringify({ type: 'phone', value: '123' })
@@ -123,6 +160,17 @@ async function testReservationFunction() {
   const message = JSON.parse(request.options.body);
   assert.equal(message.to, 'reservations@example.com');
   assert.match(message.text, /\+14155550123/);
+
+  global.fetch = async () => ({ ok: false, status: 429 });
+  const originalConsoleError = console.error;
+  console.error = () => {};
+  const rejected = await handler({
+    httpMethod: 'POST',
+    body: JSON.stringify({ type: 'phone', value: '+1 415 555 0123' })
+  }).finally(() => {
+    console.error = originalConsoleError;
+  });
+  assert.equal(rejected.statusCode, 502);
 }
 
 testReservationFunction()

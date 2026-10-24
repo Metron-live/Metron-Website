@@ -29,7 +29,7 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&amp;family=Inter:wght@400;500;600;700;800&amp;family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,700&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&amp;family=Inter:wght@400;500;600;700;800&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
 
     <style>
         /* ==========================================
@@ -83,7 +83,7 @@
         }
 
         h1, h2, h3, h4 {
-            font-family: 'Inter', -apple-system, sans-serif;
+            font-family: 'Cardo', Georgia, serif;
             letter-spacing: -0.04em;
             line-height: 1.15;
         }
@@ -749,7 +749,7 @@
         }
 
         .nav__logo-subtitle {
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: 'Cardo', Georgia, serif;
             font-size: 0.42rem;
             font-weight: 700;
             letter-spacing: 0.01em;
@@ -1088,7 +1088,7 @@
         .nav__cta {
             padding: 0.55rem 1.1rem;
             font-size: 0.875rem;
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: 'Inter', sans-serif;
             transition: all var(--ease);
         }
 
@@ -1212,7 +1212,7 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: 'Cardo', Georgia, serif;
             font-size: 0.8rem;
             font-weight: 600;
             background: url('images/marble.png') center/cover;
@@ -1301,7 +1301,7 @@
 
         .video-banner__trust {
             margin-top: 1rem;
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: 'Cardo', Georgia, serif;
             font-size: 0.75rem;
             color: rgba(255,255,255,0.35);
         }
@@ -3161,7 +3161,7 @@
     </nav>
 
     <!-- Mega Menu Panels -->
-    <div class="mega-panel" id="mega-platform" data-panel="platform">
+    <div class="mega-panel" id="mega-platform" data-panel="platform" inert>
         <div class="mega-panel__inner">
             <div class="mega-panel__items">
                 <a href="#hero" class="mega-panel__item">
@@ -3199,7 +3199,7 @@
         </div>
     </div>
 
-    <div class="mega-panel" id="mega-athletes" data-panel="athletes">
+    <div class="mega-panel" id="mega-athletes" data-panel="athletes" inert>
         <div class="mega-panel__inner">
             <div class="mega-panel__items">
                 <a href="#features" class="mega-panel__item">
@@ -3231,16 +3231,16 @@
     </div>
 
     <!-- Mobile Menu with Accordions -->
-    <div class="mobile-menu" id="mobile-menu">
+    <div class="mobile-menu" id="mobile-menu" inert>
         <button class="mobile-menu__accordion-title" type="button" data-accordion="mob-platform" aria-expanded="false" aria-controls="mob-platform">Product <span aria-hidden="true">+</span></button>
-        <div class="mobile-menu__accordion-body" id="mob-platform">
+        <div class="mobile-menu__accordion-body" id="mob-platform" inert>
             <a href="#hero">Overview</a>
             <a href="#features">Four proof loops</a>
             <a href="#compare">Free tracker vs coach</a>
             <a href="#modular-future">Modular future</a>
         </div>
         <button class="mobile-menu__accordion-title" type="button" data-accordion="mob-athletes" aria-expanded="false" aria-controls="mob-athletes">Training <span aria-hidden="true">+</span></button>
-        <div class="mobile-menu__accordion-body" id="mob-athletes">
+        <div class="mobile-menu__accordion-body" id="mob-athletes" inert>
             <a href="#features">Endurance</a>
             <a href="#features">Strength</a>
             <a href="#features">Athletic preparation</a>
@@ -3257,6 +3257,7 @@
     <!-- ==========================================
          VIDEO BANNER (with quote overlay)
     ========================================== -->
+    <main>
     <section class="video-banner" id="hero">
         <video class="video-banner__video" autoplay muted loop playsinline aria-hidden="true">
             <source src="videos/montage-web.mp4" type="video/mp4">
@@ -3306,7 +3307,6 @@
     </section>
 
 
-    <main>
         <section class="section section--dark" id="problem">
             <div class="container problem-grid">
                 <div class="reveal">
@@ -3466,7 +3466,7 @@
                             What is free in Metron?
                             <span class="faq-icon" aria-hidden="true">+</span>
                         </button>
-                        <div class="faq-answer" id="faq-answer-1">
+                        <div class="faq-answer" id="faq-answer-1" role="region" aria-labelledby="faq-question-1" aria-hidden="true">
                             Workout tracking, live logging, and your workout and exercise history remain free. The free tracker also shows the verified training progress available in the app, including volume, streaks, and e1RM trends.
                         </div>
                     </div>
@@ -3475,7 +3475,7 @@
                             How does the 30-day coach trial work?
                             <span class="faq-icon" aria-hidden="true">+</span>
                         </button>
-                        <div class="faq-answer" id="faq-answer-2">
+                        <div class="faq-answer" id="faq-answer-2" role="region" aria-labelledby="faq-question-2" aria-hidden="true">
                             You get the full Metron coach for 30 days with no card required. If you choose not to continue with coaching afterward, the free tracker, logging, and history remain available.
                         </div>
                     </div>
@@ -3484,7 +3484,7 @@
                             Are Arete chat and the Training screens different products?
                             <span class="faq-icon" aria-hidden="true">+</span>
                         </button>
-                        <div class="faq-answer" id="faq-answer-3">
+                        <div class="faq-answer" id="faq-answer-3" role="region" aria-labelledby="faq-question-3" aria-hidden="true">
                             No. They are two interfaces to the same plan, history, and shared actions. Chat is useful when you want to ask or understand; dedicated screens are useful when you want to see or change something directly.
                         </div>
                     </div>
@@ -3493,7 +3493,7 @@
                             What platforms is Metron available on?
                             <span class="faq-icon" aria-hidden="true">+</span>
                         </button>
-                        <div class="faq-answer" id="faq-answer-4">
+                        <div class="faq-answer" id="faq-answer-4" role="region" aria-labelledby="faq-question-4" aria-hidden="true">
                             Metron launches first on iPhone. Android and a dedicated Watch experience are coming later.
                         </div>
                     </div>
@@ -3502,7 +3502,7 @@
                             Which wearable data does Metron use at launch?
                             <span class="faq-icon" aria-hidden="true">+</span>
                         </button>
-                        <div class="faq-answer" id="faq-answer-5">
+                        <div class="faq-answer" id="faq-answer-5" role="region" aria-labelledby="faq-question-5" aria-hidden="true">
                             With your permission, Metron uses verified recovery and workout signals available through Apple Health. We do not claim an integration until it is ready.
                         </div>
                     </div>
@@ -3511,17 +3511,13 @@
                             Is Metron medical advice?
                             <span class="faq-icon" aria-hidden="true">+</span>
                         </button>
-                        <div class="faq-answer" id="faq-answer-6">
+                        <div class="faq-answer" id="faq-answer-6" role="region" aria-labelledby="faq-question-6" aria-hidden="true">
                             No. Metron is a training and wellness product, not a medical service. For an injury, symptoms, or any medical concern, consult a qualified healthcare professional.
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-    </main>
-
-
-
     <!-- ==========================================
          CLOSING QUOTE
     ========================================== -->
@@ -3529,6 +3525,7 @@
         <p class="closing-quote__text">"We are what we repeatedly do. Excellence, then, is not an act, but a habit."</p>
         <span class="closing-quote__attribution">— Aristotle</span>
     </section>
+    </main>
 
     <!-- ==========================================
          FOOTER
@@ -3638,6 +3635,7 @@
             const isOpen = mobileMenu.classList.toggle('active');
             hamburger.setAttribute('aria-expanded', String(isOpen));
             hamburger.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+            mobileMenu.inert = !isOpen;
             closeAllMegaPanels();
         });
 
@@ -3646,6 +3644,7 @@
                 mobileMenu.classList.remove('active');
                 hamburger.setAttribute('aria-expanded', 'false');
                 hamburger.setAttribute('aria-label', 'Open menu');
+                mobileMenu.inert = true;
             });
         });
 
@@ -3656,13 +3655,17 @@
                 const body = document.getElementById(bodyId);
                 const isOpen = body.classList.contains('open');
                 // Close all
-                document.querySelectorAll('.mobile-menu__accordion-body').forEach(b => b.classList.remove('open'));
+                document.querySelectorAll('.mobile-menu__accordion-body').forEach(b => {
+                    b.classList.remove('open');
+                    b.inert = true;
+                });
                 document.querySelectorAll('.mobile-menu__accordion-title').forEach(button => {
                     button.setAttribute('aria-expanded', 'false');
                     button.querySelector('span').textContent = '+';
                 });
                 if (!isOpen) {
                     body.classList.add('open');
+                    body.inert = false;
                     title.querySelector('span').textContent = '−';
                     title.setAttribute('aria-expanded', 'true');
                 }
@@ -3678,6 +3681,7 @@
             megaPanels.forEach(p => {
                 p.classList.remove('open');
                 p.style.display = '';
+                p.inert = true;
             });
             megaTriggers.forEach(t => {
                 t.classList.remove('active');
@@ -3695,6 +3699,7 @@
                 panel.style.display = 'flex';
                 panel.offsetHeight;
                 panel.classList.add('open');
+                panel.inert = false;
                 trigger.classList.add('active');
                 trigger.setAttribute('aria-expanded', 'true');
             }
@@ -3715,6 +3720,13 @@
                 } else {
                     openPanel(panelName);
                 }
+            });
+
+            trigger.addEventListener('keydown', (e) => {
+                if (e.key !== 'ArrowDown') return;
+                e.preventDefault();
+                openPanel(panelName);
+                document.getElementById('mega-' + panelName)?.querySelector('a')?.focus();
             });
         });
 
@@ -3747,11 +3759,14 @@
         // ESC closes
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
+                const activeTrigger = document.querySelector('.nav__mega-trigger.active');
                 closeAllMegaPanels();
+                if (activeTrigger) activeTrigger.focus();
                 if (mobileMenu.classList.contains('active')) {
                     mobileMenu.classList.remove('active');
                     hamburger.setAttribute('aria-expanded', 'false');
                     hamburger.setAttribute('aria-label', 'Open menu');
+                    mobileMenu.inert = true;
                     hamburger.focus();
                 }
             }
@@ -3826,10 +3841,12 @@
 
         function openAnswer(el) {
             el.classList.add('open');
+            el.setAttribute('aria-hidden', 'false');
         }
 
         function closeAnswer(el) {
             el.classList.remove('open');
+            el.setAttribute('aria-hidden', 'true');
         }
 
         faqItems.forEach(item => {

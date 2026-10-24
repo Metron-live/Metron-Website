@@ -9,7 +9,7 @@ Metron builds, coaches, tracks, and adapts training. The website also accepts ph
 ## Tech Stack
 
 - **Frontend**: Static HTML/CSS/JS
-- **Fonts**: Space Grotesk (headings), Inter (body)
+- **Fonts**: Cardo (headings and body), Inter (numbers and buttons), Space Grotesk (Metron wordmark only)
 - **Form Handling**: Netlify Function + Resend (phone reservation notification)
 - **Hosting**: GitHub Pages / Vercel / Netlify
 
