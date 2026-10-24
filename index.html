@@ -4,10 +4,10 @@
 <head>
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Metron AI | Performance, democratized.</title>
+    <title>Metron | The World's Smartest Personal Trainer</title>
 
-    <meta property="og:title" content="Metron AI">
-    <meta property="og:description" content="AI-powered training, nutrition & recovery — all adapting to you daily.">
+    <meta property="og:title" content="Metron | The World's Smartest Personal Trainer">
+    <meta property="og:description" content="The world's smartest personal trainer, built on a best-in-class workout tracker that stays free. Try the full coach for 30 days, no card required.">
     <meta property="og:image" content="https://metron.live/brand/brand%20preview/og-preview.png">
     <meta property="og:image:width" content="720">
     <meta property="og:image:height" content="960">
@@ -19,7 +19,7 @@
     <meta property="og:url" content="https://metron.live">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="description" content="AI-powered training, nutrition & recovery — all adapting to you daily. Performance, democratized.">
+    <meta name="description" content="Metron is the world's smartest personal trainer, with a best-in-class workout tracker that stays free. Try the full coach for 30 days, no card required.">
 
     <script defer data-domain="metron.live" src="https://plausible.io/js/script.js"></script>
 
@@ -29,7 +29,7 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700;800&family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&amp;family=Inter:wght@400;500;600;700;800&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
 
     <style>
         /* ==========================================
@@ -83,7 +83,7 @@
         }
 
         h1, h2, h3, h4 {
-            font-family: 'Inter', -apple-system, sans-serif;
+            font-family: 'Cardo', Georgia, serif;
             letter-spacing: -0.04em;
             line-height: 1.15;
         }
@@ -384,6 +384,9 @@
         /* Skip intro on repeat visits (sessionStorage) */
         .hero-skip-intro .quote-hero__text,
         .hero-skip-intro .quote-hero__attribution,
+        .hero-skip-intro .hero-kicker,
+        .hero-skip-intro .hero-reservation-form,
+        .hero-skip-intro .hero-reservation-note,
         .hero-skip-intro .scroll-cue,
         .hero-skip-intro .video-banner__tagline-corner,
         .hero-skip-intro .nav--quote-mode .nav__links,
@@ -746,7 +749,7 @@
         }
 
         .nav__logo-subtitle {
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: 'Cardo', Georgia, serif;
             font-size: 0.42rem;
             font-weight: 700;
             letter-spacing: 0.01em;
@@ -1085,7 +1088,7 @@
         .nav__cta {
             padding: 0.55rem 1.1rem;
             font-size: 0.875rem;
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: 'Inter', sans-serif;
             transition: all var(--ease);
         }
 
@@ -1209,7 +1212,7 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: 'Cardo', Georgia, serif;
             font-size: 0.8rem;
             font-weight: 600;
             background: url('images/marble.png') center/cover;
@@ -1298,7 +1301,7 @@
 
         .video-banner__trust {
             margin-top: 1rem;
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: 'Cardo', Georgia, serif;
             font-size: 0.75rem;
             color: rgba(255,255,255,0.35);
         }
@@ -2263,63 +2266,6 @@
         }
 
         /* ==========================================
-           TESTIMONIALS — BOLD FEATURE STYLE
-        ========================================== */
-        .testimonial-feature {
-            background: #111;
-            padding: 110px 0;
-        }
-
-        .testimonial-feature__inner {
-            max-width: 860px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            text-align: center;
-        }
-
-        .testimonial-feature__heading {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: clamp(2.4rem, 5.5vw, 4.5rem);
-            font-weight: 800;
-            color: #fff;
-            line-height: 1.08;
-            letter-spacing: -0.03em;
-            margin-bottom: 3rem;
-        }
-
-        .testimonial-feature__quote-wrap {
-            border-top: 1px solid rgba(255, 255, 255, 0.12);
-            padding-top: 2.5rem;
-        }
-
-        .testimonial-feature__quote {
-            font-size: clamp(1.15rem, 2.2vw, 1.6rem);
-            font-weight: 500;
-            color: rgba(255, 255, 255, 0.88);
-            line-height: 1.55;
-            font-style: italic;
-            margin-bottom: 1.5rem;
-            transition: opacity 0.3s ease;
-        }
-
-        .testimonial-feature__quote.t-fade {
-            opacity: 0;
-        }
-
-        .testimonial-feature__author {
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: rgba(255, 255, 255, 0.4);
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            transition: opacity 0.3s ease;
-        }
-
-        .testimonial-feature__author.t-fade {
-            opacity: 0;
-        }
-
-        /* ==========================================
            BETA CTA
         ========================================== */
         .beta-section {
@@ -2546,7 +2492,348 @@
         }
         .faq-answer.open {
             opacity: 1;
+            max-height: 500px;
             padding-bottom: 1.75rem;
+        }
+
+        /* ==========================================
+           TRAINER + TRACKER STORY
+        ========================================== */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        :focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 4px;
+        }
+
+        .quote-overlay {
+            max-width: 980px;
+            pointer-events: auto;
+        }
+
+        .hero-kicker {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            opacity: 0.3;
+            animation: cinematicFadeIn 900ms cubic-bezier(0.25, 0.1, 0.25, 1) 1.5s forwards;
+        }
+
+        .quote-overlay .quote-hero__text {
+            font-size: clamp(3.2rem, 6.8vw, 6.4rem);
+            letter-spacing: -0.045em;
+            line-height: 0.94;
+            max-width: 920px;
+        }
+
+        .quote-overlay .quote-hero__attribution {
+            font-size: clamp(1.25rem, 2vw, 1.7rem);
+            max-width: 650px;
+            line-height: 1.35;
+            margin-top: 1.25rem;
+        }
+
+        .hero-reservation-form,
+        .hero-reservation-note {
+            opacity: 0.3;
+            animation: cinematicFadeIn 900ms cubic-bezier(0.25, 0.1, 0.25, 1) 1.5s forwards;
+        }
+
+        .hero-reservation-form {
+            margin-top: 1.75rem;
+        }
+
+        .hero-reservation-note {
+            max-width: 580px;
+            margin-top: 0.8rem;
+            font-family: 'Cardo', serif;
+            color: rgba(255,255,255,0.78);
+            font-size: 0.95rem;
+        }
+
+        .quote-overlay .hero__success,
+        .quote-overlay .hero__error {
+            margin-top: 1rem;
+            color: white;
+            background: rgba(0,0,0,0.62);
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        .problem-grid,
+        .coach-surface__grid,
+        .future-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+            gap: clamp(2rem, 7vw, 7rem);
+            align-items: start;
+        }
+
+        .problem-grid h2,
+        .product-intro h2,
+        .coach-surface h2,
+        .future-grid h2,
+        .faq-heading h2 {
+            font-family: 'Cardo', serif;
+            font-size: clamp(2.4rem, 4.5vw, 4.4rem);
+            font-weight: 700;
+            letter-spacing: -0.035em;
+            line-height: 1.02;
+        }
+
+        .problem-grid .t-label,
+        .product-intro .t-label,
+        .coach-surface .t-label,
+        .future-grid .t-label,
+        .faq-heading .t-label {
+            display: block;
+            font-family: 'Cardo', serif;
+            margin-bottom: 1rem;
+        }
+
+        .problem-copy {
+            font-family: 'Cardo', serif;
+            font-size: clamp(1.15rem, 2vw, 1.4rem);
+            line-height: 1.75;
+            color: rgba(255,255,255,0.78);
+        }
+
+        .problem-copy p + p { margin-top: 1.5rem; }
+        .problem-copy strong { color: #fff; }
+
+        .product-intro {
+            max-width: 850px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .product-intro p {
+            font-family: 'Cardo', serif;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 680px;
+            margin: 1.25rem auto 0;
+        }
+
+        .proof-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1.25rem;
+        }
+
+        .proof-card {
+            min-height: 320px;
+            padding: clamp(1.75rem, 4vw, 3rem);
+            border: 1px solid var(--border-dark);
+            border-radius: var(--radius-card);
+            background: rgba(255,255,255,0.54);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .proof-card__number {
+            font-family: 'Inter', sans-serif;
+            color: var(--accent);
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            margin-bottom: auto;
+        }
+
+        .proof-card h3 {
+            font-family: 'Cardo', serif;
+            font-size: clamp(1.65rem, 3vw, 2.35rem);
+            letter-spacing: -0.025em;
+            margin: 2rem 0 0.75rem;
+        }
+
+        .proof-card p {
+            font-family: 'Cardo', serif;
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.65;
+        }
+
+        .analytics-proof {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            margin-top: 1.25rem;
+            border: 1px solid var(--border-dark);
+            border-radius: var(--radius-card);
+            overflow: hidden;
+            background: #111;
+        }
+
+        .analytics-proof div {
+            padding: 1.4rem;
+            border-right: 1px solid rgba(255,255,255,0.12);
+        }
+
+        .analytics-proof div:last-child { border-right: 0; }
+        .analytics-proof span,
+        .analytics-proof strong { display: block; }
+        .analytics-proof span {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 0.35rem;
+        }
+        .analytics-proof strong {
+            font-family: 'Cardo', serif;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .coach-surface {
+            background: #111;
+            color: white;
+        }
+
+        .coach-surface__copy p,
+        .future-grid p {
+            font-family: 'Cardo', serif;
+            font-size: 1.15rem;
+            line-height: 1.75;
+            color: rgba(255,255,255,0.75);
+            margin: 1.5rem 0;
+        }
+
+        .text-link {
+            font-family: 'Cardo', serif;
+            font-weight: 700;
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .coach-surface__visual {
+            display: grid;
+            gap: 0.85rem;
+            align-self: center;
+        }
+
+        .interface-card {
+            padding: 1.5rem;
+            border: 1px solid rgba(255,255,255,0.18);
+            border-radius: 16px;
+            background: rgba(255,255,255,0.06);
+        }
+
+        .interface-card--light {
+            background: url('images/marble.png') center/cover;
+            color: var(--text-primary);
+        }
+
+        .interface-card span,
+        .interface-card strong { display: block; }
+        .interface-card span {
+            font-family: 'Inter', sans-serif;
+            color: var(--accent);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+        .interface-card strong {
+            font-family: 'Cardo', serif;
+            font-size: 1.35rem;
+        }
+
+        .shared-action {
+            justify-self: center;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.55);
+        }
+
+        .plan-table th:first-child { width: 50%; }
+        .plan-table th,
+        .plan-table td { font-family: 'Cardo', serif; }
+        .plan-table tbody th {
+            padding: 1.4rem 1.75rem;
+            text-align: left;
+            font-family: 'Cardo', serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .future-list {
+            padding: clamp(1.75rem, 4vw, 3rem);
+            border: 1px solid rgba(255,255,255,0.18);
+            border-radius: var(--radius-card);
+            background: rgba(255,255,255,0.05);
+        }
+
+        .future-list .future-list__label {
+            margin: 0 0 1.25rem;
+            font-family: 'Inter', sans-serif;
+            color: var(--accent);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .future-list ul { list-style: none; }
+        .future-list li {
+            position: relative;
+            padding: 0.85rem 0 0.85rem 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-family: 'Cardo', serif;
+            color: rgba(255,255,255,0.8);
+        }
+        .future-list li:last-child { border-bottom: 0; }
+        .future-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        .beta-section__inner { max-width: 700px; }
+        .beta-section__headline,
+        .faq-heading h2 { font-family: 'Cardo', serif; }
+        .beta-section__sub {
+            font-family: 'Cardo', serif;
+            font-size: 1.15rem;
+            line-height: 1.6;
+        }
+        .beta-form { max-width: 600px; margin-left: auto; margin-right: auto; }
+        .beta-success__title,
+        .beta-success__sub { color: white; font-family: 'Cardo', serif; }
+
+        .faq-question,
+        .faq-answer {
+            font-family: 'Cardo', Georgia, serif;
+        }
+        .faq-question { font-size: 1.25rem; }
+        .faq-answer { font-size: 1.08rem; }
+
+        .mobile-menu__accordion-title {
+            width: 100%;
+            border: 0;
+            background: transparent;
+            text-align: left;
         }
 
         /* ==========================================
@@ -2602,6 +2889,20 @@
 
 
         @media (max-width: 900px) {
+            .problem-grid,
+            .coach-surface__grid,
+            .future-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .analytics-proof {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .analytics-proof div:nth-child(2) { border-right: 0; }
+            .analytics-proof div:nth-child(-n+2) { border-bottom: 1px solid rgba(255,255,255,0.12); }
+
             .hero::after {
                 background: rgba(255,255,255,0.88);
             }
@@ -2685,7 +2986,6 @@
             .steps-grid { grid-template-columns: 1fr; }
             .steps-connector { display: none; }
 
-            .testimonial-feature { padding: 60px 0; }
         }
 
         @media (max-width: 768px) {
@@ -2696,9 +2996,40 @@
             .nav__hamburger { display: flex; }
 
             .video-banner {
-                height: auto;
+                height: 100svh;
                 min-height: 100vh;
             }
+
+            .quote-overlay {
+                justify-content: center;
+                padding: calc(var(--nav-height) + 1rem) 1.25rem 5.5rem;
+            }
+
+            .quote-overlay .quote-hero__text {
+                font-size: clamp(2.35rem, 12vw, 4.2rem);
+                letter-spacing: -0.04em;
+                line-height: 0.98;
+            }
+
+            .quote-overlay .quote-hero__attribution {
+                font-size: 1.05rem;
+                margin-top: 0.85rem;
+            }
+
+            .hero-kicker { font-size: 0.78rem; margin-bottom: 0.6rem; }
+            .hero-reservation-form {
+                flex-direction: column;
+                max-width: 100%;
+                margin-top: 1.1rem;
+            }
+            .hero-reservation-form .btn { width: 100%; }
+            .hero-reservation-note { font-size: 0.8rem; line-height: 1.4; }
+            .scroll-cue { width: 48px; height: 48px; bottom: 18px; }
+            .scroll-cue__heptagon,
+            .scroll-cue__arrow-fixed { width: 48px; height: 48px; }
+
+            .proof-grid { grid-template-columns: 1fr; }
+            .proof-card { min-height: 280px; }
 
             .video-banner__hero-grid {
                 position: relative;
@@ -2780,8 +3111,16 @@
             .hero__trust .sep { display: none; }
 
             .features-headline { font-size: clamp(2rem, 8vw, 2.8rem); }
-            .testimonial-feature { padding: 48px 0; }
-            .testimonial-feature__heading { font-size: clamp(1.8rem, 7vw, 2.8rem); }
+            .analytics-proof { grid-template-columns: 1fr; }
+            .analytics-proof div,
+            .analytics-proof div:nth-child(2) {
+                border-right: 0;
+                border-bottom: 1px solid rgba(255,255,255,0.12);
+            }
+            .analytics-proof div:last-child { border-bottom: 0; }
+            .plan-table th,
+            .plan-table td,
+            .plan-table tbody th { padding: 1rem; font-size: 0.92rem; }
         }
     </style>
 </head>
@@ -2801,19 +3140,19 @@
                 </div>
             </a>
             <div class="nav__links">
-                <button class="nav__mega-trigger" data-panel="platform">
-                    Platform
+                <button class="nav__mega-trigger" type="button" data-panel="platform" aria-expanded="false" aria-controls="mega-platform">
+                    Product
                     <svg class="nav__mega-caret" viewBox="0 0 12 8" width="12" height="8"><path d="M1 1 L6 6 L11 1" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </button>
-                <button class="nav__mega-trigger" data-panel="athletes">
-                    Athletes
+                <button class="nav__mega-trigger" type="button" data-panel="athletes" aria-expanded="false" aria-controls="mega-athletes">
+                    Training
                     <svg class="nav__mega-caret" viewBox="0 0 12 8" width="12" height="8"><path d="M1 1 L6 6 L11 1" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </button>
                 <a href="#compare" class="nav__link">Compare</a>
                 <a href="#faq" class="nav__link">FAQ</a>
             </div>
-            <a href="#beta" class="btn btn-primary nav__cta">Get the App</a>
-            <button class="nav__hamburger" id="hamburger" aria-label="Menu">
+            <a href="#reserve" class="btn btn-primary nav__cta">Reserve my free year</a>
+            <button class="nav__hamburger" type="button" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -2822,37 +3161,37 @@
     </nav>
 
     <!-- Mega Menu Panels -->
-    <div class="mega-panel" id="mega-platform" data-panel="platform">
+    <div class="mega-panel" id="mega-platform" data-panel="platform" inert>
         <div class="mega-panel__inner">
             <div class="mega-panel__items">
                 <a href="#hero" class="mega-panel__item">
                     <div class="mega-panel__item-title">Overview</div>
-                    <div class="mega-panel__item-desc">Seven pillars. One AI coach. A unified performance system built on the Greek principle of measure — μέτρον — and the belief that the systems used by professional athletes should be available to everyone.</div>
+                    <div class="mega-panel__item-desc">The world's smartest personal trainer, paired with a best-in-class workout tracker that stays free.</div>
                 </a>
                 <a href="#features" class="mega-panel__item" data-idx="0">
-                    <div class="mega-panel__item-title">Plan Engine</div>
-                    <div class="mega-panel__item-desc">90 minutes, eight AI phases, one personalized plan. Training, nutrition, supplements, recovery, sleep, cardio, and body composition — all built from your actual data, with 15 to 25 custom rules tuned to your specific vulnerabilities.</div>
+                    <div class="mega-panel__item-title">Build</div>
+                    <div class="mega-panel__item-desc">Sport- and goal-specific training built around your history, injuries, equipment, and schedule.</div>
                 </a>
                 <a href="#features" class="mega-panel__item" data-idx="1">
-                    <div class="mega-panel__item-title">Rebalancing Engine</div>
-                    <div class="mega-panel__item-desc">Five tiers of adaptation, from daily to annual. Your plan adjusts overnight based on recovery, training load, sleep, and nutrition. No morning surveys. No “how do you feel today?” — the decision is made before your alarm goes off.</div>
+                    <div class="mega-panel__item-title">Coach &amp; log</div>
+                    <div class="mega-panel__item-desc">Live workout guidance and fast set logging designed to leave your music playing.</div>
                 </a>
                 <a href="#features" class="mega-panel__item" data-idx="2">
-                    <div class="mega-panel__item-title">Arete AI Coach</div>
-                    <div class="mega-panel__item-desc">The God of Performance at the center of your heptagon. Chat-first, with your full training history, real-time wearable data, and the ability to adjust anything you ask. Named for the Greek aretē — excellence as the fulfillment of purpose.</div>
+                    <div class="mega-panel__item-title">Learn &amp; adapt</div>
+                    <div class="mega-panel__item-desc">Metron learns from every logged set, shows verified progress, and adapts from performance and Apple Health recovery signals.</div>
                 </a>
-                <a href="#hero" class="mega-panel__item">
-                    <div class="mega-panel__item-title">The Heptagram</div>
-                    <div class="mega-panel__item-desc">The seven-pointed star at the heart of Metron. Sleep, Training, Nutrition, Recovery, Cardio, Body, Mind — each a pillar, each a guardian, each a score. At a glance, you see the shape of your excellence.</div>
+                <a href="#modular-future" class="mega-panel__item">
+                    <div class="mega-panel__item-title">Modular future</div>
+                    <div class="mega-panel__item-desc">Training is the foundation. More optional pillars and specialized modes are coming later.</div>
                 </a>
-                <a href="#integrations" class="mega-panel__item">
-                    <div class="mega-panel__item-title">Integrations</div>
-                    <div class="mega-panel__item-desc">Apple Health, Whoop, Oura, Garmin, Withings, Strava, and more. The wearables you already own become one intelligent system — not seven dashboards telling you seven different things.</div>
+                <a href="#compare" class="mega-panel__item">
+                    <div class="mega-panel__item-title">Free tracker</div>
+                    <div class="mega-panel__item-desc">Log workouts and keep your history for free, even after the 30-day coach trial ends.</div>
                 </a>
             </div>
             <div class="mega-panel__featured">
-                <div class="mega-panel__featured-title">Elite resources, for every athlete.</div>
-                <div class="mega-panel__featured-body">Metron is the sports scientist in your pocket — the systems professional athletes use, made accessible through AI. No team required. No $300 monthly coach required. Just you, your data, and the plan that adapts to it.</div>
+                <div class="mega-panel__featured-title">One coach. Two interfaces.</div>
+                <div class="mega-panel__featured-body">Ask Arete in chat or use Metron's dedicated screens. Both use the same plan, workout history, and shared actions.</div>
                 <svg class="mega-panel__featured-heptagon" viewBox="-32 -32 64 64">
                     <polygon points="0.0,-28.0 21.9,-17.5 27.3,6.2 12.1,25.2 -12.1,25.2 -27.3,6.2 -21.9,-17.5"/>
                 </svg>
@@ -2860,62 +3199,55 @@
         </div>
     </div>
 
-    <div class="mega-panel" id="mega-athletes" data-panel="athletes">
+    <div class="mega-panel" id="mega-athletes" data-panel="athletes" inert>
         <div class="mega-panel__inner">
             <div class="mega-panel__items">
-                <a href="#testimonials" class="mega-panel__item">
+                <a href="#features" class="mega-panel__item">
                     <div class="mega-panel__item-title">Endurance</div>
-                    <div class="mega-panel__item-desc">For runners, cyclists, and triathletes. Metron reads your HRV and overnight recovery, then adjusts tomorrow’s intervals, threshold work, and taper. Catches recovery dips before you feel them.</div>
+                    <div class="mega-panel__item-desc">Running, cycling, and other endurance preparation live inside Training—not in a separate product.</div>
                 </a>
-                <a href="#testimonials" class="mega-panel__item">
+                <a href="#features" class="mega-panel__item">
                     <div class="mega-panel__item-title">Strength</div>
-                    <div class="mega-panel__item-desc">For lifters, powerlifters, and bodybuilders. The correlation engine learns your body across weeks — like which lifts move 18% stronger after seven hours of sleep, or which sessions tank when protein drops below target.</div>
+                    <div class="mega-panel__item-desc">Plan, coach, and log every set, then review exercise history, volume, streaks, and e1RM trends.</div>
                 </a>
-                <a href="#testimonials" class="mega-panel__item">
-                    <div class="mega-panel__item-title">General fitness</div>
-                    <div class="mega-panel__item-desc">For busy lives and real training. One plan that accounts for the night your kid was up at 3 AM, the meeting that ate your lunch, and the fact that you still want to train four times a week.</div>
+                <a href="#features" class="mega-panel__item">
+                    <div class="mega-panel__item-title">Athletic preparation</div>
+                    <div class="mega-panel__item-desc">Sport-specific strength and conditioning is part of Training, shaped around the athlete's goals and schedule.</div>
                 </a>
-                <a href="#testimonials" class="mega-panel__item">
-                    <div class="mega-panel__item-title">Competitive</div>
-                    <div class="mega-panel__item-desc">For teams, coaches, and sports programs. Shared dashboards, athlete-level plans, and cross-roster correlation analysis. Built for programs that need visibility across twenty athletes, not one.</div>
+                <a href="#modular-future" class="mega-panel__item">
+                    <div class="mega-panel__item-title">Coming later</div>
+                    <div class="mega-panel__item-desc">Coming later: injury mode, vacation mode, technical-skill coaching, video form analysis, SmartRest, Watch, and broader pillars.</div>
                 </a>
             </div>
             <div class="mega-panel__featured" style="gap: 1.2rem;">
-                <!-- Mini heptagon: endurance athlete profile -->
                 <svg width="120" height="120" viewBox="-32 -32 64 64" style="margin-bottom: 0.5rem;">
-                    <!-- Outer heptagon (full shape) -->
                     <polygon points="0.0,-28.0 21.9,-17.5 27.3,6.2 12.1,25.2 -12.1,25.2 -27.3,6.2 -21.9,-17.5" fill="none" stroke="rgba(217,119,6,0.3)" stroke-width="0.8"/>
-                    <!-- Inner heptagon (endurance profile: high Cardio+Recovery, mid Training+Sleep, lower Strength+Body) -->
                     <polygon points="0.0,-19.6 13.1,-10.5 10.9,2.5 10.9,22.7 -10.9,22.7 -10.9,2.5 -15.3,-12.3" fill="rgba(217,119,6,0.15)" stroke="rgba(217,119,6,0.6)" stroke-width="1"/>
                 </svg>
-                <p class="mega-panel__featured-quote">“No coach I’ve ever worked with adjusted my taper week the way Metron did. It caught a recovery dip I hadn’t even noticed yet and cut my Tuesday session before I hurt myself.”</p>
-                <span class="mega-panel__featured-author">Sarah K. — 2:58 marathoner</span>
-                <a href="#testimonials" style="font-family: 'Cardo', serif; font-size: 0.85rem; color: var(--accent); text-decoration: none; margin-top: 0.5rem;">Read more athlete stories →</a>
+                <p class="mega-panel__featured-quote">Training is the launch foundation. The modular heptagram shows where Metron can expand without pretending every pillar is live today.</p>
+                <a href="#modular-future" style="font-family: 'Cardo', serif; font-size: 0.85rem; color: var(--accent); text-decoration: none; margin-top: 0.5rem;">See what comes next →</a>
             </div>
         </div>
     </div>
 
     <!-- Mobile Menu with Accordions -->
-    <div class="mobile-menu" id="mobile-menu">
-        <div class="mobile-menu__accordion-title" data-accordion="mob-platform">Platform <span>+</span></div>
-        <div class="mobile-menu__accordion-body" id="mob-platform">
+    <div class="mobile-menu" id="mobile-menu" inert>
+        <button class="mobile-menu__accordion-title" type="button" data-accordion="mob-platform" aria-expanded="false" aria-controls="mob-platform">Product <span aria-hidden="true">+</span></button>
+        <div class="mobile-menu__accordion-body" id="mob-platform" inert>
             <a href="#hero">Overview</a>
-            <a href="#features">Plan Engine</a>
-            <a href="#features">Rebalancing Engine</a>
-            <a href="#features">Arete AI Coach</a>
-            <a href="#hero">The Heptagram</a>
-            <a href="#integrations">Integrations</a>
+            <a href="#features">Four proof loops</a>
+            <a href="#compare">Free tracker vs coach</a>
+            <a href="#modular-future">Modular future</a>
         </div>
-        <div class="mobile-menu__accordion-title" data-accordion="mob-athletes">Athletes <span>+</span></div>
-        <div class="mobile-menu__accordion-body" id="mob-athletes">
-            <a href="#testimonials">Endurance</a>
-            <a href="#testimonials">Strength</a>
-            <a href="#testimonials">General fitness</a>
-            <a href="#testimonials">Competitive</a>
+        <button class="mobile-menu__accordion-title" type="button" data-accordion="mob-athletes" aria-expanded="false" aria-controls="mob-athletes">Training <span aria-hidden="true">+</span></button>
+        <div class="mobile-menu__accordion-body" id="mob-athletes" inert>
+            <a href="#features">Endurance</a>
+            <a href="#features">Strength</a>
+            <a href="#features">Athletic preparation</a>
         </div>
         <a href="#compare">Compare</a>
         <a href="#faq">FAQ</a>
-        <a href="#beta" class="btn btn-primary">Get the App</a>
+        <a href="#reserve" class="btn btn-primary">Reserve my free year</a>
     </div>
 
 
@@ -2925,18 +3257,33 @@
     <!-- ==========================================
          VIDEO BANNER (with quote overlay)
     ========================================== -->
+    <main>
     <section class="video-banner" id="hero">
-        <video class="video-banner__video" autoplay muted loop playsinline>
+        <video class="video-banner__video" autoplay muted loop playsinline aria-hidden="true">
             <source src="videos/montage-web.mp4" type="video/mp4">
         </video>
         <div class="video-banner__overlay"></div>
         <div class="video-banner__vignette"></div>
         <div class="quote-hero__particles" id="quote-particles"></div>
 
-        <!-- Socrates quote centered on video -->
         <div class="quote-overlay">
-            <p class="quote-hero__text">"It is a shame for a man to grow old without seeing the beauty and strength of which his body is capable."</p>
-            <span class="quote-hero__attribution">Socrates, c. 400 BC</span>
+            <p class="hero-kicker">Metron</p>
+            <h1 class="quote-hero__text" id="hero-title">The world's smartest personal trainer.</h1>
+            <p class="quote-hero__attribution">And a best-in-class workout tracker that stays free.</p>
+            <form class="video-banner__form hero-reservation-form" id="hero-form" data-source="hero" aria-label="Hero free-year reservation">
+                <label class="sr-only" for="hero-phone">Mobile phone number</label>
+                <input class="video-banner__form-input" id="hero-phone" type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="Mobile phone number" aria-describedby="hero-offer-note hero-error" required>
+                <button class="btn btn-primary video-banner__form-btn" type="submit" id="hero-submit">
+                    <span class="btn-text">Reserve my free year</span>
+                    <span class="btn-loading" hidden>Reserving…</span>
+                </button>
+            </form>
+            <p class="hero-reservation-note" id="hero-offer-note">Founding reservations get the full coach free for the first year. The standard offer is 30 days of the full coach with no card required; your tracker, logging, and history remain free.</p>
+            <div class="hero__success" id="hero-success" role="status" tabindex="-1">
+                <strong>Welcome to the Metron family.</strong>
+                Your free year is reserved. It's time to begin your journey to greatness.
+            </div>
+            <p class="hero__error" id="hero-error" role="alert">We couldn't reserve your year. Please check your number and try again.</p>
         </div>
 
         <!-- Scroll cue: rotating white heptagon + fixed arrow cutout -->
@@ -2952,416 +3299,234 @@
             </svg>
         </div>
 
-        <!-- Corner tagline -->
+        <!-- Corner promise; retains the locked 0.9s hero reveal timing. -->
         <div class="video-banner__tagline-corner">
-            <h2 class="video-banner__tagline">Performance, democratized.</h2>
-            <p class="video-banner__sub">For every athlete. At every level.</p>
+            <h2 class="video-banner__tagline">Train. Track. Adapt.</h2>
+            <p class="video-banner__sub">One coach. One shared history.</p>
         </div>
     </section>
 
 
-    <!-- ==========================================
-         PROBLEM
-    ========================================== -->
-    <section class="section section--dark" id="problem" style="padding: var(--section-v) 0;">
-        <div class="container" style="max-width: 800px;">
-            <span class="t-label reveal" style="font-family: 'Cardo', serif; font-size: 0.85rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 1.5rem;">The problem</span>
-            <h2 class="reveal reveal-delay-1" style="font-family: 'Cardo', serif; font-size: clamp(2.4rem, 4vw, 4rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 2rem;">You're tracking everything. Nothing's talking.</h2>
-            <div class="reveal reveal-delay-2" style="font-family: 'Cardo', serif; font-size: 1.15rem; line-height: 1.75; color: rgba(255,255,255,0.8);">
-                <p style="margin-bottom: 1.5rem;">You slept four hours. You ran ten miles yesterday. This morning your training app wants intervals. Your nutrition app has no idea you trained fasted. Your recovery score is red. Your coach app tells you to push.</p>
-                <p style="margin-bottom: 1.5rem; font-weight: 700; color: rgba(255,255,255,0.95);">Five apps. Five answers. Zero coordination.</p>
-                <p>The data exists. Nothing reads all of it.</p>
-            </div>
-        </div>
-    </section>
-
-
-
-    <!-- ==========================================
-         TRANSITION LINE
-    ========================================== -->
-    <section style="background: #000; padding: 4rem 2rem; text-align: center;">
-        <p class="reveal" style="font-family: 'Cardo', serif; font-size: clamp(1.6rem, 3vw, 2.4rem); font-style: italic; font-weight: 400; background: url('images/marble.png') center/cover fixed; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; max-width: 600px; margin: 0 auto; line-height: 1.4;">There had to be a better way.</p>
-    </section>
-
-
-    <!-- ==========================================
-         INTEGRATIONS
-    ========================================== -->
-    <section class="integrations" id="integrations">
-        <!-- Introducing Metron -->
-        <div style="text-align: center; padding: 0 2rem 3rem; max-width: 800px; margin: 0 auto;">
-            <span class="reveal" style="font-family: 'Cardo', serif; font-size: 0.85rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 1.5rem;">The solution</span>
-            <h2 class="reveal reveal-delay-1" style="font-family: 'Cardo', serif; font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 700; color: #fff; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1.5rem;">One coach. All your data. Every night.</h2>
-            <p class="reveal reveal-delay-2" style="font-family: 'Cardo', serif; font-size: 1.1rem; color: rgba(255,255,255,0.75); line-height: 1.65; max-width: 650px; margin: 0 auto 2.5rem;">Metron pulls your sleep, recovery, training, and nutrition into a single model — then rewrites tomorrow's plan while you sleep. No manual input. No conflicting advice. One plan, adapting to you, every morning.</p>
-        </div>
-        <p class="integrations__headline" style="margin-bottom: 2rem;">Connects with everything you already use</p>
-        <div class="integrations-track">
-            <div class="integration-item"><img src="images/health.png" alt="Apple Health"><span>Apple Health</span></div>
-            <div class="integration-item"><img src="images/whoop.png" alt="Whoop"><span>Whoop</span></div>
-            <div class="integration-item"><img src="images/oura.png" alt="Oura"><span>Oura</span></div>
-            <div class="integration-item"><img src="images/garmin.png" alt="Garmin"><span>Garmin</span></div>
-            <div class="integration-item"><img src="images/fitbit.png" alt="Fitbit"><span>Fitbit</span></div>
-            <div class="integration-item"><img src="images/strava.png" alt="Strava"><span>Strava</span></div>
-            <div class="integration-item"><img src="images/trainingpeaks.png" alt="TrainingPeaks"><span>TrainingPeaks</span></div>
-            <div class="integration-item"><img src="images/myfitnesspal.png" alt="MyFitnessPal"><span>MyFitnessPal</span></div>
-            <div class="integration-item"><img src="images/eightsleep.png" alt="Eight Sleep"><span>Eight Sleep</span></div>
-            <div class="integration-item"><img src="images/peloton.png" alt="Peloton"><span>Peloton</span></div>
-            <div class="integration-item"><img src="images/fitbod.png" alt="Fitbod"><span>Fitbod</span></div>
-            <div class="integration-item"><img src="images/withings.png" alt="Withings"><span>Withings</span></div>
-            <div class="integration-item"><img src="images/instacart.png" alt="Instacart"><span>Instacart</span></div>
-            <div class="integration-item"><img src="images/grubhub.png" alt="Grubhub"><span>Grubhub</span></div>
-        </div>
-    </section>
-
-
-
-
-    <!-- ==========================================
-         MAGIC MOMENT
-    ========================================== -->
-    <section class="section section--dark" id="magic-moment" style="padding: var(--section-v) 0;">
-        <div class="container" style="max-width: 800px;">
-            <span class="reveal" style="font-family: 'Cardo', serif; font-size: 0.85rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 1.5rem; text-align: center;">While you sleep</span>
-            <h2 class="reveal reveal-delay-1" style="font-family: 'Cardo', serif; font-size: clamp(2.4rem, 4vw, 4rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 3rem; text-align: center;">Metron is working.</h2>
-            <div class="reveal reveal-delay-2" style="font-family: 'Inter', sans-serif; font-size: 1rem; line-height: 2.2; color: rgba(255,255,255,0.7);">
-                <div style="display: flex; gap: 1.2rem; align-items: baseline; margin-bottom: 1rem;">
-                    <span style="font-family: 'Inter', sans-serif; font-weight: 700; color: var(--accent); white-space: nowrap; min-width: 90px;">11:47 PM</span>
-                    <span style="font-family: 'Cardo', serif;">Whoop logs recovery at 42%.</span>
+        <section class="section section--dark" id="problem">
+            <div class="container problem-grid">
+                <div class="reveal">
+                    <span class="t-label">The problem</span>
+                    <h2>Logging a workout is easy. Knowing what to do next isn't.</h2>
                 </div>
-                <div style="display: flex; gap: 1.2rem; align-items: baseline; margin-bottom: 1rem;">
-                    <span style="font-family: 'Inter', sans-serif; font-weight: 700; color: var(--accent); white-space: nowrap; min-width: 90px;">2:13 AM</span>
-                    <span style="font-family: 'Cardo', serif;">Apple Health confirms four hours of sleep.</span>
-                </div>
-                <div style="display: flex; gap: 1.2rem; align-items: baseline; margin-bottom: 1rem;">
-                    <span style="font-family: 'Inter', sans-serif; font-weight: 700; color: var(--accent); white-space: nowrap; min-width: 90px;">4:30 AM</span>
-                    <span style="font-family: 'Cardo', serif;">Metron rewrites tomorrow: strength session becomes mobility, protein target drops 20g, cardio moves to Thursday.</span>
-                </div>
-                <div style="display: flex; gap: 1.2rem; align-items: baseline;">
-                    <span style="font-family: 'Inter', sans-serif; font-weight: 700; color: var(--accent); white-space: nowrap; min-width: 90px;">7:00 AM</span>
-                    <span style="font-family: 'Cardo', serif;">Your plan is ready. You didn't do anything.</span>
+                <div class="problem-copy reveal reveal-delay-1">
+                    <p>Most trackers preserve the numbers and stop there. Generic plans ignore the injury, the equipment you actually have, the practice calendar, and what happened in your last session.</p>
+                    <p><strong>Your history should make your next workout smarter.</strong> Metron turns the record of what you did into coaching for what you do next.</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- ==========================================
-         FEATURES
-    ========================================== -->
-    <section class="section--alt" id="features" style="padding-top: var(--section-v);">
-        <div class="features-scroll">
-            <div class="features-sticky">
-                <div class="container">
-                    <div class="features-sticky__inner">
-                        <h2 class="features-headline">Three engines. One system.</h2>
+        <section class="section section--alt" id="features">
+            <div class="container">
+                <div class="section-header reveal product-intro">
+                    <span class="t-label">The product</span>
+                    <h2>The world's smartest personal trainer—built on a tracker good enough to stand alone.</h2>
+                    <p>Four connected loops take you from a real goal to the next better session.</p>
+                </div>
+                <div class="proof-grid">
+                    <article class="proof-card reveal">
+                        <span class="proof-card__number">01</span>
+                        <h3>Builds for your sport and goal</h3>
+                        <p>Metron shapes training around your goals, workout history, injuries, available equipment, and schedule. Endurance and sport-specific athletic preparation live inside Training.</p>
+                    </article>
+                    <article class="proof-card reveal reveal-delay-1">
+                        <span class="proof-card__number">02</span>
+                        <h3>Coaches and logs live</h3>
+                        <p>Move through the workout, record sets, and get timely guidance in one flow. Audio cues are designed to mix with—not take over—the music already playing.</p>
+                    </article>
+                    <article class="proof-card reveal reveal-delay-2">
+                        <span class="proof-card__number">03</span>
+                        <h3>Learns from every set</h3>
+                        <p>Each logged set strengthens your record. Review exercise history, weekly volume, workout streaks, and e1RM trends already backed by Metron's training and PR screens.</p>
+                    </article>
+                    <article class="proof-card reveal reveal-delay-3">
+                        <span class="proof-card__number">04</span>
+                        <h3>Adapts the next session</h3>
+                        <p>The coach uses performance plus verified recovery signals from Apple Health to adjust training. Every change remains visible, explainable, and yours to accept.</p>
+                    </article>
+                </div>
 
-                        <!-- Left: active display -->
-                        <div class="features-left">
-                            <div class="features-active">
-                                <span class="features-active__num" id="fa-num">01</span>
-                                <span class="features-active__name" id="fa-name">Personalized Plan Engine</span>
-                            </div>
-                            <p class="features-active__desc" id="fa-desc">90 minutes. Eight AI phases. One plan covering training, nutrition, supplements, recovery, sleep, cardio, and body composition. Built from YOUR actual data.</p>
-                            <ul class="features-active__bullets" id="fa-bullets">
-                                <li>Syncs your wearables before generating</li>
-                                <li>Eight-phase build with adversarial self-critique</li>
-                                <li>15 to 25 custom rules for your vulnerabilities</li>
-                            </ul>
-                            <div class="features-progress">
-                                <span class="features-progress__dot active" data-idx="0"></span>
-                                <span class="features-progress__dot" data-idx="1"></span>
-                                <span class="features-progress__dot" data-idx="2"></span>
-                            </div>
+                <div class="analytics-proof reveal" role="group" aria-label="Verified workout analytics">
+                    <div><span>History</span><strong>Every logged workout</strong></div>
+                    <div><span>Volume</span><strong>Weekly training load</strong></div>
+                    <div><span>Streaks</span><strong>Current and longest</strong></div>
+                    <div><span>e1RM</span><strong>Exercise progress trends</strong></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section coach-surface" id="arete">
+            <div class="container coach-surface__grid">
+                <div class="coach-surface__copy reveal">
+                    <span class="t-label">One intelligence</span>
+                    <h2>Ask Arete. Or use the screen built for the job.</h2>
+                    <p>Chat and dedicated screens are two interfaces to the same shared actions. Ask Arete to explain or adjust something, or make the same change directly in Training. Either way, Metron works from one plan and one workout history.</p>
+                    <a class="text-link" href="#compare">See what stays free <span aria-hidden="true">→</span></a>
+                </div>
+                <div class="coach-surface__visual reveal reveal-delay-1" role="group" aria-label="Arete chat and Training screens share the same plan and actions">
+                    <div class="interface-card">
+                        <span>Arete chat</span>
+                        <strong>“Move Friday's lift to Saturday.”</strong>
+                    </div>
+                    <div class="shared-action" aria-hidden="true">One shared action</div>
+                    <div class="interface-card interface-card--light">
+                        <span>Training</span>
+                        <strong>Saturday · Strength</strong>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section--alt" id="compare">
+            <div class="container">
+                <div class="section-header reveal product-intro">
+                    <span class="t-label">Simple by design</span>
+                    <h2>The tracker stays free. The coach earns its place.</h2>
+                    <p>Start with the full personal trainer for 30 days—no card required. If you don't continue, your tracker, logging, and history remain free.</p>
+                </div>
+                <div class="compare-wrapper reveal reveal-delay-1" tabindex="0" aria-label="Free tracker and full coach comparison; scroll horizontally on smaller screens">
+                    <table class="compare-table plan-table">
+                        <caption class="sr-only">Features included in the free workout tracker and the full Metron coach</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col">What you get</th>
+                                <th scope="col">Free tracker</th>
+                                <th scope="col" class="col-metron">Full coach</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><th scope="row">Live workout logging</th><td>Included</td><td class="col-metron">Included</td></tr>
+                            <tr><th scope="row">Workout and exercise history</th><td>Included</td><td class="col-metron">Included</td></tr>
+                            <tr><th scope="row">Volume, streak, and e1RM trends</th><td>Included</td><td class="col-metron">Included</td></tr>
+                            <tr><th scope="row">Sport- and goal-specific plan</th><td>—</td><td class="col-metron">Included</td></tr>
+                            <tr><th scope="row">Live coaching and shared Arete actions</th><td>—</td><td class="col-metron">Included</td></tr>
+                            <tr><th scope="row">Performance and recovery adaptation</th><td>—</td><td class="col-metron">Included</td></tr>
+                            <tr><th scope="row">How to start</th><td>Free</td><td class="col-metron">30-day trial · no card</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section--dark" id="modular-future">
+            <div class="container future-grid">
+                <div class="reveal">
+                    <span class="t-label">Modular by architecture</span>
+                    <h2>Training first. Your platform, eventually.</h2>
+                    <p>Metron's pillar architecture is designed so people can eventually enable only the parts they want. At launch, Training is the center: strength, endurance, and sport-specific athletic preparation in one system.</p>
+                </div>
+                <div class="future-list reveal reveal-delay-1">
+                    <p class="future-list__label">Coming later—not launch features</p>
+                    <ul>
+                        <li>Injury mode and vacation mode</li>
+                        <li>Technical-skill coaching and video form analysis</li>
+                        <li>SmartRest and a dedicated Watch experience</li>
+                        <li>Optional Sleep, Recovery, Nutrition, Cardio, Body, and Mind pillars</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="beta-section" id="reserve">
+            <div class="beta-section__inner">
+                <span class="beta-section__eyebrow reveal">Founding reservation</span>
+                <h2 class="beta-section__headline reveal reveal-delay-1">Reserve your first year free.</h2>
+                <p class="beta-section__sub reveal reveal-delay-2" id="reservation-offer-note">Meet the world's smartest personal trainer. Founding reservations get the full coach free for the first year. The standard offer starts with 30 days—no card required—and the best-in-class workout tracker stays free.</p>
+                <form class="beta-form reveal reveal-delay-2" id="beta-form" data-source="reservation-section" aria-label="Founding free-year reservation">
+                    <label class="sr-only" for="beta-phone">Mobile phone number</label>
+                    <input class="beta-form__input" id="beta-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Mobile phone number" aria-describedby="reservation-offer-note reservation-privacy-note beta-error" required>
+                    <button class="btn btn-primary beta-form__btn" type="submit" id="beta-submit">
+                        <span class="btn-text">Reserve my free year</span>
+                        <span class="btn-loading" hidden>Reserving…</span>
+                    </button>
+                </form>
+                <p class="beta-disclaimer reveal reveal-delay-2" id="reservation-privacy-note">Mobile number required for reservation updates. No card. No spam.</p>
+                <div class="beta-success" id="beta-success" role="status" tabindex="-1">
+                    <div class="beta-success__icon" aria-hidden="true">✓</div>
+                    <p class="beta-success__title">Welcome to the Metron family.</p>
+                    <p class="beta-success__sub">Your free year is reserved. It's time to begin your journey to greatness.</p>
+                </div>
+                <p class="beta-error" id="beta-error" role="alert">We couldn't reserve your year. Please check your number and try again.</p>
+            </div>
+        </section>
+
+        <section class="section section--alt" id="faq">
+            <div class="container">
+                <div class="section-header reveal faq-heading">
+                    <span class="t-label">The details</span>
+                    <h2>Frequently asked questions</h2>
+                </div>
+                <div class="faq-list" id="faq-list">
+                    <div class="faq-item reveal">
+                        <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-answer-1" id="faq-question-1">
+                            What is free in Metron?
+                            <span class="faq-icon" aria-hidden="true">+</span>
+                        </button>
+                        <div class="faq-answer" id="faq-answer-1" role="region" aria-labelledby="faq-question-1" aria-hidden="true">
+                            Workout tracking, live logging, and your workout and exercise history remain free. The free tracker also shows the verified training progress available in the app, including volume, streaks, and e1RM trends.
                         </div>
-
-                        <!-- Right panel -->
-                    <div class="features-panel">
-
-                        <!-- Card 1: Plan Engine -->
-                        <div class="feature-card active" data-idx="0">
-                            <div class="feature-card__mockup">
-                                <div class="mini-phone">
-                                    <div class="mini-phone-inner">
-                                        <div class="mini-notch"></div>
-                                        <img src="images/screen-plan-progress.png" alt="Training plan progress" class="mini-screen-img">
-                                    </div>
-                                </div>
-                            </div>
+                    </div>
+                    <div class="faq-item reveal">
+                        <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-answer-2" id="faq-question-2">
+                            How does the 30-day coach trial work?
+                            <span class="faq-icon" aria-hidden="true">+</span>
+                        </button>
+                        <div class="faq-answer" id="faq-answer-2" role="region" aria-labelledby="faq-question-2" aria-hidden="true">
+                            You get the full Metron coach for 30 days with no card required. If you choose not to continue with coaching afterward, the free tracker, logging, and history remain available.
                         </div>
-
-                        <!-- Card 2: Adaptation Engine -->
-                        <div class="feature-card" data-idx="1">
-                            <div class="feature-card__mockup">
-                                <div class="mini-phone">
-                                    <div class="mini-phone-inner">
-                                        <div class="mini-notch"></div>
-                                        <img src="images/screen-arete-recommendation.png" alt="Arete AI recommendation" class="mini-screen-img">
-                                    </div>
-                                </div>
-                            </div>
+                    </div>
+                    <div class="faq-item reveal">
+                        <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-answer-3" id="faq-question-3">
+                            What does the free-year reservation include?
+                            <span class="faq-icon" aria-hidden="true">+</span>
+                        </button>
+                        <div class="faq-answer" id="faq-answer-3" role="region" aria-labelledby="faq-question-3" aria-hidden="true">
+                            Founding reservations get the full Metron coach free for the first year. The standard launch offer is a 30-day full-coach trial with no card required. In either case, workout tracking, logging, and history remain free afterward.
                         </div>
-
-                        <!-- Card 3: Arete Coach -->
-                        <div class="feature-card" data-idx="2">
-                            <div class="feature-card__mockup">
-                                <div class="mini-phone">
-                                    <div class="mini-phone-inner">
-                                        <div class="mini-notch"></div>
-                                        <img src="images/screen-ai-chat.png" alt="AI coach chat" class="mini-screen-img">
-                                    </div>
-                                </div>
-                            </div>
+                    </div>
+                    <div class="faq-item reveal">
+                        <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-answer-4" id="faq-question-4">
+                            Are Arete chat and the Training screens different products?
+                            <span class="faq-icon" aria-hidden="true">+</span>
+                        </button>
+                        <div class="faq-answer" id="faq-answer-4" role="region" aria-labelledby="faq-question-4" aria-hidden="true">
+                            No. They are two interfaces to the same plan, history, and shared actions. Chat is useful when you want to ask or understand; dedicated screens are useful when you want to see or change something directly.
                         </div>
-
-                        </div><!-- /features-panel -->
-                    </div><!-- /features-sticky__inner -->
-                </div><!-- /container -->
-            </div><!-- /features-sticky -->
-        </div><!-- /features-scroll -->
-    </section>
-
-
-    <!-- ==========================================
-         HOW IT WORKS
-    ========================================== -->
-    <section class="section" id="how-it-works">
-        <div class="container">
-            <div class="section-header reveal">
-                <h2 style="font-size: clamp(2.4rem, 4vw, 4rem); font-weight: 800; letter-spacing: -0.05em; line-height: 1.0;">From zero to your plan in one day.</h2>
-            </div>
-            <div class="steps-grid">
-                <div class="step reveal">
-                    <div class="step__number">01</div>
-                    <div class="step__time">15 minutes</div>
-                    <h3 class="step__title">Tell us about yourself</h3>
-                    <p class="step__desc">Complete a detailed questionnaire covering your body, goals, injuries, schedule, and preferences. This becomes the foundation of everything.</p>
-                </div>
-                <div class="step reveal reveal-delay-1">
-                    <div class="step__number">02</div>
-                    <div class="step__time">90 minutes</div>
-                    <h3 class="step__title">Metron builds your plan</h3>
-                    <p class="step__desc">72 workouts. Nutrition targets. Supplement stack. Recovery protocols. All integrated, all personalized, while you do something else.</p>
-                </div>
-                <div class="step reveal reveal-delay-2">
-                    <div class="step__number">03</div>
-                    <div class="step__time">Every night after</div>
-                    <h3 class="step__title">It never stops learning</h3>
-                    <p class="step__desc">Every night it reads your data and adjusts tomorrow. The longer you use it, the more precisely it knows exactly what you need.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div class="section-divider reveal">
-        <div class="section-divider__line"></div>
-        <svg class="section-divider__heptagon" viewBox="0 0 20 20"><polygon points="10,1 17,4.5 19,12 14.5,18.5 5.5,18.5 1,12 3,4.5"/></svg>
-        <div class="section-divider__line"></div>
-    </div>
-
-    <!-- ==========================================
-         COMPARISON TABLE
-    ========================================== -->
-    <section class="section section--alt" id="compare">
-        <div class="container">
-            <div class="section-header reveal">
-                <h2 style="font-size: clamp(2.4rem, 4vw, 4rem); font-weight: 800; letter-spacing: -0.05em; line-height: 1.0;">The Metron Advantage</h2>
-            </div>
-            <div class="compare-wrapper reveal reveal-delay-1">
-                <table class="compare-table">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th class="col-metron">Metron</th>
-                            <th>Standard LLMs</th>
-                            <th>In-Person Trainers</th>
-                            <th>Generic Fitness Apps</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Reads your wearable data</td>
-                            <td class="col-metron"><span class="chk">✓</span></td>
-                            <td><span class="chk-no">✕</span></td>
-                            <td><span class="chk-partial">~</span> sometimes</td>
-                            <td><span class="chk-partial">~</span> limited</td>
-                        </tr>
-                        <tr>
-                            <td>Adapts your plan daily</td>
-                            <td class="col-metron"><span class="chk">✓</span> automatically</td>
-                            <td><span class="chk-no">✕</span></td>
-                            <td><span class="chk-partial">~</span> manually</td>
-                            <td><span class="chk-no">✕</span></td>
-                        </tr>
-                        <tr>
-                            <td>Covers training + nutrition + recovery</td>
-                            <td class="col-metron"><span class="chk">✓</span> all 7 pillars</td>
-                            <td><span class="chk-partial">~</span> generic advice</td>
-                            <td><span class="chk-partial">~</span> training only</td>
-                            <td><span class="chk-partial">~</span> one pillar</td>
-                        </tr>
-                        <tr>
-                            <td>Remembers your full history</td>
-                            <td class="col-metron"><span class="chk">✓</span></td>
-                            <td><span class="chk-no">✕</span> forgets each session</td>
-                            <td><span class="chk-partial">~</span> if they take notes</td>
-                            <td><span class="chk-no">✕</span></td>
-                        </tr>
-                        <tr>
-                            <td>Available 24/7</td>
-                            <td class="col-metron"><span class="chk">✓</span></td>
-                            <td><span class="chk">✓</span></td>
-                            <td><span class="chk-no">✕</span></td>
-                            <td><span class="chk">✓</span></td>
-                        </tr>
-                        <tr>
-                            <td>Cost</td>
-                            <td class="col-metron">Free (beta)</td>
-                            <td>$20/mo</td>
-                            <td>$100 to $300/mo</td>
-                            <td>$5 to $15/mo</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </section>
-
-    <div class="section-divider reveal">
-        <div class="section-divider__line"></div>
-        <svg class="section-divider__heptagon" viewBox="0 0 20 20"><polygon points="10,1 17,4.5 19,12 14.5,18.5 5.5,18.5 1,12 3,4.5"/></svg>
-        <div class="section-divider__line"></div>
-    </div>
-
-    <!-- ==========================================
-         TESTIMONIALS
-    ========================================== -->
-    <section class="testimonial-feature" id="testimonials">
-        <div class="testimonial-feature__inner">
-            <h2 class="testimonial-feature__heading reveal">Built for people who take training seriously.</h2>
-
-            <div class="testimonial-feature__quote-wrap reveal reveal-delay-1" style="margin-bottom: 3rem;">
-                <p class="testimonial-feature__quote">"I've tried every fitness app out there. Metron is the first one that actually feels like it knows me. It adjusted my training the morning after a bad night of sleep before I even opened it."</p>
-                <span class="testimonial-feature__author">James R. — Competitive powerlifter</span>
-            </div>
-
-            <div class="testimonial-feature__quote-wrap reveal reveal-delay-2" style="margin-bottom: 3rem;">
-                <p class="testimonial-feature__quote">"I've been marathon training for six years. No coach I've ever worked with adjusted my taper week the way Metron did — it caught a recovery dip I hadn't even noticed yet and cut my Tuesday session before I hurt myself."</p>
-                <span class="testimonial-feature__author">Sarah K. — 2:58 marathoner</span>
-            </div>
-
-            <div class="testimonial-feature__quote-wrap reveal reveal-delay-3">
-                <p class="testimonial-feature__quote">"I'm not a competitive athlete. I just want to train smart around a busy job and two kids. Metron is the first thing that actually accounts for the fact that I slept like garbage because the baby was up."</p>
-                <span class="testimonial-feature__author">Marcus T. — Recreational lifter</span>
-            </div>
-        </div>
-    </section>
-
-
-    <!-- ==========================================
-         BETA CTA
-    ========================================== -->
-    <section class="beta-section" id="beta">
-        <div class="beta-section__inner">
-            <span class="beta-section__eyebrow reveal">Coming Soon</span>
-            <h2 class="beta-section__headline reveal reveal-delay-1">
-                Stop Guessing.<br>Start Adapting.
-            </h2>
-            <p class="beta-section__sub reveal reveal-delay-2">
-                Launching on the App Store. Be the first to know.
-            </p>
-            <ul class="beta-section__value reveal reveal-delay-2">
-                <li>Complete 12-week plan built from your data</li>
-                <li>Daily workout &amp; nutrition adjustments</li>
-                <li>Unlimited Arete AI conversations</li>
-                <li>All integrations included</li>
-            </ul>
-
-            <div class="reveal reveal-delay-3" style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; align-items: center; flex-wrap: wrap;">
-                <a href="#" style="display: inline-block; opacity: 0.9; transition: opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.9'">
-                    <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store" style="height: 54px;">
-                </a>
-                <span style="font-family: 'Cardo', serif; font-size: 0.95rem; font-weight: 400; font-style: italic; color: rgba(255,255,255,0.5); letter-spacing: 0.03em;">Coming Soon</span>
-            </div>
-        </div>
-    </section>
-
-
-    <!-- ==========================================
-         FAQ
-    ========================================== -->
-    <section class="section section--alt" id="faq">
-        <div class="container">
-            <div class="section-header reveal">
-                <h2 style="font-size: clamp(2.4rem, 4vw, 4rem); font-weight: 800; letter-spacing: -0.05em; line-height: 1.0;">FAQs</h2>
-            </div>
-            <div class="faq-list" id="faq-list">
-
-                <div class="faq-item reveal">
-                    <button class="faq-question" aria-expanded="false">
-                        How is this different from Standard AI models?
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        A standard AI model can't see your data. Metron connects directly to your wearables and training logs, then analyzes your actual sleep, HRV, and workout history. When you ask "should I train today?", you get an answer based on YOUR recovery state, not generic advice.
+                    </div>
+                    <div class="faq-item reveal">
+                        <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-answer-5" id="faq-question-5">
+                            What platforms is Metron available on?
+                            <span class="faq-icon" aria-hidden="true">+</span>
+                        </button>
+                        <div class="faq-answer" id="faq-answer-5" role="region" aria-labelledby="faq-question-5" aria-hidden="true">
+                            Metron launches first on iPhone. Android and a dedicated Watch experience are coming later.
+                        </div>
+                    </div>
+                    <div class="faq-item reveal">
+                        <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-answer-6" id="faq-question-6">
+                            Which wearable data does Metron use at launch?
+                            <span class="faq-icon" aria-hidden="true">+</span>
+                        </button>
+                        <div class="faq-answer" id="faq-answer-6" role="region" aria-labelledby="faq-question-6" aria-hidden="true">
+                            With your permission, Metron uses verified recovery and workout signals available through Apple Health. We do not claim an integration until it is ready.
+                        </div>
+                    </div>
+                    <div class="faq-item reveal">
+                        <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-answer-7" id="faq-question-7">
+                            Is Metron medical advice?
+                            <span class="faq-icon" aria-hidden="true">+</span>
+                        </button>
+                        <div class="faq-answer" id="faq-answer-7" role="region" aria-labelledby="faq-question-7" aria-hidden="true">
+                            No. Metron is a training and wellness product, not a medical service. For an injury, symptoms, or any medical concern, consult a qualified healthcare professional.
+                        </div>
                     </div>
                 </div>
-
-                <div class="faq-item reveal">
-                    <button class="faq-question" aria-expanded="false">
-                        What if the system keeps reducing my workouts?
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        It doesn't default to easy. When you're ready to push, it tells you to push harder. Last month, 23% of adjustments INCREASED intensity because users were under-training relative to their recovery. You can also override any adjustment.
-                    </div>
-                </div>
-
-                <div class="faq-item reveal">
-                    <button class="faq-question" aria-expanded="false">
-                        What if I only have an Apple Watch?
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        That's plenty. Apple Watch tracks sleep, heart rate, and workouts. The system works with one device. More devices = richer insights, but one is enough to start.
-                    </div>
-                </div>
-
-                <div class="faq-item reveal">
-                    <button class="faq-question" aria-expanded="false">
-                        Is this iOS only?
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        Yes, currently iOS only. Android is on our roadmap. Sign up and we'll notify you when Android launches.
-                    </div>
-                </div>
-
-                <div class="faq-item reveal">
-                    <button class="faq-question" aria-expanded="false">
-                        Is my health data private?
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        Yes. Your data is encrypted, never sold, and never shared with external AI models. You can export or delete everything at any time. We make money from subscriptions, not your data.
-                    </div>
-                </div>
-
-                <div class="faq-item reveal">
-                    <button class="faq-question" aria-expanded="false">
-                        What if Metron gives me bad advice?
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        Metron provides insights based on your data, not medical advice. It's designed to help you understand patterns and make informed decisions. For injuries or medical concerns, always consult a healthcare professional.
-                    </div>
-                </div>
-
             </div>
-        </div>
-    </section>
-
-
-
+        </section>
     <!-- ==========================================
          CLOSING QUOTE
     ========================================== -->
@@ -3369,6 +3534,7 @@
         <p class="closing-quote__text">"We are what we repeatedly do. Excellence, then, is not an act, but a habit."</p>
         <span class="closing-quote__attribution">— Aristotle</span>
     </section>
+    </main>
 
     <!-- ==========================================
          FOOTER
@@ -3475,13 +3641,19 @@
         const mobileMenu = document.getElementById('mobile-menu');
 
         hamburger.addEventListener('click', () => {
-            mobileMenu.classList.toggle('active');
+            const isOpen = mobileMenu.classList.toggle('active');
+            hamburger.setAttribute('aria-expanded', String(isOpen));
+            hamburger.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+            mobileMenu.inert = !isOpen;
             closeAllMegaPanels();
         });
 
         mobileMenu.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenu.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
+                hamburger.setAttribute('aria-label', 'Open menu');
+                mobileMenu.inert = true;
             });
         });
 
@@ -3492,11 +3664,19 @@
                 const body = document.getElementById(bodyId);
                 const isOpen = body.classList.contains('open');
                 // Close all
-                document.querySelectorAll('.mobile-menu__accordion-body').forEach(b => b.classList.remove('open'));
-                document.querySelectorAll('.mobile-menu__accordion-title span').forEach(s => s.textContent = '+');
+                document.querySelectorAll('.mobile-menu__accordion-body').forEach(b => {
+                    b.classList.remove('open');
+                    b.inert = true;
+                });
+                document.querySelectorAll('.mobile-menu__accordion-title').forEach(button => {
+                    button.setAttribute('aria-expanded', 'false');
+                    button.querySelector('span').textContent = '+';
+                });
                 if (!isOpen) {
                     body.classList.add('open');
+                    body.inert = false;
                     title.querySelector('span').textContent = '−';
+                    title.setAttribute('aria-expanded', 'true');
                 }
             });
         });
@@ -3507,8 +3687,15 @@
         let megaCloseTimeout = null;
 
         function closeAllMegaPanels() {
-            megaPanels.forEach(p => p.classList.remove('open'));
-            megaTriggers.forEach(t => t.classList.remove('active'));
+            megaPanels.forEach(p => {
+                p.classList.remove('open');
+                p.style.display = '';
+                p.inert = true;
+            });
+            megaTriggers.forEach(t => {
+                t.classList.remove('active');
+                t.setAttribute('aria-expanded', 'false');
+            });
         }
 
         function openPanel(panelName) {
@@ -3521,7 +3708,9 @@
                 panel.style.display = 'flex';
                 panel.offsetHeight;
                 panel.classList.add('open');
+                panel.inert = false;
                 trigger.classList.add('active');
+                trigger.setAttribute('aria-expanded', 'true');
             }
         }
 
@@ -3540,6 +3729,13 @@
                 } else {
                     openPanel(panelName);
                 }
+            });
+
+            trigger.addEventListener('keydown', (e) => {
+                if (e.key !== 'ArrowDown') return;
+                e.preventDefault();
+                openPanel(panelName);
+                document.getElementById('mega-' + panelName)?.querySelector('a')?.focus();
             });
         });
 
@@ -3571,7 +3767,18 @@
 
         // ESC closes
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeAllMegaPanels();
+            if (e.key === 'Escape') {
+                const activeTrigger = document.querySelector('.nav__mega-trigger.active');
+                closeAllMegaPanels();
+                if (activeTrigger) activeTrigger.focus();
+                if (mobileMenu.classList.contains('active')) {
+                    mobileMenu.classList.remove('active');
+                    hamburger.setAttribute('aria-expanded', 'false');
+                    hamburger.setAttribute('aria-label', 'Open menu');
+                    mobileMenu.inert = true;
+                    hamburger.focus();
+                }
+            }
         });
 
         // Click outside closes
@@ -3643,14 +3850,12 @@
 
         function openAnswer(el) {
             el.classList.add('open');
-            el.style.maxHeight = el.scrollHeight + 'px';
+            el.setAttribute('aria-hidden', 'false');
         }
 
         function closeAnswer(el) {
-            el.style.maxHeight = el.scrollHeight + 'px';
-            el.getBoundingClientRect();
             el.classList.remove('open');
-            el.style.maxHeight = '0';
+            el.setAttribute('aria-hidden', 'true');
         }
 
         faqItems.forEach(item => {
@@ -3686,27 +3891,30 @@
         // ==========================================
         // 6. BETA SIGNUP SHARED HANDLER
         // ==========================================
-        async function submitBetaForm(email, formEl, successEl, errorEl, submitBtn) {
+        async function submitBetaForm(phone, formEl, successEl, errorEl, submitBtn) {
             const btnText = submitBtn.querySelector('.btn-text');
             const btnLoading = submitBtn.querySelector('.btn-loading');
 
             submitBtn.disabled = true;
-            if (btnText) btnText.style.display = 'none';
-            if (btnLoading) btnLoading.style.display = 'inline';
+            if (btnText) btnText.hidden = true;
+            if (btnLoading) btnLoading.hidden = false;
             if (errorEl) errorEl.style.display = 'none';
 
             try {
                 const response = await fetch('/.netlify/functions/beta-signup', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ type: 'email', value: email })
+                    body: JSON.stringify({ type: 'phone', value: phone, source: formEl.dataset.source })
                 });
 
                 const data = await response.json();
 
                 if (response.ok && data.success) {
                     if (formEl) formEl.style.display = 'none';
-                    if (successEl) successEl.style.display = 'block';
+                    if (successEl) {
+                        successEl.style.display = 'block';
+                        successEl.focus();
+                    }
                 } else {
                     throw new Error(data.error || 'Something went wrong');
                 }
@@ -3714,8 +3922,8 @@
                 console.error('Beta signup error:', err);
                 if (errorEl) errorEl.style.display = 'block';
                 submitBtn.disabled = false;
-                if (btnText) btnText.style.display = 'inline';
-                if (btnLoading) btnLoading.style.display = 'none';
+                if (btnText) btnText.hidden = false;
+                if (btnLoading) btnLoading.hidden = true;
             }
         }
 
@@ -3725,7 +3933,7 @@
             heroForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 submitBetaForm(
-                    heroForm.querySelector('input[type="email"]').value,
+                    heroForm.querySelector('input[type="tel"]').value,
                     heroForm,
                     document.getElementById('hero-success'),
                     document.getElementById('hero-error'),
@@ -3772,86 +3980,13 @@
             updateProblem();
         }
 
-        // ==========================================
-        // Features sticky scroll switcher
-        // ==========================================
-        const featuresScroll = document.querySelector('.features-scroll');
-        if (featuresScroll) {
-            const cards        = featuresScroll.querySelectorAll('.feature-card[data-idx]');
-            const progressDots = document.querySelectorAll('.features-progress__dot');
-            const faNum        = document.getElementById('fa-num');
-            const faName       = document.getElementById('fa-name');
-            const faDesc       = document.getElementById('fa-desc');
-            const faBullets    = document.getElementById('fa-bullets');
-            let current        = 0;
-
-            const featureData = [
-                {
-                    num: '01', name: 'Personalized Plan Engine',
-                    desc: '90 minutes. Eight AI phases. One plan covering training, nutrition, supplements, recovery, sleep, cardio, and body composition. Built from YOUR actual data.',
-                    bullets: ['Syncs your wearables before generating', 'Eight-phase build with adversarial self-critique', '15 to 25 custom rules for your vulnerabilities']
-                },
-                {
-                    num: '02', name: 'Adaptation Engine',
-                    desc: 'Every night, eight data streams. One adjusted plan by morning. Metron reads your overnight recovery, yesterday\'s training load, nutrition adherence, and sleep quality — then rewrites tomorrow before your alarm.',
-                    bullets: ['Nightly rewrite based on recovery state', 'Adjusts intensity, volume, and nutrition together', 'Explains every change in plain language']
-                },
-                {
-                    num: '03', name: 'Arete AI Coach',
-                    desc: 'Name comes from the Greek aretē — excellence, virtue, living up to your potential. Ask Arete anything. It has your full history, your current plan, and your real-time data. Not generic advice — your answer, for your body, right now.',
-                    bullets: ['Remembers every conversation', 'Sees your wearable data in real time', 'Powered by Claude, trained on your plan']
-                }
-            ];
-
-            const leftEls = [faNum, faName, faDesc, faBullets].filter(Boolean);
-
-            function setFeature(idx) {
-                if (idx === current) return;
-                const prev = current;
-                current = idx;
-
-                progressDots.forEach((el, i) => el.classList.toggle('active', i === idx));
-
-                // Fade out left text AND outgoing card simultaneously at t=0
-                leftEls.forEach(el => { el.style.opacity = '0'; el.style.transform = 'translateY(-8px)'; });
-                const prevCard = cards[prev];
-                if (prevCard) {
-                    prevCard.style.opacity = '0';
-                    prevCard.style.transform = 'translateY(-8px)';
-                }
-
-                // At t=200ms: swap cards, update text, fade both sides back in together
-                setTimeout(() => {
-                    cards.forEach((el, i) => {
-                        el.classList.toggle('active', i === idx);
-                        el.style.opacity = '';
-                        el.style.transform = '';
-                    });
-                    if (faNum)     faNum.textContent   = featureData[idx].num;
-                    if (faName)    faName.textContent  = featureData[idx].name;
-                    if (faDesc)    faDesc.textContent  = featureData[idx].desc;
-                    if (faBullets) faBullets.innerHTML = featureData[idx].bullets.map(b => `<li>${b}</li>`).join('');
-                    leftEls.forEach(el => { el.style.opacity = '1'; el.style.transform = 'translateY(0)'; });
-                }, 200);
-            }
-
-            window.addEventListener('scroll', () => {
-                const rect     = featuresScroll.getBoundingClientRect();
-                const scrolled = -rect.top;
-                const total    = rect.height - window.innerHeight;
-                if (total <= 0) return;
-                const progress = Math.max(0, Math.min(1, scrolled / total));
-                setFeature(Math.min(2, Math.floor(progress * 3)));
-            }, { passive: true });
-        }
-
         // Beta section form
         const betaForm = document.getElementById('beta-form');
         if (betaForm) {
             betaForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 submitBetaForm(
-                    document.getElementById('beta-email').value,
+                    document.getElementById('beta-phone').value,
                     betaForm,
                     document.getElementById('beta-success'),
                     document.getElementById('beta-error'),
@@ -3859,46 +3994,6 @@
                 );
             });
         }
-
-
-        // ==========================================
-        // 7. TESTIMONIAL ROTATOR
-        // ==========================================
-        const testimonials = [
-            { quote: '"I\'ve tried every fitness app out there. Metron is the first one that actually feels like it knows me. It adjusted my training the morning after a bad night of sleep before I even opened it."', author: 'James R. — Competitive powerlifter' },
-            { quote: '"The Arete AI chat blew me away. I asked why my bench keeps stalling and it pulled my last 3 months of data to explain exactly what was happening. No other app can do that."', author: 'Sarah K. — CrossFit athlete' },
-            { quote: '"I used to have my Whoop, my nutrition app, my training app, and ChatGPT all open at once. Now it\'s just Metron. Everything I need is in one place, and it\'s actually connected."', author: 'Cole M. — Amateur triathlete' },
-            { quote: '"The plan it built for me was more detailed than anything a human coach gave me. It knew my weaknesses from my data and built specific rules around them. That\'s next level."', author: 'Alex P. — Strength & conditioning' },
-        ];
-        let testimonialIndex = 0;
-        const quoteEl = document.getElementById('testimonialQuote');
-        const authorEl = document.getElementById('testimonialAuthor');
-        if (quoteEl && authorEl) {
-            setInterval(() => {
-                quoteEl.classList.add('t-fade');
-                authorEl.classList.add('t-fade');
-                setTimeout(() => {
-                    let next;
-                    do { next = Math.floor(Math.random() * testimonials.length); } while (next === testimonialIndex);
-                    testimonialIndex = next;
-                    quoteEl.textContent = testimonials[testimonialIndex].quote;
-                    authorEl.textContent = testimonials[testimonialIndex].author;
-                    quoteEl.classList.remove('t-fade');
-                    authorEl.classList.remove('t-fade');
-                }, 300);
-            }, 4000);
-        }
-
-
-        // ==========================================
-        // 8. PAUSE CAROUSEL ON REDUCED MOTION
-        // ==========================================
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            const track = document.querySelector('.integrations-track');
-            if (track) track.style.animationPlayState = 'paused';
-        }
-
-
     </script>
 
 </body>

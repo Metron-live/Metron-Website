@@ -1,16 +1,16 @@
 # Metron Landing Page
 
-Landing page for [metron.live](https://metron.live) — AI-powered fitness intelligence platform.
+Landing page for [metron.live](https://metron.live) — the world's smartest personal trainer, built on a best-in-class workout tracker that remains free.
 
 ## Overview
 
-Metron connects your wearables, workouts, and nutrition to deliver personalized training and meal plans that adapt daily to how your body is actually performing.
+Metron builds, coaches, tracks, and adapts training. The website also accepts phone-first founding reservations for a free first year of the full coach.
 
 ## Tech Stack
 
 - **Frontend**: Static HTML/CSS/JS
-- **Fonts**: Space Grotesk (headings), Inter (body)
-- **Form Handling**: Formspree (email collection)
+- **Fonts**: Cardo (headings and body), Inter (numbers and buttons), Space Grotesk (Metron wordmark only)
+- **Form Handling**: Netlify Function + Resend (phone reservation notification)
 - **Hosting**: GitHub Pages / Vercel / Netlify
 
 ## Setup
@@ -22,17 +22,12 @@ git clone https://github.com/Metron-live/metron-landing.git
 cd metron-landing
 ```
 
-### 2. Set up Formspree
+### 2. Configure reservations
 
-1. Create a free account at [formspree.io](https://formspree.io)
-2. Create a new form
-3. Copy your form ID
-4. Replace `YOUR_FORM_ID` in `index.html` with your actual form ID (appears twice)
-
-```html
-<!-- Find these lines and replace YOUR_FORM_ID -->
-<form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-```
+Set `RESEND_API_KEY` in Netlify. Reservations are sent to `beta@metron.live` by
+default; set `SIGNUP_NOTIFICATION_EMAIL` to route them to another approved
+inbox. The browser posts only the submitted phone number and page source to
+`/.netlify/functions/beta-signup`.
 
 ### 3. Deploy
 
@@ -64,12 +59,11 @@ metron-landing/
 └── README.md
 ```
 
-## Email Collection
+## Reservation collection
 
-Emails submitted through the forms are collected via Formspree. You can:
-- View submissions in the Formspree dashboard
-- Export to CSV
-- Set up integrations with Airtable, Google Sheets, Slack, etc.
+Phone numbers are validated in the Netlify function and sent to the configured
+reservation inbox through Resend. The page displays success only after Resend
+accepts the notification request.
 
 ## Local Development
 
