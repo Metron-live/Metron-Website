@@ -4,22 +4,16 @@
 <head>
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Metron | The World's Smartest Personal Trainer</title>
+    <title>The World's Smartest Personal Trainer</title>
 
-    <meta property="og:title" content="Metron | The World's Smartest Personal Trainer">
-    <meta property="og:description" content="The world's smartest personal trainer, built on a best-in-class workout tracker that stays free. Try the full coach for 30 days, no card required.">
-    <meta property="og:image" content="https://metron.live/brand/brand%20preview/og-preview.png">
-    <meta property="og:image:width" content="720">
-    <meta property="og:image:height" content="960">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:video" content="https://metron.live/brand/brand%20preview/og-preview.mp4">
-    <meta property="og:video:type" content="video/mp4">
-    <meta property="og:video:width" content="720">
-    <meta property="og:video:height" content="960">
+    <meta property="og:title" content="The World's Smartest Personal Trainer">
+    <meta property="og:description" content="The world's smartest personal trainer, plus the best free workout tracker for serious self-coached athletes.">
+    <!-- TODO(approved-og-handoff): Copy the approved 720x960 MP4 and representative-frame PNG byte-for-byte from /Users/benshai/Downloads/Metron Large Lockup/approved handoff, then restore og:video, og:image, dimensions, types, and poster metadata. The handoff path is unavailable in this checkout, so no substitute asset is published. -->
     <meta property="og:url" content="https://metron.live">
     <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="description" content="Metron is the world's smartest personal trainer, with a best-in-class workout tracker that stays free. Try the full coach for 30 days, no card required.">
+    <meta name="twitter:card" content="summary">
+    <meta name="description" content="Metron is the world's smartest personal trainer, plus the best free workout tracker for serious self-coached athletes.">
+    <meta name="metron-reservation-api-base" content="https://api.metron.live/api/v1/launch-reservations">
 
     <script defer data-domain="metron.live" src="https://plausible.io/js/script.js"></script>
 
@@ -40,6 +34,8 @@
             padding: 0;
             box-sizing: border-box;
         }
+
+        [hidden] { display: none !important; }
 
         html {
             scroll-behavior: smooth;
@@ -342,7 +338,7 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Cinematic load sequence — nav items fade in with logo */
+        /* Cinematic load sequence: nav items fade in with logo */
         .nav--quote-mode .nav__links,
         .nav--quote-mode .nav__cta,
         .nav--quote-mode .nav__hamburger,
@@ -765,7 +761,7 @@
             color: var(--accent);
         }
 
-        /* M icon — matches splash ratio (120x96 → scaled to 62x50) */
+        /* M icon matches splash ratio (120x96 to 62x50) */
         .nav__logo-m {
             height: 50px;
             width: auto;
@@ -773,7 +769,7 @@
             transition: filter var(--ease);
         }
 
-        /* Metron wordmark image — matches splash ratio (286x81 → scaled to height 42) */
+        /* Metron wordmark image matches splash ratio (286x81 to height 42) */
         .nav__logo-wordmark-img {
             height: 42px;
             width: auto;
@@ -794,7 +790,7 @@
             animation: logoFadeIn 2s cubic-bezier(0.25, 0.1, 0.25, 1) 3.5s forwards;
         }
 
-        /* Legacy text fallback — keeping for compatibility */
+        /* Legacy text fallback retained for compatibility */
         .nav__logo-text {
             font-family: 'Space Grotesk', sans-serif;
             font-size: 3.2rem;
@@ -902,7 +898,7 @@
 
 
 
-        /* Cinematic fade — same timing as nav links */
+        /* Cinematic fade uses the same timing as nav links */
         .nav--quote-mode .nav__mega-trigger {
             opacity: 0.3;
             animation: logoFadeIn 900ms cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
@@ -1269,6 +1265,7 @@
 
         .video-banner__form {
             display: flex;
+            flex-wrap: wrap;
             gap: 0.5rem;
             max-width: 440px;
         }
@@ -1366,7 +1363,7 @@
             overflow: hidden;
         }
 
-        /* Hero lava background — seamless flowing gradient, no image, no seams */
+        /* Hero lava background: seamless flowing gradient, no image, no seams */
         .hero-lava-wrap {
             position: absolute;
             inset: -100px;
@@ -1608,7 +1605,7 @@
         .badge-dot--amber { background: var(--yellow); }
         .badge-dot--coral { background: var(--accent); }
 
-        /* (Old hero phone content styles removed — now using screenshot image) */
+        /* Old hero phone content styles removed; now using screenshot image */
 
         /* ==========================================
            STATS BAR
@@ -1659,7 +1656,7 @@
         }
 
         /* ==========================================
-           PROBLEM — scroll-driven call & response
+           PROBLEM: scroll-driven call and response
         ========================================== */
         .problem-scroll {
             position: relative;
@@ -1703,7 +1700,7 @@
             align-self: start;
         }
 
-        /* Left — animates in, spans all 3 rows via subgrid */
+        /* Left animates in and spans all 3 rows via subgrid */
         .problem__left {
             display: grid;
             grid-row: span 3;
@@ -1715,7 +1712,7 @@
         }
         .problem__left.visible { opacity: 1; transform: translateY(0); }
 
-        /* Right — spans all 3 rows via subgrid */
+        /* Right spans all 3 rows via subgrid */
         .problem__right {
             display: grid;
             grid-row: span 3;
@@ -1741,7 +1738,7 @@
             transform: translateY(0);
         }
 
-        /* Text content — fades in shortly after wall lands, subgrid for row alignment */
+        /* Text content fades in shortly after wall lands; subgrid aligns rows */
         .problem__right-content {
             display: grid;
             grid-row: span 3;
@@ -1793,7 +1790,7 @@
         #features .container { max-width: 1400px; padding: 0 3rem; }
 
         /* ==========================================
-           FEATURE CARDS — sticky scroll switcher
+           FEATURE CARDS: sticky scroll switcher
         ========================================== */
         .features-scroll { position: relative; height: 300vh; }
 
@@ -2032,7 +2029,7 @@
             z-index: 2;
         }
 
-        /* (Old mini-phone content styles removed — now using screenshot images) */
+        /* Old mini-phone content styles removed; now using screenshot images */
 
         /* ==========================================
            INTEGRATIONS
@@ -2352,6 +2349,7 @@
 
         .beta-form {
             display: flex;
+            flex-wrap: wrap;
             gap: 0.625rem;
             margin-bottom: 1rem;
         }
@@ -2385,7 +2383,11 @@
         .beta-disclaimer {
             font-size: 0.78rem;
             color: rgba(255,255,255,0.6);
+            line-height: 1.55;
+            margin-top: 0.55rem;
         }
+
+        .beta-disclaimer a { color: white; }
 
         .beta-success {
             display: none;
@@ -2618,6 +2620,61 @@
             max-width: 850px;
             margin-left: auto;
             margin-right: auto;
+        }
+
+        .product-loop {
+            margin: 1.4rem 0 0.8rem;
+            color: var(--accent);
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(0.95rem, 2vw, 1.15rem);
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .reservation-secondary {
+            flex-basis: 100%;
+            width: fit-content;
+            border: 0;
+            padding: 0.25rem 0;
+            background: transparent;
+            color: inherit;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-decoration: underline;
+            text-underline-offset: 0.2rem;
+            cursor: pointer;
+        }
+
+        .hero-reservation-form .reservation-secondary {
+            color: rgba(255,255,255,0.86);
+        }
+
+        .beta-form .reservation-secondary {
+            color: white;
+            margin: 0 auto;
+        }
+
+        .reservation-progress,
+        .reservation-fallback {
+            max-width: 600px;
+            margin: 0.75rem auto 0;
+            font-family: 'Cardo', Georgia, serif;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .quote-overlay .reservation-progress,
+        .quote-overlay .reservation-fallback {
+            max-width: 580px;
+            margin-left: 0;
+            color: white;
+        }
+
+        .reservation-fallback a {
+            color: inherit;
+            font-weight: 700;
         }
 
         .product-intro p {
@@ -2947,7 +3004,7 @@
             .features-active__bullets { margin-top: 0.35rem; margin-bottom: 0; }
             .features-active__bullets li { font-size: 0.82rem; margin-bottom: 0.2rem; }
             .features-progress { position: static; bottom: auto; margin-top: 0.35rem; }
-            /* Phone renders at full base size — no overrides */
+            /* Phone renders at full base size with no overrides */
 
             /* Features section gap + integrations z-index reset on mobile */
             #features { padding-bottom: 4rem; }
@@ -3182,7 +3239,7 @@
                 </a>
                 <a href="#modular-future" class="mega-panel__item">
                     <div class="mega-panel__item-title">Modular future</div>
-                    <div class="mega-panel__item-desc">Training is the foundation. More optional pillars and specialized modes are coming later.</div>
+                    <div class="mega-panel__item-desc">Training is the launch product. Optional specialized modules are coming later.</div>
                 </a>
                 <a href="#compare" class="mega-panel__item">
                     <div class="mega-panel__item-title">Free tracker</div>
@@ -3204,7 +3261,7 @@
             <div class="mega-panel__items">
                 <a href="#features" class="mega-panel__item">
                     <div class="mega-panel__item-title">Endurance</div>
-                    <div class="mega-panel__item-desc">Running, cycling, and other endurance preparation live inside Training—not in a separate product.</div>
+                    <div class="mega-panel__item-desc">Running, cycling, and other endurance preparation live inside Training, not in a separate product.</div>
                 </a>
                 <a href="#features" class="mega-panel__item">
                     <div class="mega-panel__item-title">Strength</div>
@@ -3216,7 +3273,7 @@
                 </a>
                 <a href="#modular-future" class="mega-panel__item">
                     <div class="mega-panel__item-title">Coming later</div>
-                    <div class="mega-panel__item-desc">Coming later: injury mode, vacation mode, technical-skill coaching, video form analysis, SmartRest, Watch, and broader pillars.</div>
+                    <div class="mega-panel__item-desc">Coming later: injury mode, vacation mode, technical-skill coaching, video form analysis, SmartRest, and a Watch experience.</div>
                 </a>
             </div>
             <div class="mega-panel__featured" style="gap: 1.2rem;">
@@ -3224,7 +3281,7 @@
                     <polygon points="0.0,-28.0 21.9,-17.5 27.3,6.2 12.1,25.2 -12.1,25.2 -27.3,6.2 -21.9,-17.5" fill="none" stroke="rgba(217,119,6,0.3)" stroke-width="0.8"/>
                     <polygon points="0.0,-19.6 13.1,-10.5 10.9,2.5 10.9,22.7 -10.9,22.7 -10.9,2.5 -15.3,-12.3" fill="rgba(217,119,6,0.15)" stroke="rgba(217,119,6,0.6)" stroke-width="1"/>
                 </svg>
-                <p class="mega-panel__featured-quote">Training is the launch foundation. The modular heptagram shows where Metron can expand without pretending every pillar is live today.</p>
+                <p class="mega-panel__featured-quote">Training is the launch product. The modular heptagram shows where Metron can expand without pretending future modules are live today.</p>
                 <a href="#modular-future" style="font-family: 'Cardo', serif; font-size: 0.85rem; color: var(--accent); text-decoration: none; margin-top: 0.5rem;">See what comes next →</a>
             </div>
         </div>
@@ -3269,21 +3326,24 @@
         <div class="quote-overlay">
             <p class="hero-kicker">Metron</p>
             <h1 class="quote-hero__text" id="hero-title">The world's smartest personal trainer.</h1>
-            <p class="quote-hero__attribution">And a best-in-class workout tracker that stays free.</p>
-            <form class="video-banner__form hero-reservation-form" id="hero-form" data-source="hero" aria-label="Hero free-year reservation">
-                <label class="sr-only" for="hero-phone">Mobile phone number</label>
-                <input class="video-banner__form-input" id="hero-phone" type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="Mobile phone number" aria-describedby="hero-offer-note hero-error" required>
+            <p class="quote-hero__attribution">Plus the best free workout tracker.</p>
+            <form class="video-banner__form hero-reservation-form" id="hero-form" data-source="hero" action="https://api.metron.live/api/v1/launch-reservations/request" method="post" aria-label="Hero free-year reservation">
+                <label class="sr-only" for="hero-contact">Mobile phone number</label>
+                <input class="video-banner__form-input" id="hero-contact" type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="Mobile phone number" aria-describedby="hero-offer-note hero-progress hero-fallback hero-error" required>
                 <button class="btn btn-primary video-banner__form-btn" type="submit" id="hero-submit">
                     <span class="btn-text">Reserve my free year</span>
-                    <span class="btn-loading" hidden>Reserving…</span>
+                    <span class="btn-loading" hidden>Sending...</span>
                 </button>
+                <button class="reservation-secondary" type="button" data-contact-toggle>Use email instead</button>
             </form>
-            <p class="hero-reservation-note" id="hero-offer-note">Founding reservations get the full coach free for the first year. The standard offer is 30 days of the full coach with no card required; your tracker, logging, and history remain free.</p>
+            <p class="reservation-progress" id="hero-progress" role="status" hidden></p>
+            <p class="reservation-fallback" id="hero-fallback" role="status" hidden></p>
+            <p class="hero-reservation-note" id="hero-offer-note">Built for serious self-coached athletes. Reserve with a phone or email, then verify your code. Founding reservations get the full coach free for the first year.</p>
             <div class="hero__success" id="hero-success" role="status" tabindex="-1">
                 <strong>Welcome to the Metron family.</strong>
                 Your free year is reserved. It's time to begin your journey to greatness.
             </div>
-            <p class="hero__error" id="hero-error" role="alert">We couldn't reserve your year. Please check your number and try again.</p>
+            <p class="hero__error" id="hero-error" role="alert">We couldn't continue. Check your details and try again.</p>
         </div>
 
         <!-- Scroll cue: rotating white heptagon + fixed arrow cutout -->
@@ -3301,7 +3361,7 @@
 
         <!-- Corner promise; retains the locked 0.9s hero reveal timing. -->
         <div class="video-banner__tagline-corner">
-            <h2 class="video-banner__tagline">Train. Track. Adapt.</h2>
+            <h2 class="video-banner__tagline">Train. Log. Learn. Adapt.</h2>
             <p class="video-banner__sub">One coach. One shared history.</p>
         </div>
     </section>
@@ -3314,7 +3374,7 @@
                     <h2>Logging a workout is easy. Knowing what to do next isn't.</h2>
                 </div>
                 <div class="problem-copy reveal reveal-delay-1">
-                    <p>Most trackers preserve the numbers and stop there. Generic plans ignore the injury, the equipment you actually have, the practice calendar, and what happened in your last session.</p>
+                    <p>Serious self-coached athletes need more than a list of numbers. Generic plans ignore the injury, the equipment you actually have, the practice calendar, and what happened in your last session.</p>
                     <p><strong>Your history should make your next workout smarter.</strong> Metron turns the record of what you did into coaching for what you do next.</p>
                 </div>
             </div>
@@ -3324,28 +3384,29 @@
             <div class="container">
                 <div class="section-header reveal product-intro">
                     <span class="t-label">The product</span>
-                    <h2>The world's smartest personal trainer—built on a tracker good enough to stand alone.</h2>
-                    <p>Four connected loops take you from a real goal to the next better session.</p>
+                    <h2>The world's smartest personal trainer, built on the best free workout tracker.</h2>
+                    <p class="product-loop">Train &rarr; Log &rarr; Learn &rarr; Adapt</p>
+                    <p>Four connected steps turn each lift, run, ride, or practice into a better next session.</p>
                 </div>
                 <div class="proof-grid">
                     <article class="proof-card reveal">
                         <span class="proof-card__number">01</span>
-                        <h3>Builds for your sport and goal</h3>
+                        <h3>Train for your sport and goal</h3>
                         <p>Metron shapes training around your goals, workout history, injuries, available equipment, and schedule. Endurance and sport-specific athletic preparation live inside Training.</p>
                     </article>
                     <article class="proof-card reveal reveal-delay-1">
                         <span class="proof-card__number">02</span>
-                        <h3>Coaches and logs live</h3>
-                        <p>Move through the workout, record sets, and get timely guidance in one flow. Audio cues are designed to mix with—not take over—the music already playing.</p>
+                        <h3>Log and get coached live</h3>
+                        <p>Move through the workout, record sets, and get timely guidance in one flow. Audio cues are designed to mix with, not take over, the music already playing.</p>
                     </article>
                     <article class="proof-card reveal reveal-delay-2">
                         <span class="proof-card__number">03</span>
-                        <h3>Learns from every set</h3>
+                        <h3>Learn from every set</h3>
                         <p>Each logged set strengthens your record. Review exercise history, weekly volume, workout streaks, and e1RM trends already backed by Metron's training and PR screens.</p>
                     </article>
                     <article class="proof-card reveal reveal-delay-3">
                         <span class="proof-card__number">04</span>
-                        <h3>Adapts the next session</h3>
+                        <h3>Adapt the next session</h3>
                         <p>The coach uses performance plus verified recovery signals from Apple Health to adjust training. Every change remains visible, explainable, and yours to accept.</p>
                     </article>
                 </div>
@@ -3386,7 +3447,7 @@
                 <div class="section-header reveal product-intro">
                     <span class="t-label">Simple by design</span>
                     <h2>The tracker stays free. The coach earns its place.</h2>
-                    <p>Start with the full personal trainer for 30 days—no card required. If you don't continue, your tracker, logging, and history remain free.</p>
+                    <p>Start with the full personal trainer for 30 days, no card required. If you don't continue, your tracker, logging, and history remain free.</p>
                 </div>
                 <div class="compare-wrapper reveal reveal-delay-1" tabindex="0" aria-label="Free tracker and full coach comparison; scroll horizontally on smaller screens">
                     <table class="compare-table plan-table">
@@ -3402,9 +3463,9 @@
                             <tr><th scope="row">Live workout logging</th><td>Included</td><td class="col-metron">Included</td></tr>
                             <tr><th scope="row">Workout and exercise history</th><td>Included</td><td class="col-metron">Included</td></tr>
                             <tr><th scope="row">Volume, streak, and e1RM trends</th><td>Included</td><td class="col-metron">Included</td></tr>
-                            <tr><th scope="row">Sport- and goal-specific plan</th><td>—</td><td class="col-metron">Included</td></tr>
-                            <tr><th scope="row">Live coaching and shared Arete actions</th><td>—</td><td class="col-metron">Included</td></tr>
-                            <tr><th scope="row">Performance and recovery adaptation</th><td>—</td><td class="col-metron">Included</td></tr>
+                            <tr><th scope="row">Sport- and goal-specific plan</th><td>Not included</td><td class="col-metron">Included</td></tr>
+                            <tr><th scope="row">Live coaching and shared Arete actions</th><td>Not included</td><td class="col-metron">Included</td></tr>
+                            <tr><th scope="row">Performance and recovery adaptation</th><td>Not included</td><td class="col-metron">Included</td></tr>
                             <tr><th scope="row">How to start</th><td>Free</td><td class="col-metron">30-day trial · no card</td></tr>
                         </tbody>
                     </table>
@@ -3415,17 +3476,16 @@
         <section class="section section--dark" id="modular-future">
             <div class="container future-grid">
                 <div class="reveal">
-                    <span class="t-label">Modular by architecture</span>
-                    <h2>Training first. Your platform, eventually.</h2>
-                    <p>Metron's pillar architecture is designed so people can eventually enable only the parts they want. At launch, Training is the center: strength, endurance, and sport-specific athletic preparation in one system.</p>
+                    <span class="t-label">Honest product horizon</span>
+                    <h2>Training now. More modules later.</h2>
+                    <p>Metron launches with Training only: strength, endurance, and sport-specific athletic preparation for serious self-coached athletes. Future modules will remain optional.</p>
                 </div>
                 <div class="future-list reveal reveal-delay-1">
-                    <p class="future-list__label">Coming later—not launch features</p>
+                    <p class="future-list__label">Coming later. Not launch features.</p>
                     <ul>
                         <li>Injury mode and vacation mode</li>
                         <li>Technical-skill coaching and video form analysis</li>
                         <li>SmartRest and a dedicated Watch experience</li>
-                        <li>Optional Sleep, Recovery, Nutrition, Cardio, Body, and Mind pillars</li>
                     </ul>
                 </div>
             </div>
@@ -3435,22 +3495,26 @@
             <div class="beta-section__inner">
                 <span class="beta-section__eyebrow reveal">Founding reservation</span>
                 <h2 class="beta-section__headline reveal reveal-delay-1">Reserve your first year free.</h2>
-                <p class="beta-section__sub reveal reveal-delay-2" id="reservation-offer-note">Meet the world's smartest personal trainer. Founding reservations get the full coach free for the first year. The standard offer starts with 30 days—no card required—and the best-in-class workout tracker stays free.</p>
-                <form class="beta-form reveal reveal-delay-2" id="beta-form" data-source="reservation-section" aria-label="Founding free-year reservation">
-                    <label class="sr-only" for="beta-phone">Mobile phone number</label>
-                    <input class="beta-form__input" id="beta-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Mobile phone number" aria-describedby="reservation-offer-note reservation-privacy-note beta-error" required>
+                <p class="beta-section__sub reveal reveal-delay-2" id="reservation-offer-note">Meet the world's smartest personal trainer. Founding reservations get the full coach free for the first year. The standard offer starts with 30 days, no card required, and the best free workout tracker stays free.</p>
+                <form class="beta-form reveal reveal-delay-2" id="beta-form" data-source="reservation-section" action="https://api.metron.live/api/v1/launch-reservations/request" method="post" aria-label="Founding free-year reservation">
+                    <label class="sr-only" for="beta-contact">Mobile phone number</label>
+                    <input class="beta-form__input" id="beta-contact" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Mobile phone number" aria-describedby="reservation-offer-note reservation-privacy-note beta-progress beta-fallback beta-error" required>
                     <button class="btn btn-primary beta-form__btn" type="submit" id="beta-submit">
                         <span class="btn-text">Reserve my free year</span>
-                        <span class="btn-loading" hidden>Reserving…</span>
+                        <span class="btn-loading" hidden>Sending...</span>
                     </button>
+                    <button class="reservation-secondary" type="button" data-contact-toggle>Use email instead</button>
                 </form>
-                <p class="beta-disclaimer reveal reveal-delay-2" id="reservation-privacy-note">Mobile number required for reservation updates. No card. No spam.</p>
+                <p class="reservation-progress" id="beta-progress" role="status" hidden></p>
+                <p class="reservation-fallback" id="beta-fallback" role="status" hidden></p>
+                <p class="beta-disclaimer reveal reveal-delay-2" id="reservation-privacy-note">By continuing, you agree to receive a verification code and launch updates at your phone or email. Message and data rates may apply. Reply STOP to opt out.</p>
+                <p class="beta-disclaimer reveal reveal-delay-2">We use your contact only to verify the reservation and send launch updates. Health data is used with your permission to personalize training. It is not sold or shared with advertisers, data brokers, or information resellers. Read our <a href="/privacy.html">Privacy Policy</a> and <a href="/health-data-privacy.html">Health Data Policy</a>.</p>
                 <div class="beta-success" id="beta-success" role="status" tabindex="-1">
                     <div class="beta-success__icon" aria-hidden="true">✓</div>
                     <p class="beta-success__title">Welcome to the Metron family.</p>
                     <p class="beta-success__sub">Your free year is reserved. It's time to begin your journey to greatness.</p>
                 </div>
-                <p class="beta-error" id="beta-error" role="alert">We couldn't reserve your year. Please check your number and try again.</p>
+                <p class="beta-error" id="beta-error" role="alert">We couldn't continue. Check your details and try again.</p>
             </div>
         </section>
 
@@ -3531,8 +3595,8 @@
          CLOSING QUOTE
     ========================================== -->
     <section class="closing-quote reveal">
-        <p class="closing-quote__text">"We are what we repeatedly do. Excellence, then, is not an act, but a habit."</p>
-        <span class="closing-quote__attribution">— Aristotle</span>
+        <p class="closing-quote__text">"It is a shame for one to grow old without seeing the beauty and strength of which the body is capable"</p>
+        <span class="closing-quote__attribution">Socrates</span>
     </section>
     </main>
 
@@ -3681,7 +3745,7 @@
             });
         });
 
-        // Mega menu — desktop
+        // Mega menu for desktop
         const megaTriggers = document.querySelectorAll('.nav__mega-trigger');
         const megaPanels = document.querySelectorAll('.mega-panel');
         let megaCloseTimeout = null;
@@ -3889,61 +3953,194 @@
 
 
         // ==========================================
-        // 6. BETA SIGNUP SHARED HANDLER
+        // 6. LAUNCH RESERVATION
         // ==========================================
-        async function submitBetaForm(phone, formEl, successEl, errorEl, submitBtn) {
-            const btnText = submitBtn.querySelector('.btn-text');
-            const btnLoading = submitBtn.querySelector('.btn-loading');
+        const RESERVATION_API_BASE = document
+            .querySelector('meta[name="metron-reservation-api-base"]')
+            .content.replace(/\/$/, '');
+        const RESERVATION_ENDPOINTS = Object.freeze({
+            request: `${RESERVATION_API_BASE}/request`,
+            verify: `${RESERVATION_API_BASE}/verify`
+        });
+        const WAITLIST_EMAIL = 'beta@metron.live';
 
-            submitBtn.disabled = true;
-            if (btnText) btnText.hidden = true;
-            if (btnLoading) btnLoading.hidden = false;
-            if (errorEl) errorEl.style.display = 'none';
+        window.MetronReservationConfig = Object.freeze({
+            apiBase: RESERVATION_API_BASE,
+            endpoints: RESERVATION_ENDPOINTS,
+            fallbackEmail: WAITLIST_EMAIL
+        });
 
+        async function postReservation(endpoint, payload) {
+            let response;
             try {
-                const response = await fetch('/.netlify/functions/beta-signup', {
+                response = await fetch(endpoint, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ type: 'phone', value: phone, source: formEl.dataset.source })
+                    body: JSON.stringify(payload)
                 });
-
-                const data = await response.json();
-
-                if (response.ok && data.success) {
-                    if (formEl) formEl.style.display = 'none';
-                    if (successEl) {
-                        successEl.style.display = 'block';
-                        successEl.focus();
-                    }
-                } else {
-                    throw new Error(data.error || 'Something went wrong');
-                }
-            } catch (err) {
-                console.error('Beta signup error:', err);
-                if (errorEl) errorEl.style.display = 'block';
-                submitBtn.disabled = false;
-                if (btnText) btnText.hidden = false;
-                if (btnLoading) btnLoading.hidden = true;
+            } catch (cause) {
+                const error = new Error('The reservation service could not be reached.');
+                error.unavailable = true;
+                error.cause = cause;
+                throw error;
             }
+
+            let data = {};
+            try {
+                data = await response.json();
+            } catch {
+                data = {};
+            }
+            if (!response.ok) {
+                const error = new Error(data.detail || data.message || 'The reservation request was not accepted.');
+                error.status = response.status;
+                error.unavailable = response.status === 404 || response.status >= 500;
+                throw error;
+            }
+            return data;
         }
 
-        // Hero form
-        const heroForm = document.getElementById('hero-form');
-        if (heroForm) {
-            heroForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                submitBetaForm(
-                    heroForm.querySelector('input[type="tel"]').value,
-                    heroForm,
-                    document.getElementById('hero-success'),
-                    document.getElementById('hero-error'),
-                    document.getElementById('hero-submit')
-                );
+        function setupReservationForm(prefix) {
+            const form = document.getElementById(`${prefix}-form`);
+            if (!form) return;
+
+            const input = document.getElementById(`${prefix}-contact`);
+            const label = form.querySelector(`label[for="${input.id}"]`);
+            const submit = document.getElementById(`${prefix}-submit`);
+            const submitText = submit.querySelector('.btn-text');
+            const submitLoading = submit.querySelector('.btn-loading');
+            const toggle = form.querySelector('[data-contact-toggle]');
+            const progress = document.getElementById(`${prefix}-progress`);
+            const fallback = document.getElementById(`${prefix}-fallback`);
+            const success = document.getElementById(`${prefix}-success`);
+            const errorMessage = document.getElementById(`${prefix}-error`);
+            const state = {
+                kind: 'phone',
+                stage: 'request',
+                destination: '',
+                fallback: false
+            };
+
+            function setBusy(isBusy) {
+                submit.disabled = isBusy;
+                submitText.hidden = isBusy;
+                submitLoading.hidden = !isBusy;
+                toggle.disabled = isBusy;
+            }
+
+            function setRequestMode(kind, isFallback = false) {
+                state.kind = kind;
+                state.stage = 'request';
+                state.destination = '';
+                state.fallback = isFallback;
+                form.action = RESERVATION_ENDPOINTS.request;
+                input.value = '';
+                input.name = kind;
+                input.type = kind === 'phone' ? 'tel' : 'email';
+                input.inputMode = kind === 'phone' ? 'tel' : 'email';
+                input.autocomplete = kind === 'phone' ? 'tel' : 'email';
+                input.placeholder = kind === 'phone' ? 'Mobile phone number' : 'Email address';
+                input.removeAttribute('pattern');
+                input.removeAttribute('minlength');
+                input.removeAttribute('maxlength');
+                label.textContent = kind === 'phone' ? 'Mobile phone number' : 'Email address';
+                submitText.textContent = isFallback ? 'Join the email waitlist' : 'Reserve my free year';
+                toggle.textContent = kind === 'phone' ? 'Use email instead' : 'Use phone instead';
+                progress.hidden = true;
+                errorMessage.style.display = 'none';
+            }
+
+            function showEmailFallback() {
+                setRequestMode('email', true);
+                const subject = encodeURIComponent('Metron launch waitlist');
+                const body = encodeURIComponent('Please add me to the Metron launch waitlist.');
+                const mailto = `mailto:${WAITLIST_EMAIL}?subject=${subject}&body=${body}`;
+                fallback.innerHTML = `Phone verification is not live yet. Join by email here, or <a href="${mailto}">email ${WAITLIST_EMAIL}</a> and we will add you to the launch waitlist.`;
+                fallback.hidden = false;
+                input.focus();
+            }
+
+            function setVerifyMode() {
+                state.stage = 'verify';
+                form.action = RESERVATION_ENDPOINTS.verify;
+                input.value = '';
+                input.name = 'code';
+                input.type = 'text';
+                input.inputMode = 'numeric';
+                input.autocomplete = 'one-time-code';
+                input.placeholder = 'Verification code';
+                input.pattern = '[0-9]{4,10}';
+                input.minLength = 4;
+                input.maxLength = 10;
+                label.textContent = 'Verification code';
+                submitText.textContent = 'Verify and reserve';
+                toggle.textContent = 'Change phone or email';
+                progress.textContent = `Enter the verification code sent to your ${state.kind}.`;
+                progress.hidden = false;
+                fallback.hidden = true;
+                input.focus();
+            }
+
+            toggle.addEventListener('click', () => {
+                if (state.stage === 'verify') {
+                    setRequestMode(state.kind);
+                    input.focus();
+                    return;
+                }
+                setRequestMode(state.kind === 'phone' ? 'email' : 'phone');
+                fallback.hidden = true;
+                input.focus();
+            });
+
+            form.addEventListener('submit', async (event) => {
+                event.preventDefault();
+                if (!form.reportValidity()) return;
+
+                setBusy(true);
+                errorMessage.style.display = 'none';
+                try {
+                    if (state.stage === 'request') {
+                        state.destination = input.value.trim();
+                        await postReservation(RESERVATION_ENDPOINTS.request, {
+                            [state.kind]: state.destination,
+                            consent: true,
+                            source: form.dataset.source,
+                            campaign: 'founding-year'
+                        });
+                        setVerifyMode();
+                    } else {
+                        const data = await postReservation(RESERVATION_ENDPOINTS.verify, {
+                            [state.kind]: state.destination,
+                            code: input.value.trim()
+                        });
+                        if (data.status !== 'verified' || data.one_year_free_eligible !== true) {
+                            throw new Error('The code could not be verified.');
+                        }
+                        form.style.display = 'none';
+                        progress.hidden = true;
+                        fallback.hidden = true;
+                        success.style.display = 'block';
+                        success.focus();
+                    }
+                } catch (error) {
+                    console.error('Launch reservation error:', error);
+                    if (error.unavailable) {
+                        showEmailFallback();
+                    } else {
+                        errorMessage.textContent = error.message;
+                        errorMessage.style.display = 'block';
+                    }
+                } finally {
+                    setBusy(false);
+                }
             });
         }
 
+        setupReservationForm('hero');
+        setupReservationForm('beta');
+
         // ==========================================
-        // Problem scroll — reveal left immediately, right on scroll
+        // Problem scroll: reveal left immediately, right on scroll
         // ==========================================
         const problemScroll   = document.querySelector('.problem-scroll');
         const problemLeft     = document.getElementById('problem-left');
@@ -3980,20 +4177,6 @@
             updateProblem();
         }
 
-        // Beta section form
-        const betaForm = document.getElementById('beta-form');
-        if (betaForm) {
-            betaForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                submitBetaForm(
-                    document.getElementById('beta-phone').value,
-                    betaForm,
-                    document.getElementById('beta-success'),
-                    document.getElementById('beta-error'),
-                    document.getElementById('beta-submit')
-                );
-            });
-        }
     </script>
 
 </body>

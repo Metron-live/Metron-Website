@@ -6,11 +6,11 @@ Local path: /Users/rentamac/Metron-Website-main/
 
 ## Brand
 
-**Product**: Metron — the world's smartest personal trainer, built on a best-in-class workout tracker that remains free.
+**Product**: Metron is the world's smartest personal trainer, plus the best free workout tracker.
 **Launch offer**: 30-day full coach trial, no card required; tracking, logging, and history remain free afterward.
 **AI coach name**: Arete.
 **Launch foundation**: Training, including strength, endurance, and sport-specific athletic preparation.
-**Future architecture**: Optional pillars may be enabled individually later; do not present broader pillars or future modes as live.
+**Future architecture**: Training is the only launch module. Optional specialized modules may arrive later; do not present future modes as live.
 
 ## Typography — strict
 
@@ -79,8 +79,7 @@ cyclist → surfer → sprinter → boy athlete → basketball girl → dribbler
 
 - `index.html` — entire site
 - `videos/montage-web.mp4` — hero montage
-- `brand/brand preview/og-preview.mp4` — iMessage portrait preview
-- `brand/brand preview/og-preview.png` — og:image fallback
+- Approved iMessage media is pending handoff from `/Users/benshai/Downloads/Metron Large Lockup/approved handoff`. Do not publish the older `brand/brand preview/og-preview.*` files as substitutes.
 - `images/marble.png`, `images/black-marble.jpg` — textures
 - `images/m-cropped.png`, `images/metron-cropped.png` — logo assets
 
@@ -107,7 +106,7 @@ Product dropdown — left column (text items, Cardo, stacked vertically, ~48px g
 
 Platform dropdown — right column (featured):
 Title: The Heptagon
-Body: Seven pillars. One score. Every day.
+Body: Training now. More modules later.
 Visual: animated rotating heptagon (reuse hero scroll-cue component scaled up) on black marble background
 
 Training dropdown — left column:

@@ -1,16 +1,18 @@
 # Metron Landing Page
 
-Landing page for [metron.live](https://metron.live) — the world's smartest personal trainer, built on a best-in-class workout tracker that remains free.
+Landing page for [metron.live](https://metron.live): the world's smartest personal trainer, plus the best free workout tracker.
 
 ## Overview
 
-Metron builds, coaches, tracks, and adapts training. The website also accepts phone-first founding reservations for a free first year of the full coach.
+Metron helps serious self-coached athletes move through a concrete Train, Log,
+Learn, Adapt loop. The website accepts verified phone or email reservations for
+a free first year of the full coach.
 
 ## Tech Stack
 
 - **Frontend**: Static HTML/CSS/JS
 - **Fonts**: Cardo (headings and body), Inter (numbers and buttons), Space Grotesk (Metron wordmark only)
-- **Form Handling**: Netlify Function + Resend (phone reservation notification)
+- **Form Handling**: Metron launch-reservation API with a direct email waitlist fallback
 - **Hosting**: GitHub Pages / Vercel / Netlify
 
 ## Setup
@@ -24,10 +26,19 @@ cd metron-landing
 
 ### 2. Configure reservations
 
-Set `RESEND_API_KEY` in Netlify. Reservations are sent to `beta@metron.live` by
-default; set `SIGNUP_NOTIFICATION_EMAIL` to route them to another approved
-inbox. The browser posts only the submitted phone number and page source to
-`/.netlify/functions/beta-signup`.
+The production endpoint is declared once in `index.html`:
+
+```html
+<meta name="metron-reservation-api-base"
+      content="https://api.metron.live/api/v1/launch-reservations">
+```
+
+The browser posts a consented phone or email to `/request`, then posts the
+destination and verification code to `/verify`. The form shows success only
+when the API returns `status: verified` and `one_year_free_eligible: true`.
+
+If the API is unavailable, the form switches to email and provides a direct
+`beta@metron.live` mail link so the launch waitlist never dead-ends.
 
 ### 3. Deploy
 
@@ -61,17 +72,16 @@ metron-landing/
 
 ## Reservation collection
 
-Phone numbers are validated in the Netlify function and sent to the configured
-reservation inbox through Resend. The page displays success only after Resend
-accepts the notification request.
+Phone numbers and email addresses are verified by the launch-reservation API.
+The API owns consent, deduplication, eligibility, rate limiting, and opt-out
+state. The page never stores contact details in browser storage.
 
 ## Local Development
 
-Just open `index.html` in your browser. No build step required.
+Serve the repository so browser requests use HTTP. No build step is required.
 
-For live reload during development:
 ```bash
-npx live-server
+python3 -m http.server 4173
 ```
 
 ## License
