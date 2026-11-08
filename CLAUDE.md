@@ -6,11 +6,11 @@ Local path: /Users/rentamac/Metron-Website-main/
 
 ## Brand
 
-**Product**: Metron — AI performance coach that reads wearable/nutrition/recovery data and rewrites the user's plan nightly.
-**Tagline**: Performance, democratized.
-**Sub**: For every athlete. At every level.
+**Product**: Metron is the world's smartest personal trainer, plus the best free workout tracker.
+**Launch offer**: 30-day full coach trial, no card required; tracking, logging, and history remain free afterward.
 **AI coach name**: Arete.
-**Seven pillars**: Sleep, Recovery, Training, Nutrition, Cardio, Body, Mind.
+**Launch foundation**: Training, including strength, endurance, and sport-specific athletic preparation.
+**Future architecture**: Training is the only launch module. Optional specialized modules may arrive later; do not present future modes as live.
 
 ## Typography — strict
 
@@ -53,20 +53,17 @@ cyclist → surfer → sprinter → boy athlete → basketball girl → dribbler
 - Exact splash-page ratio: M is 1.18× taller than wordmark. Preserve this.
 - Nav logo: white filter over video, amber tint on scroll.
 
-## Section order (current → target)
+## Section order
 
-Target order after restructure:
-1. Hero
-2. Problem (visceral, full-bleed, promoted from current buried position)
-3. Transition line
-4. Introducing Metron + integrations marquee (single pass, not doubled)
-5. Magic moment demo ("While you sleep, Metron is working")
-6. Three engines — ALL THREE built out (currently only 01 is shown)
-7. From zero to your plan in one day
-8. Compare table
-9. Proof (testimonials — currently one, need more)
-10. CTA with email capture restored + App Store badge secondary
-11. Aristotle quote + footer
+1. Hero: trainer promise, free tracker promise, and phone-first reservation
+2. Problem
+3. Four connected product-proof loops
+4. Arete chat and dedicated screens as shared interfaces
+5. Free tracker vs full coach
+6. Modular future, with later capabilities labeled clearly
+7. Phone-first free-year reservation
+8. FAQ
+9. Aristotle quote + footer
 
 ## Rules of engagement
 
@@ -82,8 +79,7 @@ Target order after restructure:
 
 - `index.html` — entire site
 - `videos/montage-web.mp4` — hero montage
-- `brand/brand preview/og-preview.mp4` — iMessage portrait preview
-- `brand/brand preview/og-preview.png` — og:image fallback
+- Approved iMessage media is pending handoff from `/Users/benshai/Downloads/Metron Large Lockup/approved handoff`. Do not publish the older `brand/brand preview/og-preview.*` files as substitutes.
 - `images/marble.png`, `images/black-marble.jpg` — textures
 - `images/m-cropped.png`, `images/metron-cropped.png` — logo assets
 
@@ -101,26 +97,25 @@ Metron nav is moving to a Harvey-style mega-menu pattern for two items: Platform
 Nav structure:
 Logo · · · Platform ▾ · Athletes ▾ · Compare · FAQ · [Get the App]
 
-Platform dropdown — left column (text items, Cardo, stacked vertically, ~48px gap):
-- Overview — Seven pillars. One score. Every day.
-- Plan Engine — 90-minute build. 72 workouts. Built from your data.
-- Adaptation Engine — Nightly rewrite based on your recovery.
-- Arete AI Coach — Your history, your plan, your real-time data.
-- Integrations — Apple Health, Whoop, Oura, Garmin, and more.
+Product dropdown — left column (text items, Cardo, stacked vertically, ~48px gap):
+- Overview — trainer plus free tracker
+- Build — sport- and goal-specific training
+- Coach & log — live guidance and set logging
+- Learn & adapt — verified analytics and Apple Health recovery
+- Modular future — later expansion, clearly labeled
 
 Platform dropdown — right column (featured):
 Title: The Heptagon
-Body: Seven pillars. One score. Every day.
+Body: Training now. More modules later.
 Visual: animated rotating heptagon (reuse hero scroll-cue component scaled up) on black marble background
 
-Athletes dropdown — left column:
-- Endurance — Runners, cyclists, triathletes.
-- Strength — Lifters, powerlifters, bodybuilders.
-- General fitness — Busy lives, real training.
-- Competitive — Teams, coaches, sports programs.
+Training dropdown — left column:
+- Endurance
+- Strength
+- Athletic preparation
+- Coming later
 
-Athletes dropdown — right column (featured):
-Testimonial card: Sarah K., 2:58 marathoner. Quote: "No coach I've ever worked with adjusted my taper week the way Metron did."
+Do not publish placeholder testimonials, unsupported metrics, or unverified integration claims.
 
 Visual spec for the mega menu:
 - Panel: full viewport width, slides down from nav, black marble background (images/black-marble.jpg)
