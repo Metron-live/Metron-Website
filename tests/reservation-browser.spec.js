@@ -1,156 +1,106 @@
 const fs = require('node:fs');
 const http = require('node:http');
 const path = require('node:path');
-const { test, expect } = require('@playwright/test');
+const { expect, test } = require('@playwright/test');
 
 const root = path.resolve(__dirname, '..');
-const productionApi = 'https://api.metron.live/api/v1/launch-reservations';
-const contentTypes = {
-  '.html': 'text/html; charset=utf-8',
-  '.jpg': 'image/jpeg',
-  '.js': 'text/javascript; charset=utf-8',
-  '.mp4': 'video/mp4',
-  '.png': 'image/png',
-  '.svg': 'image/svg+xml'
-};
-
+const types = { '.css': 'text/css', '.html': 'text/html', '.ico': 'image/x-icon', '.jpg': 'image/jpeg', '.js': 'text/javascript', '.mp4': 'video/mp4', '.png': 'image/png', '.svg': 'image/svg+xml' };
 let server;
 let origin;
-let capturedRequests;
-let reservationApiUnavailable;
-
-if (process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE) {
-  test.use({
-    launchOptions: { executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE }
-  });
-}
-
-function json(response, status, body) {
-  response.writeHead(status, { 'Content-Type': 'application/json' });
-  response.end(JSON.stringify(body));
-}
 
 test.beforeAll(async () => {
-  capturedRequests = [];
-  reservationApiUnavailable = false;
   server = http.createServer((request, response) => {
-    const url = new URL(request.url, origin || 'http://127.0.0.1');
-    if (url.pathname.startsWith('/api/v1/launch-reservations/')) {
-      let rawBody = '';
-      request.setEncoding('utf8');
-      request.on('data', (chunk) => { rawBody += chunk; });
-      request.on('end', () => {
-        const body = JSON.parse(rawBody || '{}');
-        capturedRequests.push({ path: url.pathname, body });
-        if (reservationApiUnavailable) {
-          json(response, 404, { detail: 'Reservation API not deployed' });
-        } else if (url.pathname.endsWith('/request')) {
-          json(response, 200, { status: 'pending' });
-        } else {
-          json(response, 200, { status: 'verified', one_year_free_eligible: true });
-        }
-      });
-      return;
-    }
-
-    const relative = url.pathname === '/' ? 'index.html' : decodeURIComponent(url.pathname.slice(1));
+    const pathname = decodeURIComponent(new URL(request.url, 'http://localhost').pathname);
+    const relative = pathname === '/' ? 'index.html' : pathname.replace(/^\//, '');
     const file = path.resolve(root, relative);
     if (!file.startsWith(`${root}${path.sep}`) || !fs.existsSync(file) || fs.statSync(file).isDirectory()) {
-      response.writeHead(404);
-      response.end('Not found');
+      response.writeHead(404).end('Not found');
       return;
     }
-    let body = fs.readFileSync(file);
-    if (relative === 'index.html') {
-      const localApi = `${origin}/api/v1/launch-reservations`;
-      body = Buffer.from(body.toString('utf8').replaceAll(productionApi, localApi));
-    }
-    response.writeHead(200, { 'Content-Type': contentTypes[path.extname(file)] || 'application/octet-stream' });
-    response.end(body);
+    response.writeHead(200, { 'Content-Type': types[path.extname(file)] || 'application/octet-stream' });
+    fs.createReadStream(file).pipe(response);
   });
-
   await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve));
   origin = `http://127.0.0.1:${server.address().port}`;
 });
 
-test.afterAll(async () => {
-  await new Promise((resolve, reject) => server.close((error) => error ? reject(error) : resolve()));
-});
+test.afterAll(async () => new Promise((resolve) => server.close(resolve)));
 
-test.beforeEach(() => {
-  capturedRequests = [];
-  reservationApiUnavailable = false;
-});
-
-test('phone reservation posts to configured request and verify endpoints', async ({ page }) => {
-  await page.goto(origin, { waitUntil: 'domcontentloaded' });
-
-  const config = await page.evaluate(() => window.MetronReservationConfig);
-  expect(config.apiBase).toBe(`${origin}/api/v1/launch-reservations`);
-
-  await page.locator('#hero-contact').fill('+1 415 555 0123');
-  await page.locator('#hero-submit').click();
-  await expect(page.locator('#hero-contact')).toHaveAttribute('placeholder', 'Verification code');
-  expect(capturedRequests[0]).toEqual({
-    path: '/api/v1/launch-reservations/request',
-    body: expect.objectContaining({
-      phone: '+1 415 555 0123',
-      consent: true,
-      source: 'hero',
-      campaign: 'founding-year'
-    })
+test('shows email fallback and opens a populated mailto when the endpoint is unreachable', async ({ page }) => {
+  await page.route('https://api.metron.live/api/v1/launch-reservations/request', (route) => route.abort('failed'));
+  await page.addInitScript(() => {
+    window.__capturedMailto = '';
+    document.addEventListener('click', (event) => {
+      const link = event.target.closest?.('a[href^="mailto:"]');
+      if (!link) return;
+      event.preventDefault();
+      window.__capturedMailto = link.href;
+    }, true);
   });
+  await page.goto(origin);
 
-  await page.locator('#hero-contact').fill('123456');
-  await page.locator('#hero-submit').click();
-  await expect(page.locator('#hero-success')).toBeVisible();
-  expect(capturedRequests[1]).toEqual({
-    path: '/api/v1/launch-reservations/verify',
-    body: { phone: '+1 415 555 0123', code: '123456' }
-  });
+  await expect(page.locator('#waitlist-form')).toBeVisible();
+  await expect(page.locator('#phone-form')).toBeHidden();
+  await expect(page.locator('#reservation-status')).toContainText('unavailable');
+  await page.locator('#waitlist-email').fill('athlete@example.com');
+  await page.locator('#waitlist-submit').click();
+  await expect.poll(() => page.evaluate(() => window.__capturedMailto)).toMatch(/^mailto:beta@metron\.live\?/);
+  await expect.poll(() => page.evaluate(() => window.__capturedMailto)).toContain('athlete%40example.com');
 });
 
-test('email option uses the same verified reservation contract', async ({ page }) => {
-  await page.goto(origin, { waitUntil: 'domcontentloaded' });
-  await page.locator('#beta-form [data-contact-toggle]').click();
-  await expect(page.locator('#beta-contact')).toHaveAttribute('type', 'email');
-  await page.locator('#beta-contact').fill('athlete@example.com');
-  await page.locator('#beta-submit').click();
-  await expect(page.locator('#beta-contact')).toHaveAttribute('placeholder', 'Verification code');
-  expect(capturedRequests[0].path).toBe('/api/v1/launch-reservations/request');
-  expect(capturedRequests[0].body.email).toBe('athlete@example.com');
+test('shows and submits the phone-first form only after a successful HEAD probe', async ({ page }) => {
+  const requests = [];
+  await page.route('https://api.metron.live/api/v1/launch-reservations/request', async (route) => {
+    const request = route.request();
+    requests.push({ method: request.method(), body: request.postDataJSON?.() });
+    if (request.method() === 'HEAD') {
+      await route.fulfill({ status: 204, headers: { 'access-control-allow-origin': '*' } });
+      return;
+    }
+    await route.fulfill({ status: 200, contentType: 'application/json', body: '{}' });
+  });
+  await page.goto(origin);
+
+  await expect(page.locator('#phone-form')).toBeVisible();
+  await expect(page.locator('#waitlist-form')).toBeHidden();
+  await page.locator('#phone-contact').fill('+1 415 555 0123');
+  await page.locator('#phone-submit').click();
+  await expect(page.locator('#reservation-message')).toContainText('Check your phone');
+  expect(requests.map((request) => request.method)).toEqual(['HEAD', 'POST']);
+  expect(requests[1].body).toMatchObject({ phone: '+1 415 555 0123', consent: true, source: 'website-hero' });
 });
 
-test('unavailable backend exposes a working email waitlist fallback', async ({ page }) => {
-  reservationApiUnavailable = true;
-  await page.goto(origin, { waitUntil: 'domcontentloaded' });
-  await page.locator('#beta-contact').fill('+1 415 555 0123');
-  await page.locator('#beta-submit').click();
+test('interpolates the nav across 120px and lets the next section peek into the first fold', async ({ page }) => {
+  await page.route('https://api.metron.live/api/v1/launch-reservations/request', (route) => route.abort('failed'));
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto(origin);
+  const nav = page.locator('#site-nav');
+  await expect(nav).toHaveAttribute('data-scroll-progress', '0.000');
 
-  await expect(page.locator('#beta-contact')).toHaveAttribute('type', 'email');
-  await expect(page.locator('#beta-fallback')).toBeVisible();
-  await expect(page.locator('#beta-fallback a')).toHaveAttribute('href', /^mailto:beta@metron\.live/);
-  expect(capturedRequests[0].path).toBe('/api/v1/launch-reservations/request');
+  const firstFold = await page.evaluate(() => ({ heroBottom: document.querySelector('.hero').getBoundingClientRect().bottom, problemTop: document.querySelector('#problem').getBoundingClientRect().top, nextLineBottom: document.querySelector('#problem .section__label').getBoundingClientRect().bottom, viewport: innerHeight }));
+  expect(firstFold.heroBottom).toBeLessThan(firstFold.viewport);
+  expect(firstFold.problemTop).toBeLessThan(firstFold.viewport);
+  expect(firstFold.nextLineBottom).toBeLessThan(firstFold.viewport);
 
-  await page.locator('#beta-contact').fill('athlete@example.com');
-  await page.locator('#beta-submit').click();
-  expect(capturedRequests[1]).toEqual({
-    path: '/api/v1/launch-reservations/request',
-    body: expect.objectContaining({ email: 'athlete@example.com', consent: true })
-  });
-  await expect(page.locator('#beta-fallback a')).toBeVisible();
+  await page.evaluate(() => scrollTo(0, 60));
+  await expect.poll(() => nav.getAttribute('data-scroll-progress')).toBe('0.500');
+  const midpoint = await nav.evaluate((element) => getComputedStyle(element).backgroundColor);
+  expect(midpoint).toMatch(/rgba\(255, 255, 255, 0\.5\)/);
+
+  await page.evaluate(() => scrollTo(0, 200));
+  await expect.poll(() => nav.getAttribute('data-scroll-progress')).toBe('1.000');
+  await expect(nav).toHaveCSS('background-color', 'rgb(255, 255, 255)');
+  await expect(page.locator('text=Get the App').first()).toBeVisible();
+  expect(await page.locator('[class*="heptagon"], [id*="heptagon"]').count()).toBe(0);
 });
 
-for (const viewport of [
-  { name: 'mobile', width: 390, height: 844 },
-  { name: 'desktop', width: 1440, height: 900 }
-]) {
-  test(`${viewport.name} layout keeps the hero and reservation in bounds`, async ({ page }) => {
-    await page.setViewportSize({ width: viewport.width, height: viewport.height });
-    await page.goto(origin, { waitUntil: 'domcontentloaded' });
-    await expect(page.locator('#hero-title')).toBeVisible();
-    await expect(page.locator('#hero-form')).toBeVisible();
-    const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
-    expect(overflow).toBeLessThanOrEqual(1);
-  });
-}
+test('keeps the hero and fallback usable on a phone viewport', async ({ page }) => {
+  await page.route('https://api.metron.live/api/v1/launch-reservations/request', (route) => route.abort('failed'));
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto(origin);
+  await expect(page.locator('#hero-title')).toBeVisible();
+  await expect(page.locator('#waitlist-form')).toBeVisible();
+  const bounds = await page.locator('#waitlist-form').boundingBox();
+  expect(bounds.x).toBeGreaterThanOrEqual(0);
+  expect(bounds.x + bounds.width).toBeLessThanOrEqual(390);
+});
