@@ -1,0 +1,696 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Metron nav lockup options | D-1108-08</title>
+  <style>
+    @font-face {
+      font-family: "Space Grotesk Local";
+      src: url(data:font/truetype;base64,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) format("truetype");
+      font-style: normal;
+      font-weight: 700;
+      font-display: block;
+    }
+
+    @font-face {
+      font-family: "Cardo Local";
+      src: url(data:font/truetype;base64,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) format("truetype");
+      font-style: normal;
+      font-weight: 400;
+      font-display: block;
+    }
+
+    :root {
+      color-scheme: light;
+      --orange: #e8734a;
+      --ink: #1a1a1a;
+      --muted: #6d6a65;
+      --line: #d9d5ce;
+      --paper: #f3f0e9;
+      --white: #ffffff;
+      --warm-white: #fafaf8;
+      --cardo: "Cardo Local", Georgia, serif;
+      --sans: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --wordmark: "Space Grotesk Local", Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      background: var(--paper);
+    }
+
+    body {
+      margin: 0;
+      min-width: 1180px;
+      color: var(--ink);
+      background:
+        linear-gradient(rgba(26, 26, 26, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(26, 26, 26, 0.025) 1px, transparent 1px),
+        var(--paper);
+      background-size: 24px 24px;
+      font-family: var(--cardo);
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .board {
+      width: 1440px;
+      min-height: 1600px;
+      margin: 0 auto;
+      padding: 46px 52px 42px;
+    }
+
+    .masthead {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 42px;
+      align-items: end;
+      padding: 0 2px 28px;
+      border-bottom: 1px solid var(--ink);
+    }
+
+    .eyebrow,
+    .state-label,
+    .spec,
+    .source-note,
+    .replay {
+      font-family: var(--sans);
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--orange);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 42px;
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: -0.025em;
+    }
+
+    .dek {
+      max-width: 760px;
+      margin: 12px 0 0;
+      color: #4f4c47;
+      font-size: 16px;
+      line-height: 1.45;
+    }
+
+    .replay {
+      min-width: 164px;
+      height: 44px;
+      padding: 0 20px;
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      color: var(--ink);
+      background: transparent;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .replay:hover,
+    .replay:focus-visible {
+      color: var(--white);
+      background: var(--ink);
+      outline: none;
+    }
+
+    .column-head {
+      display: grid;
+      grid-template-columns: 198px minmax(0, 1fr);
+      gap: 18px;
+      align-items: end;
+      padding: 18px 0 9px;
+    }
+
+    .state-grid,
+    .sample-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .state-label {
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .state-label span:last-child {
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      text-transform: none;
+    }
+
+    .options {
+      display: grid;
+      gap: 10px;
+    }
+
+    .option {
+      display: grid;
+      grid-template-columns: 198px minmax(0, 1fr);
+      gap: 18px;
+      align-items: center;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(26, 26, 26, 0.14);
+    }
+
+    .option-meta {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .letter {
+      display: grid;
+      width: 32px;
+      height: 32px;
+      place-items: center;
+      border: 1px solid var(--ink);
+      border-radius: 50%;
+      font-family: var(--cardo);
+      font-size: 16px;
+    }
+
+    .option h2 {
+      margin: 1px 0 4px;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.1;
+    }
+
+    .spec {
+      margin: 0;
+      color: var(--muted);
+      font-size: 9px;
+      font-weight: 600;
+      line-height: 1.45;
+      letter-spacing: 0.015em;
+    }
+
+    .bar {
+      position: relative;
+      display: flex;
+      width: 100%;
+      height: 72px;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .hero-still {
+      color: var(--warm-white);
+      background:
+        radial-gradient(circle at 15% 120%, rgba(232, 115, 74, 0.38), transparent 34%),
+        radial-gradient(circle at 79% -35%, rgba(101, 135, 160, 0.38), transparent 46%),
+        linear-gradient(116deg, #080a0c 0%, #161b20 47%, #090a0b 100%);
+    }
+
+    .hero-still::before {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        linear-gradient(100deg, transparent 0 43%, rgba(255, 255, 255, 0.07) 43.2% 43.6%, transparent 43.8%),
+        radial-gradient(ellipse at 56% 122%, rgba(255, 255, 255, 0.09), transparent 36%);
+      content: "";
+      opacity: 0.75;
+    }
+
+    .white-bar {
+      color: var(--ink);
+      background: var(--white);
+      box-shadow: inset 0 0 0 1px #ece9e4;
+    }
+
+    .lockup {
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+    }
+
+    .mark,
+    .wordmark {
+      display: block;
+      flex: none;
+      overflow: visible;
+      color: currentColor;
+    }
+
+    .wordmark {
+      font-family: var(--wordmark);
+    }
+
+    .white-bar .mark {
+      color: var(--orange);
+    }
+
+    .white-bar .wordmark,
+    .white-bar .tagline,
+    .white-bar .tm {
+      color: var(--ink);
+    }
+
+    .tagline {
+      font-family: var(--cardo);
+      font-size: 13px;
+      line-height: 1;
+    }
+
+    .tm {
+      margin-left: 2px;
+      align-self: flex-start;
+      font-family: var(--sans);
+      font-size: 6px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .brand-with-tm {
+      display: flex;
+      align-items: center;
+    }
+
+    .a {
+      gap: 12px;
+    }
+
+    .a .mark {
+      width: 36px;
+      height: 28px;
+    }
+
+    .a .brand-with-tm {
+      align-items: baseline;
+    }
+
+    .a .wordmark {
+      width: 94px;
+      height: 25px;
+    }
+
+    .a .tagline {
+      align-self: baseline;
+    }
+
+    .b {
+      gap: 12px;
+    }
+
+    .b .mark,
+    .j .mark {
+      width: 36px;
+      height: 28px;
+    }
+
+    .b .wordmark,
+    .j .wordmark {
+      width: 94px;
+      height: 25px;
+    }
+
+    .c .mark {
+      width: 41px;
+      height: 32px;
+    }
+
+    .d .wordmark {
+      width: 101px;
+      height: 27px;
+    }
+
+    .e {
+      gap: 10px;
+    }
+
+    .e .mark {
+      width: 33px;
+      height: 26px;
+    }
+
+    .e .wordmark {
+      width: 86px;
+      height: 23px;
+    }
+
+    .hairline {
+      width: 1px;
+      height: 24px;
+      margin: 0 2px;
+      background: currentColor;
+      opacity: 0.44;
+    }
+
+    .f {
+      gap: 11px;
+    }
+
+    .f .mark {
+      width: 38px;
+      height: 30px;
+    }
+
+    .wordmark-stack {
+      display: grid;
+      gap: 1px;
+      align-items: center;
+    }
+
+    .wordmark-row {
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .f .wordmark {
+      width: 83px;
+      height: 22px;
+    }
+
+    .f .tagline {
+      font-family: var(--sans);
+      font-size: 7px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .g {
+      display: grid;
+      gap: 2px;
+      justify-items: center;
+    }
+
+    .g .mark {
+      width: 29px;
+      height: 23px;
+    }
+
+    .g .wordmark {
+      width: 68px;
+      height: 18px;
+    }
+
+    .g .brand-with-tm {
+      align-items: flex-start;
+    }
+
+    .h {
+      gap: 26px;
+    }
+
+    .h .mark {
+      width: 33px;
+      height: 26px;
+    }
+
+    .h .wordmark {
+      width: 90px;
+      height: 24px;
+    }
+
+    .i {
+      gap: 10px;
+    }
+
+    .badge {
+      display: grid;
+      width: 30px;
+      height: 30px;
+      flex: none;
+      place-items: center;
+      border: 1px solid currentColor;
+      border-radius: 50%;
+    }
+
+    .i .mark {
+      width: 18px;
+      height: 14px;
+    }
+
+    .i .wordmark {
+      width: 90px;
+      height: 24px;
+    }
+
+    .white-bar .badge {
+      color: var(--white);
+      border-color: var(--orange);
+      background: var(--orange);
+    }
+
+    .white-bar .badge .mark {
+      color: var(--white);
+    }
+
+    .j {
+      gap: 12px;
+    }
+
+    .sequence {
+      opacity: 1;
+    }
+
+    .playing .sequence-mark {
+      animation: loadIn 220ms ease-out both;
+    }
+
+    .playing .sequence-wordmark {
+      animation: loadIn 220ms ease-out 120ms both;
+    }
+
+    .playing .sequence-tagline {
+      animation: loadIn 220ms ease-out 240ms both;
+    }
+
+    @keyframes loadIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    .source-note {
+      display: flex;
+      justify-content: space-between;
+      gap: 32px;
+      padding: 16px 0 0 216px;
+      color: var(--muted);
+      font-size: 9px;
+      line-height: 1.45;
+    }
+
+    .source-note p {
+      margin: 0;
+    }
+
+    .source-note p:first-child {
+      max-width: 740px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .playing .sequence {
+        animation: none;
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+    <defs>
+      <symbol id="metron-mark" viewBox="0 0 56 44">
+        <path fill="currentColor" fill-rule="evenodd" d="M0 44 14 0l14 22-14 22H0Zm28-22L42 0l14 44H42L28 22Zm4 0a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z"/>
+      </symbol>
+      <symbol id="metron-wordmark" viewBox="0 0 120 32">
+        <text x="0" y="25" fill="currentColor" font-family="Space Grotesk Local, Arial, sans-serif" font-size="28" font-weight="700" letter-spacing="-0.03em">Metron</text>
+      </symbol>
+    </defs>
+  </svg>
+
+  <main class="board">
+    <header class="masthead">
+      <div>
+        <p class="eyebrow">D-1108-08 · decision board</p>
+        <h1>Metron nav lockup options</h1>
+        <p class="dek">Ten arrangements at true 72px nav height. Compare the lockup over a dark hero still and on a solid true-white scrolled bar.</p>
+      </div>
+      <button class="replay" type="button" id="replay">Replay A + B</button>
+    </header>
+
+    <div class="column-head" aria-hidden="true">
+      <div></div>
+      <div class="state-grid">
+        <div class="state-label"><span>Hero state</span><span>white</span></div>
+        <div class="state-label"><span>Scrolled state</span><span>orange + black</span></div>
+      </div>
+    </div>
+
+    <section class="options" aria-label="Lockup options">
+      <article class="option">
+        <div class="option-meta">
+          <span class="letter">A</span>
+          <div><h2>Full signature</h2><p class="spec">mark 28h · wordmark 25h<br>12 / 12 gaps · tagline 13</p></div>
+        </div>
+        <div class="sample-grid">
+          <div class="bar hero-still">
+            <div class="lockup a playing" data-animated>
+              <svg class="mark sequence sequence-mark"><use href="#metron-mark"/></svg>
+              <span class="brand-with-tm sequence sequence-wordmark"><svg class="wordmark"><use href="#metron-wordmark"/></svg><span class="tm">TM</span></span>
+              <span class="tagline sequence sequence-tagline">Performance, democratized.</span>
+            </div>
+          </div>
+          <div class="bar white-bar">
+            <div class="lockup a playing" data-animated>
+              <svg class="mark sequence sequence-mark"><use href="#metron-mark"/></svg>
+              <span class="brand-with-tm sequence sequence-wordmark"><svg class="wordmark"><use href="#metron-wordmark"/></svg><span class="tm">TM</span></span>
+              <span class="tagline sequence sequence-tagline">Performance, democratized.</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="option">
+        <div class="option-meta">
+          <span class="letter">B</span>
+          <div><h2>Core lockup</h2><p class="spec">mark 28h · wordmark 25h<br>12 gap</p></div>
+        </div>
+        <div class="sample-grid">
+          <div class="bar hero-still"><div class="lockup b playing" data-animated><svg class="mark sequence sequence-mark"><use href="#metron-mark"/></svg><span class="brand-with-tm sequence sequence-wordmark"><svg class="wordmark"><use href="#metron-wordmark"/></svg><span class="tm">TM</span></span></div></div>
+          <div class="bar white-bar"><div class="lockup b playing" data-animated><svg class="mark sequence sequence-mark"><use href="#metron-mark"/></svg><span class="brand-with-tm sequence sequence-wordmark"><svg class="wordmark"><use href="#metron-wordmark"/></svg><span class="tm">TM</span></span></div></div>
+        </div>
+      </article>
+
+      <article class="option">
+        <div class="option-meta">
+          <span class="letter">C</span>
+          <div><h2>Mark only</h2><p class="spec">mark 32h · centered<br>no companion type</p></div>
+        </div>
+        <div class="sample-grid">
+          <div class="bar hero-still"><div class="lockup c"><svg class="mark"><use href="#metron-mark"/></svg></div></div>
+          <div class="bar white-bar"><div class="lockup c"><svg class="mark"><use href="#metron-mark"/></svg></div></div>
+        </div>
+      </article>
+
+      <article class="option">
+        <div class="option-meta">
+          <span class="letter">D</span>
+          <div><h2>Wordmark only</h2><p class="spec">wordmark 27h · TM 6<br>no mark</p></div>
+        </div>
+        <div class="sample-grid">
+          <div class="bar hero-still"><div class="lockup d"><span class="brand-with-tm"><svg class="wordmark"><use href="#metron-wordmark"/></svg><span class="tm">TM</span></span></div></div>
+          <div class="bar white-bar"><div class="lockup d"><span class="brand-with-tm"><svg class="wordmark"><use href="#metron-wordmark"/></svg><span class="tm">TM</span></span></div></div>
+        </div>
+      </article>
+
+      <article class="option">
+        <div class="option-meta">
+          <span class="letter">E</span>
+          <div><h2>Hairline signature</h2><p class="spec">mark 26h · wordmark 23h<br>10 gaps · rule 1 × 24</p></div>
+        </div>
+        <div class="sample-grid">
+          <div class="bar hero-still"><div class="lockup e"><svg class="mark"><use href="#metron-mark"/></svg><span class="brand-with-tm"><svg class="wordmark"><use href="#metron-wordmark"/></svg><span class="tm">TM</span></span><span class="hairline"></span><span class="tagline">Performance, democratized.</span></div></div>
+          <div class="bar white-bar"><div class="lockup e"><svg class="mark"><use href="#metron-mark"/></svg><span class="brand-with-tm"><svg class="wordmark"><use href="#metron-wordmark"/></svg><span class="tm">TM</span></span><span class="hairline"></span><span class="tagline">Performance, democratized.</span></div></div>
+        </div>
+      </article>
+
+      <article class="option">
+        <div class="option-meta">
+          <span class="letter">F</span>
+          <div><h2>Small-caps signature</h2><p class="spec">mark 30h · wordmark 22h<br>11 gap · tagline 7 / 14%</p></div>
+        </div>
+        <div class="sample-grid">
+          <div class="bar hero-still"><div class="lockup f"><svg class="mark"><use href="#metron-mark"/></svg><span class="wordmark-stack"><span class="wordmark-row"><svg class="wordmark"><use href="#metron-wordmark"/></svg><span class="tm">TM</span></span><span class="tagline">Performance, democratized.</span></span></div></div>
+          <div class="bar white-bar"><div class="lockup f"><svg class="mark"><use href="#metron-mark"/></svg><span class="wordmark-stack"><span class="wordmark-row"><svg class="wordmark"><use href="#metron-wordmark"/></svg><span class="tm">TM</span></span><span class="tagline">Performance, democratized.</span></span></div></div>
+        </div>
+      </article>
+
+      <article class="option">
+        <div class="option-meta">
+          <span class="letter">G</span>
+          <div><h2>Compact stack</h2><p class="spec">mark 23h · wordmark 18h<br>2 vertical gap</p></div>
+        </div>
+        <div class="sample-grid">
+          <div class="bar hero-still"><div class="lockup g"><svg class="mark"><use href="#metron-mark"/></svg><span class="brand-with-tm"><svg class="wordmark"><use href="#metron-wordmark"/></svg><span class="tm">TM</span></span></div></div>
+          <div class="bar white-bar"><div class="lockup g"><svg class="mark"><use href="#metron-mark"/></svg><span class="brand-with-tm"><svg class="wordmark"><use href="#metron-wordmark"/></svg><span class="tm">TM</span></span></div></div>
+        </div>
+      </article>
+
+      <article class="option">
+        <div class="option-meta">
+          <span class="letter">H</span>
+          <div><h2>Cap-height spacing</h2><p class="spec">mark 26h · wordmark 24h<br>gap equals mark height: 26</p></div>
+        </div>
+        <div class="sample-grid">
+          <div class="bar hero-still"><div class="lockup h"><svg class="mark"><use href="#metron-mark"/></svg><span class="brand-with-tm"><svg class="wordmark"><use href="#metron-wordmark"/></svg><span class="tm">TM</span></span></div></div>
+          <div class="bar white-bar"><div class="lockup h"><svg class="mark"><use href="#metron-mark"/></svg><span class="brand-with-tm"><svg class="wordmark"><use href="#metron-wordmark"/></svg><span class="tm">TM</span></span></div></div>
+        </div>
+      </article>
+
+      <article class="option">
+        <div class="option-meta">
+          <span class="letter">I</span>
+          <div><h2>Half-height badge</h2><p class="spec">badge 30 · mark 14h<br>wordmark 24h · 10 gap</p></div>
+        </div>
+        <div class="sample-grid">
+          <div class="bar hero-still"><div class="lockup i"><span class="badge"><svg class="mark"><use href="#metron-mark"/></svg></span><span class="brand-with-tm"><svg class="wordmark"><use href="#metron-wordmark"/></svg><span class="tm">TM</span></span></div></div>
+          <div class="bar white-bar"><div class="lockup i"><span class="badge"><svg class="mark"><use href="#metron-mark"/></svg></span><span class="brand-with-tm"><svg class="wordmark"><use href="#metron-wordmark"/></svg><span class="tm">TM</span></span></div></div>
+        </div>
+      </article>
+
+      <article class="option">
+        <div class="option-meta">
+          <span class="letter">J</span>
+          <div><h2>No trademark suffix</h2><p class="spec">mark 28h · wordmark 25h<br>12 gap · no TM</p></div>
+        </div>
+        <div class="sample-grid">
+          <div class="bar hero-still"><div class="lockup j"><svg class="mark"><use href="#metron-mark"/></svg><svg class="wordmark"><use href="#metron-wordmark"/></svg></div></div>
+          <div class="bar white-bar"><div class="lockup j"><svg class="mark"><use href="#metron-mark"/></svg><svg class="wordmark"><use href="#metron-wordmark"/></svg></div></div>
+        </div>
+      </article>
+    </section>
+
+    <footer class="source-note">
+      <p>Source geometry is inlined from the current Metron-Website SVGs in brand/icon/svg and brand/wordmark/svg. Wordmark type is Space Grotesk 700. Supporting type follows the Cardo brand system.</p>
+      <p>72 CSS px bars · 2x board render · 2026-11-08</p>
+    </footer>
+  </main>
+
+  <script>
+    const replayButton = document.getElementById("replay");
+    const animatedLockups = Array.from(document.querySelectorAll("[data-animated]"));
+
+    function replayLoadIn() {
+      animatedLockups.forEach((lockup) => lockup.classList.remove("playing"));
+      void document.body.offsetWidth;
+      animatedLockups.forEach((lockup) => lockup.classList.add("playing"));
+    }
+
+    replayButton.addEventListener("click", replayLoadIn);
+  </script>
+</body>
+</html>
