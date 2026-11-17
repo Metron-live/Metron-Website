@@ -132,7 +132,7 @@ test('uses the live two-step reservation contract and approved offer', () => {
     /founding[ -]?year/i,
     /founder[ -]?story/i
   ]) assert.doesNotMatch(visibleText, legacyCopy);
-  assert.match(html, /id="reservation-contact"[^>]+aria-describedby="reservation-consent reservation-offer"/);
+  assert.match(html, /id="reservation-contact"[^>]+aria-describedby="reservation-consent reservation-sms-disclosure reservation-offer"/);
   assert.match(html, /id="marketing-consent"[^>]+type="checkbox" required/);
   assert.doesNotMatch(html, /method: 'HEAD'/);
   assert.doesNotMatch(html, /api\/v1\/launch-reservations/);
@@ -141,13 +141,18 @@ test('uses the live two-step reservation contract and approved offer', () => {
 });
 
 test('publishes the text-message disclosure and links it from the reservation form', () => {
-  assert.match(html, /<form[^>]+id="reservation-form"[\s\S]*?<a href="\/privacy\.html#text-messages">Text messages disclosure<\/a>[\s\S]*?<\/form>/);
-  assert.match(visibleText, /Text messages disclosure for message frequency, HELP instructions, and carrier terms\./);
+  assert.match(html, /<form[^>]+id="reservation-form"[\s\S]*?<a href="\/privacy\.html#text-messages">Text messages in our Privacy Policy<\/a>[\s\S]*?<\/form>/);
+  assert.match(html, /id="reservation-contact"[^>]+aria-describedby="reservation-consent reservation-sms-disclosure reservation-offer"/);
+  assert.match(html, /class="reservation-disclosure" id="reservation-sms-disclosure"/);
+  assert.match(visibleText, /See Text messages in our Privacy Policy for message frequency, HELP instructions, and carrier terms\./);
   assert.match(privacyHtml, /<h2 id="text-messages">Text messages<\/h2>/);
   assert.match(privacyVisibleText, /Verification codes you request/);
   assert.match(privacyVisibleText, /One launch-day text message with a link to download Metron\./);
   assert.match(privacyVisibleText, /Optional product updates, but only if you separately consent/);
-  assert.match(privacyVisibleText, /Message frequency varies\./);
+  assert.match(privacyVisibleText, /Message frequency varies by message type\./);
+  assert.match(privacyVisibleText, /Verification codes are sent only when you request them\./);
+  assert.match(privacyVisibleText, /The launch-day download link is sent once\./);
+  assert.match(privacyVisibleText, /Optional update frequency depends on what you separately consent to receive\./);
   assert.match(privacyVisibleText, /Msg & data rates may apply\./);
   assert.match(privacyVisibleText, /Reply STOP to opt out of text messages\. Reply HELP for help or email support@metron\.live\./);
   assert.match(privacyVisibleText, /Mobile carriers are not liable for delayed or undelivered messages\./);
