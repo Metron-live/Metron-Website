@@ -26,7 +26,10 @@ const required = [
   'Verification codes you request',
   'One launch-day text message with a link to download Metron.',
   'Optional product updates, but only if you separately consent',
-  'Message frequency varies.',
+  'Message frequency varies by message type.',
+  'Verification codes are sent only when you request them.',
+  'The launch-day download link is sent once.',
+  'Optional update frequency depends on what you separately consent to receive.',
   'Msg & data rates may apply.',
   'Reply STOP',
   'Reply HELP',
@@ -35,7 +38,7 @@ const required = [
 
 const reservationForm = indexHtml.match(/<form\b[^>]*\bid="reservation-form"[^>]*>[\s\S]*?<\/form>/i)?.[0] || '';
 const requiredMarkup = [
-  [reservationForm, 'href="/privacy.html#text-messages"', 'reservation form privacy link'],
+  [reservationForm, '<a href="/privacy.html#text-messages">Text messages in our Privacy Policy</a>', 'reservation form privacy link'],
   [html, '<h2 id="text-messages">Text messages</h2>', 'privacy section anchor']
 ];
 const missing = [

@@ -44,7 +44,7 @@ test('renders the required hero and reservation form', async ({ page }) => {
 test('opens the built text-message disclosure from the reservation form', async ({ page }) => {
   await page.goto(origin);
 
-  await page.getByRole('link', { name: 'Text messages section of our Privacy Policy' }).click();
+  await page.getByRole('link', { name: 'Text messages in our Privacy Policy' }).click();
 
   await expect(page).toHaveURL(`${origin}/privacy.html#text-messages`);
   await expect(page.getByRole('heading', { name: 'Text messages', exact: true })).toBeVisible();
