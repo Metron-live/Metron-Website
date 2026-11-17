@@ -6,7 +6,7 @@
     <title>Metron | How do I train?</title>
     <meta name="description" content="Metron gives serious self-coached athletes an adaptive training plan, fast workout logging, clear analysis and Arete text coaching.">
     <meta name="theme-color" content="#000000">
-    <meta name="metron-reservation-api-base" content="https://api.metron.live/api/v1/launch-reservations">
+    <meta name="metron-reservation-api-base" content="https://api.metron.live/launch/reservations">
     <meta property="og:title" content="Metron. How do I train?">
     <meta property="og:description" content="The strength coach, sports scientist and data analyst that athletes without a staff never had.">
     <meta property="og:url" content="https://metron.live/">
@@ -111,11 +111,14 @@
         .hero__line { margin-top: 10px; font-weight: 700; }
         .reservation-panel { margin-top: 30px; max-width: 640px; }
         .reservation-status { min-height: 24px; margin-bottom: 8px; font-size: 14px; }
-        .phone-form, .waitlist-form { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 10px; }
-        .phone-form[hidden], .waitlist-form[hidden] { display: none; }
+        .reservation-form, .verification-form { display: grid; gap: 10px; }
+        .reservation-form[hidden], .verification-form[hidden] { display: none; }
+        .reservation-fields, .verification-fields { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 10px; }
         .field-label { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
         .form-input { width: 100%; min-height: 48px; padding: 11px 14px; color: var(--ink); background: var(--white); border: 1px solid rgba(255,255,255,.8); border-radius: var(--radius); font-family: var(--font-controls); font-size: 16px; }
         .form-input::placeholder { color: #686868; }
+        .consent-field { display: flex; align-items: flex-start; gap: 9px; font-size: 13px; line-height: 1.45; color: rgba(255,255,255,.9); }
+        .consent-field input { width: 18px; height: 18px; margin: 1px 0 0; flex: 0 0 auto; accent-color: var(--orange); }
         .button--orange { color: var(--white); background: var(--orange); border-color: var(--orange); }
         .button--orange:hover { background: var(--orange-dark); border-color: var(--orange-dark); }
         .reservation-note { margin-top: 9px; font-size: 13px; color: rgba(255,255,255,.84); }
@@ -190,7 +193,7 @@
             body { font-size: 17px; } .nav__logo { width: 136px; } .nav__mark { width: 34px; } .nav__wordmark { width: 92px; }
             .hero { min-height: 720px; height: calc(100svh - 40px); } .hero__inner { padding-top: calc(var(--nav-height) + 18px); }
             .hero h1 { font-size: clamp(3rem,15vw,4.65rem); } .hero__subhead { font-size: 1.08rem; line-height: 1.38; }
-            .phone-form, .waitlist-form { grid-template-columns: 1fr; } .phone-form .button, .waitlist-form .button { width: 100%; }
+            .reservation-fields, .verification-fields { grid-template-columns: 1fr; } .reservation-form .button, .verification-form .button { width: 100%; }
             .problem__audience, .interfaces { grid-template-columns: 1fr; gap: 24px; }
             .steps, .capabilities { grid-template-columns: 1fr; }
             .step { min-height: 250px; border-right: 0; border-bottom: 1px solid var(--line); } .step:last-child { border-bottom: 0; }
@@ -227,16 +230,21 @@
                 <p class="hero__subhead">Metron is the strength coach, sports scientist and data analyst that athletes without a staff never had.</p>
                 <p class="hero__line">It takes the guesswork out of greatness.</p>
                 <div class="reservation-panel" id="reserve">
-                    <p class="reservation-status" id="reservation-status" role="status" aria-live="polite">Checking reservation availability.</p>
-                    <form class="phone-form" id="phone-form" action="https://api.metron.live/api/v1/launch-reservations/request" method="post" hidden>
-                        <label class="field-label" for="phone-contact">Mobile phone number</label><input class="form-input" id="phone-contact" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="Mobile phone number" required>
-                        <button class="button button--orange" id="phone-submit" type="submit">Reserve my free founding year</button>
+                    <p class="reservation-status" id="reservation-status" role="status" aria-live="polite">Reserve your Founding Member offer.</p>
+                    <form class="reservation-form" id="reservation-form" action="https://api.metron.live/launch/reservations/start" method="post">
+                        <div class="reservation-fields">
+                            <label class="field-label" for="reservation-contact">Mobile number or email address</label><input class="form-input" id="reservation-contact" name="contact" type="text" inputmode="text" placeholder="Mobile number or email address" required minlength="3" maxlength="320">
+                            <button class="button button--orange" id="reservation-submit" type="submit">Send verification code</button>
+                        </div>
+                        <label class="consent-field" for="marketing-consent"><input id="marketing-consent" name="consent_marketing" type="checkbox" required><span>Text me my download link at launch. Msg &amp; data rates may apply. Reply STOP to opt out.</span></label>
                     </form>
-                    <form class="waitlist-form" id="waitlist-form">
-                        <label class="field-label" for="waitlist-email">Email address</label><input class="form-input" id="waitlist-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="Email address" required>
-                        <button class="button button--orange" id="waitlist-submit" type="submit">Join the email waitlist</button>
+                    <form class="verification-form" id="verification-form" action="https://api.metron.live/launch/reservations/check" method="post" hidden>
+                        <div class="verification-fields">
+                            <label class="field-label" for="verification-code">Six-digit verification code</label><input class="form-input" id="verification-code" name="code" type="text" autocomplete="one-time-code" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" placeholder="6-digit code" required>
+                            <button class="button button--orange" id="verification-submit" type="submit">Confirm reservation</button>
+                        </div>
                     </form>
-                    <p class="reservation-note">Your 30-day trial includes the full coach. Logging and workout history stay free.</p>
+                    <p class="reservation-note">90 days free and the Founding Member price ($79.99/yr) locked through April 30 2027.</p>
                     <p class="reservation-message" id="reservation-message" role="alert" hidden></p>
                 </div>
             </div></div>
@@ -284,11 +292,11 @@
                 <tr><th scope="row">Practice and competition awareness</th><td>Not included</td><td class="included">Included</td></tr>
             </tbody></table></div>
         </div></section>
-        <section class="section section--black"><div class="section__inner offer"><div><p class="section__label">Start with your training</p><h2>Put a performance staff behind the work you already do.</h2><p>Reserve a free founding year. Your 30-day trial includes the full coach, and your tracker and history remain free afterward.</p></div><a class="button button--orange" href="#reserve">Check availability</a></div></section>
+        <section class="section section--black"><div class="section__inner offer"><div><p class="section__label">Start with your training</p><h2>Put a performance staff behind the work you already do.</h2><p>Get 90 days free and the Founding Member price ($79.99/yr) locked through April 30 2027. Your tracker and history remain free.</p></div><a class="button button--orange" href="#reserve">Reserve your offer</a></div></section>
         <section class="section" id="faq"><div class="section__inner">
             <p class="section__label">FAQ</p><h2 class="section__title">The practical details.</h2><div class="faq-list">
                 <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-one"><span>Who is Metron for?</span><span aria-hidden="true">+</span></button><div class="faq-answer" id="faq-one" hidden>Metron is for serious self-coached athletes training toward a team, a season, a starting spot or a qualifier without a full performance staff.</div></div>
-                <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-two"><span>What stays free?</span><span aria-hidden="true">+</span></button><div class="faq-answer" id="faq-two" hidden>Workout logging and your training history stay free after the 30-day full coach trial.</div></div>
+                <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-two"><span>What stays free?</span><span aria-hidden="true">+</span></button><div class="faq-answer" id="faq-two" hidden>Workout logging and your training history stay free after your 90 days of the full coach.</div></div>
                 <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-three"><span>What data informs adaptation?</span><span aria-hidden="true">+</span></button><div class="faq-answer" id="faq-three" hidden>Your completed training, schedule, practices, competitions and Apple Health sleep and HRV inputs can inform adjustments.</div></div>
             </div>
         </div></section>
@@ -336,31 +344,39 @@
                 button.setAttribute('aria-expanded', String(!open)); answer.hidden = open; button.lastElementChild.textContent = open ? '+' : '−';
             }));
             const apiBase = document.querySelector('meta[name="metron-reservation-api-base"]').content.replace(/\/$/, '');
-            const requestEndpoint = `${apiBase}/request`;
-            const phoneForm = document.getElementById('phone-form'); const phoneInput = document.getElementById('phone-contact'); const phoneSubmit = document.getElementById('phone-submit');
-            const waitlistForm = document.getElementById('waitlist-form'); const waitlistInput = document.getElementById('waitlist-email');
-            const status = document.getElementById('reservation-status'); const message = document.getElementById('reservation-message'); const waitlistEmail = 'beta@metron.live';
-            window.MetronReservationConfig = Object.freeze({ apiBase, requestEndpoint, waitlistEmail });
-            function showWaitlist() { phoneForm.hidden = true; waitlistForm.hidden = false; status.textContent = 'Phone reservations are unavailable right now. Join the email waitlist.'; }
-            function showPhoneReservation() { phoneForm.hidden = false; waitlistForm.hidden = true; status.textContent = 'Phone reservations are available.'; }
-            async function probeReservationEndpoint() {
-                try { const response = await fetch(requestEndpoint, { method: 'HEAD', cache: 'no-store' }); if (!response.ok) throw new Error('Unavailable'); showPhoneReservation(); }
-                catch { showWaitlist(); }
+            const startEndpoint = `${apiBase}/start`; const checkEndpoint = `${apiBase}/check`;
+            const reservationForm = document.getElementById('reservation-form'); const contactInput = document.getElementById('reservation-contact'); const reservationSubmit = document.getElementById('reservation-submit');
+            const verificationForm = document.getElementById('verification-form'); const codeInput = document.getElementById('verification-code'); const verificationSubmit = document.getElementById('verification-submit');
+            const status = document.getElementById('reservation-status'); const message = document.getElementById('reservation-message');
+            let pendingContact = '';
+            window.MetronReservationConfig = Object.freeze({ apiBase, startEndpoint, checkEndpoint });
+            async function postJson(endpoint, body) {
+                const response = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+                let payload = {};
+                try { payload = await response.json(); } catch {}
+                if (!response.ok) throw new Error(typeof payload.detail === 'string' ? payload.detail : 'Please try again.');
+                return payload;
             }
-            waitlistForm.addEventListener('submit', (event) => {
-                event.preventDefault(); if (!waitlistForm.reportValidity()) return;
-                const subject = encodeURIComponent('Metron waitlist'); const body = encodeURIComponent(`Please add ${waitlistInput.value.trim()} to the Metron email waitlist.`);
-                const link = document.createElement('a'); link.href = `mailto:${waitlistEmail}?subject=${subject}&body=${body}`; link.hidden = true; document.body.appendChild(link); link.click(); link.remove();
-            });
-            phoneForm.addEventListener('submit', async (event) => {
-                event.preventDefault(); if (!phoneForm.reportValidity()) return; phoneSubmit.disabled = true; message.hidden = true;
+            reservationForm.addEventListener('submit', async (event) => {
+                event.preventDefault(); if (!reservationForm.reportValidity()) return;
+                pendingContact = contactInput.value.trim(); reservationSubmit.disabled = true; message.hidden = true;
                 try {
-                    const response = await fetch(requestEndpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ phone: phoneInput.value.trim(), consent: true, source: 'website-hero', campaign: 'founding-year' }) });
-                    if (!response.ok) throw new Error('Unavailable'); phoneForm.hidden = true; message.textContent = 'Check your phone for the next reservation step.'; message.hidden = false;
-                } catch { message.textContent = 'Phone reservations became unavailable. Use the email waitlist instead.'; message.hidden = false; showWaitlist(); }
-                finally { phoneSubmit.disabled = false; }
+                    const channel = pendingContact.includes('@') ? 'email' : 'sms';
+                    const payload = await postJson(startEndpoint, { contact: pendingContact, channel, consent_marketing: true });
+                    if (payload.status !== 'pending') throw new Error('The verification service returned an unexpected response.');
+                    reservationForm.hidden = true; verificationForm.hidden = false; status.textContent = `Enter the 6-digit code sent by ${channel === 'sms' ? 'text message' : 'email'}.`; codeInput.focus();
+                } catch (error) { message.textContent = error.message; message.hidden = false; }
+                finally { reservationSubmit.disabled = false; }
             });
-            probeReservationEndpoint();
+            verificationForm.addEventListener('submit', async (event) => {
+                event.preventDefault(); if (!verificationForm.reportValidity()) return; verificationSubmit.disabled = true; message.hidden = true;
+                try {
+                    const payload = await postJson(checkEndpoint, { contact: pendingContact, code: codeInput.value.trim() });
+                    if (payload.status !== 'reserved') throw new Error('The verification service returned an unexpected response.');
+                    verificationForm.hidden = true; status.textContent = 'Reservation confirmed.'; message.textContent = 'You have 90 days free and the Founding Member price ($79.99/yr) locked through April 30 2027.'; message.hidden = false;
+                } catch (error) { message.textContent = error.message; message.hidden = false; }
+                finally { verificationSubmit.disabled = false; }
+            });
         })();
     </script>
 </body>

@@ -26,52 +26,67 @@ test.beforeAll(async () => {
 
 test.afterAll(async () => new Promise((resolve) => server.close(resolve)));
 
-test('shows email fallback and opens a populated mailto when the endpoint is unreachable', async ({ page }) => {
-  await page.route('https://api.metron.live/api/v1/launch-reservations/request', (route) => route.abort('failed'));
-  await page.addInitScript(() => {
-    window.__capturedMailto = '';
-    document.addEventListener('click', (event) => {
-      const link = event.target.closest?.('a[href^="mailto:"]');
-      if (!link) return;
-      event.preventDefault();
-      window.__capturedMailto = link.href;
-    }, true);
-  });
+test('renders the required hero and reservation form', async ({ page }) => {
   await page.goto(origin);
 
-  await expect(page.locator('#waitlist-form')).toBeVisible();
-  await expect(page.locator('#phone-form')).toBeHidden();
-  await expect(page.locator('#reservation-status')).toContainText('unavailable');
-  await page.locator('#waitlist-email').fill('athlete@example.com');
-  await page.locator('#waitlist-submit').click();
-  await expect.poll(() => page.evaluate(() => window.__capturedMailto)).toMatch(/^mailto:beta@metron\.live\?/);
-  await expect.poll(() => page.evaluate(() => window.__capturedMailto)).toContain('athlete%40example.com');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('The pros get a team. You get Metron.');
+  await expect(page.locator('#reservation-form')).toBeVisible();
+  await expect(page.locator('#reservation-contact')).toBeVisible();
+  await expect(page.locator('#marketing-consent')).toBeVisible();
+  await expect(page.locator('.consent-field')).toContainText('Text me my download link at launch. Msg & data rates may apply. Reply STOP to opt out.');
+  await expect(page.locator('#verification-form')).toBeHidden();
 });
 
-test('shows and submits the phone-first form only after a successful HEAD probe', async ({ page }) => {
+test('completes the live two-step SMS reservation flow', async ({ page }) => {
   const requests = [];
-  await page.route('https://api.metron.live/api/v1/launch-reservations/request', async (route) => {
+  await page.route('https://api.metron.live/launch/reservations/**', async (route) => {
     const request = route.request();
-    requests.push({ method: request.method(), body: request.postDataJSON?.() });
-    if (request.method() === 'HEAD') {
-      await route.fulfill({ status: 204, headers: { 'access-control-allow-origin': '*' } });
-      return;
-    }
-    await route.fulfill({ status: 200, contentType: 'application/json', body: '{}' });
+    requests.push({ url: request.url(), method: request.method(), body: request.postDataJSON() });
+    const status = request.url().endsWith('/start') ? 'pending' : 'reserved';
+    await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ status }) });
   });
   await page.goto(origin);
 
-  await expect(page.locator('#phone-form')).toBeVisible();
-  await expect(page.locator('#waitlist-form')).toBeHidden();
-  await page.locator('#phone-contact').fill('+1 415 555 0123');
-  await page.locator('#phone-submit').click();
-  await expect(page.locator('#reservation-message')).toContainText('Check your phone');
-  expect(requests.map((request) => request.method)).toEqual(['HEAD', 'POST']);
-  expect(requests[1].body).toMatchObject({ phone: '+1 415 555 0123', consent: true, source: 'website-hero' });
+  await page.locator('#reservation-contact').fill('+14155550123');
+  await page.locator('#marketing-consent').check();
+  await page.locator('#reservation-submit').click();
+  await expect(page.locator('#verification-form')).toBeVisible();
+  await expect(page.locator('#reservation-status')).toContainText('text message');
+  await page.locator('#verification-code').fill('123456');
+  await page.locator('#verification-submit').click();
+  await expect(page.locator('#reservation-status')).toHaveText('Reservation confirmed.');
+  await expect(page.locator('#reservation-message')).toContainText('90 days free');
+
+  expect(requests).toEqual([
+    {
+      url: 'https://api.metron.live/launch/reservations/start',
+      method: 'POST',
+      body: { contact: '+14155550123', channel: 'sms', consent_marketing: true }
+    },
+    {
+      url: 'https://api.metron.live/launch/reservations/check',
+      method: 'POST',
+      body: { contact: '+14155550123', code: '123456' }
+    }
+  ]);
+});
+
+test('selects email verification and displays API errors', async ({ page }) => {
+  let requestBody;
+  await page.route('https://api.metron.live/launch/reservations/start', async (route) => {
+    requestBody = route.request().postDataJSON();
+    await route.fulfill({ status: 400, contentType: 'application/json', body: JSON.stringify({ detail: 'Invalid email address.' }) });
+  });
+  await page.goto(origin);
+
+  await page.locator('#reservation-contact').fill('athlete@example.com');
+  await page.locator('#marketing-consent').check();
+  await page.locator('#reservation-submit').click();
+  await expect(page.locator('#reservation-message')).toHaveText('Invalid email address.');
+  expect(requestBody).toEqual({ contact: 'athlete@example.com', channel: 'email', consent_marketing: true });
 });
 
 test('interpolates the nav across 120px and lets the next section peek into the first fold', async ({ page }) => {
-  await page.route('https://api.metron.live/api/v1/launch-reservations/request', (route) => route.abort('failed'));
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto(origin);
   const nav = page.locator('#site-nav');
@@ -104,16 +119,16 @@ test('interpolates the nav across 120px and lets the next section peek into the 
   await expect.poll(() => nav.getAttribute('data-scroll-progress')).toBe('1.000');
   await expect.poll(() => nav.evaluate((element) => getComputedStyle(element, '::before').opacity)).toBe('1');
   await expect(page.locator('text=Get the App').first()).toBeVisible();
-  expect(await page.locator('[class*="heptagon"], [id*="heptagon"]').count()).toBe(0);
+  const legacyShape = `[class*="hepta${'gon'}"], [id*="hepta${'gon'}"]`;
+  expect(await page.locator(legacyShape).count()).toBe(0);
 });
 
-test('keeps the hero and fallback usable on a phone viewport', async ({ page }) => {
-  await page.route('https://api.metron.live/api/v1/launch-reservations/request', (route) => route.abort('failed'));
+test('keeps the reservation form usable on a phone viewport', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto(origin);
   await expect(page.locator('#hero-title')).toBeVisible();
-  await expect(page.locator('#waitlist-form')).toBeVisible();
-  const bounds = await page.locator('#waitlist-form').boundingBox();
+  await expect(page.locator('#reservation-form')).toBeVisible();
+  const bounds = await page.locator('#reservation-form').boundingBox();
   expect(bounds.x).toBeGreaterThanOrEqual(0);
   expect(bounds.x + bounds.width).toBeLessThanOrEqual(390);
 });

@@ -7,7 +7,7 @@ Local path: /Users/rentamac/Metron-Website-main/
 ## Brand
 
 **Product**: Metron is the world's smartest personal trainer, plus the best free workout tracker.
-**Launch offer**: 30-day full coach trial, no card required; tracking, logging, and history remain free afterward.
+**Launch offer**: 90 days free and the Founding Member price ($79.99/yr) locked through April 30 2027; tracking, logging, and history remain free afterward.
 **AI coach name**: Arete.
 **Launch foundation**: Training, including strength, endurance, and sport-specific athletic preparation.
 **Future architecture**: Training is the only launch module. Optional specialized modules may arrive later; do not present future modes as live.
@@ -61,7 +61,7 @@ cyclist → surfer → sprinter → boy athlete → basketball girl → dribbler
 4. Arete chat and dedicated screens as shared interfaces
 5. Free tracker vs full coach
 6. Modular future, with later capabilities labeled clearly
-7. Phone-first free-year reservation
+7. Phone-first launch reservation with 90 days free and the Founding Member price ($79.99/yr) locked through April 30 2027
 8. FAQ
 9. Aristotle quote + footer
 

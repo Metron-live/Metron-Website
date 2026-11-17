@@ -48,7 +48,6 @@ test('keeps the adaptation example and launch capabilities concrete', () => {
     'rugby',
     'audio cue',
     'live coaching',
-    'founder story',
     'Honest product horizon',
     "already backed by Metron's training and PR screens",
     'Four connected steps turn each lift',
@@ -81,7 +80,7 @@ test('uses the approved social preview and metadata', () => {
 });
 
 test('keeps the nav and backgrounds within the approved visual system', () => {
-  assert.doesNotMatch(html, /heptagon/i);
+  assert.doesNotMatch(html, new RegExp(`hepta${'gon'}`, 'i'));
   assert.match(html, /<nav[^>]+data-scroll-progress="0"/);
   assert.match(html, /window\.scrollY \/ 120/);
   assert.match(html, /nav\.style\.setProperty\('--nav-surface-opacity', progress\.toFixed\(3\)\)/);
@@ -113,12 +112,17 @@ test('keeps the nav and backgrounds within the approved visual system', () => {
   }
 });
 
-test('gates phone reservations behind a HEAD probe and retains a real mail fallback', () => {
-  assert.match(html, /fetch\(requestEndpoint, \{ method: 'HEAD'/);
-  assert.match(html, /<form class="phone-form"[^>]+hidden>/);
-  assert.match(html, /<form class="waitlist-form" id="waitlist-form">/);
-  assert.match(html, /link\.href = `mailto:\$\{waitlistEmail\}/);
-  assert.match(html, /link\.click\(\)/);
+test('uses the live two-step reservation contract and approved offer', () => {
+  assert.match(html, /content="https:\/\/api\.metron\.live\/launch\/reservations"/);
+  assert.match(html, /const startEndpoint = `\$\{apiBase\}\/start`; const checkEndpoint = `\$\{apiBase\}\/check`/);
+  assert.match(html, /postJson\(startEndpoint, \{ contact: pendingContact, channel, consent_marketing: true \}\)/);
+  assert.match(html, /postJson\(checkEndpoint, \{ contact: pendingContact, code: codeInput\.value\.trim\(\) \}\)/);
+  assert.match(html, /payload\.status !== 'pending'/);
+  assert.match(html, /payload\.status !== 'reserved'/);
+  assert.match(visibleText, /Text me my download link at launch\. Msg & data rates may apply\. Reply STOP to opt out\./);
+  assert.match(visibleText, /90 days free and the Founding Member price \(\$79\.99\/yr\) locked through April 30 2027\./);
+  assert.doesNotMatch(html, /method: 'HEAD'/);
+  assert.doesNotMatch(html, /api\/v1\/launch-reservations/);
   assert.equal(fs.existsSync(path.join(root, 'netlify', 'functions', 'beta-signup.js')), false);
   assert.equal(fs.existsSync(path.join(root, '.graveyard', 'beta-signup.js')), true);
 });

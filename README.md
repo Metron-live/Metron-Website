@@ -6,7 +6,8 @@ Landing page for [metron.live](https://metron.live): the world's smartest person
 
 Metron helps serious self-coached athletes move through a concrete Train, Log,
 Learn, Adapt loop. The website accepts verified phone or email reservations for
-a free first year of the full coach.
+90 days free and the Founding Member price ($79.99/yr) locked through April 30
+2027.
 
 ## Tech Stack
 
@@ -30,15 +31,13 @@ The production endpoint is declared once in `index.html`:
 
 ```html
 <meta name="metron-reservation-api-base"
-      content="https://api.metron.live/api/v1/launch-reservations">
+      content="https://api.metron.live/launch/reservations">
 ```
 
-The browser posts a consented phone or email to `/request`, then posts the
-destination and verification code to `/verify`. The form shows success only
-when the API returns `status: verified` and `one_year_free_eligible: true`.
-
-If the API is unavailable, the form switches to email and provides a direct
-`beta@metron.live` mail link so the launch waitlist never dead-ends.
+The browser posts a consented phone or email to `/start`, then posts the same
+contact and six-digit verification code to `/check`. The form advances only
+when the API returns `status: pending` and confirms only when it returns
+`status: reserved`.
 
 ### 3. Deploy
 
@@ -76,9 +75,20 @@ Phone numbers and email addresses are verified by the launch-reservation API.
 The API owns consent, deduplication, eligibility, rate limiting, and opt-out
 state. The page never stores contact details in browser storage.
 
+## Validation
+
+```bash
+npm ci
+npm run build
+npm run check:links
+npm run test:smoke
+```
+
 ## Local Development
 
-Serve the repository so browser requests use HTTP. No build step is required.
+Serve the repository so browser requests use HTTP. The production page remains
+plain static HTML; the build command assembles the deployable `dist/` directory
+for validation and hosting.
 
 ```bash
 python3 -m http.server 4173
