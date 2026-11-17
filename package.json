@@ -2,8 +2,11 @@
   "name": "metron-website",
   "private": true,
   "scripts": {
+    "build": "node scripts/build-site.js",
+    "check:links": "node scripts/check-links.js dist",
     "test": "node --test tests/site-contract.test.js && playwright test tests/reservation-browser.spec.js",
-    "test:browser": "playwright test tests/reservation-browser.spec.js"
+    "test:browser": "playwright test tests/reservation-browser.spec.js",
+    "test:smoke": "playwright test tests/reservation-browser.spec.js"
   },
   "devDependencies": {
     "@playwright/test": "1.56.1"

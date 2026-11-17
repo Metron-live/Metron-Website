@@ -1,0 +1,46 @@
+name: Website check
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build-link-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Build static site
+        run: npm run build
+      - name: Check built links
+        run: npm run check:links
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Run Playwright smoke
+        run: npm run test:smoke
+      - name: Verify rendered build copy
+        run: |
+          python3 -m http.server 4173 --directory dist >/tmp/metron-http.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid"' EXIT
+          for attempt in 1 2 3 4 5; do
+            curl -fsS http://127.0.0.1:4173/ -o /tmp/metron-page.html && break
+            sleep 1
+          done
+          grep -Fq 'The pros get a team. You get Metron.' /tmp/metron-page.html
+          if grep -Eiq 'heptagon|free[ -]?year' /tmp/metron-page.html; then
+            echo 'Forbidden legacy copy remains in the built page.' >&2
+            exit 1
+          fi
