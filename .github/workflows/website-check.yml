@@ -30,6 +30,8 @@ jobs:
         run: npm run check:content
       - name: Check built links
         run: npm run check:links
+      - name: Check built privacy disclosure
+        run: npm run check:privacy
       - name: Check built launch copy
         run: npm run check:copy
       - name: Run site contract tests

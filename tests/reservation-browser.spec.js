@@ -41,6 +41,17 @@ test('renders the required hero and reservation form', async ({ page }) => {
   await expect(page.locator('#verification-form')).toBeHidden();
 });
 
+test('opens the built text-message disclosure from the reservation form', async ({ page }) => {
+  await page.goto(origin);
+
+  await page.getByRole('link', { name: 'Text messages section of our Privacy Policy' }).click();
+
+  await expect(page).toHaveURL(`${origin}/privacy.html#text-messages`);
+  await expect(page.getByRole('heading', { name: 'Text messages', exact: true })).toBeVisible();
+  await expect(page.locator('.content')).toContainText('Msg & data rates may apply.');
+  await expect(page.locator('.content')).toContainText('Reply STOP');
+});
+
 test('requires launch-message consent before contacting the API', async ({ page }) => {
   let requestCount = 0;
   page.on('request', (request) => {
