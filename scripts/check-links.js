@@ -20,6 +20,16 @@ function resolveLocal(from, reference) {
   return decoded.startsWith('/') ? path.join(root, decoded) : path.resolve(path.dirname(from), decoded);
 }
 
+function fragmentId(reference) {
+  const hashAt = reference.indexOf('#');
+  return hashAt === -1 ? '' : decodeURIComponent(reference.slice(hashAt + 1));
+}
+
+function idsIn(file) {
+  const html = fs.readFileSync(file, 'utf8');
+  return new Set([...html.matchAll(/\sid="([^"]+)"/g)].map((match) => match[1]));
+}
+
 if (!fs.existsSync(root)) throw new Error(`Build directory does not exist: ${root}`);
 walk(root);
 
@@ -41,8 +51,14 @@ for (const file of htmlFiles) {
     }
     const target = resolveLocal(file, reference);
     const candidates = [target, `${target}.html`, path.join(target, 'index.html')];
-    if (!target.startsWith(root + path.sep) || !candidates.some((candidate) => fs.existsSync(candidate))) {
+    const existingTarget = candidates.find((candidate) => fs.existsSync(candidate) && fs.statSync(candidate).isFile());
+    if (!target.startsWith(root + path.sep) || !existingTarget) {
       failures.push(`${path.relative(root, file)}: missing local target ${reference}`);
+      continue;
+    }
+    const id = fragmentId(reference);
+    if (id && existingTarget.endsWith('.html') && !idsIn(existingTarget).has(id)) {
+      failures.push(`${path.relative(root, file)}: missing fragment #${id} in ${path.relative(root, existingTarget)}`);
     }
   }
 }

@@ -147,7 +147,8 @@ test('publishes the text-message disclosure and links it from the reservation fo
   assert.match(privacyVisibleText, /Verification codes you request/);
   assert.match(privacyVisibleText, /One launch-day text message with a link to download Metron\./);
   assert.match(privacyVisibleText, /Optional product updates, but only if you separately consent/);
-  assert.match(privacyVisibleText, /Message frequency varies\./);
+  assert.match(privacyVisibleText, /Message frequency varies\. Verification codes are sent only when you request them\. We send one launch-day download link\./);
+  assert.match(privacyVisibleText, /If you separately consent to optional product updates, their frequency varies\./);
   assert.match(privacyVisibleText, /Msg & data rates may apply\./);
   assert.match(privacyVisibleText, /Reply STOP to opt out of text messages\. Reply HELP for help or email support@metron\.live\./);
   assert.match(privacyVisibleText, /Mobile carriers are not liable for delayed or undelivered messages\./);
