@@ -85,11 +85,21 @@ test('keeps the nav and backgrounds within the approved visual system', () => {
   assert.match(html, /<nav[^>]+data-scroll-progress="0"/);
   assert.match(html, /window\.scrollY \/ 120/);
   assert.match(html, /nav\.style\.setProperty\('--nav-bg'/);
+  assert.match(html, /transition: background-color 300ms ease/);
   assert.doesNotMatch(html, /nav[^\n]*classList\.(?:add|toggle)\([^\n]*(?:scrolled|solid)/i);
   assert.match(html, /\.nav \{[\s\S]*background: var\(--nav-bg\)/);
   assert.doesNotMatch(html.match(/\.nav \{[\s\S]*?\n        \}/)[0], /marble/i);
   assert.match(html, /@media \(prefers-reduced-motion: reduce\)/);
   assert.match(html, /<a class="nav__cta" href="#reserve">Get the App<\/a>/);
+  assert.match(html, /brand\/icon\/svg\/metron-icon-white\.svg/);
+  assert.match(html, /brand\/icon\/svg\/metron-icon-black\.svg/);
+  assert.doesNotMatch(html.match(/<nav[\s\S]*?<\/nav>/)[0], /m-cropped(?:-white)?\.png/);
+
+  assert.match(html, /--hero-brightness: 1\.25/);
+  assert.match(html, /\.hero__video \{[^}]*filter: brightness\(var\(--hero-brightness\)\)/);
+  assert.match(html, /body \{[\s\S]*?font-family: 'Cardo', serif/);
+  assert.match(html, /\.nav \{[\s\S]*?font-family: 'Cardo', serif/);
+  assert.match(html, /h1, h2, h3 \{[^}]*font-family: 'Cardo', serif/);
 
   const mainFontValues = new Set([
     "'Cardo', 'Inter', -apple-system, BlinkMacSystemFont, serif",
