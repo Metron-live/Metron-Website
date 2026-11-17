@@ -76,7 +76,9 @@ test('interpolates the nav across 120px and lets the next section peek into the 
   await page.goto(origin);
   const nav = page.locator('#site-nav');
   await expect(nav).toHaveAttribute('data-scroll-progress', '0.000');
-  expect(await nav.evaluate((element) => getComputedStyle(element).transitionDuration.split(', ').every((duration) => duration === '0.3s'))).toBe(true);
+  expect(await nav.evaluate((element) => getComputedStyle(element, '::before').transitionDuration)).toBe('0.3s');
+  expect(await nav.evaluate((element) => getComputedStyle(element, '::before').opacity)).toBe('0');
+  expect(await nav.evaluate((element) => getComputedStyle(element, '::before').backgroundImage)).toContain('images/marble.png');
 
   const firstFold = await page.evaluate(() => ({ heroBottom: document.querySelector('.hero').getBoundingClientRect().bottom, problemTop: document.querySelector('#problem').getBoundingClientRect().top, nextLineBottom: document.querySelector('#problem .section__label').getBoundingClientRect().bottom, viewport: innerHeight }));
   expect(firstFold.heroBottom).toBeLessThan(firstFold.viewport);
@@ -85,11 +87,11 @@ test('interpolates the nav across 120px and lets the next section peek into the 
 
   await page.evaluate(() => scrollTo(0, 60));
   await expect.poll(() => nav.getAttribute('data-scroll-progress')).toBe('0.500');
-  await expect.poll(() => nav.evaluate((element) => getComputedStyle(element).backgroundColor)).toMatch(/rgba\(255, 255, 255, 0\.5\)/);
+  await expect.poll(() => nav.evaluate((element) => getComputedStyle(element, '::before').opacity)).toBe('0.5');
 
   await page.evaluate(() => scrollTo(0, 200));
   await expect.poll(() => nav.getAttribute('data-scroll-progress')).toBe('1.000');
-  await expect(nav).toHaveCSS('background-color', 'rgb(255, 255, 255)');
+  await expect.poll(() => nav.evaluate((element) => getComputedStyle(element, '::before').opacity)).toBe('1');
   await expect(page.locator('text=Get the App').first()).toBeVisible();
   expect(await page.locator('[class*="heptagon"], [id*="heptagon"]').count()).toBe(0);
 });

@@ -39,7 +39,7 @@
         :root {
             --black: #000; --white: #fff; --ink: #141414; --muted: #555; --line: #dedede;
             --orange: #bd4d00; --orange-dark: #913a00; --nav-height: 76px; --radius: 10px;
-            --page: min(1180px, calc(100% - 48px)); --nav-bg: rgba(255,255,255,0);
+            --page: min(1180px, calc(100% - 48px)); --nav-surface-opacity: 0;
             --nav-border: rgba(0,0,0,0); --nav-text: rgb(255,255,255); --nav-blur: 0px;
             --nav-light-opacity: 1; --nav-dark-opacity: 0; --nav-cta-bg: rgba(255,255,255,0);
             --nav-cta-border: rgba(255,255,255,.75); --nav-cta-text: rgb(255,255,255);
@@ -62,10 +62,15 @@
         :focus-visible { outline: 3px solid #2b75d6; outline-offset: 3px; }
         .nav {
             position: fixed; z-index: 100; inset: 0 0 auto; height: var(--nav-height); color: var(--nav-text);
-            background: var(--nav-bg); border-bottom: 1px solid var(--nav-border);
+            background: transparent; border-bottom: 1px solid var(--nav-border);
             -webkit-backdrop-filter: blur(var(--nav-blur)); backdrop-filter: blur(var(--nav-blur));
             font-family: 'Cardo', serif;
-            transition: background-color 300ms ease, border-color 300ms ease, color 300ms ease, -webkit-backdrop-filter 300ms ease, backdrop-filter 300ms ease;
+            transition: border-color 300ms ease, color 300ms ease, -webkit-backdrop-filter 300ms ease, backdrop-filter 300ms ease;
+        }
+        .nav::before {
+            content: ''; position: absolute; z-index: -1; inset: 0; opacity: var(--nav-surface-opacity);
+            background: #fff url('images/marble.png') center/cover;
+            transition: opacity 300ms ease;
         }
         .nav__inner { width: var(--page); height: 100%; margin: 0 auto; display: flex; align-items: center; gap: 28px; }
         .nav__logo { position: relative; width: 154px; height: 45px; flex: 0 0 auto; display: block; }
@@ -302,7 +307,7 @@
                 const logoProgress = colorProgress;
                 const channel = mix(255, 25, colorProgress);
                 nav.dataset.scrollProgress = progress.toFixed(3);
-                nav.style.setProperty('--nav-bg', `rgba(255,255,255,${progress.toFixed(3)})`);
+                nav.style.setProperty('--nav-surface-opacity', progress.toFixed(3));
                 nav.style.setProperty('--nav-border', `rgba(0,0,0,${(progress * .14).toFixed(3)})`);
                 nav.style.setProperty('--nav-text', `rgb(${channel},${channel},${channel})`);
                 nav.style.setProperty('--nav-blur', `${(progress * 12).toFixed(1)}px`);

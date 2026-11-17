@@ -84,11 +84,11 @@ test('keeps the nav and backgrounds within the approved visual system', () => {
   assert.doesNotMatch(html, /heptagon/i);
   assert.match(html, /<nav[^>]+data-scroll-progress="0"/);
   assert.match(html, /window\.scrollY \/ 120/);
-  assert.match(html, /nav\.style\.setProperty\('--nav-bg'/);
-  assert.match(html, /transition: background-color 300ms ease/);
+  assert.match(html, /nav\.style\.setProperty\('--nav-surface-opacity', progress\.toFixed\(3\)\)/);
+  assert.match(html, /\.nav::before \{[\s\S]*?opacity: var\(--nav-surface-opacity\)[\s\S]*?transition: opacity 300ms ease/);
   assert.doesNotMatch(html, /nav[^\n]*classList\.(?:add|toggle)\([^\n]*(?:scrolled|solid)/i);
-  assert.match(html, /\.nav \{[\s\S]*background: var\(--nav-bg\)/);
-  assert.doesNotMatch(html.match(/\.nav \{[\s\S]*?\n        \}/)[0], /marble/i);
+  assert.match(html, /\.nav \{[\s\S]*background: transparent/);
+  assert.match(html, /\.nav::before \{[\s\S]*?background: #fff url\('images\/marble\.png'\) center\/cover/);
   assert.match(html, /@media \(prefers-reduced-motion: reduce\)/);
   assert.match(html, /<a class="nav__cta" href="#reserve">Get the App<\/a>/);
   assert.match(html, /brand\/icon\/svg\/metron-icon-white\.svg/);
