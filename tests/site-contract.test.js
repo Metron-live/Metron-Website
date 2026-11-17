@@ -6,13 +6,16 @@ const test = require('node:test');
 
 const root = path.resolve(__dirname, '..');
 const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
-const visibleText = html
+const privacyHtml = fs.readFileSync(path.join(root, 'privacy.html'), 'utf8');
+const toVisibleText = (source) => source
   .replace(/<style[\s\S]*?<\/style>/gi, ' ')
   .replace(/<script[\s\S]*?<\/script>/gi, ' ')
   .replace(/<[^>]+>/g, ' ')
   .replace(/&amp;/g, '&')
   .replace(/\s+/g, ' ')
   .trim();
+const visibleText = toVisibleText(html);
+const privacyVisibleText = toVisibleText(privacyHtml);
 
 const count = (value, pattern) => (value.match(pattern) || []).length;
 const sha256 = (file) => crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
@@ -125,6 +128,19 @@ test('uses the live two-step reservation contract and approved offer', () => {
   assert.doesNotMatch(html, /api\/v1\/launch-reservations/);
   assert.equal(fs.existsSync(path.join(root, 'netlify', 'functions', 'beta-signup.js')), false);
   assert.equal(fs.existsSync(path.join(root, '.graveyard', 'beta-signup.js')), true);
+});
+
+test('publishes the text-message disclosure and links it from the reservation form', () => {
+  assert.match(html, /<a href="\/privacy\.html#text-messages">Text messages disclosure<\/a>/);
+  assert.match(privacyHtml, /<h2 id="text-messages">Text messages<\/h2>/);
+  assert.match(privacyVisibleText, /Verification codes you request/);
+  assert.match(privacyVisibleText, /One launch-day text message with a link to download Metron\./);
+  assert.match(privacyVisibleText, /Optional product updates, but only if you separately consent/);
+  assert.match(privacyVisibleText, /Message frequency varies\./);
+  assert.match(privacyVisibleText, /Msg & data rates may apply\./);
+  assert.match(privacyVisibleText, /Reply STOP to opt out of text messages\. Reply HELP for help\./);
+  assert.match(privacyVisibleText, /Mobile carriers are not liable for delayed or undelivered messages\./);
+  assert.doesNotMatch(privacyHtml, /—/);
 });
 
 test('resolves local homepage resources and in-page links', () => {

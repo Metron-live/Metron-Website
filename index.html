@@ -122,6 +122,7 @@
         .button--orange { color: var(--white); background: var(--orange); border-color: var(--orange); }
         .button--orange:hover { background: var(--orange-dark); border-color: var(--orange-dark); }
         .reservation-note { margin-top: 9px; font-size: 13px; color: rgba(255,255,255,.84); }
+        .consent-field a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
         .reservation-message { margin-top: 10px; font-size: 15px; }
         .reservation-message[hidden] { display: none; }
         .section { padding: clamp(88px,11vw,150px) 0; background: var(--white); }
@@ -236,7 +237,7 @@
                             <label class="field-label" for="reservation-contact">Mobile number or email address</label><input class="form-input" id="reservation-contact" name="contact" type="text" inputmode="text" placeholder="Mobile number or email address" required minlength="3" maxlength="320">
                             <button class="button button--orange" id="reservation-submit" type="submit">Send verification code</button>
                         </div>
-                        <label class="consent-field" for="marketing-consent"><input id="marketing-consent" name="consent_marketing" type="checkbox" required><span>Text me my download link at launch. Msg &amp; data rates may apply. Reply STOP to opt out.</span></label>
+                        <label class="consent-field" for="marketing-consent"><input id="marketing-consent" name="consent_marketing" type="checkbox" required><span>Text me my download link at launch. Msg &amp; data rates may apply. Reply STOP to opt out. See our <a href="/privacy.html#text-messages">Text messages disclosure</a>.</span></label>
                     </form>
                     <form class="verification-form" id="verification-form" action="https://api.metron.live/launch/reservations/check" method="post" hidden>
                         <div class="verification-fields">
