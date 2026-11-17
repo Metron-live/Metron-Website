@@ -10,7 +10,9 @@ permissions:
 
 jobs:
   build-link-smoke:
-    runs-on: ubuntu-latest
+    # Playwright 1.56 supports Ubuntu 24.04; ubuntu-latest currently resolves
+    # to 26.04, for which this pinned browser build has no binaries.
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
       - name: Check out repository
