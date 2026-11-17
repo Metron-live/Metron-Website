@@ -348,13 +348,13 @@
             }));
             const apiBase = document.querySelector('meta[name="metron-reservation-api-base"]').content.replace(/\/$/, '');
             const startEndpoint = `${apiBase}/start`; const checkEndpoint = `${apiBase}/check`;
-            const reservationForm = document.getElementById('reservation-form'); const contactInput = document.getElementById('reservation-contact'); const reservationSubmit = document.getElementById('reservation-submit');
+            const reservationForm = document.getElementById('reservation-form'); const contactInput = document.getElementById('reservation-contact'); const consentInput = document.getElementById('marketing-consent'); const reservationSubmit = document.getElementById('reservation-submit');
             const verificationForm = document.getElementById('verification-form'); const codeInput = document.getElementById('verification-code'); const verificationSubmit = document.getElementById('verification-submit');
             const status = document.getElementById('reservation-status'); const message = document.getElementById('reservation-message');
             let pendingContact = '';
             window.MetronReservationConfig = Object.freeze({ apiBase, startEndpoint, checkEndpoint });
             async function postJson(endpoint, body) {
-                const response = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+                const response = await fetch(endpoint, { method: 'POST', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
                 let payload = {};
                 try { payload = await response.json(); } catch {}
                 if (!response.ok) throw new Error(typeof payload.detail === 'string' ? payload.detail : 'Please try again.');
@@ -365,7 +365,7 @@
                 pendingContact = contactInput.value.trim(); reservationSubmit.disabled = true; message.hidden = true;
                 try {
                     const channel = pendingContact.includes('@') ? 'email' : 'sms';
-                    const payload = await postJson(startEndpoint, { contact: pendingContact, channel, consent_marketing: true });
+                    const payload = await postJson(startEndpoint, { contact: pendingContact, channel, consent_marketing: consentInput.checked });
                     if (payload.status !== 'pending') throw new Error('The verification service returned an unexpected response.');
                     reservationForm.hidden = true; verificationForm.hidden = false; status.textContent = `Enter the 6-digit code sent by ${channel === 'sms' ? 'text message' : 'email'}.`; codeInput.focus();
                 } catch (error) { message.textContent = error.message; message.hidden = false; }

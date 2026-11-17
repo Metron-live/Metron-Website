@@ -119,8 +119,10 @@ test('keeps the nav and backgrounds within the approved visual system', () => {
 test('uses the live two-step reservation contract and approved offer', () => {
   assert.match(html, /content="https:\/\/api\.metron\.live\/launch\/reservations"/);
   assert.match(html, /const startEndpoint = `\$\{apiBase\}\/start`; const checkEndpoint = `\$\{apiBase\}\/check`/);
-  assert.match(html, /postJson\(startEndpoint, \{ contact: pendingContact, channel, consent_marketing: true \}\)/);
+  assert.match(html, /const consentInput = document\.getElementById\('marketing-consent'\)/);
+  assert.match(html, /postJson\(startEndpoint, \{ contact: pendingContact, channel, consent_marketing: consentInput\.checked \}\)/);
   assert.match(html, /postJson\(checkEndpoint, \{ contact: pendingContact, code: codeInput\.value\.trim\(\) \}\)/);
+  assert.match(html, /headers: \{ 'Accept': 'application\/json', 'Content-Type': 'application\/json' \}/);
   assert.match(html, /payload\.status !== 'pending'/);
   assert.match(html, /payload\.status !== 'reserved'/);
   assert.match(visibleText, /Text me my download link at launch\. Msg & data rates may apply\. Reply STOP to opt out\./);
@@ -135,7 +137,7 @@ test('uses the live two-step reservation contract and approved offer', () => {
   assert.doesNotMatch(html, /method: 'HEAD'/);
   assert.doesNotMatch(html, /api\/v1\/launch-reservations/);
   assert.equal(fs.existsSync(path.join(root, 'netlify', 'functions', 'beta-signup.js')), false);
-  assert.equal(fs.existsSync(path.join(root, '.graveyard', 'beta-signup.js')), true);
+  assert.equal(fs.existsSync(path.join(root, '.graveyard', 'beta-signup.js')), false);
 });
 
 test('publishes the text-message disclosure and links it from the reservation form', () => {

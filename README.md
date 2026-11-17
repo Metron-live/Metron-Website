@@ -94,6 +94,8 @@ state. The page never stores contact details in browser storage.
 npm ci
 npm run build
 npm run check:links
+npm run check:copy
+npm run test:contract
 npm run test:smoke
 ```
 

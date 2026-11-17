@@ -105,6 +105,33 @@ test('selects email verification and displays API errors', async ({ page }) => {
   expect(requestBody).toEqual({ contact: 'athlete@example.com', channel: 'email', consent_marketing: true });
 });
 
+test('rejects responses outside the pending and reserved schemas', async ({ page }) => {
+  await page.route('https://api.metron.live/launch/reservations/start', async (route) => {
+    await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ status: 'reserved' }) });
+  });
+  await page.goto(origin);
+
+  await page.locator('#reservation-contact').fill('+14155550123');
+  await page.locator('#marketing-consent').check();
+  await page.locator('#reservation-submit').click();
+
+  await expect(page.locator('#reservation-message')).toHaveText('The verification service returned an unexpected response.');
+  await expect(page.locator('#reservation-form')).toBeVisible();
+  await expect(page.locator('#verification-form')).toBeHidden();
+
+  await page.unroute('https://api.metron.live/launch/reservations/start');
+  await page.route('https://api.metron.live/launch/reservations/**', async (route) => {
+    await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ status: 'pending' }) });
+  });
+  await page.locator('#reservation-submit').click();
+  await page.locator('#verification-code').fill('123456');
+  await page.locator('#verification-submit').click();
+
+  await expect(page.locator('#reservation-message')).toHaveText('The verification service returned an unexpected response.');
+  await expect(page.locator('#verification-form')).toBeVisible();
+  await expect(page.locator('#reservation-status')).not.toHaveText('Reservation confirmed.');
+});
+
 test('interpolates the nav across 120px and lets the next section peek into the first fold', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto(origin);
