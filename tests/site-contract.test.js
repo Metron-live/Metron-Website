@@ -13,6 +13,7 @@ const toVisibleText = (source) => source
   .replace(/<[^>]+>/g, ' ')
   .replace(/&amp;/g, '&')
   .replace(/\s+/g, ' ')
+  .replace(/\s+([.,;:!?])/g, '$1')
   .trim();
 const visibleText = toVisibleText(html);
 const privacyVisibleText = toVisibleText(privacyHtml);
@@ -131,14 +132,15 @@ test('uses the live two-step reservation contract and approved offer', () => {
 });
 
 test('publishes the text-message disclosure and links it from the reservation form', () => {
-  assert.match(html, /<a href="\/privacy\.html#text-messages">Text messages disclosure<\/a>/);
+  assert.match(html, /<form[^>]+id="reservation-form"[\s\S]*?<a href="\/privacy\.html#text-messages">Text messages disclosure<\/a>[\s\S]*?<\/form>/);
+  assert.match(visibleText, /Text messages disclosure for message frequency, HELP instructions, and carrier terms\./);
   assert.match(privacyHtml, /<h2 id="text-messages">Text messages<\/h2>/);
   assert.match(privacyVisibleText, /Verification codes you request/);
   assert.match(privacyVisibleText, /One launch-day text message with a link to download Metron\./);
   assert.match(privacyVisibleText, /Optional product updates, but only if you separately consent/);
   assert.match(privacyVisibleText, /Message frequency varies\./);
   assert.match(privacyVisibleText, /Msg & data rates may apply\./);
-  assert.match(privacyVisibleText, /Reply STOP to opt out of text messages\. Reply HELP for help\./);
+  assert.match(privacyVisibleText, /Reply STOP to opt out of text messages\. Reply HELP for help or email support@metron\.live\./);
   assert.match(privacyVisibleText, /Mobile carriers are not liable for delayed or undelivered messages\./);
   assert.doesNotMatch(privacyHtml, /—/);
 });
