@@ -3,12 +3,16 @@ const http = require('node:http');
 const path = require('node:path');
 const { expect, test } = require('@playwright/test');
 
-const root = path.resolve(__dirname, '..');
+const sourceRoot = path.resolve(__dirname, '..');
+const root = path.join(sourceRoot, 'dist');
 const types = { '.css': 'text/css', '.html': 'text/html', '.ico': 'image/x-icon', '.jpg': 'image/jpeg', '.js': 'text/javascript', '.mp4': 'video/mp4', '.png': 'image/png', '.svg': 'image/svg+xml' };
 let server;
 let origin;
 
 test.beforeAll(async () => {
+  if (!fs.existsSync(path.join(root, 'index.html'))) {
+    throw new Error('Missing dist/index.html. Run `npm run build` before the Playwright smoke test.');
+  }
   server = http.createServer((request, response) => {
     const pathname = decodeURIComponent(new URL(request.url, 'http://localhost').pathname);
     const relative = pathname === '/' ? 'index.html' : pathname.replace(/^\//, '');
@@ -35,6 +39,21 @@ test('renders the required hero and reservation form', async ({ page }) => {
   await expect(page.locator('#marketing-consent')).toBeVisible();
   await expect(page.locator('.consent-field')).toContainText('Text me my download link at launch. Msg & data rates may apply. Reply STOP to opt out.');
   await expect(page.locator('#verification-form')).toBeHidden();
+});
+
+test('requires launch-message consent before contacting the API', async ({ page }) => {
+  let requestCount = 0;
+  page.on('request', (request) => {
+    if (request.url().startsWith('https://api.metron.live/launch/reservations/')) requestCount += 1;
+  });
+  await page.goto(origin);
+
+  await page.locator('#reservation-contact').fill('+14155550123');
+  await page.locator('#reservation-submit').click();
+
+  await expect(page.locator('#marketing-consent')).toBeFocused();
+  await expect(page.locator('#verification-form')).toBeHidden();
+  expect(requestCount).toBe(0);
 });
 
 test('completes the live two-step SMS reservation flow', async ({ page }) => {

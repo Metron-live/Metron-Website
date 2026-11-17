@@ -42,7 +42,7 @@ jobs:
             sleep 1
           done
           grep -Fq 'The pros get a team. You get Metron.' /tmp/metron-page.html
-          if grep -Eiq 'heptagon|free[ -]?year' /tmp/metron-page.html; then
+          if grep -Eiq 'heptagon|free[ -]?year|founding[ -]?year|founder[ -]?story' /tmp/metron-page.html; then
             echo 'Forbidden legacy copy remains in the built page.' >&2
             exit 1
           fi

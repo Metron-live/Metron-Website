@@ -24,7 +24,7 @@ Never introduce a new font. Never use Cardo on the wordmark or Space Grotesk on 
 
 - **Marble texture** (`/images/marble.png`) on all light backgrounds: body, nav (scrolled), cards, steps.
 - **Marble text fill** (`background-clip: text`) on white text over video/dark sections.
-- **Amber** (#d97706-ish) is the only accent color. Used for dividers, favicons, hover states, small heptagon separators between sections.
+- **Amber** (#d97706-ish) is the only accent color. Used for dividers, favicons, and hover states.
 - **Black marble** (`/images/black-marble.jpg`) available but unused — OK to use for dark sections.
 - Video has a cinematic vignette overlay and parallax scroll.
 - Marble dust particles drift upward over the video.
@@ -37,7 +37,7 @@ Timing is locked. Do not modify without explicit instruction:
 - 0.3s: logo + Metron wordmark + nav items + mega triggers fade to full opacity (900ms duration)
 - 0.9s: "Performance, democratized." + sub fade to full opacity (700ms duration)
 - 1.5s: Socrates quote + attribution fade to full opacity (900ms duration)
-- 2.2s: rotating heptagon scroll cue appears (500ms duration)
+- No scroll cue is rendered.
 
 Total sequence: ~2.7s. Text readable from 0.3s.
 
@@ -105,9 +105,9 @@ Product dropdown — left column (text items, Cardo, stacked vertically, ~48px g
 - Modular future — later expansion, clearly labeled
 
 Platform dropdown — right column (featured):
-Title: The Heptagon
+Title: The Metron system
 Body: Training now. More modules later.
-Visual: animated rotating heptagon (reuse hero scroll-cue component scaled up) on black marble background
+Visual: product copy on a black marble background
 
 Training dropdown — left column:
 - Endurance
@@ -122,7 +122,7 @@ Visual spec for the mega menu:
 - Panel height: ~540px desktop
 - Panel entrance: 200ms ease-out, fade + 8px translateY
 - Active nav item: amber hairline underneath, caret flips to ▲
-- Caret glyph: small rotating heptagon (match hero scroll cue, smaller)
+- Caret glyph: a simple text caret
 - Left column items: Cardo medium 18px title, Cardo regular 14px description at 70% white opacity
 - Featured right column: Cardo medium 24px title, Cardo regular 16px body
 - Hover state on items: subtle amber tint on title, smooth 150ms

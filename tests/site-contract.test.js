@@ -125,6 +125,13 @@ test('uses the live two-step reservation contract and approved offer', () => {
   assert.match(html, /payload\.status !== 'reserved'/);
   assert.match(visibleText, /Text me my download link at launch\. Msg & data rates may apply\. Reply STOP to opt out\./);
   assert.match(visibleText, /90 days free and the Founding Member price \(\$79\.99\/yr\) locked through April 30 2027\./);
+  for (const legacyCopy of [
+    /free[ -]?year/i,
+    /founding[ -]?year/i,
+    /founder[ -]?story/i
+  ]) assert.doesNotMatch(visibleText, legacyCopy);
+  assert.match(html, /id="reservation-contact"[^>]+aria-describedby="reservation-consent reservation-offer"/);
+  assert.match(html, /id="marketing-consent"[^>]+type="checkbox" required/);
   assert.doesNotMatch(html, /method: 'HEAD'/);
   assert.doesNotMatch(html, /api\/v1\/launch-reservations/);
   assert.equal(fs.existsSync(path.join(root, 'netlify', 'functions', 'beta-signup.js')), false);

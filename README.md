@@ -34,10 +34,23 @@ The production endpoint is declared once in `index.html`:
       content="https://api.metron.live/launch/reservations">
 ```
 
-The browser posts a consented phone or email to `/start`, then posts the same
-contact and six-digit verification code to `/check`. The form advances only
-when the API returns `status: pending` and confirms only when it returns
-`status: reserved`.
+The browser uses the production two-step JSON contract. It starts verification
+with `POST /start`:
+
+```json
+{"contact":"+14155550123","channel":"sms","consent_marketing":true}
+```
+
+`channel` is `sms` for a phone number and `email` for an email address. After a
+successful `{"status":"pending"}` response, the browser verifies the code with
+`POST /check`:
+
+```json
+{"contact":"+14155550123","code":"123456"}
+```
+
+The reservation is complete only after `{"status":"reserved"}`. The browser
+does not infer success from the HTTP status alone.
 
 ### 3. Deploy
 
