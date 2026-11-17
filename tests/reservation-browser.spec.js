@@ -50,6 +50,8 @@ test('opens the built text-message disclosure from the reservation form', async 
   await expect(page.getByRole('heading', { name: 'Text messages', exact: true })).toBeVisible();
   await expect(page.locator('.content')).toContainText('Msg & data rates may apply.');
   await expect(page.locator('.content')).toContainText('Reply STOP');
+  await expect(page.locator('.content')).toContainText('Reply HELP');
+  await expect(page.locator('.content')).toContainText('Mobile carriers are not liable for delayed or undelivered messages.');
 });
 
 test('requires launch-message consent before contacting the API', async ({ page }) => {

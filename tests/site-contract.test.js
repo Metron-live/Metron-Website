@@ -132,7 +132,7 @@ test('uses the live two-step reservation contract and approved offer', () => {
     /founding[ -]?year/i,
     /founder[ -]?story/i
   ]) assert.doesNotMatch(visibleText, legacyCopy);
-  assert.match(html, /id="reservation-contact"[^>]+aria-describedby="reservation-consent reservation-offer"/);
+  assert.match(html, /id="reservation-contact"[^>]+aria-describedby="reservation-consent reservation-sms-disclosure reservation-offer"/);
   assert.match(html, /id="marketing-consent"[^>]+type="checkbox" required/);
   assert.doesNotMatch(html, /method: 'HEAD'/);
   assert.doesNotMatch(html, /api\/v1\/launch-reservations/);
@@ -142,6 +142,8 @@ test('uses the live two-step reservation contract and approved offer', () => {
 
 test('publishes the text-message disclosure and links it from the reservation form', () => {
   assert.match(html, /<form[^>]+id="reservation-form"[\s\S]*?<a href="\/privacy\.html#text-messages">Text messages section of our Privacy Policy<\/a>[\s\S]*?<\/form>/);
+  assert.match(html, /id="reservation-contact"[^>]+aria-describedby="reservation-consent reservation-sms-disclosure reservation-offer"/);
+  assert.match(html, /class="reservation-disclosure" id="reservation-sms-disclosure"/);
   assert.match(visibleText, /Read the Text messages section of our Privacy Policy for message frequency, HELP instructions, and carrier terms\./);
   assert.match(privacyHtml, /<h2 id="text-messages">Text messages<\/h2>/);
   assert.match(privacyVisibleText, /Verification codes you request/);
@@ -150,7 +152,7 @@ test('publishes the text-message disclosure and links it from the reservation fo
   assert.match(privacyVisibleText, /Message frequency varies\./);
   assert.match(privacyVisibleText, /Msg & data rates may apply\./);
   assert.match(privacyVisibleText, /Reply STOP to opt out of text messages\. Reply HELP for help or email support@metron\.live\./);
-  assert.match(privacyVisibleText, /Carriers are not liable for delayed or undelivered messages\./);
+  assert.match(privacyVisibleText, /Mobile carriers are not liable for delayed or undelivered messages\./);
   assert.doesNotMatch(privacyHtml, /—/);
 });
 
