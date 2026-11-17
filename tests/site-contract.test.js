@@ -85,7 +85,8 @@ test('keeps the nav and backgrounds within the approved visual system', () => {
   assert.match(html, /<nav[^>]+data-scroll-progress="0"/);
   assert.match(html, /window\.scrollY \/ 120/);
   assert.match(html, /nav\.style\.setProperty\('--nav-surface-opacity', progress\.toFixed\(3\)\)/);
-  assert.match(html, /\.nav::before \{[\s\S]*?opacity: var\(--nav-surface-opacity\)[\s\S]*?transition: opacity 300ms ease/);
+  assert.match(html, /--nav-fade-duration: 300ms/);
+  assert.match(html, /\.nav::before \{[\s\S]*?opacity: var\(--nav-surface-opacity\)[\s\S]*?transition: opacity var\(--nav-fade-duration\) ease/);
   assert.doesNotMatch(html, /nav[^\n]*classList\.(?:add|toggle)\([^\n]*(?:scrolled|solid)/i);
   assert.match(html, /\.nav \{[\s\S]*background: transparent/);
   assert.match(html, /\.nav::before \{[\s\S]*?background: #fff url\('images\/marble\.png'\) center\/cover/);
@@ -97,17 +98,15 @@ test('keeps the nav and backgrounds within the approved visual system', () => {
 
   assert.match(html, /--hero-brightness: 1\.25/);
   assert.match(html, /\.hero__video \{[^}]*filter: brightness\(var\(--hero-brightness\)\)/);
-  assert.match(html, /body \{[\s\S]*?font-family: 'Cardo', serif/);
-  assert.match(html, /\.nav \{[\s\S]*?font-family: 'Cardo', serif/);
-  assert.match(html, /h1, h2, h3 \{[^}]*font-family: 'Cardo', serif/);
+  assert.match(html, /--font-copy: 'Cardo', serif/);
+  assert.match(html, /--font-controls: 'Inter', sans-serif/);
+  assert.match(html, /body \{[\s\S]*?font-family: var\(--font-copy\)/);
+  assert.match(html, /\.nav \{[\s\S]*?font-family: var\(--font-copy\)/);
+  assert.match(html, /h1, h2, h3 \{[^}]*font-family: var\(--font-copy\)/);
 
   const mainFontValues = new Set([
-    "'Cardo', 'Inter', -apple-system, BlinkMacSystemFont, serif",
-    "'Cardo', serif",
-    "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
-    "'Inter', -apple-system, sans-serif",
-    "'Inter', sans-serif",
-    "'Space Grotesk', sans-serif"
+    'var(--font-copy)',
+    'var(--font-controls)'
   ]);
   for (const match of html.matchAll(/font-family:\s*([^;}]+)/g)) {
     assert.ok(mainFontValues.has(match[1].trim()), `font family differs from main: ${match[1].trim()}`);

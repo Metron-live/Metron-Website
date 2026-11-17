@@ -75,10 +75,17 @@ test('interpolates the nav across 120px and lets the next section peek into the 
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto(origin);
   const nav = page.locator('#site-nav');
+  const lightLogo = page.locator('.nav__lockup--light');
+  const darkLogo = page.locator('.nav__lockup--dark');
   await expect(nav).toHaveAttribute('data-scroll-progress', '0.000');
   expect(await nav.evaluate((element) => getComputedStyle(element, '::before').transitionDuration)).toBe('0.3s');
   expect(await nav.evaluate((element) => getComputedStyle(element, '::before').opacity)).toBe('0');
   expect(await nav.evaluate((element) => getComputedStyle(element, '::before').backgroundImage)).toContain('images/marble.png');
+  await expect(lightLogo).toHaveCSS('opacity', '1');
+  await expect(darkLogo).toHaveCSS('opacity', '0');
+  await expect(page.locator('body')).toHaveCSS('font-family', 'Cardo, serif');
+  await expect(nav).toHaveCSS('font-family', 'Cardo, serif');
+  await expect(page.locator('#hero-title')).toHaveCSS('font-family', 'Cardo, serif');
 
   const firstFold = await page.evaluate(() => ({ heroBottom: document.querySelector('.hero').getBoundingClientRect().bottom, problemTop: document.querySelector('#problem').getBoundingClientRect().top, nextLineBottom: document.querySelector('#problem .section__label').getBoundingClientRect().bottom, viewport: innerHeight }));
   expect(firstFold.heroBottom).toBeLessThan(firstFold.viewport);
@@ -88,6 +95,10 @@ test('interpolates the nav across 120px and lets the next section peek into the 
   await page.evaluate(() => scrollTo(0, 60));
   await expect.poll(() => nav.getAttribute('data-scroll-progress')).toBe('0.500');
   await expect.poll(() => nav.evaluate((element) => getComputedStyle(element, '::before').opacity)).toBe('0.5');
+
+  await page.evaluate(() => scrollTo(0, 48));
+  await expect.poll(() => lightLogo.evaluate((element) => getComputedStyle(element).opacity)).toBe('0.5');
+  await expect.poll(() => darkLogo.evaluate((element) => getComputedStyle(element).opacity)).toBe('0.5');
 
   await page.evaluate(() => scrollTo(0, 200));
   await expect.poll(() => nav.getAttribute('data-scroll-progress')).toBe('1.000');
