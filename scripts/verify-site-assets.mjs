@@ -137,12 +137,25 @@ function resolvesLocally(target) {
 const htmlFiles = walk(root).filter((path) => path.endsWith(".html"));
 const attributePattern = /\b(?:href|src|poster)\s*=\s*["']([^"']+)["']/gi;
 const cssUrlPattern = /url\(\s*(["']?[^)'"\s]+["']?)\s*\)/gi;
+const requiredIconReferences = [
+  "/favicon.ico",
+  "/favicon-16x16.png",
+  "/favicon-32x32.png",
+  "/apple-touch-icon.png",
+  "/favicon-192x192.png",
+  "/favicon-512x512.png",
+];
 
 for (const htmlFile of htmlFiles) {
   const source = readFileSync(htmlFile, "utf8");
   const page = relative(root, htmlFile);
   if (/(?:^|["'(=\s])\/?brand\//i.test(source)) {
     fail(`${page}: references retired brand/ assets`);
+  }
+  for (const iconReference of requiredIconReferences) {
+    if (!source.includes(iconReference)) {
+      fail(`${page}: missing canonical icon reference ${iconReference}`);
+    }
   }
 
   for (const pattern of [attributePattern, cssUrlPattern]) {
@@ -163,4 +176,4 @@ if (failures.length) {
 }
 
 console.log(`Verified ${expectedPngs.size} canonical PNGs and a 3-frame ICO.`);
-console.log(`Checked ${htmlFiles.length} HTML files: local links resolve and none reference retired brand/ assets.`);
+console.log(`Checked ${htmlFiles.length} HTML files: canonical icons are linked, local links resolve, and none reference retired brand/ assets.`);
