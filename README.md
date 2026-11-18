@@ -75,6 +75,12 @@ Emails submitted through the forms are collected via Formspree. You can:
 
 Just open `index.html` in your browser. No build step required.
 
+Run the dependency-free asset and local-link check before publishing:
+
+```bash
+node scripts/verify-site-assets.mjs
+```
+
 For live reload during development:
 ```bash
 npx live-server
