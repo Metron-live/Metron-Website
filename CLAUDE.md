@@ -82,8 +82,7 @@ Target order after restructure:
 
 - `index.html` — entire site
 - `videos/montage-web.mp4` — hero montage
-- `brand/brand preview/og-preview.mp4` — iMessage portrait preview
-- `brand/brand preview/og-preview.png` — og:image fallback
+- Approved iMessage media is pending handoff. Do not restore or publish the archived January 2026 brand-preview files as substitutes.
 - `images/marble.png`, `images/black-marble.jpg` — textures
 - `images/m-cropped.png`, `images/metron-cropped.png` — logo assets
 

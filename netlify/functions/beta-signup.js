@@ -62,7 +62,7 @@ exports.handler = async (event, context) => {
     
     <!-- Header -->
     <div style="background: #1a1a1a; padding: 32px; text-align: center;">
-      <img src="https://metron.live/brand/brand%20preview/metron_logo_(white).png" alt="Metron AI" height="32" style="margin-bottom: 16px;">
+      <img src="https://metron.live/images/metron-cropped.png" alt="Metron AI" height="32" style="margin-bottom: 16px;">
       <h1 style="color: white; font-size: 24px; margin: 0; font-weight: 600;">You're In! 🎉</h1>
     </div>
     
