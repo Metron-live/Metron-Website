@@ -7,6 +7,7 @@
     <meta name="description" content="Metron gives serious self-coached athletes an adaptive training plan, fast workout logging, clear analysis and Arete text coaching.">
     <meta name="theme-color" content="#000000">
     <meta name="metron-reservation-api-base" content="https://api.metron.live/launch/reservations">
+    <meta name="metron-referral-api-base" content="https://api.metron.live/referrals">
     <meta property="og:title" content="Metron. How do I train?">
     <meta property="og:description" content="The strength coach, sports scientist and data analyst that athletes without a staff never had.">
     <meta property="og:url" content="https://metron.live/">
@@ -126,6 +127,8 @@
         .reservation-disclosure a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
         .reservation-message { margin-top: 10px; font-size: 15px; }
         .reservation-message[hidden] { display: none; }
+        .referral-invite { margin: 0 0 8px; font-size: 13px; color: rgba(255,255,255,.76); }
+        .referral-invite[hidden] { display: none; }
         .section { padding: clamp(88px,11vw,150px) 0; background: var(--white); }
         .section--black { color: var(--white); background: var(--black); }
         .section__inner { width: var(--page); margin: 0 auto; }
@@ -233,6 +236,7 @@
                 <p class="hero__line">It takes the guesswork out of greatness.</p>
                 <div class="reservation-panel" id="reserve">
                     <p class="reservation-status" id="reservation-status" role="status" aria-live="polite">Reserve your Founding Member offer.</p>
+                    <p class="referral-invite" id="referral-invite" aria-live="polite" hidden></p>
                     <form class="reservation-form" id="reservation-form" action="https://api.metron.live/launch/reservations/start" method="post">
                         <div class="reservation-fields">
                             <label class="field-label" for="reservation-contact">Mobile number or email address</label><input class="form-input" id="reservation-contact" name="contact" type="text" inputmode="text" autocapitalize="none" spellcheck="false" aria-describedby="reservation-consent reservation-offer" placeholder="Mobile number or email address" required minlength="3" maxlength="320">
@@ -348,11 +352,33 @@
             }));
             const apiBase = document.querySelector('meta[name="metron-reservation-api-base"]').content.replace(/\/$/, '');
             const startEndpoint = `${apiBase}/start`; const checkEndpoint = `${apiBase}/check`;
+            const referralApiBase = document.querySelector('meta[name="metron-referral-api-base"]').content.replace(/\/$/, '');
             const reservationForm = document.getElementById('reservation-form'); const contactInput = document.getElementById('reservation-contact'); const consentInput = document.getElementById('marketing-consent'); const reservationSubmit = document.getElementById('reservation-submit');
             const verificationForm = document.getElementById('verification-form'); const codeInput = document.getElementById('verification-code'); const verificationSubmit = document.getElementById('verification-submit');
-            const status = document.getElementById('reservation-status'); const message = document.getElementById('reservation-message');
-            let pendingContact = '';
-            window.MetronReservationConfig = Object.freeze({ apiBase, startEndpoint, checkEndpoint });
+            const status = document.getElementById('reservation-status'); const message = document.getElementById('reservation-message'); const referralInvite = document.getElementById('referral-invite');
+            let pendingContact = ''; let activeReferralCode = '';
+            window.MetronReservationConfig = Object.freeze({ apiBase, startEndpoint, checkEndpoint, referralApiBase });
+            function readCookie(name) {
+                const prefix = `${encodeURIComponent(name)}=`;
+                const part = document.cookie.split('; ').find((value) => value.startsWith(prefix));
+                return part ? decodeURIComponent(part.slice(prefix.length)) : '';
+            }
+            function clearReferralCookie() {
+                document.cookie = `metron_ref=; Max-Age=0; Path=/; SameSite=Lax${window.location.protocol === 'https:' ? '; Secure' : ''}`;
+            }
+            async function resolveReferral() {
+                const code = readCookie('metron_ref').trim().toUpperCase();
+                if (!/^[A-HJ-NP-Z2-9]{7}$/.test(code)) { if (code) clearReferralCookie(); return; }
+                try {
+                    const response = await fetch(`${referralApiBase}/${encodeURIComponent(code)}`, { headers: { 'Accept': 'application/json' } });
+                    if (!response.ok) { if (response.status === 404 || response.status === 410) clearReferralCookie(); return; }
+                    const payload = await response.json();
+                    if (typeof payload.first_name !== 'string' || !payload.first_name.trim()) { clearReferralCookie(); return; }
+                    const firstName = payload.first_name.trim().split(/\s+/)[0];
+                    activeReferralCode = code; referralInvite.textContent = `Invited by ${firstName}`; referralInvite.hidden = false;
+                } catch {}
+            }
+            const referralLookup = resolveReferral();
             async function postJson(endpoint, body) {
                 const response = await fetch(endpoint, { method: 'POST', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
                 let payload = {};
@@ -362,10 +388,12 @@
             }
             reservationForm.addEventListener('submit', async (event) => {
                 event.preventDefault(); if (!reservationForm.reportValidity()) return;
-                pendingContact = contactInput.value.trim(); reservationSubmit.disabled = true; message.hidden = true;
+                pendingContact = contactInput.value.trim(); reservationSubmit.disabled = true; message.hidden = true; await referralLookup;
                 try {
                     const channel = pendingContact.includes('@') ? 'email' : 'sms';
-                    const payload = await postJson(startEndpoint, { contact: pendingContact, channel, consent_marketing: consentInput.checked });
+                    const startBody = { contact: pendingContact, channel, consent_marketing: consentInput.checked };
+                    if (activeReferralCode) startBody.ref = activeReferralCode;
+                    const payload = await postJson(startEndpoint, startBody);
                     if (payload.status !== 'pending') throw new Error('The verification service returned an unexpected response.');
                     reservationForm.hidden = true; verificationForm.hidden = false; status.textContent = `Enter the 6-digit code sent by ${channel === 'sms' ? 'text message' : 'email'}.`; codeInput.focus();
                 } catch (error) { message.textContent = error.message; message.hidden = false; }
@@ -374,7 +402,9 @@
             verificationForm.addEventListener('submit', async (event) => {
                 event.preventDefault(); if (!verificationForm.reportValidity()) return; verificationSubmit.disabled = true; message.hidden = true;
                 try {
-                    const payload = await postJson(checkEndpoint, { contact: pendingContact, code: codeInput.value.trim() });
+                    const checkBody = { contact: pendingContact, code: codeInput.value.trim() };
+                    if (activeReferralCode) checkBody.ref = activeReferralCode;
+                    const payload = await postJson(checkEndpoint, checkBody);
                     if (payload.status !== 'reserved') throw new Error('The verification service returned an unexpected response.');
                     verificationForm.hidden = true; status.textContent = 'Reservation confirmed.'; message.textContent = 'You have 90 days free and the Founding Member price ($79.99/yr) locked through April 30 2027.'; message.hidden = false;
                 } catch (error) { message.textContent = error.message; message.hidden = false; }

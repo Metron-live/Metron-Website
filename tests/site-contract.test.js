@@ -6,6 +6,7 @@ const test = require('node:test');
 
 const root = path.resolve(__dirname, '..');
 const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+const referralRouteHtml = fs.readFileSync(path.join(root, '404.html'), 'utf8');
 const privacyHtml = fs.readFileSync(path.join(root, 'privacy.html'), 'utf8');
 const toVisibleText = (source) => source
   .replace(/<style[\s\S]*?<\/style>/gi, ' ')
@@ -120,8 +121,8 @@ test('uses the live two-step reservation contract and approved offer', () => {
   assert.match(html, /content="https:\/\/api\.metron\.live\/launch\/reservations"/);
   assert.match(html, /const startEndpoint = `\$\{apiBase\}\/start`; const checkEndpoint = `\$\{apiBase\}\/check`/);
   assert.match(html, /const consentInput = document\.getElementById\('marketing-consent'\)/);
-  assert.match(html, /postJson\(startEndpoint, \{ contact: pendingContact, channel, consent_marketing: consentInput\.checked \}\)/);
-  assert.match(html, /postJson\(checkEndpoint, \{ contact: pendingContact, code: codeInput\.value\.trim\(\) \}\)/);
+  assert.match(html, /const startBody = \{ contact: pendingContact, channel, consent_marketing: consentInput\.checked \}/);
+  assert.match(html, /const checkBody = \{ contact: pendingContact, code: codeInput\.value\.trim\(\) \}/);
   assert.match(html, /headers: \{ 'Accept': 'application\/json', 'Content-Type': 'application\/json' \}/);
   assert.match(html, /payload\.status !== 'pending'/);
   assert.match(html, /payload\.status !== 'reserved'/);
@@ -138,6 +139,19 @@ test('uses the live two-step reservation contract and approved offer', () => {
   assert.doesNotMatch(html, /api\/v1\/launch-reservations/);
   assert.equal(fs.existsSync(path.join(root, 'netlify', 'functions', 'beta-signup.js')), false);
   assert.equal(fs.existsSync(path.join(root, '.graveyard', 'beta-signup.js')), false);
+});
+
+test('captures and validates first-party referral codes', () => {
+  assert.ok(referralRouteHtml.includes("window.location.pathname.match(/^\\/r\\/([A-HJ-NP-Z2-9]{7})\\/?$/i)"));
+  assert.match(referralRouteHtml, /metron_ref=\$\{encodeURIComponent\(code\)\}; Max-Age=2592000; Path=\/; SameSite=Lax/);
+  assert.match(referralRouteHtml, /window\.location\.replace\('\/#reserve'\)/);
+  assert.match(html, /content="https:\/\/api\.metron\.live\/referrals"/);
+  assert.match(html, /fetch\(`\$\{referralApiBase\}\/\$\{encodeURIComponent\(code\)\}`/);
+  assert.match(html, /typeof payload\.first_name !== 'string'/);
+  assert.match(html, /referralInvite\.textContent = `Invited by \$\{firstName\}`/);
+  assert.match(html, /if \(activeReferralCode\) startBody\.ref = activeReferralCode/);
+  assert.match(html, /if \(activeReferralCode\) checkBody\.ref = activeReferralCode/);
+  assert.match(html, /response\.status === 404 \|\| response\.status === 410/);
 });
 
 test('publishes the text-message disclosure and links it from the reservation form', () => {

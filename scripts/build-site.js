@@ -5,6 +5,7 @@ const root = path.resolve(__dirname, '..');
 const output = path.join(root, 'dist');
 const entries = [
   'index.html',
+  '404.html',
   'privacy.html',
   'health-data-privacy.html',
   'terms.html',
