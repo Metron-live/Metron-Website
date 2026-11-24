@@ -90,6 +90,7 @@ test('keeps the nav and backgrounds within the approved visual system', () => {
   assert.match(html, /window\.scrollY \/ navFadeDistance/);
   assert.match(html, /nav\.style\.setProperty\('--nav-surface-opacity', progress\.toFixed\(3\)\)/);
   assert.match(html, /--nav-fade-duration: 300ms/);
+  assert.match(html, /transition: border-color var\(--nav-fade-duration\) linear, color var\(--nav-fade-duration\) linear/);
   assert.match(html, /\.nav::before \{[\s\S]*?opacity: var\(--nav-surface-opacity\)[\s\S]*?transition: opacity var\(--nav-fade-duration\) linear/);
   assert.match(html, /\.nav__lockup \{ transition: opacity var\(--nav-fade-duration\) linear; \}/);
   assert.doesNotMatch(html, /nav[^\n]*classList\.(?:add|toggle)\([^\n]*(?:scrolled|solid)/i);
@@ -110,6 +111,7 @@ test('keeps the nav and backgrounds within the approved visual system', () => {
     assert.match(html, new RegExp(`<link rel="preload" href="${asset.replaceAll('.', '\\.')}" as="image"`));
   }
   assert.doesNotMatch(html.match(/<nav[\s\S]*?<\/nav>/)[0], /m-cropped(?:-white)?\.png/);
+  assert.doesNotMatch(html, /class="[^"]*scroll-cue|id="[^"]*scroll-cue/i);
 
   assert.match(html, /--hero-brightness: 1\.25/);
   assert.match(html, /\.hero__video \{[^}]*filter: brightness\(var\(--hero-brightness\)\)/);

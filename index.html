@@ -71,7 +71,7 @@
             background: transparent; border-bottom: 1px solid var(--nav-border);
             -webkit-backdrop-filter: blur(var(--nav-blur)); backdrop-filter: blur(var(--nav-blur));
             font-family: var(--font-copy);
-            transition: border-color var(--nav-fade-duration) ease, color var(--nav-fade-duration) ease, -webkit-backdrop-filter var(--nav-fade-duration) ease, backdrop-filter var(--nav-fade-duration) ease;
+            transition: border-color var(--nav-fade-duration) linear, color var(--nav-fade-duration) linear, -webkit-backdrop-filter var(--nav-fade-duration) linear, backdrop-filter var(--nav-fade-duration) linear;
         }
         .nav::before {
             content: ''; position: absolute; z-index: -1; inset: 0; opacity: var(--nav-surface-opacity); pointer-events: none;

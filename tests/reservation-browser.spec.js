@@ -132,6 +132,8 @@ test('interpolates the nav across 120px and lets the next section peek into the 
   const darkLogo = page.locator('.nav__lockup--dark');
   await expect(nav).toHaveAttribute('data-scroll-progress', '0.000');
   await expect(nav).toHaveAttribute('data-fade-distance', '120');
+  await expect(nav).toHaveCSS('transition-duration', '0.3s, 0.3s, 0.3s, 0.3s');
+  await expect(nav).toHaveCSS('transition-timing-function', 'linear, linear, linear, linear');
   expect(await nav.evaluate((element) => getComputedStyle(element, '::before').transitionDuration)).toBe('0.3s');
   expect(await nav.evaluate((element) => getComputedStyle(element, '::before').transitionTimingFunction)).toBe('linear');
   await expect(lightLogo).toHaveCSS('transition-duration', '0.3s');
@@ -143,6 +145,7 @@ test('interpolates the nav across 120px and lets the next section peek into the 
   await expect(page.locator('body')).toHaveCSS('font-family', 'Cardo, serif');
   await expect(nav).toHaveCSS('font-family', 'Cardo, serif');
   await expect(page.locator('#hero-title')).toHaveCSS('font-family', 'Cardo, serif');
+  await expect(page.locator('#hero-video')).toHaveCSS('filter', 'brightness(1.25)');
 
   const firstFold = await page.evaluate(() => ({ heroBottom: document.querySelector('.hero').getBoundingClientRect().bottom, problemTop: document.querySelector('#problem').getBoundingClientRect().top, nextLineBottom: document.querySelector('#problem .section__label').getBoundingClientRect().bottom, viewport: innerHeight }));
   expect(firstFold.heroBottom).toBeLessThan(firstFold.viewport);
@@ -163,6 +166,7 @@ test('interpolates the nav across 120px and lets the next section peek into the 
   await expect(page.locator('text=Get the App').first()).toBeVisible();
   const legacyShape = `[class*="hepta${'gon'}"], [id*="hepta${'gon'}"]`;
   expect(await page.locator(legacyShape).count()).toBe(0);
+  expect(await page.locator('[class*="scroll-cue"], [id*="scroll-cue"]').count()).toBe(0);
 });
 
 test('keeps the reservation form usable on a phone viewport', async ({ page }) => {
