@@ -30,6 +30,10 @@ jobs:
         run: npm run check:links
       - name: Check built launch copy
         run: npm run check:copy
+      - name: Install share preview media inspector
+        run: sudo apt-get update && sudo apt-get install --yes ffmpeg
+      - name: Check share preview media
+        run: npm run check:preview
       - name: Run site contract tests
         run: npm run test:contract
       - name: Install Playwright Chromium
