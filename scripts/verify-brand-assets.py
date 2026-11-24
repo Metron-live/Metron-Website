@@ -6,6 +6,7 @@ from __future__ import annotations
 import re
 import struct
 import sys
+from dataclasses import dataclass
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
@@ -23,6 +24,15 @@ EXPECTED_PNG_SIZES = {
 }
 EXPECTED_ICO_SIZES = {(16, 16), (32, 32), (48, 48)}
 SKIPPED_SCHEMES = {"data", "http", "https", "mailto", "sms", "tel"}
+CSS_URL_PATTERN = re.compile(r"url\(\s*(['\"]?)(.*?)\1\s*\)", re.IGNORECASE)
+
+
+@dataclass(frozen=True)
+class IcoEntry:
+    size: tuple[int, int]
+    bits_per_pixel: int
+    payload_offset: int
+    payload_size: int
 
 
 class LinkParser(HTMLParser):
@@ -38,16 +48,21 @@ class LinkParser(HTMLParser):
             value = attributes.get(name)
             if value:
                 self.links.append(value)
+        srcset = attributes.get("srcset")
+        if srcset:
+            self.links.extend(candidate.strip().split()[0] for candidate in srcset.split(","))
 
 
-def png_size(path: Path) -> tuple[int, int]:
-    header = path.read_bytes()[:24]
-    if len(header) != 24 or header[:8] != PNG_SIGNATURE or header[12:16] != b"IHDR":
+def png_info(path: Path) -> tuple[int, int, int, int]:
+    header = path.read_bytes()[:26]
+    if len(header) != 26 or header[:8] != PNG_SIGNATURE or header[12:16] != b"IHDR":
         raise ValueError("not a valid PNG")
-    return struct.unpack(">II", header[16:24])
+    width, height = struct.unpack(">II", header[16:24])
+    bit_depth, color_type = struct.unpack(">BB", header[24:26])
+    return width, height, bit_depth, color_type
 
 
-def ico_sizes(path: Path) -> set[tuple[int, int]]:
+def ico_entries(path: Path) -> list[IcoEntry]:
     data = path.read_bytes()
     if len(data) < 6:
         raise ValueError("ICO header is truncated")
@@ -55,11 +70,23 @@ def ico_sizes(path: Path) -> set[tuple[int, int]]:
     if reserved != 0 or image_type != 1 or len(data) < 6 + count * 16:
         raise ValueError("not a valid ICO")
 
-    sizes = set()
+    entries = []
     for index in range(count):
-        width, height = struct.unpack_from("<BB", data, 6 + index * 16)
-        sizes.add((width or 256, height or 256))
-    return sizes
+        offset = 6 + index * 16
+        width, height, _, _, _, bits_per_pixel, payload_size, payload_offset = struct.unpack_from(
+            "<BBBBHHII", data, offset
+        )
+        if payload_offset < 6 + count * 16 or payload_offset + payload_size > len(data):
+            raise ValueError(f"entry {index} payload is outside the file")
+        entries.append(
+            IcoEntry(
+                size=(width or 256, height or 256),
+                bits_per_pixel=bits_per_pixel,
+                payload_offset=payload_offset,
+                payload_size=payload_size,
+            )
+        )
+    return entries
 
 
 def active_html_files() -> list[Path]:
@@ -95,19 +122,36 @@ def main() -> int:
     for relative_path, expected in EXPECTED_PNG_SIZES.items():
         path = ROOT / relative_path
         try:
-            actual = png_size(path)
+            width, height, bit_depth, color_type = png_info(path)
         except (OSError, ValueError) as error:
             failures.append(f"{relative_path}: {error}")
             continue
+        actual = (width, height)
         if actual != expected:
             failures.append(f"{relative_path}: expected {expected}, found {actual}")
+        if (bit_depth, color_type) != (8, 6):
+            failures.append(
+                f"{relative_path}: expected 8-bit RGBA PNG, found bit depth {bit_depth}, "
+                f"color type {color_type}"
+            )
 
     try:
-        actual_ico_sizes = ico_sizes(ROOT / "favicon.ico")
+        entries = ico_entries(ROOT / "favicon.ico")
+        actual_ico_sizes = {entry.size for entry in entries}
         if actual_ico_sizes != EXPECTED_ICO_SIZES:
             failures.append(
                 f"favicon.ico: expected {sorted(EXPECTED_ICO_SIZES)}, found {sorted(actual_ico_sizes)}"
             )
+        if len(entries) != len(EXPECTED_ICO_SIZES):
+            failures.append(
+                f"favicon.ico: expected {len(EXPECTED_ICO_SIZES)} entries, found {len(entries)}"
+            )
+        for entry in entries:
+            if entry.bits_per_pixel != 32:
+                failures.append(
+                    f"favicon.ico: {entry.size[0]}x{entry.size[1]} entry is "
+                    f"{entry.bits_per_pixel}-bit, expected 32-bit"
+                )
     except (OSError, ValueError) as error:
         failures.append(f"favicon.ico: {error}")
 
@@ -119,7 +163,8 @@ def main() -> int:
 
         parser = LinkParser()
         parser.feed(text)
-        for raw_link in parser.links:
+        css_links = [match.group(2) for match in CSS_URL_PATTERN.finditer(text)]
+        for raw_link in parser.links + css_links:
             target = resolve_local_link(page, raw_link)
             if target is not None and not target.exists():
                 failures.append(f"{relative_page}: broken local link {raw_link!r}")
