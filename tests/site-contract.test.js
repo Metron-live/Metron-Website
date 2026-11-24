@@ -5,6 +5,8 @@ const test = require('node:test');
 
 const html = fs.readFileSync(path.resolve(__dirname, '..', 'index.html'), 'utf8');
 const visible = html.replace(/<style[\s\S]*?<\/style>/gi, ' ').replace(/<script[\s\S]*?<\/script>/gi, ' ').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
+const privacyHtml = fs.readFileSync(path.resolve(__dirname, '..', 'privacy.html'), 'utf8');
+const privacyVisible = privacyHtml.replace(/<style[\s\S]*?<\/style>/gi, ' ').replace(/<script[\s\S]*?<\/script>/gi, ' ').replace(/<[^>]+>/g, ' ').replace(/&amp;/g, '&').replace(/\s+/g, ' ');
 
 test('locks the Oct 24 launch copy contract', () => {
   assert.match(html, /<title>The World's Smartest Personal Trainer<\/title>/);
@@ -28,6 +30,16 @@ test('uses a configured two-step reservation API and mail fallback', () => {
   assert.match(visible, /I agree to receive Metron launch news and product updates\. I can unsubscribe at any time\./);
   assert.match(html, /mailto:hello@metron\.live\?subject=Metron%20launch%20waitlist/);
   assert.match(html, /<noscript>[\s\S]*Join by email[\s\S]*<\/noscript>/);
+});
+
+test('publishes and links the text message disclosure', () => {
+  assert.match(html, /href="privacy\.html#text-messages">text message terms<\/a>/);
+  assert.match(privacyHtml, /<h2 id="text-messages">Text messages<\/h2>/);
+  assert.match(privacyVisible, /verification codes and one launch-day download link/);
+  assert.match(privacyVisible, /Msg & data rates may apply/);
+  assert.match(privacyVisible, /Reply STOP/);
+  assert.match(privacyVisible, /Reply HELP/);
+  assert.match(privacyVisible, /Mobile carriers are not liable for delayed or undelivered messages/);
 });
 
 test('does not publish unverified OG media or retired claims', () => {
