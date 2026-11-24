@@ -38,15 +38,16 @@ The browser uses the production two-step JSON contract. It starts verification
 with `POST /start`:
 
 ```json
-{"contact":"+14155550123"}
+{"contact":"+14155550123","channel":"sms","consent_marketing":true}
 ```
 
-The API infers `sms` for a phone number and `email` for an email address. After
-a successful `{"status":"pending"}` response, the browser verifies the code
-and records the checked consent with `POST /check`:
+`channel` is `sms` for a phone number and `email` for an email address. The
+required checkbox supplies `consent_marketing: true`. After a successful
+`{"status":"pending"}` response, the browser verifies the code with
+`POST /check`:
 
 ```json
-{"contact":"+14155550123","code":"123456","consent_marketing":true}
+{"contact":"+14155550123","code":"123456"}
 ```
 
 The reservation is complete only after `{"status":"reserved"}`. The browser

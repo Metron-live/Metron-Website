@@ -365,7 +365,7 @@
                 pendingContact = contactInput.value.trim(); reservationSubmit.disabled = true; message.hidden = true;
                 try {
                     const channel = pendingContact.includes('@') ? 'email' : 'sms';
-                    const payload = await postJson(startEndpoint, { contact: pendingContact });
+                    const payload = await postJson(startEndpoint, { contact: pendingContact, channel, consent_marketing: true });
                     if (payload.status !== 'pending') throw new Error('The verification service returned an unexpected response.');
                     reservationForm.hidden = true; verificationForm.hidden = false; status.textContent = `Enter the 6-digit code sent by ${channel === 'sms' ? 'text message' : 'email'}.`; codeInput.focus();
                 } catch (error) { message.textContent = error.message; message.hidden = false; }
@@ -374,7 +374,7 @@
             verificationForm.addEventListener('submit', async (event) => {
                 event.preventDefault(); if (!verificationForm.reportValidity()) return; verificationSubmit.disabled = true; message.hidden = true;
                 try {
-                    const payload = await postJson(checkEndpoint, { contact: pendingContact, code: codeInput.value.trim(), consent_marketing: consentInput.checked });
+                    const payload = await postJson(checkEndpoint, { contact: pendingContact, code: codeInput.value.trim() });
                     if (payload.status !== 'reserved') throw new Error('The verification service returned an unexpected response.');
                     verificationForm.hidden = true; status.textContent = 'Reservation confirmed.'; message.textContent = 'You have 90 days free and the Founding Member price ($79.99/yr) locked through April 30 2027.'; message.hidden = false;
                 } catch (error) { message.textContent = error.message; message.hidden = false; }

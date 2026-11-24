@@ -120,8 +120,8 @@ test('uses the live two-step reservation contract and approved offer', () => {
   assert.match(html, /content="https:\/\/api\.metron\.live\/launch\/reservations"/);
   assert.match(html, /const startEndpoint = `\$\{apiBase\}\/start`; const checkEndpoint = `\$\{apiBase\}\/check`/);
   assert.match(html, /const consentInput = document\.getElementById\('marketing-consent'\)/);
-  assert.match(html, /postJson\(startEndpoint, \{ contact: pendingContact \}\)/);
-  assert.match(html, /postJson\(checkEndpoint, \{ contact: pendingContact, code: codeInput\.value\.trim\(\), consent_marketing: consentInput\.checked \}\)/);
+  assert.match(html, /postJson\(startEndpoint, \{ contact: pendingContact, channel, consent_marketing: true \}\)/);
+  assert.match(html, /postJson\(checkEndpoint, \{ contact: pendingContact, code: codeInput\.value\.trim\(\) \}\)/);
   assert.match(html, /headers: \{ 'Accept': 'application\/json', 'Content-Type': 'application\/json' \}/);
   assert.match(html, /payload\.status !== 'pending'/);
   assert.match(html, /payload\.status !== 'reserved'/);

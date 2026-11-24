@@ -13,5 +13,13 @@ assert.match(
   homepage,
   /<form[^>]+id="reservation-form"[\s\S]*?<a href="\/privacy\.html#text-messages">Text messages disclosure<\/a>[\s\S]*?<\/form>/
 );
+assert.match(
+  homepage,
+  /postJson\(startEndpoint, \{ contact: pendingContact, channel, consent_marketing: true \}\)/
+);
+assert.match(
+  homepage,
+  /postJson\(checkEndpoint, \{ contact: pendingContact, code: codeInput\.value\.trim\(\) \}\)/
+);
 
-console.log('Verified the built privacy SMS disclosure and reservation-form link.');
+console.log('Verified the built reservation contract, privacy SMS disclosure, and form link.');

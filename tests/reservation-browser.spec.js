@@ -80,12 +80,12 @@ test('completes the live two-step SMS reservation flow', async ({ page }) => {
     {
       url: 'https://api.metron.live/launch/reservations/start',
       method: 'POST',
-      body: { contact: '+14155550123' }
+      body: { contact: '+14155550123', channel: 'sms', consent_marketing: true }
     },
     {
       url: 'https://api.metron.live/launch/reservations/check',
       method: 'POST',
-      body: { contact: '+14155550123', code: '123456', consent_marketing: true }
+      body: { contact: '+14155550123', code: '123456' }
     }
   ]);
 });
@@ -102,7 +102,7 @@ test('selects email verification and displays API errors', async ({ page }) => {
   await page.locator('#marketing-consent').check();
   await page.locator('#reservation-submit').click();
   await expect(page.locator('#reservation-message')).toHaveText('Invalid email address.');
-  expect(requestBody).toEqual({ contact: 'athlete@example.com' });
+  expect(requestBody).toEqual({ contact: 'athlete@example.com', channel: 'email', consent_marketing: true });
 });
 
 test('rejects responses outside the pending and reserved schemas', async ({ page }) => {
