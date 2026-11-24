@@ -1,13 +1,14 @@
 # Metron Landing Page
 
-Landing page for [metron.live](https://metron.live): the world's smartest personal trainer, plus the best free workout tracker.
+Landing page for [metron.live](https://metron.live): the performance staff that serious self-coached athletes never had, plus a free best-in-class workout tracker.
 
 ## Overview
 
-Metron helps serious self-coached athletes move through a concrete Train, Log,
-Learn, Adapt loop. The website accepts verified phone or email reservations for
-90 days free and the Founding Member price ($79.99/yr) locked through April 30
-2027.
+Metron helps serious self-coached athletes plan training, log every set, learn
+from completed work and adapt to readiness. The website checks whether phone
+reservations are available before displaying that form and otherwise opens a
+prefilled email waitlist message. The offer is a free founding year with a
+30-day full-coach trial, while workout logging and history stay free.
 
 ## Tech Stack
 
@@ -34,15 +35,16 @@ The production endpoint is declared once in `index.html`:
       content="https://api.metron.live/launch/reservations">
 ```
 
-The browser uses the production two-step JSON contract. It starts verification
-with `POST /start`:
+The browser first probes `HEAD /start`. It shows the phone-first form only after
+a successful response and otherwise shows the email waitlist. A phone
+reservation starts verification with `POST /start`:
 
 ```json
 {"contact":"+14155550123","channel":"sms","consent_marketing":true}
 ```
 
-`channel` is `sms` for a phone number and `email` for an email address. The
-required checkbox supplies `consent_marketing: true`. After a successful
+`channel` is `sms`. The required checkbox supplies `consent_marketing: true`.
+After a successful
 `{"status":"pending"}` response, the browser verifies the code with
 `POST /check`:
 
@@ -87,9 +89,9 @@ metron-landing/
 
 ## Reservation collection
 
-Phone numbers and email addresses are verified by the launch-reservation API.
-The API owns consent, deduplication, eligibility, rate limiting, and opt-out
-state. The page never stores contact details in browser storage.
+Phone numbers are verified by the reservation API when it is available. When
+it is unavailable, the fallback opens a prefilled email to `beta@metron.live`.
+The page never stores contact details in browser storage.
 
 ## Validation
 
