@@ -30,7 +30,7 @@ jobs:
         run: npm run check:content
       - name: Check built links
         run: npm run check:links
-      - name: Check built launch copy
+      - name: Check built positioning copy
         run: npm run check:copy
       - name: Run site contract tests
         run: npm run test:contract
@@ -48,7 +48,7 @@ jobs:
             sleep 1
           done
           grep -Fq 'The pros get a team. You get Metron.' /tmp/metron-page.html
-          if grep -Eiq 'heptagon|free[ -]?year|founding[ -]?year|founder[ -]?story' /tmp/metron-page.html; then
-            echo 'Forbidden legacy copy remains in the built page.' >&2
+          if grep -Eiq 'rugby|audio[ -]?cue|live coaching|founder[ -]?story|90 days|\$[0-9]' /tmp/metron-page.html || grep -Fq '—' /tmp/metron-page.html; then
+            echo 'Forbidden copy remains in the built page.' >&2
             exit 1
           fi

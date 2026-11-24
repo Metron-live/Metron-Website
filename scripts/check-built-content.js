@@ -15,7 +15,11 @@ assert.match(
 );
 assert.match(
   homepage,
-  /postJson\(startEndpoint, \{ contact: pendingContact, channel, consent_marketing: true \}, 'pending'\)/
+  /fetch\(startEndpoint, \{ method: 'HEAD', cache: 'no-store' \}\)/
+);
+assert.match(
+  homepage,
+  /postJson\(startEndpoint, \{ contact: pendingContact, channel: 'sms', consent_marketing: true \}, 'pending'\)/
 );
 assert.match(
   homepage,
@@ -23,4 +27,6 @@ assert.match(
 );
 assert.match(homepage, /responseKeys\.length !== 1 \|\| responseKeys\[0\] !== 'status' \|\| payload\.status !== expectedStatus/);
 
-console.log('Verified the built request and response contract, privacy SMS disclosure, and form link.');
+assert.match(homepage, /mailto:\$\{waitlistEmail\}\?subject=\$\{subject\}&body=\$\{body\}/);
+
+console.log('Verified the HEAD gate, reservation contract, email fallback, privacy disclosure, and form link.');

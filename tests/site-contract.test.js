@@ -38,13 +38,13 @@ test('keeps the adaptation example and launch capabilities concrete', () => {
   assert.match(visibleText, /Each change comes with its reason\./);
   assert.match(visibleText, /Log every set fast\. Your history builds as you train, free\./);
   for (const claim of [
+    'Training only',
     'Adaptive plan',
-    'Daily readiness',
+    'Daily readiness-based adaptation',
     'Progression from actuals',
     'Arete text coaching',
-    'Apple Health',
-    'Practice awareness',
-    'Competition awareness',
+    'Apple Health inputs',
+    'Practices and competitions awareness',
     'Arete coaching chat and plan changes'
   ]) assert.match(visibleText, new RegExp(claim, 'i'));
 
@@ -117,27 +117,26 @@ test('keeps the nav and backgrounds within the approved visual system', () => {
   }
 });
 
-test('uses the live two-step reservation contract and approved offer', () => {
+test('gates the phone-first reservation form and keeps the approved offer', () => {
   assert.match(html, /content="https:\/\/api\.metron\.live\/launch\/reservations"/);
   assert.match(html, /const startEndpoint = `\$\{apiBase\}\/start`; const checkEndpoint = `\$\{apiBase\}\/check`/);
   assert.match(html, /const consentInput = document\.getElementById\('marketing-consent'\)/);
-  assert.match(html, /postJson\(startEndpoint, \{ contact: pendingContact, channel, consent_marketing: true \}, 'pending'\)/);
+  assert.match(html, /fetch\(startEndpoint, \{ method: 'HEAD', cache: 'no-store' \}\)/);
+  assert.match(html, /postJson\(startEndpoint, \{ contact: pendingContact, channel: 'sms', consent_marketing: true \}, 'pending'\)/);
   assert.match(html, /postJson\(checkEndpoint, \{ contact: pendingContact, code: codeInput\.value\.trim\(\) \}, 'reserved'\)/);
   assert.match(html, /headers: \{ 'Accept': 'application\/json', 'Content-Type': 'application\/json' \}/);
   assert.match(html, /responseKeys\.length !== 1 \|\| responseKeys\[0\] !== 'status' \|\| payload\.status !== expectedStatus/);
-  assert.match(visibleText, /Text me my download link at launch\. Msg & data rates may apply\. Reply STOP to opt out\./);
-  assert.match(visibleText, /90 days free and the Founding Member price \(\$79\.99\/yr\) locked through April 30 2027\./);
-  for (const legacyCopy of [
-    /free[ -]?year/i,
-    /founding[ -]?year/i,
-    /founder[ -]?story/i
-  ]) assert.doesNotMatch(visibleText, legacyCopy);
+  assert.match(visibleText, /Text me my download link when Metron is available\. Msg & data rates may apply\. Reply STOP to opt out\./);
+  assert.match(visibleText, /Reserve a free founding year\. Your 30-day trial includes the full coach\./);
+  assert.doesNotMatch(visibleText, /\$\d|\b(?:19|20)\d{2}\b|90 days/i);
   assert.match(html, /id="reservation-contact"[^>]+aria-describedby="reservation-consent reservation-offer"/);
+  assert.match(html, /id="reservation-contact"[^>]+type="tel"/);
+  assert.match(html, /id="reservation-form"[^>]+hidden/);
+  assert.match(html, /id="waitlist-form" hidden/);
   assert.match(html, /id="marketing-consent"[^>]+type="checkbox" required/);
-  assert.doesNotMatch(html, /method: 'HEAD'/);
-  assert.doesNotMatch(html, /api\/v1\/launch-reservations/);
+  assert.match(html, /mailto:\$\{waitlistEmail\}\?subject=\$\{subject\}&body=\$\{body\}/);
   assert.equal(fs.existsSync(path.join(root, 'netlify', 'functions', 'beta-signup.js')), false);
-  assert.equal(fs.existsSync(path.join(root, '.graveyard', 'beta-signup.js')), false);
+  assert.equal(fs.existsSync(path.join(root, '.graveyard', 'beta-signup.js')), true);
 });
 
 test('publishes the text-message disclosure and links it from the reservation form', () => {
