@@ -9,6 +9,9 @@
   <meta property="og:url" content="https://metron.live/">
   <meta property="og:title" content="The World's Smartest Personal Trainer">
   <meta property="og:description" content="Train. Log. Learn. Adapt. Metron launches with training for serious, self-coached athletes.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The World's Smartest Personal Trainer">
+  <meta name="twitter:description" content="Train. Log. Learn. Adapt. Metron launches with training for serious, self-coached athletes.">
   <!-- TODO(approved-handoff): Add the approved 720x960 representative PNG and
        720x960 H.264 MP4 from /Users/benshai/Downloads byte-for-byte, then add
        og:image, og:video, dimensions, types, and a static video poster. The
@@ -19,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&amp;family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600&amp;display=swap" rel="stylesheet">
-  <meta name="metron-api-base" content="https://api.metron.live">
+  <meta name="metron-reservation-api-base" content="https://api.metron.live/launch/reservations">
   <style>
     :root {
       --ink: #10110f; --night: #080908; --paper: #f3f0e9; --muted: #68675f;
@@ -187,7 +190,7 @@
         </section>
       </div>
     </section>
-    <section class="section section--dark quote"><div class="shell"><blockquote>“It is a shame for one to grow old without seeing the beauty and strength of which the body is capable.”</blockquote><cite>Socrates</cite></div></section>
+    <section class="section section--dark quote"><div class="shell"><blockquote>It is a shame for one to grow old without seeing the beauty and strength of which the body is capable.</blockquote><cite>Socrates</cite></div></section>
     <section class="section" id="roadmap">
       <div class="shell">
         <div class="section__intro"><p class="eyebrow">Honest roadmap</p><h2>Training first. More, later.</h2><p class="lede">We are launching the part athletes use every session. These broader capabilities are not in the first release.</p></div>
@@ -197,11 +200,11 @@
     <section class="section section--dark reservation" id="reserve">
       <div class="shell reservation__inner">
         <div><p class="eyebrow">Founding athlete offer</p><h2>Reserve your first year free.</h2><p class="lede">Use your phone number or email. We will send a six-digit code to confirm your reservation.</p><p class="offer">One verified reservation per athlete. Launch availability may be limited.</p></div>
-        <form class="reserve-form" id="reserve-form" novalidate>
+        <form class="reserve-form" id="reserve-form" action="https://api.metron.live/launch/reservations/start" method="post" data-check-action="https://api.metron.live/launch/reservations/check" novalidate>
           <div class="channel-tabs" role="tablist" aria-label="Contact method"><button class="channel-tab" type="button" role="tab" aria-selected="true" data-channel="phone">Phone</button><button class="channel-tab" type="button" role="tab" aria-selected="false" data-channel="email">Email</button></div>
           <div id="contact-step">
             <label for="contact">Mobile number</label><input id="contact" name="contact" type="tel" inputmode="tel" autocomplete="tel" placeholder="(415) 555-0100" required>
-            <div class="consent"><input id="consent" name="consent" type="checkbox"><label for="consent">I agree to receive Metron launch news and product updates. I can unsubscribe at any time.</label></div>
+            <div class="consent"><input id="consent" name="consent_marketing" type="checkbox" required><label for="consent">I agree to receive the verification code and Metron launch messages at this phone number or email address. Message and data rates may apply. Reply STOP to opt out.</label></div>
             <button class="button" id="send-code" type="submit">Send my code</button>
           </div>
           <div id="code-step" hidden><label for="code">Six-digit code</label><div class="form-row"><input id="code" name="code" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" placeholder="123456"><button class="button" id="verify-code" type="button">Confirm reservation</button><button class="button button--quiet" id="change-contact" type="button">Use a different contact</button></div></div>
@@ -227,14 +230,13 @@
   <footer><div class="shell footer__inner"><span>© 2026 Metron. Performance, democratized.</span><div class="footer__links"><a href="privacy.html">Privacy</a><a href="health-data-privacy.html">Health data</a><a href="terms.html">Terms</a><a href="support.html">Support</a></div></div></footer>
   <script>
     (() => {
-      const API_BASE_URL = document.querySelector('meta[name="metron-api-base"]').content.replace(/\/$/, '');
-      const RESERVATION_START_ENDPOINT = `${API_BASE_URL}/launch/reservations/start`;
-      const RESERVATION_CHECK_ENDPOINT = `${API_BASE_URL}/launch/reservations/check`;
+      const API_BASE_URL = document.querySelector('meta[name="metron-reservation-api-base"]').content.replace(/\/$/, '');
+      const RESERVATION_START_ENDPOINT = `${API_BASE_URL}/start`;
+      const RESERVATION_CHECK_ENDPOINT = `${API_BASE_URL}/check`;
       const WAITLIST_EMAIL = 'hello@metron.live';
       const form = document.getElementById('reserve-form');
       const contact = document.getElementById('contact');
       const contactLabel = document.querySelector('label[for="contact"]');
-      const consent = document.getElementById('consent');
       const contactStep = document.getElementById('contact-step');
       const codeStep = document.getElementById('code-step');
       const code = document.getElementById('code');
@@ -257,6 +259,8 @@
         let data = {};
         try { data = await response.json(); } catch (_) { data = {}; }
         if (!response.ok) throw new Error(data.detail || 'The reservation service could not complete that request.');
+        const keys = data && typeof data === 'object' && !Array.isArray(data) ? Object.keys(data) : [];
+        if (keys.length !== 1 || keys[0] !== 'status') throw new Error('The reservation service returned an unexpected response.');
         return data;
       };
       document.querySelectorAll('.channel-tab').forEach((tab) => {
@@ -270,10 +274,12 @@
       });
       form.addEventListener('submit', async (event) => {
         event.preventDefault();
-        if (!contact.value.trim() || !contact.checkValidity()) { contact.reportValidity(); return; }
+        if (!contact.value.trim() || !form.reportValidity()) return;
         sendButton.disabled = true; fallback.classList.remove('is-visible'); setStatus('Sending your verification code...');
         try {
-          pendingContact = contact.value.trim(); await request(RESERVATION_START_ENDPOINT, { contact: pendingContact });
+          pendingContact = contact.value.trim();
+          const data = await request(RESERVATION_START_ENDPOINT, { contact: pendingContact, channel: channel === 'phone' ? 'sms' : 'email', consent_marketing: true });
+          if (data.status !== 'pending') throw new Error('The reservation service returned an unexpected response.');
           contactStep.hidden = true; codeStep.hidden = false; setStatus(`Code sent to ${pendingContact}.`, 'success'); code.focus();
         } catch (error) { setStatus(error.message, 'error'); showFallback(); } finally { sendButton.disabled = false; }
       });
@@ -281,7 +287,8 @@
         if (!/^\d{6}$/.test(code.value.trim())) { setStatus('Enter the six-digit code we sent you.', 'error'); code.focus(); return; }
         verifyButton.disabled = true; setStatus('Confirming your reservation...');
         try {
-          await request(RESERVATION_CHECK_ENDPOINT, { contact: pendingContact, code: code.value.trim(), consent_marketing: consent.checked });
+          const data = await request(RESERVATION_CHECK_ENDPOINT, { contact: pendingContact, code: code.value.trim() });
+          if (data.status !== 'reserved') throw new Error('The reservation service returned an unexpected response.');
           codeStep.hidden = true; setStatus('You are reserved. We will see you at launch.', 'success');
         } catch (error) { setStatus(error.message, 'error'); showFallback(); } finally { verifyButton.disabled = false; }
       });
