@@ -1,0 +1,19 @@
+{
+  "name": "metron-website",
+  "private": true,
+  "scripts": {
+    "assets:favicons": "swift scripts/render-favicons.swift",
+    "review:favicons": "node scripts/capture-favicon-review.js",
+    "build": "node scripts/build-site.js",
+    "check:content": "node scripts/check-built-content.js dist",
+    "check:links": "node scripts/check-links.js dist",
+    "check:copy": "node scripts/check-built-copy.js dist",
+    "test:contract": "node --test tests/site-contract.test.js",
+    "test": "npm run build && node --test tests/site-contract.test.js && playwright test tests/reservation-browser.spec.js",
+    "test:browser": "npm run build && playwright test tests/reservation-browser.spec.js",
+    "test:smoke": "npm run build && playwright test tests/reservation-browser.spec.js"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.56.1"
+  }
+}

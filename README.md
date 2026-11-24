@@ -1,16 +1,20 @@
 # Metron Landing Page
 
-Landing page for [metron.live](https://metron.live) — AI-powered fitness intelligence platform.
+Landing page for [metron.live](https://metron.live): the performance staff that serious self-coached athletes never had, plus a free best-in-class workout tracker.
 
 ## Overview
 
-Metron connects your wearables, workouts, and nutrition to deliver personalized training and meal plans that adapt daily to how your body is actually performing.
+Metron helps serious self-coached athletes plan training, log every set, learn
+from completed work and adapt to readiness. The website checks whether phone
+reservations are available before displaying that form and otherwise opens a
+prefilled email waitlist message. The offer is a free founding year with a
+30-day full-coach trial, while workout logging and history stay free.
 
 ## Tech Stack
 
 - **Frontend**: Static HTML/CSS/JS
-- **Fonts**: Space Grotesk (headings), Inter (body)
-- **Form Handling**: Formspree (email collection)
+- **Fonts**: Cardo (headings and body), Inter (numbers and buttons), Space Grotesk (Metron wordmark only)
+- **Form Handling**: Metron launch-reservation API with a direct email waitlist fallback
 - **Hosting**: GitHub Pages / Vercel / Netlify
 
 ## Setup
@@ -22,17 +26,37 @@ git clone https://github.com/Metron-live/metron-landing.git
 cd metron-landing
 ```
 
-### 2. Set up Formspree
+### 2. Configure reservations
 
-1. Create a free account at [formspree.io](https://formspree.io)
-2. Create a new form
-3. Copy your form ID
-4. Replace `YOUR_FORM_ID` in `index.html` with your actual form ID (appears twice)
+The production endpoint is declared once in `index.html`:
 
 ```html
-<!-- Find these lines and replace YOUR_FORM_ID -->
-<form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+<meta name="metron-reservation-api-base"
+      content="https://api.metron.live/launch/reservations">
 ```
+
+The browser first probes `HEAD /start`. It shows the phone-first form only after
+a successful response and otherwise shows the email waitlist. The probe times
+out after four seconds so a stalled endpoint cannot leave both forms hidden. A phone
+reservation starts verification with `POST /start`:
+
+```json
+{"contact":"+14155550123","channel":"sms","consent_marketing":true}
+```
+
+`channel` is `sms`. The required checkbox supplies `consent_marketing: true`.
+After a successful
+`{"status":"pending"}` response, the browser verifies the code with
+`POST /check`:
+
+```json
+{"contact":"+14155550123","code":"123456"}
+```
+
+The reservation is complete only after the exact `{"status":"reserved"}`
+response. Likewise, the start response must be exactly `{"status":"pending"}`;
+the browser does not infer success from the HTTP status alone or accept
+undocumented response fields.
 
 ### 3. Deploy
 
@@ -64,20 +88,31 @@ metron-landing/
 └── README.md
 ```
 
-## Email Collection
+## Reservation collection
 
-Emails submitted through the forms are collected via Formspree. You can:
-- View submissions in the Formspree dashboard
-- Export to CSV
-- Set up integrations with Airtable, Google Sheets, Slack, etc.
+Phone numbers are verified by the reservation API when it is available. When
+it is unavailable, the fallback opens a prefilled email to `beta@metron.live`.
+The page never stores contact details in browser storage.
+
+## Validation
+
+```bash
+npm ci
+npm run build
+npm run check:links
+npm run check:copy
+npm run test:contract
+npm run test:smoke
+```
 
 ## Local Development
 
-Just open `index.html` in your browser. No build step required.
+Serve the repository so browser requests use HTTP. The production page remains
+plain static HTML; the build command assembles the deployable `dist/` directory
+for validation and hosting.
 
-For live reload during development:
 ```bash
-npx live-server
+python3 -m http.server 4173
 ```
 
 ## License

@@ -1,0 +1,205 @@
+const fs = require('node:fs');
+const http = require('node:http');
+const path = require('node:path');
+const { expect, test } = require('@playwright/test');
+
+const sourceRoot = path.resolve(__dirname, '..');
+const root = path.join(sourceRoot, 'dist');
+const types = { '.css': 'text/css', '.html': 'text/html', '.ico': 'image/x-icon', '.jpg': 'image/jpeg', '.js': 'text/javascript', '.mp4': 'video/mp4', '.png': 'image/png', '.svg': 'image/svg+xml' };
+let server;
+let origin;
+
+test.beforeAll(async () => {
+  if (!fs.existsSync(path.join(root, 'index.html'))) {
+    throw new Error('Missing dist/index.html. Run `npm run build` before the Playwright smoke test.');
+  }
+  server = http.createServer((request, response) => {
+    const pathname = decodeURIComponent(new URL(request.url, 'http://localhost').pathname);
+    const relative = pathname === '/' ? 'index.html' : pathname.replace(/^\//, '');
+    const file = path.resolve(root, relative);
+    if (!file.startsWith(`${root}${path.sep}`) || !fs.existsSync(file) || fs.statSync(file).isDirectory()) {
+      response.writeHead(404).end('Not found');
+      return;
+    }
+    response.writeHead(200, { 'Content-Type': types[path.extname(file)] || 'application/octet-stream' });
+    fs.createReadStream(file).pipe(response);
+  });
+  await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve));
+  origin = `http://127.0.0.1:${server.address().port}`;
+});
+
+test.afterAll(async () => new Promise((resolve) => server.close(resolve)));
+
+test('shows the phone-first form only after the HEAD probe answers', async ({ page }) => {
+  const methods = [];
+  await page.route('https://api.metron.live/launch/reservations/start', async (route) => {
+    methods.push(route.request().method());
+    await route.fulfill({ status: 204 });
+  });
+  await page.goto(origin);
+
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('The pros get a team. You get Metron.');
+  await expect(page.locator('#reservation-form')).toBeVisible();
+  await expect(page.locator('#reservation-contact')).toHaveAttribute('type', 'tel');
+  await expect(page.locator('#waitlist-form')).toBeHidden();
+  await expect(page.locator('#reserve')).toHaveAttribute('aria-busy', 'false');
+  await expect(page.locator('.consent-field')).toContainText('Text me my download link when Metron is available. Msg & data rates may apply. Reply STOP to opt out.');
+  expect(methods).toEqual(['HEAD']);
+});
+
+test('shows the email fallback when the endpoint is unreachable and opens a populated mailto', async ({ page }) => {
+  await page.addInitScript(() => {
+    window.__openedMailto = '';
+    const click = HTMLAnchorElement.prototype.click;
+    HTMLAnchorElement.prototype.click = function captureMailto() {
+      if (this.href.startsWith('mailto:')) window.__openedMailto = this.href;
+      else click.call(this);
+    };
+  });
+  await page.route('https://api.metron.live/launch/reservations/start', (route) => route.abort('failed'));
+  await page.goto(origin);
+
+  await expect(page.locator('#reservation-form')).toBeHidden();
+  await expect(page.locator('#waitlist-form')).toBeVisible();
+  await expect(page.locator('#reserve')).toHaveAttribute('aria-busy', 'false');
+  await page.locator('#waitlist-email').fill('athlete@example.com');
+  await page.locator('#waitlist-submit').click();
+
+  const mailto = await page.evaluate(() => window.__openedMailto);
+  expect(mailto).toMatch(/^mailto:beta@metron\.live\?/);
+  expect(decodeURIComponent(mailto)).toContain('athlete@example.com');
+  expect(decodeURIComponent(mailto)).toContain('Metron email waitlist');
+});
+
+test('shows the email fallback when the HEAD probe stalls', async ({ page }) => {
+  await page.route('https://api.metron.live/launch/reservations/start', () => new Promise(() => {}));
+  await page.goto(origin);
+
+  await expect(page.locator('#reservation-form')).toBeHidden();
+  await expect(page.locator('#reserve')).toHaveAttribute('aria-busy', 'true');
+  await expect(page.locator('#waitlist-form')).toBeVisible({ timeout: 5000 });
+  await expect(page.locator('#reservation-status')).toHaveText('Phone reservations are unavailable right now. Join the email waitlist.');
+  await expect(page.locator('#reserve')).toHaveAttribute('aria-busy', 'false');
+});
+
+test('shows the email fallback when the HEAD probe returns an error', async ({ page }) => {
+  await page.route('https://api.metron.live/launch/reservations/start', (route) => route.fulfill({ status: 503 }));
+  await page.goto(origin);
+
+  await expect(page.locator('#reservation-form')).toBeHidden();
+  await expect(page.locator('#waitlist-form')).toBeVisible();
+  await expect(page.locator('#reserve')).toHaveAttribute('aria-busy', 'false');
+});
+
+test('requires text-message consent before posting to the API', async ({ page }) => {
+  let postCount = 0;
+  await page.route('https://api.metron.live/launch/reservations/start', async (route) => {
+    if (route.request().method() === 'HEAD') await route.fulfill({ status: 204 });
+    else { postCount += 1; await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ status: 'pending' }) }); }
+  });
+  await page.goto(origin);
+
+  await page.locator('#reservation-contact').fill('+14155550123');
+  await page.locator('#reservation-submit').click();
+
+  await expect(page.locator('#marketing-consent')).toBeFocused();
+  await expect(page.locator('#verification-form')).toBeHidden();
+  expect(postCount).toBe(0);
+});
+
+test('completes the live two-step SMS reservation flow', async ({ page }) => {
+  const requests = [];
+  await page.route('https://api.metron.live/launch/reservations/**', async (route) => {
+    const request = route.request();
+    if (request.method() === 'HEAD') { await route.fulfill({ status: 204 }); return; }
+    requests.push({ url: request.url(), method: request.method(), body: request.postDataJSON() });
+    const status = request.url().endsWith('/start') ? 'pending' : 'reserved';
+    await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ status }) });
+  });
+  await page.goto(origin);
+
+  await page.locator('#reservation-contact').fill('+14155550123');
+  await page.locator('#marketing-consent').check();
+  await page.locator('#reservation-submit').click();
+  await expect(page.locator('#verification-form')).toBeVisible();
+  await page.locator('#verification-code').fill('123456');
+  await page.locator('#verification-submit').click();
+  await expect(page.locator('#reservation-status')).toHaveText('Reservation confirmed.');
+  await expect(page.locator('#reservation-message')).toContainText('founding year is free');
+
+  expect(requests).toEqual([
+    { url: 'https://api.metron.live/launch/reservations/start', method: 'POST', body: { contact: '+14155550123', channel: 'sms', consent_marketing: true } },
+    { url: 'https://api.metron.live/launch/reservations/check', method: 'POST', body: { contact: '+14155550123', code: '123456' } }
+  ]);
+});
+
+test('switches to the waitlist if the phone reservation becomes unavailable', async ({ page }) => {
+  await page.route('https://api.metron.live/launch/reservations/start', async (route) => {
+    if (route.request().method() === 'HEAD') await route.fulfill({ status: 204 });
+    else await route.fulfill({ status: 503, contentType: 'application/json', body: JSON.stringify({ detail: 'Unavailable' }) });
+  });
+  await page.goto(origin);
+  await page.locator('#reservation-contact').fill('+14155550123');
+  await page.locator('#marketing-consent').check();
+  await page.locator('#reservation-submit').click();
+  await expect(page.locator('#reservation-form')).toBeHidden();
+  await expect(page.locator('#waitlist-form')).toBeVisible();
+});
+
+test('interpolates the nav across 120px and lets the next section peek into the first fold', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto(origin);
+  const nav = page.locator('#site-nav');
+  const lightLogo = page.locator('.nav__lockup--light');
+  const darkLogo = page.locator('.nav__lockup--dark');
+  await expect(nav).toHaveAttribute('data-scroll-progress', '0.000');
+  await expect(nav).toHaveAttribute('data-fade-distance', '120');
+  await expect(nav).toHaveCSS('transition-duration', '0.3s, 0.3s, 0.3s, 0.3s');
+  await expect(nav).toHaveCSS('transition-timing-function', 'linear, linear, linear, linear');
+  await expect(nav).toHaveCSS('isolation', 'isolate');
+  expect(await nav.evaluate((element) => getComputedStyle(element, '::before').transitionDuration)).toBe('0.3s');
+  expect(await nav.evaluate((element) => getComputedStyle(element, '::before').transitionTimingFunction)).toBe('linear');
+  await expect(lightLogo).toHaveCSS('transition-duration', '0.3s');
+  await expect(lightLogo).toHaveCSS('transition-timing-function', 'linear');
+  await expect(lightLogo).toHaveCSS('will-change', 'opacity');
+  expect(await nav.evaluate((element) => getComputedStyle(element, '::before').opacity)).toBe('0');
+  expect(await nav.evaluate((element) => getComputedStyle(element, '::before').backgroundImage)).toContain('images/marble.png');
+  await expect(lightLogo).toHaveCSS('opacity', '1');
+  await expect(darkLogo).toHaveCSS('opacity', '0');
+  await expect(page.locator('body')).toHaveCSS('font-family', 'Cardo, serif');
+  await expect(nav).toHaveCSS('font-family', 'Cardo, serif');
+  await expect(page.locator('#hero-title')).toHaveCSS('font-family', 'Cardo, serif');
+  await expect(page.locator('#hero-video')).toHaveCSS('filter', 'brightness(1.25)');
+
+  const firstFold = await page.evaluate(() => ({ heroBottom: document.querySelector('.hero').getBoundingClientRect().bottom, problemTop: document.querySelector('#problem').getBoundingClientRect().top, nextLineBottom: document.querySelector('#problem .section__label').getBoundingClientRect().bottom, viewport: innerHeight }));
+  expect(firstFold.heroBottom).toBeLessThan(firstFold.viewport);
+  expect(firstFold.problemTop).toBeLessThan(firstFold.viewport);
+  expect(firstFold.nextLineBottom).toBeLessThan(firstFold.viewport);
+
+  await page.evaluate(() => scrollTo(0, 60));
+  await expect.poll(() => nav.getAttribute('data-scroll-progress')).toBe('0.500');
+  await expect.poll(() => nav.evaluate((element) => getComputedStyle(element, '::before').opacity)).toBe('0.5');
+
+  await page.evaluate(() => scrollTo(0, 48));
+  await expect.poll(() => lightLogo.evaluate((element) => getComputedStyle(element).opacity)).toBe('0.5');
+  await expect.poll(() => darkLogo.evaluate((element) => getComputedStyle(element).opacity)).toBe('0.5');
+
+  await page.evaluate(() => scrollTo(0, 200));
+  await expect.poll(() => nav.getAttribute('data-scroll-progress')).toBe('1.000');
+  await expect.poll(() => nav.evaluate((element) => getComputedStyle(element, '::before').opacity)).toBe('1');
+  await expect(page.locator('text=Get the App').first()).toBeVisible();
+  const legacyShape = `[class*="hepta${'gon'}"], [id*="hepta${'gon'}"]`;
+  expect(await page.locator(legacyShape).count()).toBe(0);
+  expect(await page.locator('[class*="scroll-cue"], [id*="scroll-cue"]').count()).toBe(0);
+});
+
+test('keeps the reservation form usable on a phone viewport', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.route('https://api.metron.live/launch/reservations/start', (route) => route.fulfill({ status: 204 }));
+  await page.goto(origin);
+  await expect(page.locator('#hero-title')).toBeVisible();
+  await expect(page.locator('#reservation-form')).toBeVisible();
+  const bounds = await page.locator('#reservation-form').boundingBox();
+  expect(bounds.x).toBeGreaterThanOrEqual(0);
+  expect(bounds.x + bounds.width).toBeLessThanOrEqual(390);
+});

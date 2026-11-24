@@ -6,11 +6,13 @@ Local path: /Users/rentamac/Metron-Website-main/
 
 ## Brand
 
-**Product**: Metron — AI performance coach that reads wearable/nutrition/recovery data and rewrites the user's plan nightly.
-**Tagline**: Performance, democratized.
-**Sub**: For every athlete. At every level.
+**Category**: The performance staff that serious self-coached athletes never had: strength coach, sports scientist, and data analyst in one system.
+**Product question**: How do I train?
+**Audience**: The athlete fighting for a starting spot, training for a team, a season, or a qualifier, who has no staff.
+**Brand line**: Performance, democratized.
+**Launch offer**: A free founding year with a 30-day full-coach trial. Tracking, logging, and history remain free.
 **AI coach name**: Arete.
-**Seven pillars**: Sleep, Recovery, Training, Nutrition, Cardio, Body, Mind.
+**Launch foundation**: Training only. Claim only the approved capabilities listed below.
 
 ## Typography — strict
 
@@ -24,22 +26,18 @@ Never introduce a new font. Never use Cardo on the wordmark or Space Grotesk on 
 
 - **Marble texture** (`/images/marble.png`) on all light backgrounds: body, nav (scrolled), cards, steps.
 - **Marble text fill** (`background-clip: text`) on white text over video/dark sections.
-- **Amber** (#d97706-ish) is the only accent color. Used for dividers, favicons, hover states, small heptagon separators between sections.
+- **Amber** (#d97706-ish) is the only accent color. Used for dividers, favicons, and hover states.
 - **Black marble** (`/images/black-marble.jpg`) available but unused — OK to use for dark sections.
 - Video has a cinematic vignette overlay and parallax scroll.
 - Marble dust particles drift upward over the video.
 
-## Hero load choreography — DO NOT TOUCH
+## Hero contract
 
-Timing is locked. Do not modify without explicit instruction:
-
-- 0.0s: video montage starts, all text elements at opacity 0.3 baseline
-- 0.3s: logo + Metron wordmark + nav items + mega triggers fade to full opacity (900ms duration)
-- 0.9s: "Performance, democratized." + sub fade to full opacity (700ms duration)
-- 1.5s: Socrates quote + attribution fade to full opacity (900ms duration)
-- 2.2s: rotating heptagon scroll cue appears (500ms duration)
-
-Total sequence: ~2.7s. Text readable from 0.3s.
+- Eyebrow: How do I train?
+- H1: The pros get a team. You get Metron.
+- Subhead: Metron is the strength coach, sports scientist and data analyst that athletes without a staff never had.
+- Sub-line: It takes the guesswork out of greatness.
+- The phone reservation form stays hidden until its HEAD probe succeeds. A failed or timed-out probe reveals the working email fallback.
 
 sessionStorage flag `metron_hero_seen`: first visit plays full sequence, repeat visits in same session skip animations entirely (body class `.hero-skip-intro`).
 
@@ -53,20 +51,29 @@ cyclist → surfer → sprinter → boy athlete → basketball girl → dribbler
 - Exact splash-page ratio: M is 1.18× taller than wordmark. Preserve this.
 - Nav logo: white filter over video, amber tint on scroll.
 
-## Section order (current → target)
+## Section order
 
-Target order after restructure:
-1. Hero
-2. Problem (visceral, full-bleed, promoted from current buried position)
-3. Transition line
-4. Introducing Metron + integrations marquee (single pass, not doubled)
-5. Magic moment demo ("While you sleep, Metron is working")
-6. Three engines — ALL THREE built out (currently only 01 is shown)
-7. From zero to your plan in one day
-8. Compare table
-9. Proof (testimonials — currently one, need more)
-10. CTA with email capture restored + App Store badge secondary
-11. Aristotle quote + footer
+1. Hero: performance-staff promise and gated phone-first reservation
+2. Problem
+3. Four concrete product-proof steps
+4. Arete chat and dedicated screens as shared interfaces
+5. Free tracker vs full coach
+6. Approved training capabilities
+7. Free founding year offer with a 30-day full-coach trial
+8. FAQ
+9. The single Socrates quote + footer
+
+## Approved capability claims
+
+- Training only
+- Adaptive plan
+- Daily readiness-based adaptation
+- Progression from actuals
+- Arete text coaching
+- Apple Health inputs
+- Practices and competitions awareness
+
+Do not claim future integrations or publish an integration before it is ready.
 
 ## Rules of engagement
 
@@ -82,8 +89,7 @@ Target order after restructure:
 
 - `index.html` — entire site
 - `videos/montage-web.mp4` — hero montage
-- `brand/brand preview/og-preview.mp4` — iMessage portrait preview
-- `brand/brand preview/og-preview.png` — og:image fallback
+- Approved iMessage media is pending handoff from `/Users/benshai/Downloads/Metron Large Lockup/approved handoff`. Do not publish the older `brand/brand preview/og-preview.*` files as substitutes.
 - `images/marble.png`, `images/black-marble.jpg` — textures
 - `images/m-cropped.png`, `images/metron-cropped.png` — logo assets
 
@@ -101,33 +107,32 @@ Metron nav is moving to a Harvey-style mega-menu pattern for two items: Platform
 Nav structure:
 Logo · · · Platform ▾ · Athletes ▾ · Compare · FAQ · [Get the App]
 
-Platform dropdown — left column (text items, Cardo, stacked vertically, ~48px gap):
-- Overview — Seven pillars. One score. Every day.
-- Plan Engine — 90-minute build. 72 workouts. Built from your data.
-- Adaptation Engine — Nightly rewrite based on your recovery.
-- Arete AI Coach — Your history, your plan, your real-time data.
-- Integrations — Apple Health, Whoop, Oura, Garmin, and more.
+Product dropdown — left column (text items, Cardo, stacked vertically, ~48px gap):
+- Overview — performance staff plus free tracker
+- Build — sport- and goal-specific training
+- Coach & log — text coaching and set logging
+- Learn & adapt — verified analytics and Apple Health recovery
+- Modular future — later expansion, clearly labeled
 
 Platform dropdown — right column (featured):
-Title: The Heptagon
-Body: Seven pillars. One score. Every day.
-Visual: animated rotating heptagon (reuse hero scroll-cue component scaled up) on black marble background
+Title: The Metron system
+Body: Training now. More modules later.
+Visual: product copy on a black marble background
 
-Athletes dropdown — left column:
-- Endurance — Runners, cyclists, triathletes.
-- Strength — Lifters, powerlifters, bodybuilders.
-- General fitness — Busy lives, real training.
-- Competitive — Teams, coaches, sports programs.
+Training dropdown — left column:
+- Endurance
+- Strength
+- Athletic preparation
+- Coming later
 
-Athletes dropdown — right column (featured):
-Testimonial card: Sarah K., 2:58 marathoner. Quote: "No coach I've ever worked with adjusted my taper week the way Metron did."
+Do not publish placeholder testimonials, unsupported metrics, or unverified integration claims.
 
 Visual spec for the mega menu:
 - Panel: full viewport width, slides down from nav, black marble background (images/black-marble.jpg)
 - Panel height: ~540px desktop
 - Panel entrance: 200ms ease-out, fade + 8px translateY
 - Active nav item: amber hairline underneath, caret flips to ▲
-- Caret glyph: small rotating heptagon (match hero scroll cue, smaller)
+- Caret glyph: a simple text caret
 - Left column items: Cardo medium 18px title, Cardo regular 14px description at 70% white opacity
 - Featured right column: Cardo medium 24px title, Cardo regular 16px body
 - Hover state on items: subtle amber tint on title, smooth 150ms

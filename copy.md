@@ -1,119 +1,43 @@
-# Metron Website — Restructure Copy
+# Metron Website Messaging
 
-Copy for new and rewritten sections. Section order defined in CLAUDE.md.
-Each block below specifies eyebrow, headline, body, and any bullets.
-Do not paraphrase. Use this copy verbatim.
+## Positioning
 
----
+- Category: **the performance staff that serious self-coached athletes never had.**
+- Product question: **How do I train?**
+- Audience: **the athlete fighting for a starting spot, training for a team, a
+  season or a qualifier without a staff.**
+- Free product: **a best-in-class workout tracker.**
+- Tracking, set logging, and workout history remain free.
+- The offer is a free founding year with a 30-day full-coach trial.
 
-## 2. Problem (promoted to full-bleed section, right after hero)
+## Product proof
 
-**Eyebrow:** The problem
-**Headline:** You're tracking everything. Nothing's talking.
+1. **Plan:** Builds training around the athlete's goals, history, equipment,
+   practices and competitions.
+2. **Log:** Records every set quickly and keeps the full workout history free.
+3. **Learn:** Progresses training from completed reps, load and effort.
+4. **Adapt:** Uses Apple Health sleep and HRV inputs to inform readiness-based
+   changes, with the reason shown.
 
-**Body:**
-You slept four hours. You ran ten miles yesterday. This morning your training app wants intervals. Your nutrition app has no idea you trained fasted. Your recovery score is red. Your coach app tells you to push.
+Arete chat and dedicated screens are two interfaces to the same plan, history,
+and shared actions. Endurance and sport-specific athletic preparation belong
+inside Training.
 
-Five apps. Five answers. Zero coordination.
+## What ships
 
-The data exists. Nothing reads all of it.
+Training only: an adaptive plan, daily readiness-based adaptation, progression
+from actuals, Arete text coaching, Apple Health inputs, and awareness of
+practices and competitions.
 
----
+Do not publish future integrations, testimonials, usage statistics, performance
+claims, dates or prices unless they have been independently verified and
+approved.
 
-## 3. Transition line (own section, black background, centered, Cardo italic, large)
+## Reservation
 
-> There had to be a better way.
-
----
-
-## 4. Introducing Metron (sits right before integrations marquee)
-
-**Eyebrow:** The solution
-**Headline:** One coach. All your data. Every night.
-
-**Body:**
-Metron pulls your sleep, recovery, training, and nutrition into a single model — then rewrites tomorrow's plan while you sleep. No manual input. No conflicting advice. One plan, adapting to you, every morning.
-
----
-
-## 5. Magic moment (new section — shell only, animation built separately)
-
-**Eyebrow:** While you sleep
-**Headline:** Metron is working.
-
-**Body:**
-11:47 PM — Whoop logs recovery at 42%.
-2:13 AM — Apple Health confirms four hours of sleep.
-4:30 AM — Metron rewrites tomorrow: strength session becomes mobility, protein target drops 20g, cardio moves to Thursday.
-7:00 AM — your plan is ready. You didn't do anything.
-
----
-
-## 6. Three engines — build out 02 and 03 to match 01's layout
-
-### Engine 02 — Adaptation Engine
-
-**Headline:** Adaptation Engine
-
-**Body:**
-Every night, eight data streams. One adjusted plan by morning. Metron reads your overnight recovery, yesterday's training load, nutrition adherence, and sleep quality — then rewrites tomorrow before your alarm.
-
-**Bullets:**
-- Nightly rewrite based on recovery state
-- Adjusts intensity, volume, and nutrition together
-- Explains every change in plain language
-
-### Engine 03 — Arete AI Coach
-
-**Headline:** Arete AI Coach
-
-**Body:**
-Name comes from the Greek *aretē* — excellence, virtue, living up to your potential. Ask Arete anything. It has your full history, your current plan, and your real-time data. Not generic advice — your answer, for your body, right now.
-
-**Bullets:**
-- Remembers every conversation
-- Sees your wearable data in real time
-- Powered by Claude, trained on your plan
-
----
-
-## 9. Proof — add two more testimonials alongside the existing James R.
-
-### Testimonial 2 (endurance athlete — placeholder, replace with real quote when available)
-
-"I've been marathon training for six years. No coach I've ever worked with adjusted my taper week the way Metron did — it caught a recovery dip I hadn't even noticed yet and cut my Tuesday session before I hurt myself."
-
-— Sarah K., 2:58 marathoner
-
-### Testimonial 3 (general fitness — placeholder, replace with real quote when available)
-
-"I'm not a competitive athlete. I just want to train smart around a busy job and two kids. Metron is the first thing that actually accounts for the fact that I slept like garbage because the baby was up."
-
-— Marcus T., recreational lifter
-
----
-
-## 10. CTA — restore email capture, keep App Store badge as secondary
-
-**Eyebrow:** Coming Soon
-**Headline:** Stop Guessing. Start Adapting.
-
-**Body:**
-Launching on the App Store. Be the first to know.
-
-**Bullet list (keep existing):**
-- Complete 12-week plan built from your data
-- Daily workout & nutrition adjustments
-- Unlimited Arete AI conversations
-- All integrations included
-
-**Primary CTA:** email capture form — single input, placeholder "your@email.com", button "Notify me" (Inter font per type rules). Form posts to whatever endpoint is wired up separately; if none, store in a list or use Formspree-style endpoint TBD.
-
-**Secondary CTA:** Apple "Download on the App Store" badge, marked "Coming Soon" as it is currently.
-
----
-
-## Deletions
-
-- Remove the animated stats counter block entirely (0 integrations, 0 workouts, 0 adaptation timeframes, 0 to build your plan).
-- The integrations logo marquee currently duplicates in the DOM — keep only one pass.
+Probe the phone reservation endpoint with HEAD when the page loads. Show the
+phone-first form only after a successful response. Otherwise show an email
+waitlist that opens a prefilled message. The free tracker remains available if
+the athlete does not continue after the 30-day full-coach trial. Mark the
+reservation panel busy while the endpoint check is pending, then clear that
+state when either form is shown.
