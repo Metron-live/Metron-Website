@@ -23,6 +23,8 @@ test('uses a configured two-step reservation API and mail fallback', () => {
   assert.match(html, /data-check-action="https:\/\/api\.metron\.live\/launch\/reservations\/check"/);
   assert.match(html, /request\(RESERVATION_START_ENDPOINT, \{ contact: pendingContact \}\)/);
   assert.match(html, /request\(RESERVATION_CHECK_ENDPOINT, \{ contact: pendingContact, code: code\.value\.trim\(\), consent_marketing: true \}\)/);
+  assert.match(html, /catch \(_\) \{\s*throw new Error\(SERVICE_UNAVAILABLE_MESSAGE\);\s*\}/);
+  assert.match(html, /The reservation service is temporarily unavailable\. You can still join by email\./);
   assert.match(visible, /I agree to receive Metron launch news and product updates\. I can unsubscribe at any time\./);
   assert.match(html, /mailto:hello@metron\.live\?subject=Metron%20launch%20waitlist/);
   assert.match(html, /<noscript>[\s\S]*Join by email[\s\S]*<\/noscript>/);

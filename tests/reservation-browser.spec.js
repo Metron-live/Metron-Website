@@ -58,6 +58,18 @@ test('supports email verification and degrades to email waitlist', async ({ page
   expect(requestBody).toEqual({ contact: 'athlete@example.com' });
 });
 
+test('uses a clear waitlist fallback when the API cannot be reached', async ({ page }) => {
+  await page.route('https://api.metron.live/launch/reservations/start', (route) => route.abort('connectionrefused'));
+  await page.goto(origin);
+  await page.locator('#contact').fill('+14155550123');
+  await page.locator('#consent').check();
+  await page.locator('#send-code').click();
+
+  await expect(page.locator('#form-status')).toHaveText('The reservation service is temporarily unavailable. You can still join by email.');
+  await expect(page.locator('#fallback')).toBeVisible();
+  await expect(page.locator('#fallback-link')).toHaveAttribute('href', /^mailto:hello@metron\.live/);
+});
+
 test('offers an email waitlist when JavaScript is unavailable', async ({ browser }) => {
   const context = await browser.newContext({ javaScriptEnabled: false });
   const page = await context.newPage();

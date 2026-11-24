@@ -13,6 +13,8 @@ Metron launches as a free workout tracker and personal trainer for serious, self
 - **Reservation API**: `https://api.metron.live/launch/reservations`
 - **Hosting**: GitHub Pages
 
+The reservation form posts to `/start`, confirms the six-digit code through `/check`, and exposes an email waitlist fallback for HTTP or network failures. The browser contract tests intercept these configured production URLs, so the test suite never creates a live reservation.
+
 ## Setup
 
 ### Local development
