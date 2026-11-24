@@ -11,7 +11,7 @@ assert.match(privacy, /\bSTOP\b/);
 assert.match(privacy, /Msg &amp; data rates may apply/);
 assert.match(
   homepage,
-  /<form[^>]+id="reservation-form"[\s\S]*?<a href="\/privacy\.html#text-messages">Text messages disclosure<\/a>[\s\S]*?<\/form>/
+  /<form[^>]+id="reservation-form"[\s\S]*?<a href="\/privacy\.html#text-messages">Text messages in our Privacy Policy<\/a>[\s\S]*?<\/form>/
 );
 assert.match(
   homepage,
