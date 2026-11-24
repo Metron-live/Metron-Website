@@ -1,2 +1,4 @@
-# Local Netlify folder
-.netlify
+/dist/
+/node_modules/
+/test-results/
+/playwright-report/
