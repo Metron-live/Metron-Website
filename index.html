@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Metron AI | Performance, democratized.</title>
+    <meta name="metron-reservation-api-base" content="https://api.metron.live/api/v1/launch-reservations">
 
     <meta property="og:title" content="Metron AI">
     <meta property="og:description" content="AI-powered training, nutrition & recovery — all adapting to you daily.">
@@ -2328,6 +2329,13 @@
             text-align: center;
             overflow: hidden;
         }
+        .reservation-anchor {
+            position: relative;
+            top: calc(-1 * var(--nav-height));
+            display: block;
+            height: 0;
+            visibility: hidden;
+        }
         .beta-section::before {
             content: '';
             position: absolute;
@@ -2346,7 +2354,7 @@
         .beta-section__inner {
             position: relative;
             z-index: 1;
-            max-width: 520px;
+            max-width: 620px;
             margin: 0 auto;
         }
 
@@ -2404,14 +2412,59 @@
             flex-shrink: 0;
         }
 
-        .beta-form {
-            display: flex;
-            gap: 0.625rem;
+        .reservation-panel {
+            padding: 1.5rem;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: var(--radius-card);
+            background: rgba(15,15,15,0.72);
+            backdrop-filter: blur(14px);
+            text-align: left;
+        }
+
+        .reservation-channel {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.4rem;
+            padding: 0.3rem;
             margin-bottom: 1rem;
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 10px;
+        }
+
+        .reservation-channel__button {
+            min-height: 44px;
+            border: 0;
+            border-radius: 8px;
+            background: transparent;
+            color: rgba(255,255,255,0.78);
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .reservation-channel__button[aria-pressed="true"] {
+            background: url('images/marble.png') center/cover;
+            color: var(--text-primary);
+        }
+
+        .reservation-form {
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .reservation-form[hidden],
+        .reservation-success[hidden] {
+            display: none;
+        }
+
+        .reservation-field-label {
+            color: #fff;
+            font-size: 0.9rem;
+            font-weight: 700;
         }
 
         .beta-form__input {
-            flex: 1;
+            width: 100%;
             padding: 0.85rem 1rem;
             border: 1.5px solid var(--border-dark);
             border-radius: 10px;
@@ -2431,20 +2484,73 @@
         }
 
         .beta-form__btn {
-            flex-shrink: 0;
+            width: 100%;
+            min-height: 48px;
             border: 2px solid rgba(255,255,255,0.55);
             animation: none;
         }
 
+        .beta-form__btn:disabled,
+        .reservation-channel__button:disabled {
+            cursor: wait;
+            opacity: 0.65;
+        }
+
+        .reservation-consent {
+            display: grid;
+            grid-template-columns: 20px 1fr;
+            gap: 0.65rem;
+            align-items: start;
+            color: rgba(255,255,255,0.82);
+            font-size: 0.8rem;
+            line-height: 1.45;
+        }
+
+        .reservation-consent input {
+            width: 18px;
+            height: 18px;
+            margin-top: 0.1rem;
+            accent-color: var(--accent);
+        }
+
+        .reservation-consent a,
+        .beta-disclaimer a {
+            color: #fff;
+            text-underline-offset: 0.18em;
+        }
+
+        .reservation-back {
+            justify-self: center;
+            border: 0;
+            background: transparent;
+            color: rgba(255,255,255,0.82);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            text-decoration: underline;
+            text-underline-offset: 0.18em;
+            cursor: pointer;
+        }
+
+        .reservation-status {
+            min-height: 1.5rem;
+            margin-top: 0.9rem;
+            color: rgba(255,255,255,0.88);
+            font-size: 0.88rem;
+            text-align: center;
+        }
+
+        .reservation-status[data-state="error"] { color: #fff; }
+
         .beta-disclaimer {
+            margin-top: 1rem;
             font-size: 0.78rem;
             color: rgba(255,255,255,0.6);
         }
 
-        .beta-success {
-            display: none;
+        .reservation-success {
             text-align: center;
             padding: 1.5rem;
+            color: #fff;
         }
 
         .beta-success__icon {
@@ -2460,15 +2566,8 @@
             margin: 0 auto 1rem;
         }
 
-        .beta-success__title { font-size: 1.2rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.4rem; }
-        .beta-success__sub   { font-size: 0.9rem; color: var(--text-secondary); }
-
-        .beta-error {
-            display: none;
-            font-size: 0.85rem;
-            color: #dc2626;
-            margin-bottom: 0.75rem;
-        }
+        .beta-success__title { font-size: 1.35rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; }
+        .beta-success__sub   { font-size: 1rem; color: rgba(255,255,255,0.82); }
 
         /* ==========================================
            FAQ
@@ -2812,7 +2911,7 @@
                 <a href="#compare" class="nav__link">Compare</a>
                 <a href="#faq" class="nav__link">FAQ</a>
             </div>
-            <a href="#beta" class="btn btn-primary nav__cta">Get the App</a>
+            <a href="#reserve" class="btn btn-primary nav__cta">Reserve Your Year</a>
             <button class="nav__hamburger" id="hamburger" aria-label="Menu">
                 <span></span>
                 <span></span>
@@ -2915,7 +3014,7 @@
         </div>
         <a href="#compare">Compare</a>
         <a href="#faq">FAQ</a>
-        <a href="#beta" class="btn btn-primary">Get the App</a>
+        <a href="#reserve" class="btn btn-primary">Reserve Your Year</a>
     </div>
 
 
@@ -3215,7 +3314,7 @@
                         </tr>
                         <tr>
                             <td>Cost</td>
-                            <td class="col-metron">Free (beta)</td>
+                            <td class="col-metron">Free</td>
                             <td>$20/mo</td>
                             <td>$100 to $300/mo</td>
                             <td>$5 to $15/mo</td>
@@ -3258,29 +3357,55 @@
 
 
     <!-- ==========================================
-         BETA CTA
+         LAUNCH RESERVATION
     ========================================== -->
-    <section class="beta-section" id="beta">
+    <section class="beta-section" id="launch-reservation">
+        <span class="reservation-anchor" id="reserve" aria-hidden="true"></span>
         <div class="beta-section__inner">
-            <span class="beta-section__eyebrow reveal">Coming Soon</span>
-            <h2 class="beta-section__headline reveal reveal-delay-1">
-                Stop Guessing.<br>Start Adapting.
-            </h2>
+            <span class="beta-section__eyebrow reveal">Founding reservation</span>
+            <h2 class="beta-section__headline reveal reveal-delay-1">Your first year is on us.</h2>
             <p class="beta-section__sub reveal reveal-delay-2">
-                Launching on the App Store. Be the first to know.
+                Take the guesswork out of greatness. Reserve Metron free for your first year and join the Metron family at launch.
             </p>
-            <ul class="beta-section__value reveal reveal-delay-2">
-                <li>Complete 12-week plan built from your data</li>
-                <li>Daily workout &amp; nutrition adjustments</li>
-                <li>Unlimited Arete AI conversations</li>
-                <li>All integrations included</li>
-            </ul>
 
-            <div class="reveal reveal-delay-3" style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; align-items: center; flex-wrap: wrap;">
-                <a href="#" style="display: inline-block; opacity: 0.9; transition: opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.9'">
-                    <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store" style="height: 54px;">
-                </a>
-                <span style="font-family: 'Cardo', serif; font-size: 0.95rem; font-weight: 400; font-style: italic; color: rgba(255,255,255,0.5); letter-spacing: 0.03em;">Coming Soon</span>
+            <div class="reservation-panel reveal reveal-delay-3">
+                <div class="reservation-channel" id="reservation-channel" role="group" aria-label="How should we send your verification code?">
+                    <button class="reservation-channel__button" id="reservation-phone-mode" type="button" aria-pressed="true">Phone</button>
+                    <button class="reservation-channel__button" id="reservation-email-mode" type="button" aria-pressed="false">Email instead</button>
+                </div>
+
+                <form class="reservation-form" id="reservation-request-form" action="https://api.metron.live/api/v1/launch-reservations/request" method="post" novalidate>
+                    <label class="reservation-field-label" id="reservation-contact-label" for="reservation-contact">Mobile phone number</label>
+                    <input class="beta-form__input" id="reservation-contact" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+1 415 555 0123" aria-describedby="reservation-contact-help reservation-status" required>
+                    <p class="beta-disclaimer" id="reservation-contact-help">We will send one verification code, then contact you about your launch reservation.</p>
+                    <label class="reservation-consent" for="reservation-consent">
+                        <input id="reservation-consent" name="consent" type="checkbox" required>
+                        <span>I agree to receive a verification code and launch reservation messages from Metron. Message and data rates may apply. Consent is not a condition of purchase. See the <a href="/terms.html">Terms</a> and <a href="/privacy.html#launch-reservations">Privacy Policy</a>.</span>
+                    </label>
+                    <button class="btn btn-primary beta-form__btn" id="reservation-request-submit" type="submit">
+                        <span class="btn-text">Reserve my free year</span>
+                        <span class="btn-loading" hidden>Sending code…</span>
+                    </button>
+                </form>
+
+                <form class="reservation-form" id="reservation-verify-form" action="https://api.metron.live/api/v1/launch-reservations/verify" method="post" hidden novalidate>
+                    <label class="reservation-field-label" for="reservation-code">Verification code</label>
+                    <input class="beta-form__input" id="reservation-code" name="code" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" placeholder="6-digit code" aria-describedby="reservation-code-help reservation-status" required>
+                    <p class="beta-disclaimer" id="reservation-code-help">Enter the verification code we sent to your phone or email.</p>
+                    <button class="btn btn-primary beta-form__btn" id="reservation-verify-submit" type="submit">
+                        <span class="btn-text">Verify reservation</span>
+                        <span class="btn-loading" hidden>Verifying…</span>
+                    </button>
+                    <button class="reservation-back" id="reservation-back" type="button">Change phone or email</button>
+                </form>
+
+                <p class="reservation-status" id="reservation-status" role="status" aria-live="polite"></p>
+                <p class="reservation-status" id="reservation-error" role="alert" hidden></p>
+                <div class="reservation-success" id="reservation-success" role="status" tabindex="-1" hidden>
+                    <div class="beta-success__icon" aria-hidden="true">✓</div>
+                    <p class="beta-success__title">Welcome to the Metron family.</p>
+                    <p class="beta-success__sub">Your free year is reserved. It is time to begin your journey to greatness.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -3684,55 +3809,203 @@
 
 
         // ==========================================
-        // 6. BETA SIGNUP SHARED HANDLER
+        // 6. VERIFIED LAUNCH RESERVATION
         // ==========================================
-        async function submitBetaForm(email, formEl, successEl, errorEl, submitBtn) {
-            const btnText = submitBtn.querySelector('.btn-text');
-            const btnLoading = submitBtn.querySelector('.btn-loading');
+        const reservationApiBase = document
+            .querySelector('meta[name="metron-reservation-api-base"]')
+            .content.replace(/\/$/, '');
+        const reservationEndpoints = Object.freeze({
+            request: `${reservationApiBase}/request`,
+            verify: `${reservationApiBase}/verify`
+        });
+        window.MetronReservationConfig = Object.freeze({
+            apiBase: reservationApiBase,
+            endpoints: reservationEndpoints
+        });
 
-            submitBtn.disabled = true;
-            if (btnText) btnText.style.display = 'none';
-            if (btnLoading) btnLoading.style.display = 'inline';
-            if (errorEl) errorEl.style.display = 'none';
+        const reservationRequestForm = document.getElementById('reservation-request-form');
+        const reservationVerifyForm = document.getElementById('reservation-verify-form');
+        const reservationContact = document.getElementById('reservation-contact');
+        const reservationContactLabel = document.getElementById('reservation-contact-label');
+        const reservationConsent = document.getElementById('reservation-consent');
+        const reservationCode = document.getElementById('reservation-code');
+        const reservationPhoneMode = document.getElementById('reservation-phone-mode');
+        const reservationEmailMode = document.getElementById('reservation-email-mode');
+        const reservationChannel = document.getElementById('reservation-channel');
+        const reservationStatus = document.getElementById('reservation-status');
+        const reservationError = document.getElementById('reservation-error');
+        const reservationSuccess = document.getElementById('reservation-success');
+        const reservationBack = document.getElementById('reservation-back');
+        let reservationKind = 'phone';
+        let reservationDestination = '';
+        let reservationBusy = false;
 
+        async function postReservation(endpoint, payload) {
+            let response;
             try {
-                const response = await fetch('/.netlify/functions/beta-signup', {
+                response = await fetch(endpoint, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ type: 'email', value: email })
+                    headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
                 });
-
-                const data = await response.json();
-
-                if (response.ok && data.success) {
-                    if (formEl) formEl.style.display = 'none';
-                    if (successEl) successEl.style.display = 'block';
-                } else {
-                    throw new Error(data.error || 'Something went wrong');
-                }
-            } catch (err) {
-                console.error('Beta signup error:', err);
-                if (errorEl) errorEl.style.display = 'block';
-                submitBtn.disabled = false;
-                if (btnText) btnText.style.display = 'inline';
-                if (btnLoading) btnLoading.style.display = 'none';
+            } catch (cause) {
+                const error = new Error('We could not reach the reservation service. Please try again.');
+                error.cause = cause;
+                throw error;
             }
+
+            let data = {};
+            try { data = await response.json(); } catch {}
+            if (!response.ok) {
+                const error = new Error(data.detail || data.message || 'We could not complete that request. Please try again.');
+                error.duplicate = response.status === 409;
+                throw error;
+            }
+            return data;
         }
 
-        // Hero form
-        const heroForm = document.getElementById('hero-form');
-        if (heroForm) {
-            heroForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                submitBetaForm(
-                    heroForm.querySelector('input[type="email"]').value,
-                    heroForm,
-                    document.getElementById('hero-success'),
-                    document.getElementById('hero-error'),
-                    document.getElementById('hero-submit')
-                );
-            });
+        function setReservationBusy(button, busy) {
+            reservationBusy = busy;
+            button.disabled = busy;
+            reservationPhoneMode.disabled = busy;
+            reservationEmailMode.disabled = busy;
+            const text = button.querySelector('.btn-text');
+            const loading = button.querySelector('.btn-loading');
+            text.hidden = busy;
+            loading.hidden = !busy;
         }
+
+        function showReservationError(message) {
+            reservationStatus.textContent = '';
+            reservationError.textContent = message;
+            reservationError.hidden = false;
+        }
+
+        function clearReservationMessages() {
+            reservationStatus.textContent = '';
+            reservationError.textContent = '';
+            reservationError.hidden = true;
+        }
+
+        function setReservationKind(kind) {
+            if (reservationBusy) return;
+            reservationKind = kind;
+            reservationContact.value = '';
+            reservationContact.setCustomValidity('');
+            reservationContact.name = kind;
+            reservationContact.type = kind === 'phone' ? 'tel' : 'email';
+            reservationContact.inputMode = kind === 'phone' ? 'tel' : 'email';
+            reservationContact.autocomplete = kind === 'phone' ? 'tel' : 'email';
+            reservationContact.placeholder = kind === 'phone' ? '+1 415 555 0123' : 'you@example.com';
+            reservationContactLabel.textContent = kind === 'phone' ? 'Mobile phone number' : 'Email address';
+            reservationPhoneMode.setAttribute('aria-pressed', String(kind === 'phone'));
+            reservationEmailMode.setAttribute('aria-pressed', String(kind === 'email'));
+            clearReservationMessages();
+            reservationContact.focus();
+        }
+
+        function showVerification() {
+            reservationRequestForm.hidden = true;
+            reservationVerifyForm.hidden = false;
+            reservationChannel.hidden = true;
+            reservationStatus.textContent = `Enter the 6-digit code sent to your ${reservationKind}.`;
+            reservationCode.value = '';
+            reservationCode.focus();
+        }
+
+        function showRequest() {
+            reservationVerifyForm.hidden = true;
+            reservationRequestForm.hidden = false;
+            reservationChannel.hidden = false;
+            reservationCode.setCustomValidity('');
+            clearReservationMessages();
+            reservationContact.focus();
+        }
+
+        function showReservationSuccess(isDuplicate) {
+            reservationRequestForm.hidden = true;
+            reservationVerifyForm.hidden = true;
+            reservationChannel.hidden = true;
+            clearReservationMessages();
+            if (isDuplicate) {
+                reservationSuccess.querySelector('.beta-success__title').textContent = 'You are already in the Metron family.';
+                reservationSuccess.querySelector('.beta-success__sub').textContent = 'Your free-year reservation is already confirmed.';
+            }
+            reservationSuccess.hidden = false;
+            reservationSuccess.focus();
+        }
+
+        reservationPhoneMode.addEventListener('click', () => setReservationKind('phone'));
+        reservationEmailMode.addEventListener('click', () => setReservationKind('email'));
+        reservationBack.addEventListener('click', showRequest);
+
+        reservationRequestForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            clearReservationMessages();
+            const value = reservationContact.value.trim();
+            reservationContact.setCustomValidity('');
+            if (reservationKind === 'phone' && !/^\+?[0-9\s().-]{10,22}$/.test(value)) {
+                reservationContact.setCustomValidity('Enter a valid mobile phone number, including country code.');
+            }
+            if (!reservationRequestForm.checkValidity()) {
+                reservationRequestForm.reportValidity();
+                return;
+            }
+
+            reservationDestination = value;
+            const button = document.getElementById('reservation-request-submit');
+            setReservationBusy(button, true);
+            reservationStatus.textContent = 'Sending your verification code…';
+            try {
+                const data = await postReservation(reservationEndpoints.request, {
+                    [reservationKind]: reservationDestination,
+                    consent: reservationConsent.checked,
+                    source: 'launch-reservation',
+                    campaign: 'founding-year'
+                });
+                if (['duplicate', 'already_verified', 'verified'].includes(data.status)) {
+                    showReservationSuccess(true);
+                } else if (data.status === undefined || ['pending', 'requested', 'code_sent'].includes(data.status)) {
+                    showVerification();
+                } else {
+                    throw new Error('The verification service returned an unexpected response. Please try again.');
+                }
+            } catch (error) {
+                if (error.duplicate) showReservationSuccess(true);
+                else showReservationError(error.message);
+            } finally {
+                setReservationBusy(button, false);
+            }
+        });
+
+        reservationVerifyForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            clearReservationMessages();
+            if (!reservationVerifyForm.checkValidity()) {
+                reservationVerifyForm.reportValidity();
+                return;
+            }
+
+            const button = document.getElementById('reservation-verify-submit');
+            setReservationBusy(button, true);
+            reservationStatus.textContent = 'Verifying your reservation…';
+            try {
+                const data = await postReservation(reservationEndpoints.verify, {
+                    [reservationKind]: reservationDestination,
+                    code: reservationCode.value.trim()
+                });
+                if (['verified', 'reserved', 'success'].includes(data.status)) {
+                    showReservationSuccess(Boolean(data.duplicate));
+                } else {
+                    throw new Error('That code could not be verified. Check it and try again.');
+                }
+            } catch (error) {
+                if (error.duplicate) showReservationSuccess(true);
+                else showReservationError(error.message);
+            } finally {
+                setReservationBusy(button, false);
+            }
+        });
 
         // ==========================================
         // Problem scroll — reveal left immediately, right on scroll
@@ -3844,22 +4117,6 @@
                 setFeature(Math.min(2, Math.floor(progress * 3)));
             }, { passive: true });
         }
-
-        // Beta section form
-        const betaForm = document.getElementById('beta-form');
-        if (betaForm) {
-            betaForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                submitBetaForm(
-                    document.getElementById('beta-email').value,
-                    betaForm,
-                    document.getElementById('beta-success'),
-                    document.getElementById('beta-error'),
-                    document.getElementById('beta-submit')
-                );
-            });
-        }
-
 
         // ==========================================
         // 7. TESTIMONIAL ROTATOR

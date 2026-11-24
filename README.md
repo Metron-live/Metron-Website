@@ -1,6 +1,6 @@
 # Metron Landing Page
 
-Landing page for [metron.live](https://metron.live) — AI-powered fitness intelligence platform.
+Landing page for [metron.live](https://metron.live), including the verified launch-reservation flow.
 
 ## Overview
 
@@ -10,8 +10,9 @@ Metron connects your wearables, workouts, and nutrition to deliver personalized 
 
 - **Frontend**: Static HTML/CSS/JS
 - **Fonts**: Space Grotesk (headings), Inter (body)
-- **Form Handling**: Formspree (email collection)
-- **Hosting**: GitHub Pages / Vercel / Netlify
+- **Reservation API**: `POST /api/v1/launch-reservations/request` and `/verify`
+- **Hosting**: GitHub Pages
+- **Tests**: Node contract checks and Playwright browser/snapshot coverage
 
 ## Setup
 
@@ -22,16 +23,11 @@ git clone https://github.com/Metron-live/metron-landing.git
 cd metron-landing
 ```
 
-### 2. Set up Formspree
+### 2. Install and test
 
-1. Create a free account at [formspree.io](https://formspree.io)
-2. Create a new form
-3. Copy your form ID
-4. Replace `YOUR_FORM_ID` in `index.html` with your actual form ID (appears twice)
-
-```html
-<!-- Find these lines and replace YOUR_FORM_ID -->
-<form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+```bash
+npm ci
+npm test
 ```
 
 ### 3. Deploy
@@ -40,14 +36,6 @@ cd metron-landing
 1. Go to repo Settings → Pages
 2. Set source to main branch
 3. Your site will be live at `https://metron-live.github.io/metron-landing`
-
-**Vercel:**
-```bash
-npx vercel
-```
-
-**Netlify:**
-- Drag and drop the folder to Netlify, or connect via Git
 
 ### 4. Custom Domain
 
@@ -64,12 +52,11 @@ metron-landing/
 └── README.md
 ```
 
-## Email Collection
+## Launch reservations
 
-Emails submitted through the forms are collected via Formspree. You can:
-- View submissions in the Formspree dashboard
-- Export to CSV
-- Set up integrations with Airtable, Google Sheets, Slack, etc.
+The production page defaults to phone verification and offers email as an
+alternative. Both channels require explicit consent and use the same two-step
+reservation API. No local or hosting-provider form function is required.
 
 ## Local Development
 
