@@ -1,84 +1,62 @@
-# Metron Landing Page
+# Metron Website
 
-Landing page for [metron.live](https://metron.live) — AI-powered fitness intelligence platform.
+The static GitHub Pages site for [metron.live](https://metron.live).
 
 ## Overview
 
-Metron connects your wearables, workouts, and nutrition to deliver personalized training and meal plans that adapt daily to how your body is actually performing.
+Metron launches as a free workout tracker and personal trainer for serious, self-coached athletes. The landing page explains the Train, Log, Learn, Adapt loop and offers a verified first-year launch reservation.
 
 ## Tech Stack
 
-- **Frontend**: Static HTML/CSS/JS
-- **Fonts**: Space Grotesk (headings), Inter (body)
-- **Form Handling**: Formspree (email collection)
-- **Hosting**: GitHub Pages / Vercel / Netlify
+- **Frontend**: Static HTML, CSS, and JavaScript
+- **Fonts**: Cardo for editorial copy, Inter for controls, Space Grotesk for the wordmark
+- **Reservation API**: `https://api.metron.live/launch/reservations`
+- **Hosting**: GitHub Pages
+
+The reservation form posts to `/start`, confirms the six-digit code through `/check`, and exposes an email waitlist fallback for HTTP or network failures. The browser contract tests intercept these configured production URLs, so the test suite never creates a live reservation.
 
 ## Setup
 
-### 1. Clone the repository
+### Local development
 
 ```bash
-git clone https://github.com/Metron-live/metron-landing.git
-cd metron-landing
+git clone https://github.com/Metron-live/Metron-Website.git
+cd Metron-Website
+npm ci
+npm test
 ```
 
-### 2. Set up Formspree
+`npm test` builds `dist/`, validates the HTML, checks local links and assets, enforces the launch copy contract, and exercises the reservation flow in Chromium.
 
-1. Create a free account at [formspree.io](https://formspree.io)
-2. Create a new form
-3. Copy your form ID
-4. Replace `YOUR_FORM_ID` in `index.html` with your actual form ID (appears twice)
+To serve the built site locally:
 
-```html
-<!-- Find these lines and replace YOUR_FORM_ID -->
-<form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-```
-
-### 3. Deploy
-
-**GitHub Pages:**
-1. Go to repo Settings → Pages
-2. Set source to main branch
-3. Your site will be live at `https://metron-live.github.io/metron-landing`
-
-**Vercel:**
 ```bash
-npx vercel
+npm run build
+python3 -m http.server 8080 --directory dist
 ```
 
-**Netlify:**
-- Drag and drop the folder to Netlify, or connect via Git
+Open `http://localhost:8080`.
 
-### 4. Custom Domain
+### Deployment
 
-Point your domain's DNS to your hosting provider and configure in their dashboard.
+Changes ship through a pull request. The website check workflow must pass before merge. GitHub Pages serves the `main` branch through the domain in `CNAME`.
 
 ## File Structure
 
 ```
-metron-landing/
+Metron-Website/
 ├── index.html              # Main landing page
 ├── privacy.html            # Privacy Policy
 ├── terms.html              # Terms of Service
 ├── health-data-privacy.html # Consumer Health Data Privacy
+├── scripts/                # Build and static validation
+├── tests/                  # Copy and reservation flow contracts
 └── README.md
 ```
 
-## Email Collection
+## Open Graph handoff
 
-Emails submitted through the forms are collected via Formspree. You can:
-- View submissions in the Formspree dashboard
-- Export to CSV
-- Set up integrations with Airtable, Google Sheets, Slack, etc.
-
-## Local Development
-
-Just open `index.html` in your browser. No build step required.
-
-For live reload during development:
-```bash
-npx live-server
-```
+The approved portrait MP4 and representative-frame PNG must be copied byte-for-byte from the approved handoff. Do not substitute or recompress these files. Until that handoff is available, `index.html` intentionally contains a TODO and publishes no `og:image` or `og:video` tags.
 
 ## License
 
