@@ -15,7 +15,7 @@ test.beforeAll(async () => {
   }
   server = http.createServer((request, response) => {
     const pathname = decodeURIComponent(new URL(request.url, 'http://localhost').pathname);
-    const relative = pathname === '/' ? 'index.html' : pathname.replace(/^\//, '');
+    const relative = pathname === '/' ? 'index.html' : /^\/r\/[^/]+\/?$/.test(pathname) ? '404.html' : pathname.replace(/^\//, '');
     const file = path.resolve(root, relative);
     if (!file.startsWith(`${root}${path.sep}`) || !fs.existsSync(file) || fs.statSync(file).isDirectory()) {
       response.writeHead(404).end('Not found');
@@ -33,7 +33,7 @@ test.afterAll(async () => new Promise((resolve) => server.close(resolve)));
 test('renders the required hero and reservation form', async ({ page }) => {
   await page.goto(origin);
 
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText('The pros get a team. You get Metron.');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText("The world's smartest personal trainer.");
   await expect(page.locator('#reservation-form')).toBeVisible();
   await expect(page.locator('#reservation-contact')).toBeVisible();
   await expect(page.locator('#marketing-consent')).toBeVisible();
@@ -74,7 +74,7 @@ test('completes the live two-step SMS reservation flow', async ({ page }) => {
   await page.locator('#verification-code').fill('123456');
   await page.locator('#verification-submit').click();
   await expect(page.locator('#reservation-status')).toHaveText('Reservation confirmed.');
-  await expect(page.locator('#reservation-message')).toContainText('90 days free');
+  await expect(page.locator('#reservation-message')).toContainText('first year of the full Metron coach is reserved free');
 
   expect(requests).toEqual([
     {
@@ -90,6 +90,73 @@ test('completes the live two-step SMS reservation flow', async ({ page }) => {
   ]);
 });
 
+test('captures a referral route for 30 days and sends it with the reservation', async ({ page }) => {
+  const requests = [];
+  await page.route('https://api.metron.live/referrals/ABC2345', async (route) => {
+    await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ first_name: 'Maya' }) });
+  });
+  await page.route('https://api.metron.live/launch/reservations/**', async (route) => {
+    const request = route.request();
+    requests.push({ url: request.url(), body: request.postDataJSON() });
+    const status = request.url().endsWith('/start') ? 'pending' : 'reserved';
+    await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ status }) });
+  });
+
+  await page.goto(`${origin}/r/abc2345`);
+  await expect.poll(() => page.url()).toBe(`${origin}/#reserve`);
+  await expect(page.locator('#referral-invite')).toHaveText('Invited by Maya');
+  await expect(page.locator('#referral-invite')).toBeVisible();
+
+  const [cookie] = await page.context().cookies(origin);
+  expect(cookie.name).toBe('metron_ref');
+  expect(cookie.value).toBe('ABC2345');
+  expect(cookie.sameSite).toBe('Lax');
+  expect(cookie.expires).toBeGreaterThan(Date.now() / 1000 + (29 * 24 * 60 * 60));
+  expect(cookie.expires).toBeLessThan(Date.now() / 1000 + (31 * 24 * 60 * 60));
+
+  await page.locator('#reservation-contact').fill('+14155550123');
+  await page.locator('#marketing-consent').check();
+  await page.locator('#reservation-submit').click();
+  await page.locator('#verification-code').fill('123456');
+  await page.locator('#verification-submit').click();
+
+  expect(requests).toEqual([
+    {
+      url: 'https://api.metron.live/launch/reservations/start',
+      body: { contact: '+14155550123', channel: 'sms', consent_marketing: true, ref: 'ABC2345' }
+    },
+    {
+      url: 'https://api.metron.live/launch/reservations/check',
+      body: { contact: '+14155550123', code: '123456', ref: 'ABC2345' }
+    }
+  ]);
+});
+
+test('ignores an unknown referral code', async ({ page }) => {
+  let lookupCount = 0;
+  let requestBody;
+  await page.route('https://api.metron.live/referrals/ZYX9876', async (route) => {
+    lookupCount += 1;
+    await route.fulfill({ status: 404, contentType: 'application/json', body: JSON.stringify({ detail: 'Not found' }) });
+  });
+  await page.route('https://api.metron.live/launch/reservations/start', async (route) => {
+    requestBody = route.request().postDataJSON();
+    await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ status: 'pending' }) });
+  });
+
+  await page.goto(`${origin}/r/zyx9876`);
+  await expect.poll(() => page.url()).toBe(`${origin}/#reserve`);
+  await expect.poll(() => lookupCount).toBe(1);
+  await expect(page.locator('#referral-invite')).toBeHidden();
+  expect(await page.context().cookies(origin)).toEqual([]);
+
+  await page.locator('#reservation-contact').fill('athlete@example.com');
+  await page.locator('#marketing-consent').check();
+  await page.locator('#reservation-submit').click();
+
+  expect(requestBody).toEqual({ contact: 'athlete@example.com', channel: 'email', consent_marketing: true });
+});
+
 test('selects email verification and displays API errors', async ({ page }) => {
   let requestBody;
   await page.route('https://api.metron.live/launch/reservations/start', async (route) => {
@@ -102,6 +169,8 @@ test('selects email verification and displays API errors', async ({ page }) => {
   await page.locator('#marketing-consent').check();
   await page.locator('#reservation-submit').click();
   await expect(page.locator('#reservation-message')).toHaveText('Invalid email address.');
+  await expect(page.locator('#reservation-fallback')).toBeVisible();
+  await expect(page.locator('#reservation-fallback-link')).toHaveAttribute('href', /mailto:hello@metron\.live/);
   expect(requestBody).toEqual({ contact: 'athlete@example.com', channel: 'email', consent_marketing: true });
 });
 

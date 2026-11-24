@@ -55,6 +55,13 @@ response. Likewise, the start response must be exactly `{"status":"pending"}`;
 the browser does not infer success from the HTTP status alone or accept
 undocumented response fields.
 
+Referral links use `/r/<code>`. The static `404.html` route stores a valid
+seven-character code in the first-party `metron_ref` cookie for 30 days and
+redirects to `/#reserve`. The reservation page resolves the code through
+`GET https://api.metron.live/referrals/<code>` before displaying the inviter's
+first name or adding `ref` to the reservation requests. Unknown codes are
+cleared and are never submitted.
+
 ### 3. Deploy
 
 **GitHub Pages:**
@@ -79,6 +86,7 @@ Point your domain's DNS to your hosting provider and configure in their dashboar
 ```
 metron-landing/
 ├── index.html              # Main landing page
+├── 404.html                # Static-host referral route
 ├── privacy.html            # Privacy Policy
 ├── terms.html              # Terms of Service
 ├── health-data-privacy.html # Consumer Health Data Privacy
@@ -96,10 +104,27 @@ state. The page never stores contact details in browser storage.
 ```bash
 npm ci
 npm run build
+npm run check:html
+npm run check:content
 npm run check:links
 npm run check:copy
 npm run test:contract
 npm run test:smoke
+```
+
+## Social preview handoff
+
+The approved 720x960 MP4 and representative PNG are not available in this
+checkout. The build intentionally removes the older preview files and the
+homepage intentionally omits `og:image` and `og:video` rather than publishing a
+substitute. When `/Users/benshai/Downloads/Metron Large Lockup/approved handoff`
+is available, copy both approved files byte-for-byte, record their source and
+repository SHA-256 values, and only then add the Open Graph media metadata and
+static poster.
+
+```bash
+shasum -a 256 "/Users/benshai/Downloads/Metron Large Lockup/approved handoff/"*
+shasum -a 256 path/to/copied/approved-assets/*
 ```
 
 ## Local Development

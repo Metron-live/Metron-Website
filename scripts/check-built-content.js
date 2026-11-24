@@ -5,6 +5,7 @@ const path = require('node:path');
 const root = path.resolve(process.argv[2] || 'dist');
 const homepage = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const privacy = fs.readFileSync(path.join(root, 'privacy.html'), 'utf8');
+const retiredPreviewDirectory = path.join(root, 'brand', 'brand preview');
 
 assert.match(privacy, /<h2 id="text-messages">Text messages<\/h2>/);
 assert.match(privacy, /\bSTOP\b/);
@@ -15,12 +16,22 @@ assert.match(
 );
 assert.match(
   homepage,
-  /postJson\(startEndpoint, \{ contact: pendingContact, channel, consent_marketing: true \}, 'pending'\)/
+  /const startBody = \{ contact: pendingContact, channel, consent_marketing: true \}[\s\S]*?postJson\(startEndpoint, startBody, 'pending'\)/
 );
 assert.match(
   homepage,
-  /postJson\(checkEndpoint, \{ contact: pendingContact, code: codeInput\.value\.trim\(\) \}, 'reserved'\)/
+  /const checkBody = \{ contact: pendingContact, code: codeInput\.value\.trim\(\) \}[\s\S]*?postJson\(checkEndpoint, checkBody, 'reserved'\)/
 );
 assert.match(homepage, /responseKeys\.length !== 1 \|\| responseKeys\[0\] !== 'status' \|\| payload\.status !== expectedStatus/);
+assert.match(homepage, /<title>The World's Smartest Personal Trainer<\/title>/);
+assert.match(homepage, /Join the waitlist by email\./);
+assert.doesNotMatch(homepage, /property="og:(?:image|video)(?::[^" ]+)?"/);
+for (const file of ['og-preview-approved.mp4', 'og-preview-approved.png']) {
+  assert.equal(
+    fs.existsSync(path.join(retiredPreviewDirectory, file)),
+    false,
+    `unverified social preview must not be published: ${file}`
+  );
+}
 
-console.log('Verified the built request and response contract, privacy SMS disclosure, and form link.');
+console.log('Verified built titles, reservation contract, fallback, privacy disclosure, and pending OG handoff guard.');

@@ -6,9 +6,8 @@
 - Free product: **the best free workout tracker.**
 - Audience: **serious self-coached athletes.**
 - Tracking, live logging, and workout history remain free.
-- The full coach starts with 90 days free. Founding Members can keep the
-  $79.99/year price through April 30 2027. If the user does not continue, the
-  free tracker remains.
+- Athletes who complete a verified launch reservation receive the first year
+  of the full coach free. The free tracker remains afterward.
 
 ## Product proof
 
@@ -29,16 +28,17 @@ Training is the only launch module. Injury mode, vacation mode,
 technical-skill coaching, video form analysis, SmartRest, and a dedicated Watch
 experience must always be labeled **Coming later**.
 
-Do not publish testimonials, usage statistics, performance claims, pricing, or
+Do not publish social proof, usage statistics, performance claims, pricing, or
 integrations unless they have been independently verified and approved.
 
 ## Reservation
 
 The reservation form is phone-first and also accepts email. The visitor verifies
 a code before the page confirms eligibility. A verified reservation provides
-90 days free and the Founding Member price ($79.99/yr) locked through April 30
-2027. The free tracker remains available if the user does not continue. Use
-this confirmation:
+the first year of the full coach free. The free tracker remains available
+afterward. If the configured service is unavailable, the page exposes a
+waitlist email link instead of leaving a dead call to action. Use this
+confirmation:
 
-> Welcome to the Metron family. You have 90 days free and the Founding Member
-> price ($79.99/yr) locked through April 30 2027.
+> Your first year of the full Metron coach is reserved free. Workout tracking
+> and history remain free afterward.

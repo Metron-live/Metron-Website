@@ -3,32 +3,24 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Metron | How do I train?</title>
-    <meta name="description" content="Metron gives serious self-coached athletes an adaptive training plan, fast workout logging, clear analysis and Arete text coaching.">
+    <title>The World's Smartest Personal Trainer</title>
+    <meta name="description" content="Metron is the world's smartest personal trainer and the best free workout tracker for serious self-coached athletes.">
     <meta name="theme-color" content="#000000">
     <meta name="metron-reservation-api-base" content="https://api.metron.live/launch/reservations">
-    <meta property="og:title" content="Metron. How do I train?">
-    <meta property="og:description" content="The strength coach, sports scientist and data analyst that athletes without a staff never had.">
+    <meta name="metron-referral-api-base" content="https://api.metron.live/referrals">
+    <meta property="og:title" content="The World's Smartest Personal Trainer">
+    <meta property="og:description" content="Train. Log. Learn. Adapt. Metron launches with training for serious self-coached athletes.">
     <meta property="og:url" content="https://metron.live/">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Metron">
-    <meta property="og:image" content="https://metron.live/brand/brand%20preview/og-preview-approved.png">
-    <meta property="og:image:secure_url" content="https://metron.live/brand/brand%20preview/og-preview-approved.png">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="720">
-    <meta property="og:image:height" content="960">
-    <meta property="og:image:alt" content="Metron performance training preview">
-    <meta property="og:video" content="https://metron.live/brand/brand%20preview/og-preview-approved.mp4">
-    <meta property="og:video:secure_url" content="https://metron.live/brand/brand%20preview/og-preview-approved.mp4">
-    <meta property="og:video:type" content="video/mp4">
-    <meta property="og:video:width" content="720">
-    <meta property="og:video:height" content="960">
-    <meta property="og:video:poster" content="https://metron.live/brand/brand%20preview/og-preview-approved.png">
+    <!-- TODO(approved-handoff): Copy the approved 720x960 representative PNG and
+         720x960 H.264 MP4 from /Users/benshai/Downloads/Metron Large Lockup/approved handoff
+         byte-for-byte, verify their SHA-256 values, then add og:image, og:video,
+         dimensions, MIME types, and a static poster. The handoff folder is not
+         reachable on this machine, so the older preview assets are not substituted. -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Metron. How do I train?">
-    <meta name="twitter:description" content="The performance staff that serious self-coached athletes never had.">
-    <meta name="twitter:image" content="https://metron.live/brand/brand%20preview/og-preview-approved.png">
-    <meta name="twitter:image:alt" content="Metron performance training preview">
+    <meta name="twitter:title" content="The World's Smartest Personal Trainer">
+    <meta name="twitter:description" content="Train. Log. Learn. Adapt. Training intelligence for serious self-coached athletes.">
     <link rel="canonical" href="https://metron.live/">
     <link rel="icon" href="favicon.ico">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -126,6 +118,11 @@
         .reservation-disclosure a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
         .reservation-message { margin-top: 10px; font-size: 15px; }
         .reservation-message[hidden] { display: none; }
+        .reservation-fallback { margin-top: 10px; font-size: 15px; color: rgba(255,255,255,.9); }
+        .reservation-fallback[hidden] { display: none; }
+        .reservation-fallback a { color: inherit; text-underline-offset: 3px; }
+        .referral-invite { margin: 0 0 8px; font-size: 13px; color: rgba(255,255,255,.76); }
+        .referral-invite[hidden] { display: none; }
         .section { padding: clamp(88px,11vw,150px) 0; background: var(--white); }
         .section--black { color: var(--white); background: var(--black); }
         .section__inner { width: var(--page); margin: 0 auto; }
@@ -224,21 +221,22 @@
     <div class="mobile-menu" id="mobile-menu" hidden><a href="#system">How it works</a><a href="#compare">Free vs paid</a><a href="#faq">FAQ</a><a class="button" href="#reserve">Get the App</a></div>
     <main id="main">
         <section class="hero" id="top">
-            <video class="hero__video" id="hero-video" muted loop playsinline preload="metadata" poster="brand/brand preview/og-preview-approved.png" aria-hidden="true"><source src="videos/montage-web.mp4" type="video/mp4"></video>
+            <video class="hero__video" id="hero-video" muted loop playsinline preload="metadata" aria-hidden="true"><source src="videos/montage-web.mp4" type="video/mp4"></video>
             <div class="hero__shade"></div>
             <div class="hero__inner"><div class="hero__copy">
-                <p class="hero__eyebrow">How do I train?</p>
-                <h1 id="hero-title">The pros get a team. You get Metron.</h1>
-                <p class="hero__subhead">Metron is the strength coach, sports scientist and data analyst that athletes without a staff never had.</p>
-                <p class="hero__line">It takes the guesswork out of greatness.</p>
+                <p class="hero__eyebrow">Training intelligence, built for you</p>
+                <h1 id="hero-title">The world's smartest personal trainer.</h1>
+                <p class="hero__subhead">And the best free workout tracker. Metron turns every session you log into a clearer next step for serious self-coached athletes.</p>
+                <p class="hero__line">Training launches first. More modules may come later.</p>
                 <div class="reservation-panel" id="reserve">
-                    <p class="reservation-status" id="reservation-status" role="status" aria-live="polite">Reserve your Founding Member offer.</p>
+                    <p class="reservation-status" id="reservation-status" role="status" aria-live="polite">Reserve your first year free.</p>
+                    <p class="referral-invite" id="referral-invite" aria-live="polite" hidden></p>
                     <form class="reservation-form" id="reservation-form" action="https://api.metron.live/launch/reservations/start" method="post">
                         <div class="reservation-fields">
                             <label class="field-label" for="reservation-contact">Mobile number or email address</label><input class="form-input" id="reservation-contact" name="contact" type="text" inputmode="text" autocapitalize="none" spellcheck="false" aria-describedby="reservation-consent reservation-offer" placeholder="Mobile number or email address" required minlength="3" maxlength="320">
                             <button class="button button--orange" id="reservation-submit" type="submit">Send verification code</button>
                         </div>
-                        <label class="consent-field" id="reservation-consent" for="marketing-consent"><input id="marketing-consent" name="consent_marketing" type="checkbox" required><span>Text me my download link at launch. Msg &amp; data rates may apply. Reply STOP to opt out.</span></label>
+                        <label class="consent-field" id="reservation-consent"><input id="marketing-consent" name="consent_marketing" type="checkbox" required><span>Text me my download link at launch. Msg &amp; data rates may apply. Reply STOP to opt out.</span></label>
                         <p class="reservation-disclosure">See our <a href="/privacy.html#text-messages">Text messages disclosure</a> for message frequency, HELP instructions, and carrier terms.</p>
                     </form>
                     <form class="verification-form" id="verification-form" action="https://api.metron.live/launch/reservations/check" method="post" hidden>
@@ -247,29 +245,30 @@
                             <button class="button button--orange" id="verification-submit" type="submit">Confirm reservation</button>
                         </div>
                     </form>
-                    <p class="reservation-note" id="reservation-offer">90 days free and the Founding Member price ($79.99/yr) locked through April 30 2027.</p>
+                    <p class="reservation-note" id="reservation-offer">One verified reservation per athlete. Launch availability may be limited.</p>
                     <p class="reservation-message" id="reservation-message" role="alert" hidden></p>
+                    <p class="reservation-fallback" id="reservation-fallback" hidden>The reservation service is temporarily unavailable. <a id="reservation-fallback-link" href="mailto:hello@metron.live?subject=Metron%20launch%20waitlist">Join the waitlist by email.</a></p>
                 </div>
             </div></div>
         </section>
         <section class="section problem" id="problem"><div class="section__inner">
             <p class="section__label">The self-coached problem</p><h2 class="section__title">Logging is easy. Knowing how to train is the hard part.</h2>
-            <p class="section__intro">You are juggling practice, lifting, conditioning and recovery with no one to ask what should change. You spend hours trying to optimize your own training while fighting for a starting spot, training for a team, a season or a qualifier.</p>
-            <div class="problem__audience"><strong>Built for the athlete without a staff</strong><p>Metron turns your schedule, completed work and recovery signals into a plan you can understand and follow.</p></div>
+            <p class="section__intro">You are juggling practice, lifting, conditioning and recovery with no one to ask what should change. A runner balancing interval practice and easy volume, or a climber connecting strength practice to time on the wall, deserves more than a blank log.</p>
+            <div class="problem__audience"><strong>Built for serious self-coached athletes</strong><p>Metron turns your schedule, completed work and recovery signals into a plan you can understand and follow.</p></div>
         </div></section>
         <section class="section" id="system"><div class="section__inner">
-            <p class="section__label">One connected system</p><h2 class="section__title">Build the plan. Record the work. See what changed. Train again.</h2>
+            <p class="section__label">One connected system</p><h2 class="section__title">Train. Log. Learn. Adapt.</h2>
             <p class="section__intro">Your plan, workout history and readiness stay connected, so the next session reflects what you actually did.</p>
             <div class="steps">
-                <article class="step"><span class="step__number">01</span><h3>Plan for the season</h3><p>Start with your goal, training history, available equipment, practices and competitions.</p></article>
-                <article class="step"><span class="step__number">02</span><h3>Log every set</h3><p>Log every set fast. Your history builds as you train, free.</p></article>
-                <article class="step"><span class="step__number">03</span><h3>Learn from actuals</h3><p>Compare the plan with completed reps, load and effort. Progression follows what happened, not what was scheduled.</p></article>
-                <article class="step"><span class="step__number">04</span><h3>Adapt with context</h3><p>Poor sleep and a low HRV morning can turn tomorrow's heavy lower session into a lighter one, with the reason shown.</p><span class="step__reason">Each change comes with its reason.</span></article>
+                <article class="step"><span class="step__number">01</span><h3>Train</h3><p>Do the session with intent, whether you are building strength, speed, endurance or skill.</p></article>
+                <article class="step"><span class="step__number">02</span><h3>Log</h3><p>Capture every set quickly while the useful details are still fresh. Your history stays free.</p></article>
+                <article class="step"><span class="step__number">03</span><h3>Learn</h3><p>Compare the plan with completed reps, load and effort so progress and plateaus become visible.</p></article>
+                <article class="step"><span class="step__number">04</span><h3>Adapt</h3><p>Use that evidence to make the next session specific to you, with the reason for every change shown.</p></article>
             </div>
         </div></section>
         <section class="section section--black" id="more-than-trainer"><div class="section__inner trainer-grid">
-            <div><p class="section__label">More than a trainer</p><h2>The world's smartest personal trainer is only the starting comparison.</h2></div>
-            <div class="trainer-copy"><p class="trainer-compare">A trainer tells you what to do. Metron studies your logs, recovery and the research, explains every change, and adapts to your season, practices and competitions.</p><p>Metron brings the work of a strength coach, sports scientist and data analyst into one system for athletes who have had to do that work alone.</p></div>
+            <div><p class="section__label">Training, connected</p><h2>A personal trainer that learns from the work you actually do.</h2></div>
+            <div class="trainer-copy"><p class="trainer-compare">Metron connects your plan, workout log and training history, then explains why the next session should stay the same or change.</p><p>The free tracker keeps the record. The full coach helps you learn from it and choose what comes next.</p></div>
         </div></section>
         <section class="section" id="capabilities"><div class="section__inner">
             <p class="section__label">Training, connected</p><h2 class="section__title">The inputs and decisions that shape your next session.</h2>
@@ -278,7 +277,7 @@
                 <article class="capability"><h3>Daily readiness</h3><p>Apple Health sleep and HRV inputs inform day-to-day adjustments.</p></article>
                 <article class="capability"><h3>Progression from actuals</h3><p>Sets, reps, load and effort shape what comes next.</p></article>
                 <article class="capability"><h3>Arete text coaching</h3><p>Ask what changed, why it changed and how to approach the session.</p></article>
-                <article class="capability"><h3>Practice awareness</h3><p>Team practices sit beside strength and conditioning work.</p></article>
+                <article class="capability"><h3>Practice awareness</h3><p>Sport practices sit beside strength and conditioning work.</p></article>
                 <article class="capability"><h3>Competition awareness</h3><p>Your plan accounts for the events that matter in your season.</p></article>
             </div>
         </div></section>
@@ -295,12 +294,28 @@
                 <tr><th scope="row">Practice and competition awareness</th><td>Not included</td><td class="included">Included</td></tr>
             </tbody></table></div>
         </div></section>
-        <section class="section section--black"><div class="section__inner offer"><div><p class="section__label">Start with your training</p><h2>Put a performance staff behind the work you already do.</h2><p>Get 90 days free and the Founding Member price ($79.99/yr) locked through April 30 2027. Your tracker and history remain free.</p></div><a class="button button--orange" href="#reserve">Reserve your offer</a></div></section>
+        <section class="section" id="roadmap"><div class="section__inner">
+            <p class="section__label">Honest roadmap</p><h2 class="section__title">Training first. More, later.</h2>
+            <p class="section__intro">Training is the only launch module. Optional specialized modules may arrive later, but they are not part of the first release.</p>
+            <div class="capabilities">
+                <article class="capability"><h3>Training at launch</h3><p>Free workout tracking, useful history and the Train, Log, Learn, Adapt loop.</p></article>
+                <article class="capability"><h3>Coming later</h3><p>Additional coaching context will arrive only when it is ready and responsibly explained.</p></article>
+            </div>
+        </div></section>
+        <section class="section section--black"><div class="section__inner offer"><div><p class="section__label">Founding athlete offer</p><h2>Reserve your first year free.</h2><p>Complete a verified phone or email reservation. Workout tracking and your history remain free afterward.</p></div><a class="button button--orange" href="#reserve">Reserve your free year</a></div></section>
+        <section class="section" id="trust"><div class="section__inner">
+            <p class="section__label">Trust, in plain language</p><h2 class="section__title">Your training data is personal.</h2>
+            <div class="capabilities">
+                <article class="capability"><h3>You stay in control</h3><p>Metron uses your information to provide the product you ask for. We do not sell your personal information.</p></article>
+                <article class="capability"><h3>Wellness, not medicine</h3><p>Metron supports training decisions. It does not diagnose or treat medical conditions. Read our <a href="health-data-privacy.html">health data privacy policy</a>.</p></article>
+            </div>
+        </div></section>
         <section class="section" id="faq"><div class="section__inner">
             <p class="section__label">FAQ</p><h2 class="section__title">The practical details.</h2><div class="faq-list">
-                <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-one"><span>Who is Metron for?</span><span aria-hidden="true">+</span></button><div class="faq-answer" id="faq-one" hidden>Metron is for serious self-coached athletes training toward a team, a season, a starting spot or a qualifier without a full performance staff.</div></div>
-                <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-two"><span>What stays free?</span><span aria-hidden="true">+</span></button><div class="faq-answer" id="faq-two" hidden>Workout logging and your training history stay free after your 90 days of the full coach.</div></div>
-                <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-three"><span>What data informs adaptation?</span><span aria-hidden="true">+</span></button><div class="faq-answer" id="faq-three" hidden>Your completed training, schedule, practices, competitions and Apple Health sleep and HRV inputs can inform adjustments.</div></div>
+                <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-one"><span>Who is Metron for?</span><span aria-hidden="true">+</span></button><div class="faq-answer" id="faq-one" hidden>Metron is for serious self-coached athletes training toward a season, a starting spot or a qualifier without a dedicated coach.</div></div>
+                <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-two"><span>What stays free?</span><span aria-hidden="true">+</span></button><div class="faq-answer" id="faq-two" hidden>Workout logging and your training history stay free after your first year of the full coach.</div></div>
+                <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-three"><span>What platforms is Metron available on?</span><span aria-hidden="true">+</span></button><div class="faq-answer" id="faq-three" hidden>Metron is launching on iPhone first. Other platforms are not part of the initial release.</div></div>
+                <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-four"><span>What data informs adaptation?</span><span aria-hidden="true">+</span></button><div class="faq-answer" id="faq-four" hidden>Your completed training, schedule, practices, competitions and Apple Health sleep and HRV inputs can inform adjustments.</div></div>
             </div>
         </div></section>
         <section class="closing" aria-labelledby="closing-text"><div class="closing__inner"><blockquote id="closing-text">It is a shame for one to grow old without seeing the beauty and strength of which the body is capable.</blockquote><cite>Socrates</cite></div></section>
@@ -348,11 +363,34 @@
             }));
             const apiBase = document.querySelector('meta[name="metron-reservation-api-base"]').content.replace(/\/$/, '');
             const startEndpoint = `${apiBase}/start`; const checkEndpoint = `${apiBase}/check`;
+            const referralApiBase = document.querySelector('meta[name="metron-referral-api-base"]').content.replace(/\/$/, '');
             const reservationForm = document.getElementById('reservation-form'); const contactInput = document.getElementById('reservation-contact'); const consentInput = document.getElementById('marketing-consent'); const reservationSubmit = document.getElementById('reservation-submit');
             const verificationForm = document.getElementById('verification-form'); const codeInput = document.getElementById('verification-code'); const verificationSubmit = document.getElementById('verification-submit');
-            const status = document.getElementById('reservation-status'); const message = document.getElementById('reservation-message');
-            let pendingContact = '';
-            window.MetronReservationConfig = Object.freeze({ apiBase, startEndpoint, checkEndpoint });
+            const status = document.getElementById('reservation-status'); const message = document.getElementById('reservation-message'); const referralInvite = document.getElementById('referral-invite');
+            const fallback = document.getElementById('reservation-fallback'); const fallbackLink = document.getElementById('reservation-fallback-link');
+            let pendingContact = ''; let activeReferralCode = '';
+            window.MetronReservationConfig = Object.freeze({ apiBase, startEndpoint, checkEndpoint, referralApiBase });
+            function readCookie(name) {
+                const prefix = `${encodeURIComponent(name)}=`;
+                const part = document.cookie.split('; ').find((value) => value.startsWith(prefix));
+                return part ? decodeURIComponent(part.slice(prefix.length)) : '';
+            }
+            function clearReferralCookie() {
+                document.cookie = `metron_ref=; Max-Age=0; Path=/; SameSite=Lax${window.location.protocol === 'https:' ? '; Secure' : ''}`;
+            }
+            async function resolveReferral() {
+                const code = readCookie('metron_ref').trim().toUpperCase();
+                if (!/^[A-HJ-NP-Z2-9]{7}$/.test(code)) { if (code) clearReferralCookie(); return; }
+                try {
+                    const response = await fetch(`${referralApiBase}/${encodeURIComponent(code)}`, { headers: { 'Accept': 'application/json' } });
+                    if (!response.ok) { if (response.status === 404 || response.status === 410) clearReferralCookie(); return; }
+                    const payload = await response.json();
+                    if (typeof payload.first_name !== 'string' || !payload.first_name.trim()) { clearReferralCookie(); return; }
+                    const firstName = payload.first_name.trim().split(/\s+/)[0];
+                    activeReferralCode = code; referralInvite.textContent = `Invited by ${firstName}`; referralInvite.hidden = false;
+                } catch {}
+            }
+            const referralLookup = resolveReferral();
             async function postJson(endpoint, body, expectedStatus) {
                 const response = await fetch(endpoint, { method: 'POST', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
                 let payload = {};
@@ -362,21 +400,31 @@
                 if (responseKeys.length !== 1 || responseKeys[0] !== 'status' || payload.status !== expectedStatus) throw new Error('The verification service returned an unexpected response.');
                 return payload;
             }
+            function showWaitlistFallback() {
+                const value = contactInput.value.trim();
+                const body = value.includes('@') ? `Please add ${value} to the Metron launch waitlist.` : 'Please add me to the Metron launch waitlist.';
+                fallbackLink.href = `mailto:hello@metron.live?subject=${encodeURIComponent('Metron launch waitlist')}&body=${encodeURIComponent(body)}`;
+                fallback.hidden = false;
+            }
             reservationForm.addEventListener('submit', async (event) => {
                 event.preventDefault(); if (!reservationForm.reportValidity()) return;
-                pendingContact = contactInput.value.trim(); reservationSubmit.disabled = true; message.hidden = true;
+                pendingContact = contactInput.value.trim(); reservationSubmit.disabled = true; message.hidden = true; fallback.hidden = true; await referralLookup;
                 try {
                     const channel = pendingContact.includes('@') ? 'email' : 'sms';
-                    await postJson(startEndpoint, { contact: pendingContact, channel, consent_marketing: true }, 'pending');
+                    const startBody = { contact: pendingContact, channel, consent_marketing: true };
+                    if (activeReferralCode) startBody.ref = activeReferralCode;
+                    await postJson(startEndpoint, startBody, 'pending');
                     reservationForm.hidden = true; verificationForm.hidden = false; status.textContent = `Enter the 6-digit code sent by ${channel === 'sms' ? 'text message' : 'email'}.`; codeInput.focus();
-                } catch (error) { message.textContent = error.message; message.hidden = false; }
+                } catch (error) { message.textContent = error.message; message.hidden = false; showWaitlistFallback(); }
                 finally { reservationSubmit.disabled = false; }
             });
             verificationForm.addEventListener('submit', async (event) => {
                 event.preventDefault(); if (!verificationForm.reportValidity()) return; verificationSubmit.disabled = true; message.hidden = true;
                 try {
-                    await postJson(checkEndpoint, { contact: pendingContact, code: codeInput.value.trim() }, 'reserved');
-                    verificationForm.hidden = true; status.textContent = 'Reservation confirmed.'; message.textContent = 'You have 90 days free and the Founding Member price ($79.99/yr) locked through April 30 2027.'; message.hidden = false;
+                    const checkBody = { contact: pendingContact, code: codeInput.value.trim() };
+                    if (activeReferralCode) checkBody.ref = activeReferralCode;
+                    await postJson(checkEndpoint, checkBody, 'reserved');
+                    verificationForm.hidden = true; status.textContent = 'Reservation confirmed.'; message.textContent = 'Your first year of the full Metron coach is reserved free. Workout tracking and history remain free afterward.'; message.hidden = false;
                 } catch (error) { message.textContent = error.message; message.hidden = false; }
                 finally { verificationSubmit.disabled = false; }
             });

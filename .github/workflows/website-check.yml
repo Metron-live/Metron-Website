@@ -26,12 +26,16 @@ jobs:
         run: npm ci
       - name: Build static site
         run: npm run build
+      - name: Validate built HTML
+        run: npm run check:html
       - name: Check built privacy disclosure
         run: npm run check:content
       - name: Check built links
         run: npm run check:links
       - name: Check built launch copy
         run: npm run check:copy
+      - name: Check built reservation content
+        run: npm run check:content
       - name: Run site contract tests
         run: npm run test:contract
       - name: Install Playwright Chromium
@@ -47,8 +51,10 @@ jobs:
             curl -fsS http://127.0.0.1:4173/ -o /tmp/metron-page.html && break
             sleep 1
           done
-          grep -Fq 'The pros get a team. You get Metron.' /tmp/metron-page.html
-          if grep -Eiq 'heptagon|free[ -]?year|founding[ -]?year|founder[ -]?story' /tmp/metron-page.html; then
+          grep -Fq "The world's smartest personal trainer." /tmp/metron-page.html
+          grep -Fq "<title>The World's Smartest Personal Trainer</title>" /tmp/metron-page.html
+          grep -Fq "property=\"og:title\" content=\"The World's Smartest Personal Trainer\"" /tmp/metron-page.html
+          if grep -Eiq 'heptagon|founder[ -]?story|rugby|23%|testimonial placeholder|nutrition module|supplement module|seven[ -]?pillar|team(s|mates)?|—' /tmp/metron-page.html; then
             echo 'Forbidden legacy copy remains in the built page.' >&2
             exit 1
           fi

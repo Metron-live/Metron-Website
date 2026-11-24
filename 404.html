@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex">
+    <title>Metron referral</title>
+</head>
+<body>
+    <p>Taking you to Metron...</p>
+    <script>
+        (() => {
+            const match = window.location.pathname.match(/^\/r\/([A-HJ-NP-Z2-9]{7})\/?$/i);
+            if (match) {
+                const code = match[1].toUpperCase();
+                const secure = window.location.protocol === 'https:' ? '; Secure' : '';
+                document.cookie = `metron_ref=${encodeURIComponent(code)}; Max-Age=2592000; Path=/; SameSite=Lax${secure}`;
+                window.location.replace('/#reserve');
+                return;
+            }
+            window.location.replace('/');
+        })();
+    </script>
+</body>
+</html>

@@ -5,6 +5,7 @@ const root = path.resolve(__dirname, '..');
 const output = path.join(root, 'dist');
 const entries = [
   'index.html',
+  '404.html',
   'privacy.html',
   'health-data-privacy.html',
   'terms.html',
@@ -31,6 +32,12 @@ for (const entry of entries) {
   const source = path.join(root, entry);
   if (!fs.existsSync(source)) throw new Error(`Missing build input: ${entry}`);
   fs.cpSync(source, path.join(output, entry), { recursive: true });
+}
+
+// The approved social handoff is still pending. Keep the older repository
+// previews available for design history, but never publish them as substitutes.
+for (const file of ['og-preview-approved.mp4', 'og-preview-approved.png']) {
+  fs.rmSync(path.join(output, 'brand', 'brand preview', file), { force: true });
 }
 
 console.log(`Built ${entries.length} static entries in dist/`);
