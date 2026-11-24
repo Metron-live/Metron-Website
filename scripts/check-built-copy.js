@@ -6,11 +6,13 @@ const failures = [];
 const forbidden = [
   { label: 'retired polygon name', pattern: new RegExp(`hepta${'gon'}`, 'i') },
   { label: 'retired origin-story copy', pattern: /founder[ -]?story/i },
+  { label: 'out-of-scope rugby example', pattern: /\brugby\b/i },
   { label: 'unsupported metric', pattern: /23%/i },
   { label: 'fabricated social proof', pattern: /testimonial placeholder/i },
   { label: 'out-of-scope nutrition claim', pattern: /nutrition module/i },
   { label: 'out-of-scope supplement claim', pattern: /supplement module/i },
   { label: 'retired seven-pillar claim', pattern: /seven[ -]?pillar/i },
+  { label: 'unsupported team claim', pattern: /\bteam(?:s|mates)?\b/i },
   { label: 'prohibited em dash', pattern: /—/ }
 ];
 
