@@ -72,7 +72,7 @@
         .nav::before {
             content: ''; position: absolute; z-index: -1; inset: 0; opacity: var(--nav-surface-opacity); pointer-events: none;
             background: #fff url('images/marble.png') center/cover;
-            transition: opacity var(--nav-fade-duration) ease;
+            transition: opacity var(--nav-fade-duration) linear;
             will-change: opacity;
         }
         .nav__inner { width: var(--page); height: 100%; margin: 0 auto; display: flex; align-items: center; gap: 28px; }

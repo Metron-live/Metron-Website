@@ -90,7 +90,7 @@ test('keeps the nav and backgrounds within the approved visual system', () => {
   assert.match(html, /window\.scrollY \/ navFadeDistance/);
   assert.match(html, /nav\.style\.setProperty\('--nav-surface-opacity', progress\.toFixed\(3\)\)/);
   assert.match(html, /--nav-fade-duration: 300ms/);
-  assert.match(html, /\.nav::before \{[\s\S]*?opacity: var\(--nav-surface-opacity\)[\s\S]*?transition: opacity var\(--nav-fade-duration\) ease/);
+  assert.match(html, /\.nav::before \{[\s\S]*?opacity: var\(--nav-surface-opacity\)[\s\S]*?transition: opacity var\(--nav-fade-duration\) linear/);
   assert.doesNotMatch(html, /nav[^\n]*classList\.(?:add|toggle)\([^\n]*(?:scrolled|solid)/i);
   assert.match(html, /\.nav \{[\s\S]*background: transparent/);
   assert.match(html, /\.nav::before \{[\s\S]*?background: #fff url\('images\/marble\.png'\) center\/cover/);
