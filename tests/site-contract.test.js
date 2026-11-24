@@ -88,6 +88,8 @@ test('uses the approved social preview and metadata', () => {
   assert.match(html, /property="og:video:height" content="960"/);
   assert.match(html, /property="og:video:poster" content="[^"]+og-preview-approved\.png"/);
   assert.match(html, /name="twitter:card" content="summary_large_image"/);
+  assert.match(html, /name="twitter:image" content="[^"]+og-preview-approved\.png"/);
+  assert.match(html, /name="twitter:image:alt" content="Metron performance training preview"/);
 });
 
 test('keeps the nav and backgrounds within the approved visual system', () => {
@@ -168,6 +170,8 @@ test('gates the phone-first reservation form and keeps the approved offer', () =
   assert.match(html, /id="reservation-contact"[^>]+type="tel"/);
   assert.match(html, /id="reservation-form"[^>]+hidden/);
   assert.match(html, /id="waitlist-form" hidden/);
+  assert.match(html, /class="reservation-panel" id="reserve" aria-busy="true"/);
+  assert.match(html, /function finishProbe\(\) \{ reservationPanel\.setAttribute\('aria-busy', 'false'\); \}/);
   assert.match(html, /id="marketing-consent"[^>]+type="checkbox" required/);
   assert.match(html, /mailto:\$\{waitlistEmail\}\?subject=\$\{subject\}&body=\$\{body\}/);
   assert.equal(fs.existsSync(path.join(root, 'netlify', 'functions', 'beta-signup.js')), false);

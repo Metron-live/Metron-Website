@@ -236,7 +236,7 @@
                 <h1 id="hero-title">The pros get a team. You get Metron.</h1>
                 <p class="hero__subhead">Metron is the strength coach, sports scientist and data analyst that athletes without a staff never had.</p>
                 <p class="hero__line">It takes the guesswork out of greatness.</p>
-                <div class="reservation-panel" id="reserve">
+                <div class="reservation-panel" id="reserve" aria-busy="true">
                     <p class="reservation-status" id="reservation-status" role="status" aria-live="polite">Checking reservation availability.</p>
                     <form class="reservation-form" id="reservation-form" action="https://api.metron.live/launch/reservations/start" method="post" hidden>
                         <div class="reservation-fields">
@@ -362,14 +362,16 @@
             const apiBase = document.querySelector('meta[name="metron-reservation-api-base"]').content.replace(/\/$/, '');
             const probeTimeoutMs = Number(document.querySelector('meta[name="metron-reservation-probe-timeout"]').content);
             const startEndpoint = `${apiBase}/start`; const checkEndpoint = `${apiBase}/check`;
+            const reservationPanel = document.getElementById('reserve');
             const reservationForm = document.getElementById('reservation-form'); const contactInput = document.getElementById('reservation-contact'); const consentInput = document.getElementById('marketing-consent'); const reservationSubmit = document.getElementById('reservation-submit');
             const waitlistForm = document.getElementById('waitlist-form'); const waitlistInput = document.getElementById('waitlist-email');
             const verificationForm = document.getElementById('verification-form'); const codeInput = document.getElementById('verification-code'); const verificationSubmit = document.getElementById('verification-submit');
             const status = document.getElementById('reservation-status'); const message = document.getElementById('reservation-message'); const waitlistEmail = 'beta@metron.live';
             let pendingContact = '';
             window.MetronReservationConfig = Object.freeze({ apiBase, startEndpoint, checkEndpoint, waitlistEmail, probeTimeoutMs });
-            function showWaitlist() { reservationForm.hidden = true; verificationForm.hidden = true; waitlistForm.hidden = false; status.textContent = 'Phone reservations are unavailable right now. Join the email waitlist.'; }
-            function showPhoneReservation() { waitlistForm.hidden = true; reservationForm.hidden = false; status.textContent = 'Phone reservations are available.'; }
+            function finishProbe() { reservationPanel.setAttribute('aria-busy', 'false'); }
+            function showWaitlist() { reservationForm.hidden = true; verificationForm.hidden = true; waitlistForm.hidden = false; status.textContent = 'Phone reservations are unavailable right now. Join the email waitlist.'; finishProbe(); }
+            function showPhoneReservation() { waitlistForm.hidden = true; reservationForm.hidden = false; status.textContent = 'Phone reservations are available.'; finishProbe(); }
             async function probeReservationEndpoint() {
                 const controller = new AbortController();
                 const timeout = window.setTimeout(() => controller.abort(), probeTimeoutMs);

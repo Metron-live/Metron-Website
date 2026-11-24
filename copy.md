@@ -38,4 +38,6 @@ approved.
 Probe the phone reservation endpoint with HEAD when the page loads. Show the
 phone-first form only after a successful response. Otherwise show an email
 waitlist that opens a prefilled message. The free tracker remains available if
-the athlete does not continue after the 30-day full-coach trial.
+the athlete does not continue after the 30-day full-coach trial. Mark the
+reservation panel busy while the endpoint check is pending, then clear that
+state when either form is shown.

@@ -42,6 +42,7 @@ test('shows the phone-first form only after the HEAD probe answers', async ({ pa
   await expect(page.locator('#reservation-form')).toBeVisible();
   await expect(page.locator('#reservation-contact')).toHaveAttribute('type', 'tel');
   await expect(page.locator('#waitlist-form')).toBeHidden();
+  await expect(page.locator('#reserve')).toHaveAttribute('aria-busy', 'false');
   await expect(page.locator('.consent-field')).toContainText('Text me my download link when Metron is available. Msg & data rates may apply. Reply STOP to opt out.');
   expect(methods).toEqual(['HEAD']);
 });
@@ -60,6 +61,7 @@ test('shows the email fallback when the endpoint is unreachable and opens a popu
 
   await expect(page.locator('#reservation-form')).toBeHidden();
   await expect(page.locator('#waitlist-form')).toBeVisible();
+  await expect(page.locator('#reserve')).toHaveAttribute('aria-busy', 'false');
   await page.locator('#waitlist-email').fill('athlete@example.com');
   await page.locator('#waitlist-submit').click();
 
@@ -74,8 +76,19 @@ test('shows the email fallback when the HEAD probe stalls', async ({ page }) => 
   await page.goto(origin);
 
   await expect(page.locator('#reservation-form')).toBeHidden();
+  await expect(page.locator('#reserve')).toHaveAttribute('aria-busy', 'true');
   await expect(page.locator('#waitlist-form')).toBeVisible({ timeout: 5000 });
   await expect(page.locator('#reservation-status')).toHaveText('Phone reservations are unavailable right now. Join the email waitlist.');
+  await expect(page.locator('#reserve')).toHaveAttribute('aria-busy', 'false');
+});
+
+test('shows the email fallback when the HEAD probe returns an error', async ({ page }) => {
+  await page.route('https://api.metron.live/launch/reservations/start', (route) => route.fulfill({ status: 503 }));
+  await page.goto(origin);
+
+  await expect(page.locator('#reservation-form')).toBeHidden();
+  await expect(page.locator('#waitlist-form')).toBeVisible();
+  await expect(page.locator('#reserve')).toHaveAttribute('aria-busy', 'false');
 });
 
 test('requires text-message consent before posting to the API', async ({ page }) => {
