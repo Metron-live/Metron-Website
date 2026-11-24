@@ -15,11 +15,12 @@ assert.match(
 );
 assert.match(
   homepage,
-  /postJson\(startEndpoint, \{ contact: pendingContact, channel, consent_marketing: true \}\)/
+  /postJson\(startEndpoint, \{ contact: pendingContact, channel, consent_marketing: true \}, 'pending'\)/
 );
 assert.match(
   homepage,
-  /postJson\(checkEndpoint, \{ contact: pendingContact, code: codeInput\.value\.trim\(\) \}\)/
+  /postJson\(checkEndpoint, \{ contact: pendingContact, code: codeInput\.value\.trim\(\) \}, 'reserved'\)/
 );
+assert.match(homepage, /responseKeys\.length !== 1 \|\| responseKeys\[0\] !== 'status' \|\| payload\.status !== expectedStatus/);
 
-console.log('Verified the built reservation contract, privacy SMS disclosure, and form link.');
+console.log('Verified the built request and response contract, privacy SMS disclosure, and form link.');

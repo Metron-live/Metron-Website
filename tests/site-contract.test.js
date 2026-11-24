@@ -120,11 +120,10 @@ test('uses the live two-step reservation contract and approved offer', () => {
   assert.match(html, /content="https:\/\/api\.metron\.live\/launch\/reservations"/);
   assert.match(html, /const startEndpoint = `\$\{apiBase\}\/start`; const checkEndpoint = `\$\{apiBase\}\/check`/);
   assert.match(html, /const consentInput = document\.getElementById\('marketing-consent'\)/);
-  assert.match(html, /postJson\(startEndpoint, \{ contact: pendingContact, channel, consent_marketing: true \}\)/);
-  assert.match(html, /postJson\(checkEndpoint, \{ contact: pendingContact, code: codeInput\.value\.trim\(\) \}\)/);
+  assert.match(html, /postJson\(startEndpoint, \{ contact: pendingContact, channel, consent_marketing: true \}, 'pending'\)/);
+  assert.match(html, /postJson\(checkEndpoint, \{ contact: pendingContact, code: codeInput\.value\.trim\(\) \}, 'reserved'\)/);
   assert.match(html, /headers: \{ 'Accept': 'application\/json', 'Content-Type': 'application\/json' \}/);
-  assert.match(html, /payload\.status !== 'pending'/);
-  assert.match(html, /payload\.status !== 'reserved'/);
+  assert.match(html, /responseKeys\.length !== 1 \|\| responseKeys\[0\] !== 'status' \|\| payload\.status !== expectedStatus/);
   assert.match(visibleText, /Text me my download link at launch\. Msg & data rates may apply\. Reply STOP to opt out\./);
   assert.match(visibleText, /90 days free and the Founding Member price \(\$79\.99\/yr\) locked through April 30 2027\./);
   for (const legacyCopy of [

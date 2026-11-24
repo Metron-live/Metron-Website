@@ -105,9 +105,9 @@ test('selects email verification and displays API errors', async ({ page }) => {
   expect(requestBody).toEqual({ contact: 'athlete@example.com', channel: 'email', consent_marketing: true });
 });
 
-test('rejects responses outside the pending and reserved schemas', async ({ page }) => {
+test('rejects responses outside the exact pending and reserved schemas', async ({ page }) => {
   await page.route('https://api.metron.live/launch/reservations/start', async (route) => {
-    await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ status: 'reserved' }) });
+    await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ status: 'pending', request_id: 'unexpected' }) });
   });
   await page.goto(origin);
 

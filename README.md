@@ -50,8 +50,10 @@ required checkbox supplies `consent_marketing: true`. After a successful
 {"contact":"+14155550123","code":"123456"}
 ```
 
-The reservation is complete only after `{"status":"reserved"}`. The browser
-does not infer success from the HTTP status alone.
+The reservation is complete only after the exact `{"status":"reserved"}`
+response. Likewise, the start response must be exactly `{"status":"pending"}`;
+the browser does not infer success from the HTTP status alone or accept
+undocumented response fields.
 
 ### 3. Deploy
 
