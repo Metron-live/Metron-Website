@@ -101,6 +101,14 @@ test('keeps the nav and backgrounds within the approved visual system', () => {
   assert.match(html, /brand\/icon\/svg\/metron-icon-black\.svg" width="56" height="44"/);
   assert.match(html, /brand\/wordmark\/png\/metron-wordmark-white\.png" width="480" height="128"/);
   assert.match(html, /brand\/wordmark\/png\/metron-wordmark-black\.png" width="480" height="128"/);
+  for (const asset of [
+    'brand/icon/svg/metron-icon-white.svg',
+    'brand/icon/svg/metron-icon-black.svg',
+    'brand/wordmark/png/metron-wordmark-white.png',
+    'brand/wordmark/png/metron-wordmark-black.png'
+  ]) {
+    assert.match(html, new RegExp(`<link rel="preload" href="${asset.replaceAll('.', '\\.')}" as="image"`));
+  }
   assert.doesNotMatch(html.match(/<nav[\s\S]*?<\/nav>/)[0], /m-cropped(?:-white)?\.png/);
 
   assert.match(html, /--hero-brightness: 1\.25/);
