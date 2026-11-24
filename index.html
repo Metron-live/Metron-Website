@@ -210,7 +210,7 @@
 </head>
 <body>
     <a class="skip-link" href="#main">Skip to content</a>
-    <nav class="nav" id="site-nav" aria-label="Primary" data-scroll-progress="0">
+    <nav class="nav" id="site-nav" aria-label="Primary" data-scroll-progress="0" data-fade-distance="120">
         <div class="nav__inner">
             <a class="nav__logo" href="#top" aria-label="Metron home">
                 <span class="nav__lockup nav__lockup--light" aria-hidden="true"><img class="nav__mark" src="brand/icon/svg/metron-icon-white.svg" alt=""><img class="nav__wordmark" src="brand/wordmark/png/metron-wordmark-white.png" alt=""></span>
@@ -314,8 +314,9 @@
             if (!reducedMotion) heroVideo.play().catch(() => {});
             let framePending = false;
             const mix = (start, end, progress) => Math.round(start + ((end - start) * progress));
+            const navFadeDistance = Number(nav.dataset.fadeDistance);
             function updateNav() {
-                const progress = Math.max(0, Math.min(1, window.scrollY / 120));
+                const progress = Math.max(0, Math.min(1, window.scrollY / navFadeDistance));
                 const colorProgress = Math.max(0, Math.min(1, (progress - .3) / .2));
                 const buttonProgress = Math.min(1, progress * 2);
                 const logoProgress = colorProgress;

@@ -139,6 +139,7 @@ test('interpolates the nav across 120px and lets the next section peek into the 
   const lightLogo = page.locator('.nav__lockup--light');
   const darkLogo = page.locator('.nav__lockup--dark');
   await expect(nav).toHaveAttribute('data-scroll-progress', '0.000');
+  await expect(nav).toHaveAttribute('data-fade-distance', '120');
   expect(await nav.evaluate((element) => getComputedStyle(element, '::before').transitionDuration)).toBe('0.3s');
   expect(await nav.evaluate((element) => getComputedStyle(element, '::before').opacity)).toBe('0');
   expect(await nav.evaluate((element) => getComputedStyle(element, '::before').backgroundImage)).toContain('images/marble.png');

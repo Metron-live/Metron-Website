@@ -85,8 +85,9 @@ test('uses the approved social preview and metadata', () => {
 
 test('keeps the nav and backgrounds within the approved visual system', () => {
   assert.doesNotMatch(html, new RegExp(`hepta${'gon'}`, 'i'));
-  assert.match(html, /<nav[^>]+data-scroll-progress="0"/);
-  assert.match(html, /window\.scrollY \/ 120/);
+  assert.match(html, /<nav[^>]+data-scroll-progress="0"[^>]+data-fade-distance="120"/);
+  assert.match(html, /const navFadeDistance = Number\(nav\.dataset\.fadeDistance\)/);
+  assert.match(html, /window\.scrollY \/ navFadeDistance/);
   assert.match(html, /nav\.style\.setProperty\('--nav-surface-opacity', progress\.toFixed\(3\)\)/);
   assert.match(html, /--nav-fade-duration: 300ms/);
   assert.match(html, /\.nav::before \{[\s\S]*?opacity: var\(--nav-surface-opacity\)[\s\S]*?transition: opacity var\(--nav-fade-duration\) ease/);
