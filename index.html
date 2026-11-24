@@ -68,7 +68,7 @@
         .skip-link:focus { transform: translateY(0); }
         :focus-visible { outline: 3px solid #2b75d6; outline-offset: 3px; }
         .nav {
-            position: fixed; z-index: 100; inset: 0 0 auto; height: var(--nav-height); color: var(--nav-text);
+            position: fixed; z-index: 100; isolation: isolate; inset: 0 0 auto; height: var(--nav-height); color: var(--nav-text);
             background: transparent; border-bottom: 1px solid var(--nav-border);
             -webkit-backdrop-filter: blur(var(--nav-blur)); backdrop-filter: blur(var(--nav-blur));
             font-family: var(--font-copy);
@@ -85,7 +85,7 @@
         .nav__lockup { position: absolute; inset: 0; display: flex; align-items: center; gap: 8px; }
         .nav__lockup--light { opacity: var(--nav-light-opacity); }
         .nav__lockup--dark { opacity: var(--nav-dark-opacity); }
-        .nav__lockup { transition: opacity var(--nav-fade-duration) linear; }
+        .nav__lockup { transition: opacity var(--nav-fade-duration) linear; will-change: opacity; }
         .nav__mark { width: 42px; height: 33px; object-fit: contain; }
         .nav__wordmark { width: 103px; height: 28px; object-fit: contain; }
         .nav__links { margin-left: auto; display: flex; align-items: center; gap: 28px; }

@@ -20,6 +20,11 @@ const privacyVisibleText = toVisibleText(privacyHtml);
 
 const count = (value, pattern) => (value.match(pattern) || []).length;
 const sha256 = (file) => crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+const pngDimensions = (file) => {
+  const png = fs.readFileSync(file);
+  assert.equal(png.subarray(1, 4).toString('ascii'), 'PNG', `${file} must be a PNG`);
+  return { width: png.readUInt32BE(16), height: png.readUInt32BE(20) };
+};
 
 test('positions Metron as the performance staff for self-coached athletes', () => {
   const eyebrowAt = html.indexOf('How do I train?');
@@ -94,7 +99,8 @@ test('keeps the nav and backgrounds within the approved visual system', () => {
   assert.match(html, /--nav-fade-duration: 300ms/);
   assert.match(html, /transition: border-color var\(--nav-fade-duration\) linear, color var\(--nav-fade-duration\) linear/);
   assert.match(html, /\.nav::before \{[\s\S]*?opacity: var\(--nav-surface-opacity\)[\s\S]*?transition: opacity var\(--nav-fade-duration\) linear/);
-  assert.match(html, /\.nav__lockup \{ transition: opacity var\(--nav-fade-duration\) linear; \}/);
+  assert.match(html, /\.nav \{[\s\S]*?isolation: isolate/);
+  assert.match(html, /\.nav__lockup \{ transition: opacity var\(--nav-fade-duration\) linear; will-change: opacity; \}/);
   assert.doesNotMatch(html, /nav[^\n]*classList\.(?:add|toggle)\([^\n]*(?:scrolled|solid)/i);
   assert.match(html, /\.nav \{[\s\S]*background: transparent/);
   assert.match(html, /\.nav::before \{[\s\S]*?background: #fff url\('images\/marble\.png'\) center\/cover/);
@@ -130,6 +136,17 @@ test('keeps the nav and backgrounds within the approved visual system', () => {
   for (const match of html.matchAll(/font-family:\s*([^;}]+)/g)) {
     assert.ok(mainFontValues.has(match[1].trim()), `font family differs from main: ${match[1].trim()}`);
   }
+});
+
+test('keeps the required responsive captures and accessibility evidence reviewable', () => {
+  const reviewAssets = path.join(root, '.github', 'review-assets', 'pr-6');
+  const phoneCapture = path.join(reviewAssets, 'hero-390px.png');
+  const desktopCapture = path.join(reviewAssets, 'hero-1440px.png');
+  const lighthouse = JSON.parse(fs.readFileSync(path.join(reviewAssets, 'lighthouse-accessibility.json'), 'utf8'));
+
+  assert.deepEqual(pngDimensions(phoneCapture), { width: 390, height: 844 });
+  assert.deepEqual(pngDimensions(desktopCapture), { width: 1440, height: 900 });
+  assert.ok(lighthouse.categories.accessibility.score >= 0.9, 'Lighthouse accessibility must be at least 90');
 });
 
 test('gates the phone-first reservation form and keeps the approved offer', () => {
