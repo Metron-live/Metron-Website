@@ -106,6 +106,8 @@
     .fallback { display: none; margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--line); }
     .fallback.is-visible { display: block; }
     .fallback p { margin-bottom: 12px; color: var(--muted); font-size: .9rem; }
+    .no-script-fallback { margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--line); }
+    .no-script-fallback p { margin-bottom: 12px; color: var(--muted); font-size: .9rem; }
     .legal-note { margin: 18px 0 0; color: var(--muted); font-size: .76rem; }
     .legal-note a { color: inherit; }
     .faq { max-width: 900px; }
@@ -204,12 +206,13 @@
           <div class="channel-tabs" role="tablist" aria-label="Contact method"><button class="channel-tab" type="button" role="tab" aria-selected="true" data-channel="phone">Phone</button><button class="channel-tab" type="button" role="tab" aria-selected="false" data-channel="email">Email</button></div>
           <div id="contact-step">
             <label for="contact">Mobile number</label><input id="contact" name="contact" type="tel" inputmode="tel" autocomplete="tel" placeholder="(415) 555-0100" required>
-            <div class="consent"><input id="consent" name="consent_marketing" type="checkbox" required><label for="consent">I agree to receive the verification code and Metron launch messages at this phone number or email address. Message and data rates may apply. Reply STOP to opt out.</label></div>
+            <div class="consent"><input id="consent" name="consent_marketing" type="checkbox" required><label for="consent">I agree to receive Metron launch news and product updates. I can unsubscribe at any time.</label></div>
             <button class="button" id="send-code" type="submit">Send my code</button>
           </div>
           <div id="code-step" hidden><label for="code">Six-digit code</label><div class="form-row"><input id="code" name="code" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" placeholder="123456"><button class="button" id="verify-code" type="button">Confirm reservation</button><button class="button button--quiet" id="change-contact" type="button">Use a different contact</button></div></div>
           <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
           <div class="fallback" id="fallback"><p>The reservation service is temporarily unavailable. Email us and we will add you to the launch waitlist.</p><a class="button button--quiet" id="fallback-link" href="mailto:hello@metron.live?subject=Metron%20launch%20waitlist">Join by email</a></div>
+          <noscript><div class="no-script-fallback"><p>JavaScript is required for verification. You can still join the launch waitlist by email.</p><a class="button button--quiet" href="mailto:hello@metron.live?subject=Metron%20launch%20waitlist">Join by email</a></div></noscript>
           <p class="legal-note">Verification is used to protect your reservation. See our <a href="privacy.html">privacy policy</a> and <a href="terms.html">terms</a>.</p>
         </form>
       </div>
@@ -278,7 +281,7 @@
         sendButton.disabled = true; fallback.classList.remove('is-visible'); setStatus('Sending your verification code...');
         try {
           pendingContact = contact.value.trim();
-          const data = await request(RESERVATION_START_ENDPOINT, { contact: pendingContact, channel: channel === 'phone' ? 'sms' : 'email', consent_marketing: true });
+          const data = await request(RESERVATION_START_ENDPOINT, { contact: pendingContact });
           if (data.status !== 'pending') throw new Error('The reservation service returned an unexpected response.');
           contactStep.hidden = true; codeStep.hidden = false; setStatus(`Code sent to ${pendingContact}.`, 'success'); code.focus();
         } catch (error) { setStatus(error.message, 'error'); showFallback(); } finally { sendButton.disabled = false; }
@@ -287,7 +290,7 @@
         if (!/^\d{6}$/.test(code.value.trim())) { setStatus('Enter the six-digit code we sent you.', 'error'); code.focus(); return; }
         verifyButton.disabled = true; setStatus('Confirming your reservation...');
         try {
-          const data = await request(RESERVATION_CHECK_ENDPOINT, { contact: pendingContact, code: code.value.trim() });
+          const data = await request(RESERVATION_CHECK_ENDPOINT, { contact: pendingContact, code: code.value.trim(), consent_marketing: true });
           if (data.status !== 'reserved') throw new Error('The reservation service returned an unexpected response.');
           codeStep.hidden = true; setStatus('You are reserved. We will see you at launch.', 'success');
         } catch (error) { setStatus(error.message, 'error'); showFallback(); } finally { verifyButton.disabled = false; }

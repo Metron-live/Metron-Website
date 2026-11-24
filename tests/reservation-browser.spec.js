@@ -37,8 +37,8 @@ test('posts the phone-first two-step reservation contract', async ({ page }) => 
   await page.locator('#verify-code').click();
   await expect(page.locator('#form-status')).toHaveText('You are reserved. We will see you at launch.');
   expect(requests).toEqual([
-    { url: 'https://api.metron.live/launch/reservations/start', method: 'POST', body: { contact: '+14155550123', channel: 'sms', consent_marketing: true } },
-    { url: 'https://api.metron.live/launch/reservations/check', method: 'POST', body: { contact: '+14155550123', code: '123456' } }
+    { url: 'https://api.metron.live/launch/reservations/start', method: 'POST', body: { contact: '+14155550123' } },
+    { url: 'https://api.metron.live/launch/reservations/check', method: 'POST', body: { contact: '+14155550123', code: '123456', consent_marketing: true } }
   ]);
 });
 
@@ -55,7 +55,17 @@ test('supports email verification and degrades to email waitlist', async ({ page
   await page.locator('#send-code').click();
   await expect(page.locator('#fallback')).toBeVisible();
   await expect(page.locator('#fallback-link')).toHaveAttribute('href', /mailto:hello@metron\.live/);
-  expect(requestBody).toEqual({ contact: 'athlete@example.com', channel: 'email', consent_marketing: true });
+  expect(requestBody).toEqual({ contact: 'athlete@example.com' });
+});
+
+test('offers an email waitlist when JavaScript is unavailable', async ({ browser }) => {
+  const context = await browser.newContext({ javaScriptEnabled: false });
+  const page = await context.newPage();
+  await page.goto(origin);
+  const fallback = page.getByRole('link', { name: 'Join by email' });
+  await expect(fallback).toBeVisible();
+  await expect(fallback).toHaveAttribute('href', 'mailto:hello@metron.live?subject=Metron%20launch%20waitlist');
+  await context.close();
 });
 
 test('keeps the reservation form inside a phone viewport', async ({ page }) => {
