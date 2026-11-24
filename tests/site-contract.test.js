@@ -91,13 +91,16 @@ test('keeps the nav and backgrounds within the approved visual system', () => {
   assert.match(html, /nav\.style\.setProperty\('--nav-surface-opacity', progress\.toFixed\(3\)\)/);
   assert.match(html, /--nav-fade-duration: 300ms/);
   assert.match(html, /\.nav::before \{[\s\S]*?opacity: var\(--nav-surface-opacity\)[\s\S]*?transition: opacity var\(--nav-fade-duration\) linear/);
+  assert.match(html, /\.nav__lockup \{ transition: opacity var\(--nav-fade-duration\) linear; \}/);
   assert.doesNotMatch(html, /nav[^\n]*classList\.(?:add|toggle)\([^\n]*(?:scrolled|solid)/i);
   assert.match(html, /\.nav \{[\s\S]*background: transparent/);
   assert.match(html, /\.nav::before \{[\s\S]*?background: #fff url\('images\/marble\.png'\) center\/cover/);
   assert.match(html, /@media \(prefers-reduced-motion: reduce\)/);
   assert.match(html, /<a class="nav__cta" href="#reserve">Get the App<\/a>/);
-  assert.match(html, /brand\/icon\/svg\/metron-icon-white\.svg/);
-  assert.match(html, /brand\/icon\/svg\/metron-icon-black\.svg/);
+  assert.match(html, /brand\/icon\/svg\/metron-icon-white\.svg" width="56" height="44"/);
+  assert.match(html, /brand\/icon\/svg\/metron-icon-black\.svg" width="56" height="44"/);
+  assert.match(html, /brand\/wordmark\/png\/metron-wordmark-white\.png" width="480" height="128"/);
+  assert.match(html, /brand\/wordmark\/png\/metron-wordmark-black\.png" width="480" height="128"/);
   assert.doesNotMatch(html.match(/<nav[\s\S]*?<\/nav>/)[0], /m-cropped(?:-white)?\.png/);
 
   assert.match(html, /--hero-brightness: 1\.25/);

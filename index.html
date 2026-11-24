@@ -80,7 +80,7 @@
         .nav__lockup { position: absolute; inset: 0; display: flex; align-items: center; gap: 8px; }
         .nav__lockup--light { opacity: var(--nav-light-opacity); }
         .nav__lockup--dark { opacity: var(--nav-dark-opacity); }
-        .nav__lockup { transition: opacity var(--nav-fade-duration) ease; }
+        .nav__lockup { transition: opacity var(--nav-fade-duration) linear; }
         .nav__mark { width: 42px; height: 33px; object-fit: contain; }
         .nav__wordmark { width: 103px; height: 28px; object-fit: contain; }
         .nav__links { margin-left: auto; display: flex; align-items: center; gap: 28px; }
@@ -213,8 +213,8 @@
     <nav class="nav" id="site-nav" aria-label="Primary" data-scroll-progress="0" data-fade-distance="120">
         <div class="nav__inner">
             <a class="nav__logo" href="#top" aria-label="Metron home">
-                <span class="nav__lockup nav__lockup--light" aria-hidden="true"><img class="nav__mark" src="brand/icon/svg/metron-icon-white.svg" alt=""><img class="nav__wordmark" src="brand/wordmark/png/metron-wordmark-white.png" alt=""></span>
-                <span class="nav__lockup nav__lockup--dark" aria-hidden="true"><img class="nav__mark" src="brand/icon/svg/metron-icon-black.svg" alt=""><img class="nav__wordmark" src="brand/wordmark/png/metron-wordmark-black.png" alt=""></span>
+                <span class="nav__lockup nav__lockup--light" aria-hidden="true"><img class="nav__mark" src="brand/icon/svg/metron-icon-white.svg" width="56" height="44" alt=""><img class="nav__wordmark" src="brand/wordmark/png/metron-wordmark-white.png" width="480" height="128" alt=""></span>
+                <span class="nav__lockup nav__lockup--dark" aria-hidden="true"><img class="nav__mark" src="brand/icon/svg/metron-icon-black.svg" width="56" height="44" alt=""><img class="nav__wordmark" src="brand/wordmark/png/metron-wordmark-black.png" width="480" height="128" alt=""></span>
             </a>
             <div class="nav__links"><a class="nav__link" href="#system">How it works</a><a class="nav__link" href="#compare">Free vs paid</a><a class="nav__link" href="#faq">FAQ</a></div>
             <a class="nav__cta" href="#reserve">Get the App</a>

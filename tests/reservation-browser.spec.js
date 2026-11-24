@@ -134,6 +134,8 @@ test('interpolates the nav across 120px and lets the next section peek into the 
   await expect(nav).toHaveAttribute('data-fade-distance', '120');
   expect(await nav.evaluate((element) => getComputedStyle(element, '::before').transitionDuration)).toBe('0.3s');
   expect(await nav.evaluate((element) => getComputedStyle(element, '::before').transitionTimingFunction)).toBe('linear');
+  await expect(lightLogo).toHaveCSS('transition-duration', '0.3s');
+  await expect(lightLogo).toHaveCSS('transition-timing-function', 'linear');
   expect(await nav.evaluate((element) => getComputedStyle(element, '::before').opacity)).toBe('0');
   expect(await nav.evaluate((element) => getComputedStyle(element, '::before').backgroundImage)).toContain('images/marble.png');
   await expect(lightLogo).toHaveCSS('opacity', '1');
