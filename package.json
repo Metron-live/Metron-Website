@@ -2,6 +2,8 @@
   "name": "metron-website",
   "private": true,
   "scripts": {
+    "assets:favicons": "swift scripts/render-favicons.swift",
+    "review:favicons": "node scripts/capture-favicon-review.js",
     "build": "node scripts/build-site.js",
     "check:content": "node scripts/check-built-content.js dist",
     "check:links": "node scripts/check-links.js dist",

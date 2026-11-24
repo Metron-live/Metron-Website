@@ -76,19 +76,19 @@ test('publishes one exact attributed quote', () => {
 
 test('uses the approved social preview and metadata', () => {
   const expectedHash = '708d533d5658b26e71e7787cb327c0a25b0b54894594750afb349d3f46fdba54';
-  const video = path.join(root, 'brand', 'brand preview', 'og-preview-approved.mp4');
-  const poster = path.join(root, 'brand', 'brand preview', 'og-preview-approved.png');
+  const video = path.join(root, 'images', 'social-preview.mp4');
+  const poster = path.join(root, 'images', 'social-preview.png');
   assert.equal(sha256(video), expectedHash);
   assert.ok(fs.existsSync(poster));
   assert.match(html, /property="og:title" content="Metron\. How do I train\?"/);
-  assert.match(html, /property="og:image" content="[^"]+og-preview-approved\.png"/);
-  assert.match(html, /property="og:video" content="[^"]+og-preview-approved\.mp4"/);
+  assert.match(html, /property="og:image" content="[^"]+images\/social-preview\.png"/);
+  assert.match(html, /property="og:video" content="[^"]+images\/social-preview\.mp4"/);
   assert.match(html, /property="og:video:type" content="video\/mp4"/);
   assert.match(html, /property="og:video:width" content="720"/);
   assert.match(html, /property="og:video:height" content="960"/);
-  assert.match(html, /property="og:video:poster" content="[^"]+og-preview-approved\.png"/);
+  assert.match(html, /property="og:video:poster" content="[^"]+images\/social-preview\.png"/);
   assert.match(html, /name="twitter:card" content="summary_large_image"/);
-  assert.match(html, /name="twitter:image" content="[^"]+og-preview-approved\.png"/);
+  assert.match(html, /name="twitter:image" content="[^"]+images\/social-preview\.png"/);
   assert.match(html, /name="twitter:image:alt" content="Metron performance training preview"/);
 });
 
@@ -108,19 +108,15 @@ test('keeps the nav and backgrounds within the approved visual system', () => {
   assert.match(html, /\.nav::before \{[\s\S]*?background: #fff url\('images\/marble\.png'\) center\/cover/);
   assert.match(html, /@media \(prefers-reduced-motion: reduce\)/);
   assert.match(html, /<a class="nav__cta" href="#reserve">Get the App<\/a>/);
-  assert.match(html, /brand\/icon\/svg\/metron-icon-white\.svg" width="56" height="44"/);
-  assert.match(html, /brand\/icon\/svg\/metron-icon-black\.svg" width="56" height="44"/);
-  assert.match(html, /brand\/wordmark\/png\/metron-wordmark-white\.png" width="480" height="128"/);
-  assert.match(html, /brand\/wordmark\/png\/metron-wordmark-black\.png" width="480" height="128"/);
-  for (const asset of [
-    'brand/icon/svg/metron-icon-white.svg',
-    'brand/icon/svg/metron-icon-black.svg',
-    'brand/wordmark/png/metron-wordmark-white.png',
-    'brand/wordmark/png/metron-wordmark-black.png'
-  ]) {
-    assert.match(html, new RegExp(`<link rel="preload" href="${asset.replaceAll('.', '\\.')}" as="image"`));
+  const nav = html.match(/<nav[\s\S]*?<\/nav>/)[0];
+  assert.equal(count(nav, /images\/m-cropped\.png/g), 2);
+  assert.equal(count(nav, /images\/metron-cropped\.png/g), 2);
+  assert.equal(count(nav, /images\/m-cropped\.png" width="439" height="350"/g), 2);
+  assert.equal(count(nav, /images\/metron-cropped\.png" width="806" height="228"/g), 2);
+  assert.doesNotMatch(nav, /brand\//);
+  for (const asset of ['images/m-cropped.png', 'images/metron-cropped.png']) {
+    assert.match(html, new RegExp(`<link rel="preload" href="${asset.replaceAll('.', '\\.')}" as="image" type="image/png"`));
   }
-  assert.doesNotMatch(html.match(/<nav[\s\S]*?<\/nav>/)[0], /m-cropped(?:-white)?\.png/);
   assert.doesNotMatch(html, /class="[^"]*scroll-cue|id="[^"]*scroll-cue/i);
 
   assert.match(html, /--hero-brightness: 1\.25/);
@@ -201,4 +197,48 @@ test('resolves local homepage resources and in-page links', () => {
     if (/^(?:https?:|data:)/i.test(reference)) continue;
     assert.ok(fs.existsSync(path.join(root, decodeURIComponent(reference))), `missing local resource: ${reference}`);
   }
+});
+
+test('publishes canonical brand assets without legacy brand references', () => {
+  const pageFiles = [
+    'index.html',
+    'privacy.html',
+    'health-data-privacy.html',
+    'terms.html',
+    'support.html',
+    'arete/index.html',
+    'onboarding/index.html',
+    'rebalance/index.html'
+  ];
+  for (const file of pageFiles) {
+    const page = fs.readFileSync(path.join(root, file), 'utf8');
+    assert.doesNotMatch(page, /(?:src|href|poster|content)="[^"]*\/?brand\//i, `${file} references an archived brand asset`);
+  }
+  const readme = fs.readFileSync(path.join(root, 'brand', 'README.md'), 'utf8');
+  assert.match(readme, /images\/m-cropped\.png/);
+  assert.match(readme, /images\/metron-cropped\.png/);
+  assert.ok(fs.existsSync(path.join(root, '.graveyard', '2026-11', 'brand', 'brand-guidelines.md')));
+});
+
+test('exports every favicon size and a multi-size ICO', () => {
+  const expectedPngs = new Map([
+    ['favicon-16x16.png', 16],
+    ['favicon-32x32.png', 32],
+    ['favicon-48x48.png', 48],
+    ['apple-touch-icon.png', 180],
+    ['favicon-192x192.png', 192],
+    ['favicon-512x512.png', 512]
+  ]);
+  for (const [file, size] of expectedPngs) {
+    const png = fs.readFileSync(path.join(root, file));
+    assert.equal(png.toString('ascii', 1, 4), 'PNG', `${file} is not a PNG`);
+    assert.equal(png.readUInt32BE(16), size, `${file} width`);
+    assert.equal(png.readUInt32BE(20), size, `${file} height`);
+  }
+
+  const ico = fs.readFileSync(path.join(root, 'favicon.ico'));
+  assert.equal(ico.readUInt16LE(0), 0);
+  assert.equal(ico.readUInt16LE(2), 1);
+  assert.equal(ico.readUInt16LE(4), 3);
+  assert.deepEqual([ico[6], ico[22], ico[38]], [16, 32, 48]);
 });

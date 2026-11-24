@@ -7,7 +7,7 @@ const homepage = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const privacy = fs.readFileSync(path.join(root, 'privacy.html'), 'utf8');
 
 assert.match(homepage, /name="twitter:card" content="summary_large_image"/);
-assert.match(homepage, /name="twitter:image" content="[^"]+og-preview-approved\.png"/);
+assert.match(homepage, /name="twitter:image" content="[^"]+images\/social-preview\.png"/);
 assert.match(homepage, /name="twitter:image:alt" content="Metron performance training preview"/);
 assert.match(privacy, /<h2 id="text-messages">Text messages<\/h2>/);
 assert.match(privacy, /\bSTOP\b/);

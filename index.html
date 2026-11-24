@@ -13,30 +13,33 @@
     <meta property="og:url" content="https://metron.live/">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Metron">
-    <meta property="og:image" content="https://metron.live/brand/brand%20preview/og-preview-approved.png">
-    <meta property="og:image:secure_url" content="https://metron.live/brand/brand%20preview/og-preview-approved.png">
+    <meta property="og:image" content="https://metron.live/images/social-preview.png">
+    <meta property="og:image:secure_url" content="https://metron.live/images/social-preview.png">
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:width" content="720">
     <meta property="og:image:height" content="960">
     <meta property="og:image:alt" content="Metron performance training preview">
-    <meta property="og:video" content="https://metron.live/brand/brand%20preview/og-preview-approved.mp4">
-    <meta property="og:video:secure_url" content="https://metron.live/brand/brand%20preview/og-preview-approved.mp4">
+    <meta property="og:video" content="https://metron.live/images/social-preview.mp4">
+    <meta property="og:video:secure_url" content="https://metron.live/images/social-preview.mp4">
     <meta property="og:video:type" content="video/mp4">
     <meta property="og:video:width" content="720">
     <meta property="og:video:height" content="960">
-    <meta property="og:video:poster" content="https://metron.live/brand/brand%20preview/og-preview-approved.png">
+    <meta property="og:video:poster" content="https://metron.live/images/social-preview.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Metron. How do I train?">
     <meta name="twitter:description" content="The performance staff that serious self-coached athletes never had.">
-    <meta name="twitter:image" content="https://metron.live/brand/brand%20preview/og-preview-approved.png">
+    <meta name="twitter:image" content="https://metron.live/images/social-preview.png">
     <meta name="twitter:image:alt" content="Metron performance training preview">
     <link rel="canonical" href="https://metron.live/">
-    <link rel="icon" href="favicon.ico">
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="favicon-512x512.png">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <link rel="preload" href="brand/icon/svg/metron-icon-white.svg" as="image" type="image/svg+xml">
-    <link rel="preload" href="brand/icon/svg/metron-icon-black.svg" as="image" type="image/svg+xml">
-    <link rel="preload" href="brand/wordmark/png/metron-wordmark-white.png" as="image" type="image/png">
-    <link rel="preload" href="brand/wordmark/png/metron-wordmark-black.png" as="image" type="image/png">
+    <link rel="preload" href="images/m-cropped.png" as="image" type="image/png">
+    <link rel="preload" href="images/metron-cropped.png" as="image" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cardo:wght@400;700&amp;family=Inter:wght@500;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet">
@@ -84,6 +87,7 @@
         .nav__logo { position: relative; width: 154px; height: 45px; flex: 0 0 auto; display: block; }
         .nav__lockup { position: absolute; inset: 0; display: flex; align-items: center; gap: 8px; }
         .nav__lockup--light { opacity: var(--nav-light-opacity); }
+        .nav__lockup--light img { filter: brightness(0) invert(1); }
         .nav__lockup--dark { opacity: var(--nav-dark-opacity); }
         .nav__lockup { transition: opacity var(--nav-fade-duration) linear; will-change: opacity; }
         .nav__mark { width: 42px; height: 33px; object-fit: contain; }
@@ -218,8 +222,8 @@
     <nav class="nav" id="site-nav" aria-label="Primary" data-scroll-progress="0" data-fade-distance="120">
         <div class="nav__inner">
             <a class="nav__logo" href="#top" aria-label="Metron home">
-                <span class="nav__lockup nav__lockup--light" aria-hidden="true"><img class="nav__mark" src="brand/icon/svg/metron-icon-white.svg" width="56" height="44" alt=""><img class="nav__wordmark" src="brand/wordmark/png/metron-wordmark-white.png" width="480" height="128" alt=""></span>
-                <span class="nav__lockup nav__lockup--dark" aria-hidden="true"><img class="nav__mark" src="brand/icon/svg/metron-icon-black.svg" width="56" height="44" alt=""><img class="nav__wordmark" src="brand/wordmark/png/metron-wordmark-black.png" width="480" height="128" alt=""></span>
+                <span class="nav__lockup nav__lockup--light" aria-hidden="true"><img class="nav__mark" src="images/m-cropped.png" width="439" height="350" alt=""><img class="nav__wordmark" src="images/metron-cropped.png" width="806" height="228" alt=""></span>
+                <span class="nav__lockup nav__lockup--dark" aria-hidden="true"><img class="nav__mark" src="images/m-cropped.png" width="439" height="350" alt=""><img class="nav__wordmark" src="images/metron-cropped.png" width="806" height="228" alt=""></span>
             </a>
             <div class="nav__links"><a class="nav__link" href="#system">How it works</a><a class="nav__link" href="#compare">Free vs paid</a><a class="nav__link" href="#faq">FAQ</a></div>
             <a class="nav__cta" href="#reserve">Get the App</a>
@@ -229,7 +233,7 @@
     <div class="mobile-menu" id="mobile-menu" hidden><a href="#system">How it works</a><a href="#compare">Free vs paid</a><a href="#faq">FAQ</a><a class="button" href="#reserve">Get the App</a></div>
     <main id="main">
         <section class="hero" id="top">
-            <video class="hero__video" id="hero-video" muted loop playsinline preload="metadata" poster="brand/brand preview/og-preview-approved.png" aria-hidden="true"><source src="videos/montage-web.mp4" type="video/mp4"></video>
+            <video class="hero__video" id="hero-video" muted loop playsinline preload="metadata" poster="images/social-preview.png" aria-hidden="true"><source src="videos/montage-web.mp4" type="video/mp4"></video>
             <div class="hero__shade"></div>
             <div class="hero__inner"><div class="hero__copy">
                 <p class="hero__eyebrow">How do I train?</p>
@@ -317,7 +321,7 @@
         </div></section>
         <section class="closing" aria-labelledby="closing-text"><div class="closing__inner"><blockquote id="closing-text">It is a shame for one to grow old without seeing the beauty and strength of which the body is capable.</blockquote><cite>Socrates</cite></div></section>
     </main>
-    <footer class="footer"><div class="footer__inner"><div class="footer__brand"><div class="footer__logo" role="img" aria-label="Metron"><img class="nav__mark" src="images/m-cropped-white.png" alt=""><img class="nav__wordmark" src="images/metron-cropped-white.png" alt=""></div><p class="footer__tagline">Performance, democratized.</p></div><div class="footer__links"><a href="privacy.html">Privacy</a><a href="health-data-privacy.html">Health data privacy</a><a href="terms.html">Terms</a><a href="support.html">Support</a></div></div></footer>
+    <footer class="footer"><div class="footer__inner"><div class="footer__brand"><div class="footer__logo" role="img" aria-label="Metron"><img class="nav__mark" src="images/m-cropped.png" alt=""><img class="nav__wordmark" src="images/metron-cropped.png" alt=""></div><p class="footer__tagline">Performance, democratized.</p></div><div class="footer__links"><a href="privacy.html">Privacy</a><a href="health-data-privacy.html">Health data privacy</a><a href="terms.html">Terms</a><a href="support.html">Support</a></div></div></footer>
     <script>
         (() => {
             const nav = document.getElementById('site-nav');
