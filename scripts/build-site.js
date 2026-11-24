@@ -34,4 +34,10 @@ for (const entry of entries) {
   fs.cpSync(source, path.join(output, entry), { recursive: true });
 }
 
+// The approved social handoff is still pending. Keep the older repository
+// previews available for design history, but never publish them as substitutes.
+for (const file of ['og-preview-approved.mp4', 'og-preview-approved.png']) {
+  fs.rmSync(path.join(output, 'brand', 'brand preview', file), { force: true });
+}
+
 console.log(`Built ${entries.length} static entries in dist/`);

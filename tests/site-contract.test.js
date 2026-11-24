@@ -1,5 +1,4 @@
 const assert = require('node:assert/strict');
-const crypto = require('node:crypto');
 const fs = require('node:fs');
 const path = require('node:path');
 const test = require('node:test');
@@ -20,24 +19,23 @@ const visibleText = toVisibleText(html);
 const privacyVisibleText = toVisibleText(privacyHtml);
 
 const count = (value, pattern) => (value.match(pattern) || []).length;
-const sha256 = (file) => crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
-
-test('positions Metron as the performance staff for self-coached athletes', () => {
-  const eyebrowAt = html.indexOf('How do I train?');
-  const headingAt = html.indexOf('<h1 id="hero-title">The pros get a team. You get Metron.</h1>');
+test('leads with the trainer and free tracker promise', () => {
+  const eyebrowAt = html.indexOf('Training intelligence, built for you');
+  const headingAt = html.indexOf('<h1 id="hero-title">The world\'s smartest personal trainer.</h1>');
   assert.ok(eyebrowAt >= 0 && eyebrowAt < headingAt, 'hero eyebrow must sit above the H1');
-  assert.match(visibleText, /Metron is the strength coach, sports scientist and data analyst that athletes without a staff never had\./);
-  assert.match(visibleText, /It takes the guesswork out of greatness\./);
-  assert.match(visibleText, /fighting for a starting spot, training for a team, a season or a qualifier/i);
+  assert.match(visibleText, /And the best free workout tracker\./);
+  assert.match(visibleText, /serious self-coached athletes/i);
+  assert.match(visibleText, /runner balancing interval practice/i);
+  assert.match(visibleText, /climber connecting strength practice/i);
   assert.match(visibleText, /Logging is easy\. Knowing how to train is the hard part\./);
   assert.match(visibleText, /free best-in-class workout tracker/i);
-  assert.equal(count(visibleText, /world's smartest personal trainer/gi), 1);
+  assert.ok(count(visibleText, /world's smartest personal trainer/gi) >= 1);
 });
 
-test('keeps the adaptation example and launch capabilities concrete', () => {
-  assert.match(visibleText, /Poor sleep and a low HRV morning can turn tomorrow's heavy lower session into a lighter one, with the reason shown\./);
-  assert.match(visibleText, /Each change comes with its reason\./);
-  assert.match(visibleText, /Log every set fast\. Your history builds as you train, free\./);
+test('keeps the training loop and launch scope concrete', () => {
+  assert.match(visibleText, /Train\. Log\. Learn\. Adapt\./);
+  assert.match(visibleText, /reason for every change shown/i);
+  assert.match(visibleText, /Your history stays free\./);
   for (const claim of [
     'Adaptive plan',
     'Daily readiness',
@@ -51,6 +49,11 @@ test('keeps the adaptation example and launch capabilities concrete', () => {
 
   for (const forbidden of [
     'rugby',
+    '23%',
+    'testimonial',
+    'nutrition',
+    'supplement',
+    'seven-pillar',
     'audio cue',
     'live coaching',
     'Honest product horizon',
@@ -68,20 +71,15 @@ test('publishes one exact attributed quote', () => {
   assert.doesNotMatch(html, /<q\b/i);
 });
 
-test('uses the approved social preview and metadata', () => {
-  const expectedHash = '708d533d5658b26e71e7787cb327c0a25b0b54894594750afb349d3f46fdba54';
-  const video = path.join(root, 'brand', 'brand preview', 'og-preview-approved.mp4');
-  const poster = path.join(root, 'brand', 'brand preview', 'og-preview-approved.png');
-  assert.equal(sha256(video), expectedHash);
-  assert.ok(fs.existsSync(poster));
-  assert.match(html, /property="og:title" content="Metron\. How do I train\?"/);
-  assert.match(html, /property="og:image" content="[^"]+og-preview-approved\.png"/);
-  assert.match(html, /property="og:video" content="[^"]+og-preview-approved\.mp4"/);
-  assert.match(html, /property="og:video:type" content="video\/mp4"/);
-  assert.match(html, /property="og:video:width" content="720"/);
-  assert.match(html, /property="og:video:height" content="960"/);
-  assert.match(html, /property="og:video:poster" content="[^"]+og-preview-approved\.png"/);
+test('uses exact title metadata and does not substitute unapproved social media', () => {
+  assert.match(html, /<title>The World's Smartest Personal Trainer<\/title>/);
+  assert.match(html, /property="og:title" content="The World's Smartest Personal Trainer"/);
+  assert.match(html, /TODO\(approved-handoff\)/);
+  assert.doesNotMatch(html, /property="og:(?:image|video)"/);
   assert.match(html, /name="twitter:card" content="summary_large_image"/);
+  const buildScript = fs.readFileSync(path.join(root, 'scripts', 'build-site.js'), 'utf8');
+  assert.match(buildScript, /og-preview-approved\.mp4/);
+  assert.match(buildScript, /og-preview-approved\.png/);
 });
 
 test('keeps the nav and backgrounds within the approved visual system', () => {
@@ -117,7 +115,7 @@ test('keeps the nav and backgrounds within the approved visual system', () => {
   }
 });
 
-test('uses the live two-step reservation contract and approved offer', () => {
+test('uses the live two-step reservation contract with an email fallback', () => {
   assert.match(html, /content="https:\/\/api\.metron\.live\/launch\/reservations"/);
   assert.match(html, /const startEndpoint = `\$\{apiBase\}\/start`; const checkEndpoint = `\$\{apiBase\}\/check`/);
   assert.match(html, /const consentInput = document\.getElementById\('marketing-consent'\)/);
@@ -127,12 +125,10 @@ test('uses the live two-step reservation contract and approved offer', () => {
   assert.match(html, /payload\.status !== 'pending'/);
   assert.match(html, /payload\.status !== 'reserved'/);
   assert.match(visibleText, /Text me my download link at launch\. Msg & data rates may apply\. Reply STOP to opt out\./);
-  assert.match(visibleText, /90 days free and the Founding Member price \(\$79\.99\/yr\) locked through April 30 2027\./);
-  for (const legacyCopy of [
-    /free[ -]?year/i,
-    /founding[ -]?year/i,
-    /founder[ -]?story/i
-  ]) assert.doesNotMatch(visibleText, legacyCopy);
+  assert.match(visibleText, /Reserve your first year free\./);
+  assert.match(visibleText, /Join the waitlist by email\./);
+  assert.match(html, /mailto:hello@metron\.live\?subject=Metron%20launch%20waitlist/);
+  assert.doesNotMatch(visibleText, /founder[ -]?story/i);
   assert.match(html, /id="reservation-contact"[^>]+aria-describedby="reservation-consent reservation-offer"/);
   assert.match(html, /id="marketing-consent"[^>]+type="checkbox" required/);
   assert.doesNotMatch(html, /method: 'HEAD'/);

@@ -33,7 +33,7 @@ test.afterAll(async () => new Promise((resolve) => server.close(resolve)));
 test('renders the required hero and reservation form', async ({ page }) => {
   await page.goto(origin);
 
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText('The pros get a team. You get Metron.');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText("The world's smartest personal trainer.");
   await expect(page.locator('#reservation-form')).toBeVisible();
   await expect(page.locator('#reservation-contact')).toBeVisible();
   await expect(page.locator('#marketing-consent')).toBeVisible();
@@ -74,7 +74,7 @@ test('completes the live two-step SMS reservation flow', async ({ page }) => {
   await page.locator('#verification-code').fill('123456');
   await page.locator('#verification-submit').click();
   await expect(page.locator('#reservation-status')).toHaveText('Reservation confirmed.');
-  await expect(page.locator('#reservation-message')).toContainText('90 days free');
+  await expect(page.locator('#reservation-message')).toContainText('first year of the full Metron coach is reserved free');
 
   expect(requests).toEqual([
     {
@@ -169,6 +169,8 @@ test('selects email verification and displays API errors', async ({ page }) => {
   await page.locator('#marketing-consent').check();
   await page.locator('#reservation-submit').click();
   await expect(page.locator('#reservation-message')).toHaveText('Invalid email address.');
+  await expect(page.locator('#reservation-fallback')).toBeVisible();
+  await expect(page.locator('#reservation-fallback-link')).toHaveAttribute('href', /mailto:hello@metron\.live/);
   expect(requestBody).toEqual({ contact: 'athlete@example.com', channel: 'email', consent_marketing: true });
 });
 
