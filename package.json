@@ -5,8 +5,9 @@
     "build": "node scripts/build-site.js",
     "check:links": "node scripts/check-links.js dist",
     "check:copy": "node scripts/check-built-copy.js dist",
+    "check:preview": "node scripts/check-share-preview.js",
     "test:contract": "node --test tests/site-contract.test.js",
-    "test": "npm run build && node --test tests/site-contract.test.js && playwright test tests/reservation-browser.spec.js",
+    "test": "npm run build && npm run check:preview && node --test tests/site-contract.test.js && playwright test tests/reservation-browser.spec.js",
     "test:browser": "npm run build && playwright test tests/reservation-browser.spec.js",
     "test:smoke": "npm run build && playwright test tests/reservation-browser.spec.js"
   },
