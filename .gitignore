@@ -1,2 +1,8 @@
 # Local Netlify folder
 .netlify
+
+# Local visual-verification output
+dist/
+node_modules/
+test-results/
+__pycache__/

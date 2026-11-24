@@ -82,8 +82,8 @@ Target order after restructure:
 
 - `index.html` — entire site
 - `videos/montage-web.mp4` — hero montage
-- `brand/brand preview/og-preview.mp4` — iMessage portrait preview
-- `brand/brand preview/og-preview.png` — og:image fallback
+- `images/social/og-preview.mp4` — iMessage portrait preview
+- `images/social/og-preview.png` — og:image fallback
 - `images/marble.png`, `images/black-marble.jpg` — textures
 - `images/m-cropped.png`, `images/metron-cropped.png` — logo assets
 
