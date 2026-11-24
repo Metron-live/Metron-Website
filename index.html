@@ -7,6 +7,7 @@
     <meta name="description" content="Metron gives serious self-coached athletes an adaptive training plan, fast workout logging, clear analysis and Arete text coaching.">
     <meta name="theme-color" content="#000000">
     <meta name="metron-reservation-api-base" content="https://api.metron.live/launch/reservations">
+    <meta name="metron-reservation-probe-timeout" content="4000">
     <meta property="og:title" content="Metron. How do I train?">
     <meta property="og:description" content="The strength coach, sports scientist and data analyst that athletes without a staff never had.">
     <meta property="og:url" content="https://metron.live/">
@@ -359,18 +360,22 @@
                 button.setAttribute('aria-expanded', String(!open)); answer.hidden = open; button.lastElementChild.textContent = open ? '+' : '−';
             }));
             const apiBase = document.querySelector('meta[name="metron-reservation-api-base"]').content.replace(/\/$/, '');
+            const probeTimeoutMs = Number(document.querySelector('meta[name="metron-reservation-probe-timeout"]').content);
             const startEndpoint = `${apiBase}/start`; const checkEndpoint = `${apiBase}/check`;
             const reservationForm = document.getElementById('reservation-form'); const contactInput = document.getElementById('reservation-contact'); const consentInput = document.getElementById('marketing-consent'); const reservationSubmit = document.getElementById('reservation-submit');
             const waitlistForm = document.getElementById('waitlist-form'); const waitlistInput = document.getElementById('waitlist-email');
             const verificationForm = document.getElementById('verification-form'); const codeInput = document.getElementById('verification-code'); const verificationSubmit = document.getElementById('verification-submit');
             const status = document.getElementById('reservation-status'); const message = document.getElementById('reservation-message'); const waitlistEmail = 'beta@metron.live';
             let pendingContact = '';
-            window.MetronReservationConfig = Object.freeze({ apiBase, startEndpoint, checkEndpoint, waitlistEmail });
+            window.MetronReservationConfig = Object.freeze({ apiBase, startEndpoint, checkEndpoint, waitlistEmail, probeTimeoutMs });
             function showWaitlist() { reservationForm.hidden = true; verificationForm.hidden = true; waitlistForm.hidden = false; status.textContent = 'Phone reservations are unavailable right now. Join the email waitlist.'; }
             function showPhoneReservation() { waitlistForm.hidden = true; reservationForm.hidden = false; status.textContent = 'Phone reservations are available.'; }
             async function probeReservationEndpoint() {
-                try { const response = await fetch(startEndpoint, { method: 'HEAD', cache: 'no-store' }); if (!response.ok) throw new Error('Unavailable'); showPhoneReservation(); }
+                const controller = new AbortController();
+                const timeout = window.setTimeout(() => controller.abort(), probeTimeoutMs);
+                try { const response = await fetch(startEndpoint, { method: 'HEAD', cache: 'no-store', signal: controller.signal }); if (!response.ok) throw new Error('Unavailable'); showPhoneReservation(); }
                 catch { showWaitlist(); }
+                finally { window.clearTimeout(timeout); }
             }
             async function postJson(endpoint, body, expectedStatus) {
                 const response = await fetch(endpoint, { method: 'POST', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, body: JSON.stringify(body) });

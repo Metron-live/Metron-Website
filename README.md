@@ -36,7 +36,8 @@ The production endpoint is declared once in `index.html`:
 ```
 
 The browser first probes `HEAD /start`. It shows the phone-first form only after
-a successful response and otherwise shows the email waitlist. A phone
+a successful response and otherwise shows the email waitlist. The probe times
+out after four seconds so a stalled endpoint cannot leave both forms hidden. A phone
 reservation starts verification with `POST /start`:
 
 ```json

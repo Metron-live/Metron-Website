@@ -15,8 +15,9 @@ assert.match(
 );
 assert.match(
   homepage,
-  /fetch\(startEndpoint, \{ method: 'HEAD', cache: 'no-store' \}\)/
+  /fetch\(startEndpoint, \{ method: 'HEAD', cache: 'no-store', signal: controller\.signal \}\)/
 );
+assert.match(homepage, /window\.setTimeout\(\(\) => controller\.abort\(\), probeTimeoutMs\)/);
 assert.match(
   homepage,
   /postJson\(startEndpoint, \{ contact: pendingContact, channel: 'sms', consent_marketing: true \}, 'pending'\)/

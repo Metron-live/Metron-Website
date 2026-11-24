@@ -69,6 +69,15 @@ test('shows the email fallback when the endpoint is unreachable and opens a popu
   expect(decodeURIComponent(mailto)).toContain('Metron email waitlist');
 });
 
+test('shows the email fallback when the HEAD probe stalls', async ({ page }) => {
+  await page.route('https://api.metron.live/launch/reservations/start', () => new Promise(() => {}));
+  await page.goto(origin);
+
+  await expect(page.locator('#reservation-form')).toBeHidden();
+  await expect(page.locator('#waitlist-form')).toBeVisible({ timeout: 5000 });
+  await expect(page.locator('#reservation-status')).toHaveText('Phone reservations are unavailable right now. Join the email waitlist.');
+});
+
 test('requires text-message consent before posting to the API', async ({ page }) => {
   let postCount = 0;
   await page.route('https://api.metron.live/launch/reservations/start', async (route) => {

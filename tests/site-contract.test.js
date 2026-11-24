@@ -27,6 +27,7 @@ test('positions Metron as the performance staff for self-coached athletes', () =
   assert.ok(eyebrowAt >= 0 && eyebrowAt < headingAt, 'hero eyebrow must sit above the H1');
   assert.match(visibleText, /Metron is the strength coach, sports scientist and data analyst that athletes without a staff never had\./);
   assert.match(visibleText, /It takes the guesswork out of greatness\./);
+  assert.match(html, /<div class="footer__logo"[^>]*>[\s\S]*?<\/div><p class="footer__tagline">Performance, democratized\.<\/p>/);
   assert.match(visibleText, /fighting for a starting spot, training for a team, a season or a qualifier/i);
   assert.match(visibleText, /Logging is easy\. Knowing how to train is the hard part\./);
   assert.match(visibleText, /free best-in-class workout tracker/i);
@@ -63,6 +64,7 @@ test('keeps the adaptation example and launch capabilities concrete', () => {
 
 test('publishes one exact attributed quote', () => {
   assert.equal(count(html, /<blockquote\b/gi), 1);
+  assert.equal(count(html, /<cite\b/gi), 1);
   assert.match(html, /<blockquote id="closing-text">It is a shame for one to grow old without seeing the beauty and strength of which the body is capable\.<\/blockquote><cite>Socrates<\/cite>/);
   assert.doesNotMatch(html, /<q\b/i);
 });
@@ -132,9 +134,12 @@ test('keeps the nav and backgrounds within the approved visual system', () => {
 
 test('gates the phone-first reservation form and keeps the approved offer', () => {
   assert.match(html, /content="https:\/\/api\.metron\.live\/launch\/reservations"/);
+  assert.match(html, /name="metron-reservation-probe-timeout" content="4000"/);
   assert.match(html, /const startEndpoint = `\$\{apiBase\}\/start`; const checkEndpoint = `\$\{apiBase\}\/check`/);
   assert.match(html, /const consentInput = document\.getElementById\('marketing-consent'\)/);
-  assert.match(html, /fetch\(startEndpoint, \{ method: 'HEAD', cache: 'no-store' \}\)/);
+  assert.match(html, /fetch\(startEndpoint, \{ method: 'HEAD', cache: 'no-store', signal: controller\.signal \}\)/);
+  assert.match(html, /window\.setTimeout\(\(\) => controller\.abort\(\), probeTimeoutMs\)/);
+  assert.match(html, /finally \{ window\.clearTimeout\(timeout\); \}/);
   assert.match(html, /postJson\(startEndpoint, \{ contact: pendingContact, channel: 'sms', consent_marketing: true \}, 'pending'\)/);
   assert.match(html, /postJson\(checkEndpoint, \{ contact: pendingContact, code: codeInput\.value\.trim\(\) \}, 'reserved'\)/);
   assert.match(html, /headers: \{ 'Accept': 'application\/json', 'Content-Type': 'application\/json' \}/);

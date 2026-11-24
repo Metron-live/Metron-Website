@@ -6,11 +6,13 @@ Local path: /Users/rentamac/Metron-Website-main/
 
 ## Brand
 
-**Product**: Metron is the world's smartest personal trainer, plus the best free workout tracker.
-**Launch offer**: 90 days free and the Founding Member price ($79.99/yr) locked through April 30 2027; tracking, logging, and history remain free afterward.
+**Category**: The performance staff that serious self-coached athletes never had: strength coach, sports scientist, and data analyst in one system.
+**Product question**: How do I train?
+**Audience**: The athlete fighting for a starting spot, training for a team, a season, or a qualifier, who has no staff.
+**Brand line**: Performance, democratized.
+**Launch offer**: A free founding year with a 30-day full-coach trial. Tracking, logging, and history remain free.
 **AI coach name**: Arete.
-**Launch foundation**: Training, including strength, endurance, and sport-specific athletic preparation.
-**Future architecture**: Training is the only launch module. Optional specialized modules may arrive later; do not present future modes as live.
+**Launch foundation**: Training only. Claim only the approved capabilities listed below.
 
 ## Typography — strict
 
@@ -29,17 +31,13 @@ Never introduce a new font. Never use Cardo on the wordmark or Space Grotesk on 
 - Video has a cinematic vignette overlay and parallax scroll.
 - Marble dust particles drift upward over the video.
 
-## Hero load choreography — DO NOT TOUCH
+## Hero contract
 
-Timing is locked. Do not modify without explicit instruction:
-
-- 0.0s: video montage starts, all text elements at opacity 0.3 baseline
-- 0.3s: logo + Metron wordmark + nav items + mega triggers fade to full opacity (900ms duration)
-- 0.9s: "Performance, democratized." + sub fade to full opacity (700ms duration)
-- 1.5s: Socrates quote + attribution fade to full opacity (900ms duration)
-- No scroll cue is rendered.
-
-Total sequence: ~2.7s. Text readable from 0.3s.
+- Eyebrow: How do I train?
+- H1: The pros get a team. You get Metron.
+- Subhead: Metron is the strength coach, sports scientist and data analyst that athletes without a staff never had.
+- Sub-line: It takes the guesswork out of greatness.
+- The phone reservation form stays hidden until its HEAD probe succeeds. A failed or timed-out probe reveals the working email fallback.
 
 sessionStorage flag `metron_hero_seen`: first visit plays full sequence, repeat visits in same session skip animations entirely (body class `.hero-skip-intro`).
 
@@ -55,15 +53,27 @@ cyclist → surfer → sprinter → boy athlete → basketball girl → dribbler
 
 ## Section order
 
-1. Hero: trainer promise, free tracker promise, and phone-first reservation
+1. Hero: performance-staff promise and gated phone-first reservation
 2. Problem
-3. Four connected product-proof loops
+3. Four concrete product-proof steps
 4. Arete chat and dedicated screens as shared interfaces
 5. Free tracker vs full coach
-6. Modular future, with later capabilities labeled clearly
-7. Phone-first launch reservation with 90 days free and the Founding Member price ($79.99/yr) locked through April 30 2027
+6. Approved training capabilities
+7. Free founding year offer with a 30-day full-coach trial
 8. FAQ
-9. Aristotle quote + footer
+9. The single Socrates quote + footer
+
+## Approved capability claims
+
+- Training only
+- Adaptive plan
+- Daily readiness-based adaptation
+- Progression from actuals
+- Arete text coaching
+- Apple Health inputs
+- Practices and competitions awareness
+
+Do not claim future integrations or publish an integration before it is ready.
 
 ## Rules of engagement
 
@@ -98,9 +108,9 @@ Nav structure:
 Logo · · · Platform ▾ · Athletes ▾ · Compare · FAQ · [Get the App]
 
 Product dropdown — left column (text items, Cardo, stacked vertically, ~48px gap):
-- Overview — trainer plus free tracker
+- Overview — performance staff plus free tracker
 - Build — sport- and goal-specific training
-- Coach & log — live guidance and set logging
+- Coach & log — text coaching and set logging
 - Learn & adapt — verified analytics and Apple Health recovery
 - Modular future — later expansion, clearly labeled
 
