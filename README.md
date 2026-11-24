@@ -41,16 +41,19 @@ with `POST /start`:
 {"contact":"+14155550123","channel":"sms","consent_marketing":true}
 ```
 
-`channel` is `sms` for a phone number and `email` for an email address. After a
-successful `{"status":"pending"}` response, the browser verifies the code with
+`channel` is `sms` for a phone number and `email` for an email address. The
+required checkbox supplies `consent_marketing: true`. After a successful
+`{"status":"pending"}` response, the browser verifies the code with
 `POST /check`:
 
 ```json
 {"contact":"+14155550123","code":"123456"}
 ```
 
-The reservation is complete only after `{"status":"reserved"}`. The browser
-does not infer success from the HTTP status alone.
+The reservation is complete only after the exact `{"status":"reserved"}`
+response. Likewise, the start response must be exactly `{"status":"pending"}`;
+the browser does not infer success from the HTTP status alone or accept
+undocumented response fields.
 
 Referral links use `/r/<code>`. The static `404.html` route stores a valid
 seven-character code in the first-party `metron_ref` cookie for 30 days and

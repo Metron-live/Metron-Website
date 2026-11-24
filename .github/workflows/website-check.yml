@@ -26,10 +26,14 @@ jobs:
         run: npm ci
       - name: Build static site
         run: npm run build
+      - name: Check built privacy disclosure
+        run: npm run check:content
       - name: Check built links
         run: npm run check:links
       - name: Check built launch copy
         run: npm run check:copy
+      - name: Check built reservation content
+        run: npm run check:content
       - name: Run site contract tests
         run: npm run test:contract
       - name: Install Playwright Chromium

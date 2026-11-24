@@ -119,11 +119,12 @@ test('uses the live two-step reservation contract with an email fallback', () =>
   assert.match(html, /content="https:\/\/api\.metron\.live\/launch\/reservations"/);
   assert.match(html, /const startEndpoint = `\$\{apiBase\}\/start`; const checkEndpoint = `\$\{apiBase\}\/check`/);
   assert.match(html, /const consentInput = document\.getElementById\('marketing-consent'\)/);
-  assert.match(html, /const startBody = \{ contact: pendingContact, channel, consent_marketing: consentInput\.checked \}/);
+  assert.match(html, /const startBody = \{ contact: pendingContact, channel, consent_marketing: true \}/);
   assert.match(html, /const checkBody = \{ contact: pendingContact, code: codeInput\.value\.trim\(\) \}/);
+  assert.match(html, /postJson\(startEndpoint, startBody, 'pending'\)/);
+  assert.match(html, /postJson\(checkEndpoint, checkBody, 'reserved'\)/);
   assert.match(html, /headers: \{ 'Accept': 'application\/json', 'Content-Type': 'application\/json' \}/);
-  assert.match(html, /payload\.status !== 'pending'/);
-  assert.match(html, /payload\.status !== 'reserved'/);
+  assert.match(html, /responseKeys\.length !== 1 \|\| responseKeys\[0\] !== 'status' \|\| payload\.status !== expectedStatus/);
   assert.match(visibleText, /Text me my download link at launch\. Msg & data rates may apply\. Reply STOP to opt out\./);
   assert.match(visibleText, /Reserve your first year free\./);
   assert.match(visibleText, /Join the waitlist by email\./);
@@ -157,7 +158,8 @@ test('publishes the text-message disclosure and links it from the reservation fo
   assert.match(privacyVisibleText, /Verification codes you request/);
   assert.match(privacyVisibleText, /One launch-day text message with a link to download Metron\./);
   assert.match(privacyVisibleText, /Optional product updates, but only if you separately consent/);
-  assert.match(privacyVisibleText, /Message frequency varies\./);
+  assert.match(privacyVisibleText, /Message frequency varies\. Verification codes are sent only when you request them\. We send one launch-day download link\./);
+  assert.match(privacyVisibleText, /If you separately consent to optional product updates, their frequency varies\./);
   assert.match(privacyVisibleText, /Msg & data rates may apply\./);
   assert.match(privacyVisibleText, /Reply STOP to opt out of text messages\. Reply HELP for help or email support@metron\.live\./);
   assert.match(privacyVisibleText, /Mobile carriers are not liable for delayed or undelivered messages\./);

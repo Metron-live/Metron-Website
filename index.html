@@ -391,11 +391,13 @@
                 } catch {}
             }
             const referralLookup = resolveReferral();
-            async function postJson(endpoint, body) {
+            async function postJson(endpoint, body, expectedStatus) {
                 const response = await fetch(endpoint, { method: 'POST', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
                 let payload = {};
                 try { payload = await response.json(); } catch {}
                 if (!response.ok) throw new Error(typeof payload.detail === 'string' ? payload.detail : 'Please try again.');
+                const responseKeys = payload && typeof payload === 'object' && !Array.isArray(payload) ? Object.keys(payload) : [];
+                if (responseKeys.length !== 1 || responseKeys[0] !== 'status' || payload.status !== expectedStatus) throw new Error('The verification service returned an unexpected response.');
                 return payload;
             }
             function showWaitlistFallback() {
@@ -409,10 +411,9 @@
                 pendingContact = contactInput.value.trim(); reservationSubmit.disabled = true; message.hidden = true; fallback.hidden = true; await referralLookup;
                 try {
                     const channel = pendingContact.includes('@') ? 'email' : 'sms';
-                    const startBody = { contact: pendingContact, channel, consent_marketing: consentInput.checked };
+                    const startBody = { contact: pendingContact, channel, consent_marketing: true };
                     if (activeReferralCode) startBody.ref = activeReferralCode;
-                    const payload = await postJson(startEndpoint, startBody);
-                    if (payload.status !== 'pending') throw new Error('The verification service returned an unexpected response.');
+                    await postJson(startEndpoint, startBody, 'pending');
                     reservationForm.hidden = true; verificationForm.hidden = false; status.textContent = `Enter the 6-digit code sent by ${channel === 'sms' ? 'text message' : 'email'}.`; codeInput.focus();
                 } catch (error) { message.textContent = error.message; message.hidden = false; showWaitlistFallback(); }
                 finally { reservationSubmit.disabled = false; }
@@ -422,8 +423,7 @@
                 try {
                     const checkBody = { contact: pendingContact, code: codeInput.value.trim() };
                     if (activeReferralCode) checkBody.ref = activeReferralCode;
-                    const payload = await postJson(checkEndpoint, checkBody);
-                    if (payload.status !== 'reserved') throw new Error('The verification service returned an unexpected response.');
+                    await postJson(checkEndpoint, checkBody, 'reserved');
                     verificationForm.hidden = true; status.textContent = 'Reservation confirmed.'; message.textContent = 'Your first year of the full Metron coach is reserved free. Workout tracking and history remain free afterward.'; message.hidden = false;
                 } catch (error) { message.textContent = error.message; message.hidden = false; }
                 finally { verificationSubmit.disabled = false; }
