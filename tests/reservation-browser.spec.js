@@ -41,6 +41,31 @@ test('renders the required hero and reservation form', async ({ page }) => {
   await expect(page.locator('#verification-form')).toBeHidden();
 });
 
+test('serves the cache-busted link preview video and fallback image', async ({ page, request }) => {
+  await page.goto(origin);
+  const metadata = await page.evaluate(() => ({
+    canonical: document.querySelector('link[rel="canonical"]')?.href,
+    description: document.querySelector('meta[name="description"]')?.content,
+    image: document.querySelector('meta[property="og:image"]')?.content,
+    title: document.querySelector('meta[property="og:title"]')?.content,
+    video: document.querySelector('meta[property="og:video"]')?.content
+  }));
+  expect(metadata).toEqual({
+    canonical: 'https://metron.live/',
+    description: 'Metron builds training around your goals and learns from every set. Track workouts free, or try the full personal trainer for 30 days with no card required.',
+    image: 'https://metron.live/brand/brand%20preview/og-preview.png?v=20261123',
+    title: "The World's Smartest Personal Trainer | Metron",
+    video: 'https://metron.live/brand/brand%20preview/og-preview.mp4?v=20261123'
+  });
+
+  for (const [url, mime] of [[metadata.image, 'image/png'], [metadata.video, 'video/mp4']]) {
+    const productionUrl = new URL(url);
+    const response = await request.get(`${origin}${productionUrl.pathname}${productionUrl.search}`);
+    expect(response.ok()).toBeTruthy();
+    expect(response.headers()['content-type']).toBe(mime);
+  }
+});
+
 test('requires launch-message consent before contacting the API', async ({ page }) => {
   let requestCount = 0;
   page.on('request', (request) => {

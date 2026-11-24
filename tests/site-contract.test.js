@@ -16,6 +16,7 @@ const toVisibleText = (source) => source
   .replace(/\s+([.,;:!?])/g, '$1')
   .trim();
 const visibleText = toVisibleText(html);
+const bodyVisibleText = toVisibleText(html.match(/<body[\s\S]*<\/body>/i)?.[0] || '');
 const privacyVisibleText = toVisibleText(privacyHtml);
 
 const count = (value, pattern) => (value.match(pattern) || []).length;
@@ -30,7 +31,7 @@ test('positions Metron as the performance staff for self-coached athletes', () =
   assert.match(visibleText, /fighting for a starting spot, training for a team, a season or a qualifier/i);
   assert.match(visibleText, /Logging is easy\. Knowing how to train is the hard part\./);
   assert.match(visibleText, /free best-in-class workout tracker/i);
-  assert.equal(count(visibleText, /world's smartest personal trainer/gi), 1);
+  assert.equal(count(bodyVisibleText, /world's smartest personal trainer/gi), 1);
 });
 
 test('keeps the adaptation example and launch capabilities concrete', () => {
@@ -58,7 +59,7 @@ test('keeps the adaptation example and launch capabilities concrete', () => {
     'Ask Arete. Or use the screen built for the job.',
     'The tracker stays free. The coach earns its place.'
   ]) assert.doesNotMatch(visibleText, new RegExp(forbidden.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i'));
-  assert.doesNotMatch(html, /—/);
+  assert.doesNotMatch(html.match(/<body[\s\S]*<\/body>/i)?.[0] || '', /—/);
 });
 
 test('publishes one exact attributed quote', () => {
@@ -69,18 +70,39 @@ test('publishes one exact attributed quote', () => {
 
 test('uses the approved social preview and metadata', () => {
   const expectedHash = '708d533d5658b26e71e7787cb327c0a25b0b54894594750afb349d3f46fdba54';
-  const video = path.join(root, 'brand', 'brand preview', 'og-preview-approved.mp4');
-  const poster = path.join(root, 'brand', 'brand preview', 'og-preview-approved.png');
+  const expectedPosterHash = 'fb8c029550a65d097efb6ce7feadf6dcc75ec2ec03eceedc8d522e624dc079b5';
+  const video = path.join(root, 'brand', 'brand preview', 'og-preview.mp4');
+  const poster = path.join(root, 'brand', 'brand preview', 'og-preview.png');
+  const expectedDescription = 'A best-in-class workout tracker, free. A personal trainer that plans, coaches, learns, and adapts when you want more.';
+  const metaContent = (attribute, value) => {
+    const escaped = value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    return html.match(new RegExp(`<meta ${attribute}="${escaped}" content="([^"]+)"`))?.[1];
+  };
   assert.equal(sha256(video), expectedHash);
-  assert.ok(fs.existsSync(poster));
-  assert.match(html, /property="og:title" content="Metron\. How do I train\?"/);
-  assert.match(html, /property="og:image" content="[^"]+og-preview-approved\.png"/);
-  assert.match(html, /property="og:video" content="[^"]+og-preview-approved\.mp4"/);
+  assert.equal(sha256(poster), expectedPosterHash);
+  assert.equal(fs.existsSync(path.join(root, 'brand', 'brand preview', 'og-preview-approved.mp4')), false);
+  assert.equal(fs.existsSync(path.join(root, 'brand', 'brand preview', 'og-preview-approved.png')), false);
+  assert.match(html, /<title>Metron — The World's Smartest Personal Trainer<\/title>/);
+  assert.equal(metaContent('name', 'description'), 'Metron builds training around your goals and learns from every set. Track workouts free, or try the full personal trainer for 30 days with no card required.');
+  assert.equal(metaContent('property', 'og:title'), "The World's Smartest Personal Trainer | Metron");
+  assert.equal(metaContent('property', 'og:description'), expectedDescription);
+  assert.equal(metaContent('name', 'twitter:title'), "The World's Smartest Personal Trainer | Metron");
+  assert.equal(metaContent('name', 'twitter:description'), expectedDescription);
+  for (const key of ['og:image', 'og:image:secure_url', 'og:video', 'og:video:secure_url', 'og:video:poster']) {
+    const url = new URL(metaContent('property', key));
+    assert.equal(url.protocol, 'https:');
+    assert.equal(url.hostname, 'metron.live');
+    assert.equal(url.searchParams.get('v'), '20261123');
+  }
+  assert.equal(new URL(metaContent('name', 'twitter:image')).searchParams.get('v'), '20261123');
+  assert.match(html, /property="og:image" content="[^"]+og-preview\.png\?v=20261123"/);
+  assert.match(html, /property="og:video" content="[^"]+og-preview\.mp4\?v=20261123"/);
   assert.match(html, /property="og:video:type" content="video\/mp4"/);
   assert.match(html, /property="og:video:width" content="720"/);
   assert.match(html, /property="og:video:height" content="960"/);
-  assert.match(html, /property="og:video:poster" content="[^"]+og-preview-approved\.png"/);
+  assert.match(html, /property="og:video:poster" content="[^"]+og-preview\.png\?v=20261123"/);
   assert.match(html, /name="twitter:card" content="summary_large_image"/);
+  assert.match(html, /<link rel="canonical" href="https:\/\/metron\.live\/">/);
 });
 
 test('keeps the nav and backgrounds within the approved visual system', () => {
