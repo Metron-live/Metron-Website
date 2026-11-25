@@ -29,6 +29,7 @@
       --line: #d9d5ce;
       --paper: #f3f0e9;
       --white: #ffffff;
+      --nav-height: 72px;
       --cardo: "Cardo Local", Georgia, serif;
       --sans: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       --wordmark: "Space Grotesk Local", Arial, sans-serif;
@@ -172,6 +173,18 @@
       cursor: wait;
     }
 
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
     .column-head {
       display: grid;
       grid-template-columns: 330px minmax(0, 1fr);
@@ -256,7 +269,7 @@
       position: relative;
       display: flex;
       width: 100%;
-      height: 72px;
+      height: var(--nav-height);
       align-items: center;
       justify-content: center;
       overflow: hidden;
@@ -591,14 +604,17 @@
           <span>2x review render</span>
         </div>
       </div>
-      <button class="replay" type="button" id="replay" aria-label="Replay the opacity load-in for options A and B">Replay A + B</button>
+      <div>
+        <button class="replay" type="button" id="replay" aria-describedby="replay-status" aria-label="Replay the opacity load-in for options A and B">Replay A + B</button>
+        <span class="sr-only" id="replay-status" aria-live="polite">Ready to replay options A and B.</span>
+      </div>
     </header>
 
     <div class="column-head" aria-hidden="true">
       <div></div>
       <div class="state-grid">
-        <div class="state-label"><span>Hero state</span><span>white</span></div>
-        <div class="state-label"><span>Scrolled state</span><span>orange + black on true white</span></div>
+        <div class="state-label"><span>Hero state</span><span>white #FFFFFF</span></div>
+        <div class="state-label"><span>Scrolled state</span><span>orange #E8734A + black #1A1A1A</span></div>
       </div>
     </div>
 
@@ -606,7 +622,7 @@
       <article class="option">
         <div class="option-meta">
           <span class="letter">A</span>
-          <div><h2>Full signature</h2><p class="spec">mark 28h · wordmark 25h · gaps 12 / 12 · tagline 13</p></div>
+          <div><h2>Full signature</h2><p class="spec">mark 28h · wordmark 25h · optical gaps 12 / 12 · tagline 13 baseline</p></div>
         </div>
         <div class="sample-grid">
           <div class="bar hero-still">
@@ -684,7 +700,7 @@
       <article class="option">
         <div class="option-meta">
           <span class="letter">G</span>
-          <div><h2>Footer stack</h2><p class="spec">mark 23h · wordmark 18h · vertical gap 2</p></div>
+          <div><h2>Stacked lockup</h2><p class="spec">mark 23h above · wordmark 18h · vertical gap 2</p></div>
         </div>
         <div class="sample-grid">
           <div class="bar hero-still"><div class="lockup g"><svg class="mark"><use href="#metron-mark"/></svg><span class="brand-with-tm"><svg class="wordmark"><use href="#metron-wordmark"/></svg><span class="tm">TM</span></span></div></div>
@@ -706,7 +722,7 @@
       <article class="option">
         <div class="option-meta">
           <span class="letter">I</span>
-          <div><h2>Superscript badge</h2><p class="spec">badge 24 · mark 12h · wordmark 24h · rise 7 · gap 8</p></div>
+          <div><h2>Half-height badge</h2><p class="spec">badge 24 · mark 12h · wordmark 24h · rise 7 · gap 8</p></div>
         </div>
         <div class="sample-grid">
           <div class="bar hero-still"><div class="lockup i"><span class="badge"><svg class="mark"><use href="#metron-mark"/></svg></span><span class="brand-with-tm"><svg class="wordmark"><use href="#metron-wordmark"/></svg><span class="tm">TM</span></span></div></div>
@@ -734,17 +750,24 @@
 
   <script>
     const replayButton = document.getElementById("replay");
+    const replayStatus = document.getElementById("replay-status");
     const animatedLockups = Array.from(document.querySelectorAll("[data-animated]"));
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
     function finishReplay() {
       replayButton.disabled = false;
       replayButton.textContent = "Replay A + B";
+      replayStatus.textContent = reduceMotion.matches
+        ? "Options A and B remain in their final state because reduced motion is enabled."
+        : "Options A and B load-in complete.";
     }
 
     function replayLoadIn() {
       replayButton.disabled = true;
       replayButton.textContent = reduceMotion.matches ? "Final state" : "Playing";
+      replayStatus.textContent = reduceMotion.matches
+        ? "Reduced motion is enabled. Showing the final state."
+        : "Playing options A and B, mark then wordmark then tagline.";
       animatedLockups.forEach((lockup) => lockup.classList.remove("playing"));
       void document.body.offsetWidth;
       animatedLockups.forEach((lockup) => lockup.classList.add("playing"));
