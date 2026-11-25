@@ -173,6 +173,23 @@
       cursor: wait;
     }
 
+    .review-control {
+      display: grid;
+      gap: 8px;
+      justify-items: center;
+    }
+
+    .review-note {
+      margin: 0;
+      color: var(--muted);
+      font-family: var(--sans);
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
     .sr-only {
       position: absolute;
       width: 1px;
@@ -600,12 +617,13 @@
         <div class="proof-strip" aria-label="Board production details">
           <span>1:1 CSS scale</span>
           <span>72px nav bars</span>
-          <span>Current production SVG geometry</span>
+          <span>metron-icon + metron-wordmark SVGs</span>
           <span>2x review render</span>
         </div>
       </div>
-      <div>
+      <div class="review-control">
         <button class="replay" type="button" id="replay" aria-describedby="replay-status" aria-label="Replay the opacity load-in for options A and B">Replay A + B</button>
+        <p class="review-note">Review at 100% scale</p>
         <span class="sr-only" id="replay-status" aria-live="polite">Ready to replay options A and B.</span>
       </div>
     </header>
@@ -743,7 +761,7 @@
     </section>
 
     <footer class="source-note">
-      <p>Source geometry is inlined from the current Metron-Website SVGs in brand/icon/svg and brand/wordmark/svg. Wordmark type is Space Grotesk 700. Supporting type follows the Cardo brand system.</p>
+      <p>Source geometry is inlined from brand/icon/svg/metron-icon-*.svg and brand/wordmark/svg/metron-wordmark-*.svg. Wordmark type is Space Grotesk 700. Supporting type follows the Cardo brand system.</p>
       <p>72 CSS px bars · 2x board render · 2026-11-08</p>
     </footer>
   </main>
